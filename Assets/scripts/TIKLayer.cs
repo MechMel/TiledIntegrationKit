@@ -37,7 +37,7 @@ public class TIKLayer
     #endregion
 
     //The Initialize function sets up the tile layer, objects, and images
-    public void Initialize()
+    public void InitializeLayer()
     {
         if(type == "tilelayer")
         {

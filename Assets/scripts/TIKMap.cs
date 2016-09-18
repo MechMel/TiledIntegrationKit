@@ -20,15 +20,17 @@ public class TIKMap
     #endregion
 
     //The InitializeMap function initializes all the layers and tilests
-    public void InitializeMap()
+    public void InitializeMap(Texture2D[] tilesetTextures)
     {
+        // Tell each of this map's layers to initialize
         foreach(TIKLayer layer in layers)
         {
-            layer.Initialize();
+            layer.InitializeLayer();
         }
-        foreach (TIKTileset tileset in tilesets)
+        // Tell each of this map's tilesets to initialize
+        for (int currentTileset = 0; currentTileset < tilesets.Length; currentTileset++)
         {
-            tileset.Initialize();
+            tilesets[currentTileset].InitializeTileset(tilesetTextures[currentTileset]);
         }
     }
     //The GetDimension function takes a string, either "width", or "height", and returns the int value of either 
@@ -48,6 +50,8 @@ public class TIKMap
             return 0;
         }
     }
+
+
     /*
     // When this is called it creates a new PDKmap from a given XmlDocument for a tiled map
     public TIKMap(XmlDocument mapXML)
