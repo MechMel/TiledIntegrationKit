@@ -4,7 +4,7 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(TIKLevelControl))]
-public class TIKLevelControlEditor : Editor
+public class TIKEditorLevelControl : Editor
 {
     //
     public override void OnInspectorGUI()
