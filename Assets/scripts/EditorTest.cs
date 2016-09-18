@@ -15,8 +15,9 @@ public class EditorTest : Editor
         MasterControlScripTest myTarget = (MasterControlScripTest)target;
 
         myTarget.experience = EditorGUILayout.IntField("Experience", myTarget.experience);
+        EditorGUILayout.LabelField("Trial", myTarget.trial.ToString());
         EditorGUILayout.LabelField("Level", myTarget.Level.ToString());
-
+        myTarget.SetLevel();
 
         // Block of code with controls
         // that may set GUI.changed to true.
