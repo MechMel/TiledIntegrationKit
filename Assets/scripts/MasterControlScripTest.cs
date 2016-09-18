@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MasterControlScripTest : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class MasterControlScripTest : MonoBehaviour
     {
         get { return experience / 750; }
     }
+
+    public Texture2D texture2d;
+
+    private Dictionary<string, Texture2D> TilesetTextures;
 
     public void SetLevel()
     {
