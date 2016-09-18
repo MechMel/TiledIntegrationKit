@@ -15,7 +15,7 @@ public class TIKEditorLevelControl : Editor
         myTarget.tileMapTextAsset = (TextAsset)EditorGUILayout.ObjectField("Tile Map", myTarget.tileMapTextAsset, typeof(TextAsset), false);
         //
         EditorGUI.BeginChangeCheck();
-        if (myTarget.UpdateGUI())
+        if (myTarget.UpdateGUIVariables())
         {
             //
             for (int currentTileset = 0; currentTileset < myTarget.tilesetTextures.Length; currentTileset++)
