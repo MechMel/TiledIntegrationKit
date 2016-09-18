@@ -31,19 +31,10 @@ public class TIKTileset
 
     // This is used to remove all letters off of an extension
     private char[] allLetters = new char[] { 'a', 'b', 'b', 'c', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-
-<<<<<<< HEAD
     //
     public void Initialize()
     {
-        // Find this tileset's image
-        imagePath = Path.Combine(Application.persistentDataPath, image.TrimStart('.', '\''));
-        // Assign this tileset's image
-        //imageTexture2D = Sprite.Create(imagePath, new Rect(0, 1, 0, 1), new Vector2(0.5f, 0.5f));
     }
-=======
-
->>>>>>> parent of cb9b329... Started to setup initialization for TIKTileset
 
     // When this is called it creates a Tileset from a given XmlNode for a tileset
     public TIKTileset(XmlNode tilesetXmlNode)
