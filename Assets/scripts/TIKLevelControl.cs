@@ -15,13 +15,6 @@ public class TIKLevelControl : MonoBehaviour
     // This is the TIKMap for this level
     public TIKMap levelMap;
 
-    
-    void Awake()
-    {
-        // Tell this level's map to initialize
-        levelMap.InitializeMap(tilesetTextures);
-    }
-
     // Check which variables have changed and set others accordingly
     public bool UpdateGUIVariables()
     {
