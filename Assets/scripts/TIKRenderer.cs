@@ -4,7 +4,7 @@ using System.Collections;
 public class TIKRenderer : MonoBehaviour {
 
 	//The CombineSprites function combines an array of sprites, and returns one large one
-    public Texture2D CombineSprites(Texture2D[] tile2D, int tileSize)
+    public Texture2D CombineTexture2Ds(Texture2D[] tile2D, int tileSize)
     {
         TIKMap TIKmap = new TIKMap();
         int mapWidth = TIKmap.GetDimension("width");

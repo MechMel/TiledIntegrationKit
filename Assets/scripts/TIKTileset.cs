@@ -102,11 +102,11 @@ public class TIKTileset
 
 
     // When this is called it recturns a sprite of a tile from a given tile ID
-    public Sprite GetTileSprite(int tileID)
+    public Texture2D GetTileTexture2D(int tileID)
     {
         // Create a new sprite for this tile from the correct portion of this tileset
         Sprite newTileSprite = Sprite.Create(imageTexture2D, new Rect(tilewidth * ((tileID - firstgid) % (imagewidth / tilewidth)), imageheight - (tilewidth * ((tileID - firstgid + 1) / (imagewidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
         // Return the newly created sprite for this tile
-        return newTileSprite;
+        return newTileSprite.texture;
     }
 }

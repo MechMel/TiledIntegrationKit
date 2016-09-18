@@ -7,13 +7,18 @@ using System.IO;
 
 public class TestTileDisplay : MonoBehaviour
 {
-    //public TIKTileset tileset;
+    public TIKLayer tileLayers;
+    public TIKTileset tileset;
+    public TIKRenderer TIKrend;
     public PDKTileLayer tileLayer;
     //private UnityEngine.Object tileMapTMX;
     public TextAsset tileMapTextAsset;
     //private SpriteRenderer ender;
     //private XmlDocument tileMapXML = new XmlDocument();
     private TIKMap map;
+
+    private Texture2D[] tileTextures;
+    private SpriteRenderer sprRend;
 
 
     void Awake()
@@ -60,9 +65,17 @@ public class TestTileDisplay : MonoBehaviour
 
     void Start()
     {
+        sprRend = GetComponent<SpriteRenderer>();
         TIKJsonUtilities tIKJsonUtilitiesInstance = new TIKJsonUtilities();
         TIKMap exampleMap = tIKJsonUtilitiesInstance.CreateTIKMapFromTextAsset(tileMapTextAsset);
         Debug.Log(exampleMap.tilesets[0].tilecount);
         //ender.sprite = tileset.GetTileSprite(tileLayer.getTileIDFromCorrdinate(4, 32)); //Sprite.Create(tileset.GetTile(0), new Rect(16, 16, 32, 32), new Vector2(.5f, .5f), 16);
+
+        for(int a = 0; a < map.layers[0].data.Count; a++)
+        {
+            tileTextures[a] = tileset.GetTileTexture2D(a);
+        }
+        sprRend.sprite = Sprite.Create(TIKrend.CombineTexture2Ds(tileTextures, map.GetDimension("width")), 
+        new Rect(0,0,map.GetDimension("width"),map.GetDimension("height")), new Vector2(0.5f, 0.5f));
     }
 }
