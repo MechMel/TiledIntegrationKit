@@ -31,7 +31,23 @@ public class TIKMap
             tileset.Initialize();
         }
     }
-
+    //The GetDimension function takes a string, either "width", or "height", and returns the int value of either 
+    //the width or height, according to the string
+    public int GetDimension(string dimension)
+    {
+        if (dimension == "width")
+        {
+            return width;
+        }
+        else if (dimension == "height")
+        {
+            return height;
+        }
+        else
+        {
+            return 0;
+        }
+    }
     /*
     // When this is called it creates a new PDKmap from a given XmlDocument for a tiled map
     public TIKMap(XmlDocument mapXML)
