@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
+[Serializable]
 public class TIKTileset
 {
     #region Tileset Attributes
@@ -18,10 +19,10 @@ public class TIKTileset
     #endregion
 
     #region Image Attributes
-    public string imageSource;
+    public string image;
     public Texture2D imageTexture2D;
-    public int imageWidth;
-    public int imageHeight;
+    public int imagewidth;
+    public int imageheight;
     #endregion
 
     #region Custom Properties
@@ -50,11 +51,11 @@ public class TIKTileset
 
         // Add all of the Image attributes to the new tileset
         XmlNode imageNode = tilesetXmlNode.SelectSingleNode("//*[local-name() = 'image'][1]");
-        imageSource = imageNode.Attributes["source"].Value;
-        imageTexture2D = (Texture2D)Resources.Load<Texture2D>(imageSource.TrimStart(new char[] { '.' }).TrimStart(new char[] { '/' }).TrimEnd(allLetters).TrimEnd(new char[] { '.' }));
+        image = imageNode.Attributes["source"].Value;
+        imageTexture2D = (Texture2D)Resources.Load<Texture2D>(image.TrimStart(new char[] { '.' }).TrimStart(new char[] { '/' }).TrimEnd(allLetters).TrimEnd(new char[] { '.' }));
         FormatTexture2D(imageTexture2D); // Format this tileset's texture
-        imageWidth = Int32.Parse(imageNode.Attributes["width"].Value);
-        imageHeight = Int32.Parse(imageNode.Attributes["height"].Value);
+        imagewidth = Int32.Parse(imageNode.Attributes["width"].Value);
+        imageheight = Int32.Parse(imageNode.Attributes["height"].Value);
 
         // Add all of the custom properties to the new tileset
         // Declare this tileset's dictionary for custom properties
@@ -104,7 +105,7 @@ public class TIKTileset
     public Sprite GetTileSprite(int tileID)
     {
         // Create a new sprite for this tile from the correct portion of this tileset
-        Sprite newTileSprite = Sprite.Create(imageTexture2D, new Rect(tilewidth * ((tileID - firstgid) % (imageWidth / tilewidth)), imageHeight - (tilewidth * ((tileID - firstgid + 1) / (imageWidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
+        Sprite newTileSprite = Sprite.Create(imageTexture2D, new Rect(tilewidth * ((tileID - firstgid) % (imagewidth / tilewidth)), imageheight - (tilewidth * ((tileID - firstgid + 1) / (imagewidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
         // Return the newly created sprite for this tile
         return newTileSprite;
     }
