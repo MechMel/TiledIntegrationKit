@@ -11,6 +11,7 @@ public class MasterControlScripTest : MonoBehaviour
     {
         get { return experience / 750; }
     }
+    // test
 
     public void SetLevel()
     {
