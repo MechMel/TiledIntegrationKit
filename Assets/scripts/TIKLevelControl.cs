@@ -14,7 +14,7 @@ public class TIKLevelControl : MonoBehaviour
     #endregion
 
     #region Tiled Map Vhange Variables
-    // This is a copy of the tileMapTextAsset. It is used to determine if tileMapText asset has ben changed
+    // This is a copy of the tileMapTextAsset. It is used to determine if tileMapText asset has been changed
     private TextAsset oldTileMapTextAsset;
     // This is a copy of levelMap. It is used to see what has changed between this map and the new one
     public TIKMap oldLevelMap;
@@ -22,6 +22,8 @@ public class TIKLevelControl : MonoBehaviour
     public Texture2D[] newTilesetTextures;
     #endregion
 
+    // This is a copy of the tilesetTextures. It is used to determine if tilesetTextures has been changed
+    public Texture2D[] oldTilesetTextures;
     // Reference to TIK's jsonUtilies class
     private TIKJsonUtilities jsonUtilities = new TIKJsonUtilities();
 
@@ -79,5 +81,15 @@ public class TIKLevelControl : MonoBehaviour
         oldTileMapTextAsset = tileMapTextAsset;
         // Update tilesetTextures to have the new tilesets
         tilesetTextures = newTilesetTextures;
+    }
+
+
+    void Awake()
+    {
+        // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
+        for (int tileset = 0; tileset < tilesetTextures.Length; tileset++)
+        {
+            levelMap.tilesets[tileset].imageTexture = tilesetTextures[tileset];
+        }
     }
 }
