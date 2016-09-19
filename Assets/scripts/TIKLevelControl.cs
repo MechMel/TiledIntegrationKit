@@ -21,27 +21,31 @@ public class TIKLevelControl : MonoBehaviour
     {
         if (oldTileMapTextAsset == null) // If tileMapTextAsset has not been changed before
         {
-            // Update oldTileMapTextAsset for use for next time the GUI is changed
-            oldTileMapTextAsset = tileMapTextAsset;
-            // Create a new TIKMap based on the new textAsset file
-            levelMap = jsonUtilities.CreateTIKMapFromTextAsset(tileMapTextAsset);
-            // Make tilesetTextures have enough slots for each tilest in this levelMap
-            tilesetTextures = new Texture2D[levelMap.tilesets.Length];
+            // Update the nesecary variables for a tileMapTextAsset change
+            tileMapTextAssetChanged();
             // Variables have been updated
             return true;
         }
         else if (oldTileMapTextAsset != tileMapTextAsset) // If the tileMapTextAsset changed
         {
-            // Update oldTileMapTextAsset for use for next time the GUI is changed
-            oldTileMapTextAsset = tileMapTextAsset;
-            // Create a new TIKMap based on the new textAsset file
-            levelMap = jsonUtilities.CreateTIKMapFromTextAsset(tileMapTextAsset);
-            // Make tilesetTextures have enough slots for each tilest in this levelMap
-            tilesetTextures = new Texture2D[levelMap.tilesets.Length];
+            // Update the nesecary variables for a tileMapTextAsset change
+            tileMapTextAssetChanged();
             // Variables have been updated
             return true;
         }
         // Variables have been updated
         return true;
+    }
+
+
+    //
+    private void tileMapTextAssetChanged()
+    {
+        // Update oldTileMapTextAsset for use for next time the GUI is changed
+        oldTileMapTextAsset = tileMapTextAsset;
+        // Create a new TIKMap based on the new textAsset file
+        levelMap = jsonUtilities.CreateTIKMapFromTextAsset(tileMapTextAsset);
+        // Make tilesetTextures have enough slots for each tilest in this levelMap
+        tilesetTextures = new Texture2D[levelMap.tilesets.Length];
     }
 }
