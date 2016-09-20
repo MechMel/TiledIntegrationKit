@@ -24,7 +24,7 @@ public class TIKLayer
     #endregion
 
     #region Tile Layer Attributes
-    public List<int> data;
+    public int[] data;
     #endregion
 
     #region Object Layer Attributes

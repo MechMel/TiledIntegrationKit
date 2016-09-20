@@ -17,7 +17,6 @@ public class PDKLevelConfigurator : MonoBehaviour
     private TIKMapSettings oldMapSettings = new TIKMapSettings(null);
     #endregion
 
-
     // When this is called the current map type is evaluated and appropriate action is taken
     public bool UpdateMapSettings()
     {
@@ -65,12 +64,23 @@ public class PDKLevelConfigurator : MonoBehaviour
 
     void Awake()
     {
-        /*
-        // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
-        for (int tileset = 0; tileset < tilesetTextures.Length; tileset++)
+        // If a TIKMap has been created
+        if (mapSettings.tikMap != null)
         {
-            levelMap.tilesets[tileset].imageTexture = tilesetTextures[tileset];
+            // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
+            for (int tileset = 0; tileset < mapSettings.tilesetTextures.Length; tileset++)
+            {
+                mapSettings.tikMap.tilesets[tileset].imageTexture = mapSettings.tilesetTextures[tileset];
+            }
+
+            // Add the level controller to this object
+            this.gameObject.AddComponent<PDKLevelController>();
+            // Locate the level controller on this object
+            PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
+            // Give the TIKMap with the user's settings to the levelController
+            levelController.levelMap = mapSettings.tikMap;
+            // Disable this script
+            //this.gameObject.GetComponent<PDKLevelConfigurator>().enabled = false;
         }
-        */
     }
 }

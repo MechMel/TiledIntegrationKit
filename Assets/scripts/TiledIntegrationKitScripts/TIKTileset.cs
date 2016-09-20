@@ -42,7 +42,7 @@ public class TIKTileset
     }
 
     // When this is called it creates a Tileset from a given XmlNode for a tileset
-    public TIKTileset(XmlNode tilesetXmlNode)
+    /*public TIKTileset(XmlNode tilesetXmlNode)
     {
 
         // Add all of the tileset attributes to the new tileset
@@ -92,7 +92,7 @@ public class TIKTileset
             // Put all of this tile's custom properties into the dictionary of custom tiles 
             customTiles[Int32.Parse(currentCustomTile.Attributes["name"].Value)] = currentCustomTileProperties;
         }
-    }
+    }*/
 
 
 
@@ -106,10 +106,10 @@ public class TIKTileset
 
 
     // When this is called it recturns a sprite of a tile from a given tile ID
-    public Texture2D GetTileTexture2D(int tileID)
+    public Texture2D GetTileTexture(int tileID)
     {
         // Create a new sprite for this tile from the correct portion of this tileset
-        Sprite newTileSprite = Sprite.Create(imageTexture, new Rect(tilewidth * ((tileID - firstgid) % (imagewidth / tilewidth)), imageheight - (tilewidth * ((tileID - firstgid + 1) / (imagewidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
+        Sprite newTileSprite = Sprite.Create(imageTexture, new Rect(tilewidth * ((tileID - firstgid + 1) % (imagewidth / tilewidth)), imageheight - (tilewidth * ((tileID - firstgid + 1) / (imagewidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
         // Return the newly created sprite for this tile
         return newTileSprite.texture;
     }

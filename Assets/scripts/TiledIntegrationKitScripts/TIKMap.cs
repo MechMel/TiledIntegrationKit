@@ -19,6 +19,7 @@ public class TIKMap
     public TIKTileset[] tilesets;
     #endregion
 
+
     //The InitializeMap function initializes all the layers and tilests
     public void InitializeMap(Texture2D[] tilesetTextures)
     {
@@ -34,6 +35,7 @@ public class TIKMap
         }
     }
     //The GetDimension function takes a string, either "width", or "height", and returns the int value of either 
+
     //the width or height, according to the string
     public int GetDimension(string dimension)
     {
@@ -48,6 +50,42 @@ public class TIKMap
         else
         {
             return 0;
+        }
+    }
+
+    //
+    public Texture2D[] GetAllTilesTexturesFromLayer(int layerToGetTilesFrom)
+    {
+        // If the layer to get tiles form is a tile layer
+        if (layers[layerToGetTilesFrom].layerType == TIKLayer.layerTypes.Tile)
+        {
+            // Create an array of textures to put all the textures formt the requested layer into
+            Texture2D[] allTileTextures = new Texture2D[layers[layerToGetTilesFrom].data.Length];
+            // For each tile in the requested layer
+            for (int tileNumber = 0; tileNumber < layers[layerToGetTilesFrom].data.Length; tileNumber++)
+            {
+                // Look through each of this map's tilesets
+                foreach (TIKTileset tilesetCurrentlyBeingChecked in tilesets)
+                {
+                    // If this tile is in the tilest currently being checked
+                    if (layers[layerToGetTilesFrom].data[tileNumber] >= tilesetCurrentlyBeingChecked.firstgid - 1 && layers[layerToGetTilesFrom].data[tileNumber] < tilesetCurrentlyBeingChecked.firstgid + tilesetCurrentlyBeingChecked.tilecount)
+                    {
+                        // Add the texture for this tile to the array of tile textures
+                        allTileTextures[tileNumber] = tilesetCurrentlyBeingChecked.GetTileTexture(layers[layerToGetTilesFrom].data[tileNumber]);
+                        // There is no reason to continue checking tilesets
+                        break;
+                    }
+                }
+            }
+            // Return the lest of all tile textures in the requested layer
+            return allTileTextures;
+        }
+        else
+        {
+            // Tell the user what went wrong
+            Debug.Log("Requested layer to get all tiles from is not a tile layer: Returned null");
+            // Request is invalid, because the requested layer is not a tile layer
+            return null;
         }
     }
 
