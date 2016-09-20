@@ -10,11 +10,11 @@ public class PDKLevelConfigurator : MonoBehaviour
 
     #region Tiled Map Settings
     //
-    public TIKMapSettings newMapSettings;
+    private TIKMapSettings newMapSettings;
     // 
-    public TIKMapSettings mapSettings;
+    public TIKMapSettings mapSettings = new TIKMapSettings(null);
     //
-    public TIKMapSettings oldMapSettings;
+    private TIKMapSettings oldMapSettings = new TIKMapSettings(null);
     #endregion
 
 
@@ -38,16 +38,16 @@ public class PDKLevelConfigurator : MonoBehaviour
             // Clear all current settings
             mapSettings = new TIKMapSettings(mapSettings.mapTextAsset);
             // Clear all remebered settings
-            oldMapSettings = mapSettings;
+            oldMapSettings.Clone(mapSettings);
             // Clear all remebered settings
-            newMapSettings = mapSettings;
+            newMapSettings.Clone(mapSettings);
         }
         else if (oldMapSettings.mapTextAsset == null) // If no map was entered previously
         {
             // Create a new set of settings from the new TextAsset
             mapSettings = new TIKMapSettings(mapSettings.mapTextAsset);
             // Remember the current map settings
-            oldMapSettings = mapSettings;
+            oldMapSettings.Clone(mapSettings);
         }
         else if (oldMapSettings.mapTextAsset != mapSettings.mapTextAsset) // If the TextAsset for the map was changed
         {
@@ -56,19 +56,21 @@ public class PDKLevelConfigurator : MonoBehaviour
             // Copy over any settings that match between the current and the new TIKMapSettings
             newMapSettings.CopyMatchingSettings(mapSettings);
             // Display the new map settings
-            mapSettings = newMapSettings;
+            mapSettings.Clone(newMapSettings);
             // Remember the current map settings
-            oldMapSettings = mapSettings;
+            oldMapSettings.Clone(mapSettings);
         }
     }
 
 
     void Awake()
     {
+        /*
         // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
         for (int tileset = 0; tileset < tilesetTextures.Length; tileset++)
         {
             levelMap.tilesets[tileset].imageTexture = tilesetTextures[tileset];
         }
+        */
     }
 }

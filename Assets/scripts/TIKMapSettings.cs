@@ -29,6 +29,22 @@ public class TIKMapSettings
             // Make tilesetTextures have enough slots for each tilest in the new map
             tilesetTextures = new Texture2D[tikMap.tilesets.Length];
         }
+        else
+        {
+            // Clear mapTextAsset
+            mapTextAsset = null;
+            // Clear tilesetTexture
+            tilesetTextures = null;
+        }
+    }
+
+    // When this is called this TIKMapSettings coppies the values of another TIKMapSettings
+    public void Clone(TIKMapSettings mapSettingsToClone)
+    {
+        // Clone each Variable
+        mapTextAsset = mapSettingsToClone.mapTextAsset;
+        tilesetTextures = mapSettingsToClone.tilesetTextures;
+        tikMap = mapSettingsToClone.tikMap;
     }
     
     // When this is called settings from another map are copied onto this map's settings

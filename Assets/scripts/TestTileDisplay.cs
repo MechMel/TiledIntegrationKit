@@ -20,7 +20,7 @@ public class TestTileDisplay : MonoBehaviour
     void Start()
     {
         sprRend = GetComponent<SpriteRenderer>();
-        testMap = GameObject.Find("GameObject").GetComponent<TIKLevelControl>().levelMap;
+        //testMap = GameObject.Find("GameObject").GetComponent<TIKLevelControl>().levelMap;
         tileTextures = new Texture2D[testMap.layers[0].data.Count];
 
         for (int a = 0; a < testMap.layers[0].data.Count; a++)
