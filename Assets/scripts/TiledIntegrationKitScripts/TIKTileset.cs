@@ -105,12 +105,15 @@ public class TIKTileset
 
 
 
-    // When this is called it recturns a sprite of a tile from a given tile ID
-    public Texture2D GetTileTexture(int tileID)
+    // When this is called it creates and returns an array of colors for a tile from a given tile ID
+    public Color[] GetTilePixels(int tileID)
     {
-        // Create a new sprite for this tile from the correct portion of this tileset
-        Sprite newTileSprite = Sprite.Create(imageTexture, new Rect(tilewidth * ((tileID - firstgid + 1) % (imagewidth / tilewidth)), imageheight - (tilewidth * ((tileID - firstgid + 1) / (imagewidth / tilewidth))), tilewidth, -tileheight), new Vector2(0.5f, 0.5f), tilewidth);
-        // Return the newly created sprite for this tile
-        return newTileSprite.texture;
+        // Return the pixels from the requested tile
+        return imageTexture.GetPixels(
+            x: tilewidth * ((tileID - firstgid) % columns), 
+            y: tileheight * ((tilecount - tileID + firstgid - 1) / columns), 
+            blockWidth: tilewidth, 
+            blockHeight: tileheight
+        );
     }
 }

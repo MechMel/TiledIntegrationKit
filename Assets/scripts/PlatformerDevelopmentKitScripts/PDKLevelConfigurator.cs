@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
 public class PDKLevelConfigurator : MonoBehaviour
 {
     // This is all possible map types a user can choose
@@ -12,6 +13,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     //
     private TIKMapSettings newMapSettings;
     // 
+    [SerializeField]
     public TIKMapSettings mapSettings = new TIKMapSettings(null);
     //
     private TIKMapSettings oldMapSettings = new TIKMapSettings(null);
@@ -65,7 +67,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     void Awake()
     {
         // If a TIKMap has been created
-        if (mapSettings.tikMap != null)
+        if (mapSettings.tikMap != null && mapSettings.mapTextAsset != null)
         {
             // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
             for (int tileset = 0; tileset < mapSettings.tilesetTextures.Length; tileset++)

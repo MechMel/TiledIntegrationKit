@@ -18,11 +18,11 @@ public class PDKLevelConfiguratorEditor : Editor
         #region Map TextAsset Change Check
         // Check to see if the GUI has been changed
         EditorGUI.BeginChangeCheck();
-            if (myTarget.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
-            {
-                // Display a slot for the map's TextAsset
-                myTarget.mapSettings.mapTextAsset = (TextAsset)EditorGUILayout.ObjectField("Tile Map", myTarget.mapSettings.mapTextAsset, typeof(TextAsset), false);
-            }
+        if (myTarget.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
+        {
+            // Display a slot for the map's TextAsset
+            myTarget.mapSettings.mapTextAsset = (TextAsset)EditorGUILayout.ObjectField("Tile Map", myTarget.mapSettings.mapTextAsset, typeof(TextAsset), false);
+        }
         // Stop checking to see if the GUI has been changed
         if (EditorGUI.EndChangeCheck())
         {
@@ -32,8 +32,8 @@ public class PDKLevelConfiguratorEditor : Editor
         #endregion
 
         #region Display Tileset Slots
-        // If tilesetTextures has ben instatiated
-        if (myTarget.mapSettings.tilesetTextures != null)
+        // If tilesetTextures has ben instatiated, and the map type is not none
+        if (myTarget.mapSettings.tilesetTextures != null && myTarget.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // Create a slot to put the Texture2D from each Tileset in
             for (int currentTileset = 0; currentTileset < myTarget.mapSettings.tilesetTextures.Length; currentTileset++)

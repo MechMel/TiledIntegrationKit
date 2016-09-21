@@ -87,8 +87,15 @@ public class TIKMap
         return disoveredTilePostitions;
     }
 
-    // When this is called this function looks through all tilesets, finds the tileset with the texture for the requested tile, and returns a texture for that tile
-    public Texture2D GetTileTexture(int tileID)
+    // When this is called this function finds the tileset with the texture for the requested tile and then returns an array of colors for that tile
+    public Color[] GetTilePixels(int tileID)
+    {
+        // Return the pixels for the requested tile
+        return GetTileSetFromID(tileID).GetTilePixels(tileID);
+    }
+
+    // When this is called this function looks through all tilesets, finds the tileset that contains the given tile ID, and then returns that tileset
+    public TIKTileset GetTileSetFromID(int tileID)
     {
         // Look through each tileset in this map
         foreach (TIKTileset tilesetToCheck in tilesets)
@@ -96,13 +103,13 @@ public class TIKMap
             // If the given tile ID is in the tileset being checked
             if (tileID >= tilesetToCheck.firstgid && tileID < tilesetToCheck.firstgid + tilesetToCheck.tilecount)
             {
-                // Return the texture for the requested tile
-                return tilesetToCheck.GetTileTexture(tileID);
+                // Return this tileset
+                return tilesetToCheck;
             }
         }
         // In form the user that the tile ID was out of range
-        Debug.Log("Tile ID for requested tile texture was out of range: returned null");
-        // The tile ID did not match any tile in this map
+        Debug.Log("Tile ID for requested tileset was out of range: returned null");
+        // The tile ID did not match any tileset in this map
         return null;
     }
 

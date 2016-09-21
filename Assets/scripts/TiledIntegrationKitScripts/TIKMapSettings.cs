@@ -6,8 +6,10 @@ public class TIKMapSettings
 {
     #region Variables for Map Settings
     // This is the text asset for this map
+    [SerializeField]
     public TextAsset mapTextAsset;
     // This is an array of textures for each tileset
+    [SerializeField]
     public Texture2D[] tilesetTextures;
     #endregion
 
