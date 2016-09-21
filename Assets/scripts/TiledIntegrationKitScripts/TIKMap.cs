@@ -43,17 +43,16 @@ public class TIKMap
         int[] tileIDsInRectangle = new int[(int)rectangleToGeTileFrom.width * (int)rectangleToGeTileFrom.height];
         // This dictionary will contain all positions of a tile ID in the given rectangle
         Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
-        //
+        // Find where in the map the rectangle should start
         int rectStartPosition = (width * (int)(rectangleToGeTileFrom.y)) + (int)rectangleToGeTileFrom.x;
 
-        //
+        // Go through each row of the rectangle
         for (int rectY = 0; rectY < rectangleToGeTileFrom.height; rectY++)
         {
-            //
+            // Go through each tile in this row of the rectangle
             for (int rectX = 0; rectX < rectangleToGeTileFrom.width; rectX++)
             {
-                Debug.Log(string.Format("rectX: {0}, rectY: {1}", rectX, rectY));
-                //
+                // Add the this tile ID from the map to the array of tile IDs in the given rectangle
                 tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = layers[layerToGetTilesFrom].data[(rectY * width) + rectX + rectStartPosition];
             }
         }
@@ -61,28 +60,50 @@ public class TIKMap
         // Go through each position in the given rectangle
         for (int positionOfIDBeingChecked = 0; positionOfIDBeingChecked < tileIDsInRectangle.Length; positionOfIDBeingChecked++)
         {
-            // This will be used to determine if it exits and then store the list this tile position should be placed in
-            List<int> matchingID;
-            // If the ID at the position being checked has been disovered
-            if (disoveredTilePostitions.TryGetValue(tileIDsInRectangle[positionOfIDBeingChecked], out matchingID))
+            // If the tile ID to check is not 0(a blank tile)
+            if (tileIDsInRectangle[positionOfIDBeingChecked] != 0)
             {
-                // Add this position to that ID's list of positions
-                matchingID.Add(positionOfIDBeingChecked);
-            }
-            else
-            {
-                // Create a new list for the tile ID at the position being checked
-                matchingID = new List<int>();
-                // Add the tile ID at the position being checked to its new list
-                matchingID.Add(tileIDsInRectangle[positionOfIDBeingChecked]);
-                // Add this position to this tile ID's new list
-                matchingID.Add(positionOfIDBeingChecked);
-                // Add this tile ID's new list to the dictionary of discovered tile IDs
-                disoveredTilePostitions[tileIDsInRectangle[positionOfIDBeingChecked]] = matchingID;
+                // This will be used to determine if it exits and then store the list this tile position should be placed in
+                List<int> matchingID;
+                // If the ID at the position being checked has been disovered
+                if (disoveredTilePostitions.TryGetValue(tileIDsInRectangle[positionOfIDBeingChecked], out matchingID))
+                {
+                    // Add this position to that ID's list of positions
+                    matchingID.Add(positionOfIDBeingChecked);
+                }
+                else
+                {
+                    // Create a new list for the tile ID at the position being checked
+                    matchingID = new List<int>();
+                    // Add this position to this tile ID's new list
+                    matchingID.Add(positionOfIDBeingChecked);
+                    // Add this tile ID's new list to the dictionary of discovered tile IDs
+                    disoveredTilePostitions[tileIDsInRectangle[positionOfIDBeingChecked]] = matchingID;
+                }
             }
         }
+
         // Return the lsit of all discovered tiles and their positions
         return disoveredTilePostitions;
+    }
+
+    // When this is called this function looks through all tilesets, finds the tileset with the texture for the requested tile, and returns a texture for that tile
+    public Texture2D GetTileTexture(int tileID)
+    {
+        // Look through each tileset in this map
+        foreach (TIKTileset tilesetToCheck in tilesets)
+        {
+            // If the given tile ID is in the tileset being checked
+            if (tileID >= tilesetToCheck.firstgid && tileID < tilesetToCheck.firstgid + tilesetToCheck.tilecount)
+            {
+                // Return the texture for the requested tile
+                return tilesetToCheck.GetTileTexture(tileID);
+            }
+        }
+        // In form the user that the tile ID was out of range
+        Debug.Log("Tile ID for requested tile texture was out of range: returned null");
+        // The tile ID did not match any tile in this map
+        return null;
     }
 
 

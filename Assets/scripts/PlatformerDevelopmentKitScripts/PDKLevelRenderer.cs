@@ -5,25 +5,47 @@ using System.Collections.Generic;
 public class PDKLevelRenderer : MonoBehaviour
 {
     //
-    public void RenderLevel(TIKMap mapToRender)
+    public void RenderRectangleOfMap(TIKMap mapToRender, Rect rectangleToRender)
     {
-        // 
-        GameObject layerOneObject = new GameObject();
-        //
-        SpriteRenderer layerOneSpriteRenderer = layerOneObject.AddComponent<SpriteRenderer>();
-        //
-        //layerOneSpriteRenderer.sprite = Sprite.Create(RenderLayer(mapToRender, 0), new Rect(0, 0, mapToRender.width * mapToRender.tilewidth, mapToRender.height * mapToRender.tileheight), new Vector2(0.5f, 0.5f));
-        CreateTextureFromASectionOfALayer(mapToRender, 0, new Rect(3, 36, 4, 4));
+        //TODO: impliment multiple layer rendering
+        // Create a game object to render this layer on
+        GameObject layer1Object = new GameObject();
+        layer1Object.name = "Layer_1";
+        // Add a sprite renderer to the game object for layer 1
+        SpriteRenderer layerOneSpriteRenderer = layer1Object.AddComponent<SpriteRenderer>();
+        // Create a texture from the given rectangle
+        Texture2D textureToRender = CreateTextureFromASectionOfALayer(mapToRender, 0, rectangleToRender);
+        // Create a sprite from the texture to render
+        Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
+        // Display the sprite of the area to render
+        layerOneSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
     }
 
-    //
+    // When this is called this function creates a texture from a given rectangle of the map
     private Texture2D CreateTextureFromASectionOfALayer(TIKMap levelMap, int layerToRender, Rect rectangleOfLayerToRender)
     {
-        //
-        Debug.Log(levelMap.GetAllTilePositionsFromLayerInRectangle(layerToRender, rectangleOfLayerToRender));
+        // Create a texture to store the requested rectangle of the map
+        Texture2D textureToReturn = new Texture2D((int)rectangleOfLayerToRender.width * levelMap.tilewidth, (int)rectangleOfLayerToRender.height * levelMap.tileheight);
+        // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
+        Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerToRender, rectangleOfLayerToRender);
 
-        //TODO: Remove this later
-        return null;
+        // Go through each tile ID in the requested rectangle of the map
+        foreach (int thisTileID in tilePositions.Keys)
+        {
+            // Create an array of colors and put the pixels from this tile into it
+            Color[] thisTilesPixels = levelMap.GetTileTexture(thisTileID).GetPixels(0, 0, levelMap.tilewidth, levelMap.tileheight);
+            // Go through each occurance of this tile in the requested rectangle of the map
+            foreach(int tilePosition in tilePositions[thisTileID])
+            {
+                // Draw that tile in the corect position in the texture to return 
+                textureToReturn.SetPixels(tilePosition % (int)rectangleOfLayerToRender.width, tilePosition / (int)rectangleOfLayerToRender.width, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
+                // Apply the changes to the texture
+                textureToReturn.Apply();
+            }
+        }
+
+        // Return the completed texture
+        return textureToReturn;
     }
 
     //The CombineSprites function combines an array of sprites, and returns one large one

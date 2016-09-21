@@ -9,9 +9,9 @@ public class PDKLevelController : MonoBehaviour
     public PDKLevelRenderer levelRenderer = new PDKLevelRenderer();
 
 
-    void Update()
+    void Start()
     {
         //
-        levelRenderer.RenderLevel(levelMap);
+        levelRenderer.RenderRectangleOfMap(levelMap, new Rect(3, 100, 3, 3));
     }
 }
