@@ -24,14 +24,14 @@ public class TIKMap
     public void InitializeMap(Texture2D[] tilesetTextures)
     {
         // Tell each of this map's layers to initialize
-        foreach(TIKLayer layer in layers)
+        foreach(TIKLayer layerToInitialize in layers)
         {
-            layer.InitializeLayer();
+            layerToInitialize.InitializeLayer();
         }
         // Tell each of this map's tilesets to initialize
-        for (int currentTileset = 0; currentTileset < tilesets.Length; currentTileset++)
+        for (int numberOfTilesetToInitialze = 0; numberOfTilesetToInitialze < tilesets.Length; numberOfTilesetToInitialze++)
         {
-            tilesets[currentTileset].InitializeTileset(tilesetTextures[currentTileset]);
+            tilesets[numberOfTilesetToInitialze].InitializeTileset(tilesetTextures[numberOfTilesetToInitialze]);
         }
     }
 

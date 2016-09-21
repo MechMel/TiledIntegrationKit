@@ -4,21 +4,31 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
-    //
+    // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
     public void RenderRectangleOfMap(TIKMap mapToRender, Rect rectangleToRender)
     {
-        //TODO: impliment multiple layer rendering
-        // Create a game object to render this layer on
-        GameObject layer1Object = new GameObject();
-        layer1Object.name = "Layer_1";
-        // Add a sprite renderer to the game object for layer 1
-        SpriteRenderer layerOneSpriteRenderer = layer1Object.AddComponent<SpriteRenderer>();
-        // Create a texture from the given rectangle
-        Texture2D textureToRender = CreateTextureFromASectionOfALayer(mapToRender, 0, rectangleToRender);
-        // Create a sprite from the texture to render
-        Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
-        // Display the sprite of the area to render
-        layerOneSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+        // Go through each layer in this map
+        for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
+        {
+            // If this layer is a tile layer
+            if (mapToRender.layers[layerNumberToRender].layerType == TIKLayer.layerTypes.Tile && mapToRender.layers[layerNumberToRender].visible)
+            {
+                // Create a game object to render this layer on
+                GameObject thisLayerObject = new GameObject();
+                // Name this layer's object
+                thisLayerObject.name = "Layer " + layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
+                // Add a sprite renderer to the game object for layer 1
+                SpriteRenderer thisLayerSpriteRenderer = thisLayerObject.AddComponent<SpriteRenderer>();
+                // TODO: get sorting layers working
+                //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
+                // Create a texture from the given rectangle
+                Texture2D textureToRender = CreateTextureFromASectionOfALayer(mapToRender, layerNumberToRender, rectangleToRender);
+                // Create a sprite from the texture to render
+                Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
+                // Display the sprite of the area to render
+                thisLayerSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+            }
+        }
     }
 
     // When this is called this function creates a texture from a given rectangle of the map
@@ -66,6 +76,8 @@ public class PDKLevelRenderer : MonoBehaviour
         // For each pixel in transparentPixels
         for (int pixelNumber = 0; pixelNumber < transparentPixels.Length; pixelNumber++)
         {
+            // Make this pixel white
+            transparentPixels[pixelNumber] = Color.white;
             // Make this pixel transparent
             transparentPixels[pixelNumber].a = 0;
         }

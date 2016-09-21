@@ -69,12 +69,8 @@ public class PDKLevelConfigurator : MonoBehaviour
         // If a TIKMap has been created
         if (mapSettings.tikMap != null && mapSettings.mapTextAsset != null)
         {
-            // Assign each of this level's TIKMap's tileset's texture variable to each of the textures the user has put in
-            for (int tileset = 0; tileset < mapSettings.tilesetTextures.Length; tileset++)
-            {
-                mapSettings.tikMap.tilesets[tileset].imageTexture = mapSettings.tilesetTextures[tileset];
-            }
-
+            // Tell this level's map to initialize
+            mapSettings.tikMap.InitializeMap(mapSettings.tilesetTextures);
             // Add the level controller to this object
             this.gameObject.AddComponent<PDKLevelController>();
             // Locate the level controller on this object
