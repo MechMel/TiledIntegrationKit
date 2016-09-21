@@ -34,59 +34,55 @@ public class TIKMap
             tilesets[currentTileset].InitializeTileset(tilesetTextures[currentTileset]);
         }
     }
-    //The GetDimension function takes a string, either "width", or "height", and returns the int value of either 
 
-    //the width or height, according to the string
-    public int GetDimension(string dimension)
+    /* When this is called this function finds all tile IDs in a given rectangle, and then 
+    returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
+    public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInRectangle(int layerToGetTilesFrom, Rect rectangleToGeTileFrom)
     {
-        if (dimension == "width")
-        {
-            return width;
-        }
-        else if (dimension == "height")
-        {
-            return height;
-        }
-        else
-        {
-            return 0;
-        }
-    }
+        // This is the ID at a position in the given rectangle
+        int[] tileIDsInRectangle = new int[(int)rectangleToGeTileFrom.width * (int)rectangleToGeTileFrom.height];
+        // This dictionary will contain all positions of a tile ID in the given rectangle
+        Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
+        //
+        int rectStartPosition = (width * (int)(rectangleToGeTileFrom.y)) + (int)rectangleToGeTileFrom.x;
 
-    //
-    public Texture2D[] GetAllTilesTexturesFromLayer(int layerToGetTilesFrom)
-    {
-        // If the layer to get tiles form is a tile layer
-        if (layers[layerToGetTilesFrom].layerType == TIKLayer.layerTypes.Tile)
+        //
+        for (int rectY = 0; rectY < rectangleToGeTileFrom.height; rectY++)
         {
-            // Create an array of textures to put all the textures formt the requested layer into
-            Texture2D[] allTileTextures = new Texture2D[layers[layerToGetTilesFrom].data.Length];
-            // For each tile in the requested layer
-            for (int tileNumber = 0; tileNumber < layers[layerToGetTilesFrom].data.Length; tileNumber++)
+            //
+            for (int rectX = 0; rectX < rectangleToGeTileFrom.width; rectX++)
             {
-                // Look through each of this map's tilesets
-                foreach (TIKTileset tilesetCurrentlyBeingChecked in tilesets)
-                {
-                    // If this tile is in the tilest currently being checked
-                    if (layers[layerToGetTilesFrom].data[tileNumber] >= tilesetCurrentlyBeingChecked.firstgid - 1 && layers[layerToGetTilesFrom].data[tileNumber] < tilesetCurrentlyBeingChecked.firstgid + tilesetCurrentlyBeingChecked.tilecount)
-                    {
-                        // Add the texture for this tile to the array of tile textures
-                        allTileTextures[tileNumber] = tilesetCurrentlyBeingChecked.GetTileTexture(layers[layerToGetTilesFrom].data[tileNumber]);
-                        // There is no reason to continue checking tilesets
-                        break;
-                    }
-                }
+                Debug.Log(string.Format("rectX: {0}, rectY: {1}", rectX, rectY));
+                //
+                tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = layers[layerToGetTilesFrom].data[(rectY * width) + rectX + rectStartPosition];
             }
-            // Return the lest of all tile textures in the requested layer
-            return allTileTextures;
         }
-        else
+
+        // Go through each position in the given rectangle
+        for (int positionOfIDBeingChecked = 0; positionOfIDBeingChecked < tileIDsInRectangle.Length; positionOfIDBeingChecked++)
         {
-            // Tell the user what went wrong
-            Debug.Log("Requested layer to get all tiles from is not a tile layer: Returned null");
-            // Request is invalid, because the requested layer is not a tile layer
-            return null;
+            // This will be used to determine if it exits and then store the list this tile position should be placed in
+            List<int> matchingID;
+            // If the ID at the position being checked has been disovered
+            if (disoveredTilePostitions.TryGetValue(tileIDsInRectangle[positionOfIDBeingChecked], out matchingID))
+            {
+                // Add this position to that ID's list of positions
+                matchingID.Add(positionOfIDBeingChecked);
+            }
+            else
+            {
+                // Create a new list for the tile ID at the position being checked
+                matchingID = new List<int>();
+                // Add the tile ID at the position being checked to its new list
+                matchingID.Add(tileIDsInRectangle[positionOfIDBeingChecked]);
+                // Add this position to this tile ID's new list
+                matchingID.Add(positionOfIDBeingChecked);
+                // Add this tile ID's new list to the dictionary of discovered tile IDs
+                disoveredTilePostitions[tileIDsInRectangle[positionOfIDBeingChecked]] = matchingID;
+            }
         }
+        // Return the lsit of all discovered tiles and their positions
+        return disoveredTilePostitions;
     }
 
 

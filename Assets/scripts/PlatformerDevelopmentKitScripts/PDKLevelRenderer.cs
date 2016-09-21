@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
@@ -11,11 +12,22 @@ public class PDKLevelRenderer : MonoBehaviour
         //
         SpriteRenderer layerOneSpriteRenderer = layerOneObject.AddComponent<SpriteRenderer>();
         //
-        layerOneSpriteRenderer.sprite = Sprite.Create(RenderLayer(mapToRender, 0), new Rect(0, 0, mapToRender.width * mapToRender.tilewidth, mapToRender.height * mapToRender.tileheight), new Vector2(0.5f, 0.5f));
+        //layerOneSpriteRenderer.sprite = Sprite.Create(RenderLayer(mapToRender, 0), new Rect(0, 0, mapToRender.width * mapToRender.tilewidth, mapToRender.height * mapToRender.tileheight), new Vector2(0.5f, 0.5f));
+        CreateTextureFromASectionOfALayer(mapToRender, 0, new Rect(3, 36, 4, 4));
+    }
+
+    //
+    private Texture2D CreateTextureFromASectionOfALayer(TIKMap levelMap, int layerToRender, Rect rectangleOfLayerToRender)
+    {
+        //
+        Debug.Log(levelMap.GetAllTilePositionsFromLayerInRectangle(layerToRender, rectangleOfLayerToRender));
+
+        //TODO: Remove this later
+        return null;
     }
 
     //The CombineSprites function combines an array of sprites, and returns one large one
-    private Texture2D RenderLayer(TIKMap levelMap, int layerToRender)
+    /*private Texture2D RenderLayer(TIKMap levelMap, int layerToRender)
     {
         //
         //
@@ -40,5 +52,5 @@ public class PDKLevelRenderer : MonoBehaviour
             }
         }
         return newCombinedTexture;
-    }
+    }*/
 }
