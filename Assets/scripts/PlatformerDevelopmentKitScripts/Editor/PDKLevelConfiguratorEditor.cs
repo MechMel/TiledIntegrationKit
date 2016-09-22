@@ -12,6 +12,10 @@ public class PDKLevelConfiguratorEditor : Editor
         // Define the target script to use
         PDKLevelConfigurator myTarget = (PDKLevelConfigurator)target;
 
+        // Display a fiedl for load distance
+        myTarget.loadDistance = EditorGUILayout.IntField("Load Distance", myTarget.loadDistance);
+        // Display a field for buffer distance
+        myTarget.bufferDistance = EditorGUILayout.IntField("Buffer Distance",  myTarget.bufferDistance);
         // Create the map type selection drop down
         myTarget.mapType = (PDKLevelConfigurator.mapTypes)EditorGUILayout.EnumPopup("Map Type", myTarget.mapType);
 
@@ -26,8 +30,8 @@ public class PDKLevelConfiguratorEditor : Editor
         // Stop checking to see if the GUI has been changed
         if (EditorGUI.EndChangeCheck())
         {
-            // Tell the level configurator to update it's settings
-            myTarget.UpdateMapSettings();
+            // Tell the level configurator it's text asset has been changed
+            myTarget.TextAssetChanged();
         }
         #endregion
 

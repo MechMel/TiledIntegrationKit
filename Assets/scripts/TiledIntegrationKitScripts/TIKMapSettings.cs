@@ -46,25 +46,29 @@ public class TIKMapSettings
     {
         // Clone each Variable
         mapTextAsset = mapSettingsToClone.mapTextAsset;
-        tilesetTextures = mapSettingsToClone.tilesetTextures;
         tikMap = mapSettingsToClone.tikMap;
+        tilesetTextures = mapSettingsToClone.tilesetTextures;
     }
     
     // When this is called settings from another map are copied onto this map's settings
     public void CopyMatchingSettings(TIKMapSettings mapSettingsToCopy)
     {
         #region Check and Copy Tilesets
-        // For each tileset in this map
-        for (int tilesetToCheck = 0; tilesetToCheck < tilesetTextures.Length; tilesetToCheck++)
+        // If the map settings to copy tilesetTextures is not blank
+        if (mapSettingsToCopy.tilesetTextures != null)
         {
-            // Go through each tileset in the map to copy
-            for (int tilesetToCopy = 0; tilesetToCopy < mapSettingsToCopy.tilesetTextures.Length; tilesetToCopy++)
+            // For each tileset in this map
+            for (int tilesetToCheck = 0; tilesetToCheck < tilesetTextures.Length; tilesetToCheck++)
             {
-                // If these tilesets have the same name
-                if (tikMap.tilesets[tilesetToCheck].name == mapSettingsToCopy.tikMap.tilesets[tilesetToCopy].name)
+                // Go through each tileset in the map to copy
+                for (int tilesetToCopy = 0; tilesetToCopy < mapSettingsToCopy.tilesetTextures.Length; tilesetToCopy++)
                 {
-                    // Copy that tileset from mapSettingsToCopy to this TIKMapSettings
-                    tilesetTextures[tilesetToCheck] = mapSettingsToCopy.tilesetTextures[tilesetToCopy];
+                    // If these tilesets have the same name
+                    if (tikMap.tilesets[tilesetToCheck].name == mapSettingsToCopy.tikMap.tilesets[tilesetToCopy].name)
+                    {
+                        // Copy that tileset from mapSettingsToCopy to this TIKMapSettings
+                        tilesetTextures[tilesetToCheck] = mapSettingsToCopy.tilesetTextures[tilesetToCopy];
+                    }
                 }
             }
         }
