@@ -5,12 +5,15 @@ using System.Collections;
 public class PDKLevelConfigurator : MonoBehaviour
 {
     // This is how far from out from the camera to load this level
+    [SerializeField]
     public int loadDistance;
     // This is how close the camera can get to the edge of the loaded area before a new section should be loaded
+    [SerializeField]
     public int bufferDistance;
     // This is all possible map types a user can choose
     public enum mapTypes { None, Tiled };
     // This will be used to track the map type that the user has chosen
+    [SerializeField]
     public mapTypes mapType = mapTypes.None;
 
     #region Tiled Map Settings
