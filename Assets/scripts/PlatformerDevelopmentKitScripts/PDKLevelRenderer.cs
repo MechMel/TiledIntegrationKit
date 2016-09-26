@@ -4,8 +4,21 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
+    //
+    public List<GameObject> layerObjects = new List<GameObject>();
+
+    //
+    public void RemoveAllLayers()
+    {
+        //
+        foreach (GameObject thisLayerObject in layerObjects)
+        {
+            GameObject.Destroy(thisLayerObject);
+        }
+    }
+
     // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
-    public void RenderRectangleOfMap(TIKMap mapToRender, Rect rectangleToRender)
+    public void RenderRectangleOfMapAtPosition(TIKMap mapToRender, Rect rectangleToRender, Vector3 positionToCreateLayersAt)
     {
         // Go through each layer in this map
         for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
@@ -19,6 +32,8 @@ public class PDKLevelRenderer : MonoBehaviour
                 thisLayerObject.name = "Layer " + layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
                 // Add a sprite renderer to the game object for layer 1
                 SpriteRenderer thisLayerSpriteRenderer = thisLayerObject.AddComponent<SpriteRenderer>();
+                //
+                thisLayerObject.transform.position = positionToCreateLayersAt;
                 // TODO: get sorting layers working
                 //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
                 // Create a texture from the given rectangle
@@ -27,6 +42,8 @@ public class PDKLevelRenderer : MonoBehaviour
                 Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
                 // Display the sprite of the area to render
                 thisLayerSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+                // Add the newly created object for this layer into the list of layer objects
+                layerObjects.Add(thisLayerObject);
             }
         }
     }

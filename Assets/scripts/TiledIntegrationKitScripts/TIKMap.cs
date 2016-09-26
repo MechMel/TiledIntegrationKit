@@ -52,8 +52,18 @@ public class TIKMap
             // Go through each tile in this row of the rectangle
             for (int rectX = 0; rectX < rectangleToGeTileFrom.width; rectX++)
             {
-                // Add the this tile ID from the map to the array of tile IDs in the given rectangle
-                tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = layers[layerToGetTilesFrom].data[(rectY * width) + rectX + rectStartPosition];
+                if (rectX + rectangleToGeTileFrom.x >= 0 && rectX + rectangleToGeTileFrom.x < width && rectY + rectangleToGeTileFrom.y >= 0 && rectY + rectangleToGeTileFrom.y <= height) // If the tile in the given rectangle is inside this map
+                {
+                    // Find the position in the map of this tile ID from the rectangle
+                    int positionOfTileIDToGet = (rectY * width) + rectX + rectStartPosition;
+                    // Add the this tile ID from the map to the array of tile IDs in the given rectangle
+                    tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = layers[layerToGetTilesFrom].data[positionOfTileIDToGet];
+                }
+                else // If the tile in the given rectangle is outside this map
+                {
+                    // There is no tile at this position
+                    tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = 0;
+                }
             }
         }
 
