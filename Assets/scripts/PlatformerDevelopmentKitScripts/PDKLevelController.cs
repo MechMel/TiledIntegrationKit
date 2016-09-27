@@ -32,8 +32,6 @@ public class PDKLevelController : MonoBehaviour
     public void Reload()
     {
         //
-        levelRenderer.RemoveAllLayers();
-        //
         levelRenderer.RenderRectangleOfMapAtPosition(levelMap, new Rect(0, 20, (int)(2 * screenRatio * loadDistance), 2 * loadDistance), transform.position);
     }
 }

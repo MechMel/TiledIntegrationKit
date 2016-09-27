@@ -4,79 +4,123 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
-    //
-    public List<GameObject> layerObjects = new List<GameObject>();
-
-    //
-    public void RemoveAllLayers()
-    {
-        //
-        foreach (GameObject thisLayerObject in layerObjects)
-        {
-            GameObject.Destroy(thisLayerObject);
-        }
-    }
+    // This is used to store all layer group objects that this renderer creates
+    public List<GameObject> layerGroupObjects = new List<GameObject>();
 
     // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
     public void RenderRectangleOfMapAtPosition(TIKMap mapToRender, Rect rectangleToRender, Vector3 positionToCreateLayersAt)
     {
+        // This is used to store an ordered set of a layer groups in this map
+        Dictionary<int, PDKLayerGroup> layerGroupsToRender = new Dictionary<int, PDKLayerGroup>();
+        // This is used to track which layer group is currently being compared against
+        int currentLayerGroupNumber = -1;
+
         // Go through each layer in this map
         for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
         {
-            // If this layer is a tile layer
-            if (mapToRender.layers[layerNumberToRender].layerType == TIKLayer.layerTypes.Tile && mapToRender.layers[layerNumberToRender].visible)
+            // If this layer is visible
+            if (mapToRender.layers[layerNumberToRender].visible)
             {
-                // Create a game object to render this layer on
-                GameObject thisLayerObject = new GameObject();
-                // Name this layer's object
-                thisLayerObject.name = "Layer " + layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
-                // Add a sprite renderer to the game object for layer 1
-                SpriteRenderer thisLayerSpriteRenderer = thisLayerObject.AddComponent<SpriteRenderer>();
-                //
-                thisLayerObject.transform.position = positionToCreateLayersAt;
-                // TODO: get sorting layers working
-                //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
-                // Create a texture from the given rectangle
-                Texture2D textureToRender = CreateTextureFromASectionOfALayer(mapToRender, layerNumberToRender, rectangleToRender);
-                // Create a sprite from the texture to render
-                Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
-                // Display the sprite of the area to render
-                thisLayerSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-                // Add the newly created object for this layer into the list of layer objects
-                layerObjects.Add(thisLayerObject);
+                if (currentLayerGroupNumber <= 0) // If no layer groups have been created yet
+                {
+                    // CThe first layer group should be created at position 0
+                    currentLayerGroupNumber = 0;
+                    // Create A new LayerGroup dictionary for this type of layer
+                    layerGroupsToRender.Add(currentLayerGroupNumber, CreateNewLayerGroup(mapToRender.layers[layerNumberToRender].layerType, layerNumberToRender));
+                }
+                else if (layerGroupsToRender[currentLayerGroupNumber].groupType == mapToRender.layers[layerNumberToRender].layerType) // If this layer is the same type as the current layer group
+                {
+                    // Add this layer to the current layer group
+                    layerGroupsToRender[currentLayerGroupNumber].layerNumbers.Add(layerNumberToRender);
+                }
+                else
+                {
+                    // Increase the current layer group number
+                    currentLayerGroupNumber++;
+                    // Create A new LayerGroup dictionary for this type of layer
+                    layerGroupsToRender.Add(currentLayerGroupNumber, CreateNewLayerGroup(mapToRender.layers[layerNumberToRender].layerType, layerNumberToRender));
+                }
+            }
+        }
+        //
+        foreach (int layerGroupNumber in layerGroupsToRender.Keys)
+        {
+            // Go through each layer in this group
+            for (int layerNumberToRender = layerGroupsToRender[layerGroupNumber].layerNumbers.Count - 1; layerNumberToRender >= 0; layerNumberToRender--)
+            {
+                // If this layer is a tile layer
+                if (layerGroupsToRender[layerGroupNumber].groupType == TIKLayer.layerTypes.Tile)
+                {
+                    // Create a game object to render this layer group on
+                    GameObject thisLayerGroupObject = new GameObject();
+                    // Name this layer's object
+                    thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString();
+                    // Add a sprite renderer to this layer group's game object
+                    SpriteRenderer thisLayerSpriteRenderer = thisLayerGroupObject.AddComponent<SpriteRenderer>();
+                    // Put this layer in the correct position
+                    thisLayerGroupObject.transform.position = positionToCreateLayersAt;
+                    // TODO: get sorting layers working
+                    //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
+                    // Create a texture from the given rectangle
+                    Texture2D textureToRender = CreateTextureFromASectionOfASetOfLayers(mapToRender, layerGroupsToRender[layerGroupNumber].layerNumbers, rectangleToRender);
+                    // Create a sprite from the texture to render
+                    Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
+                    // Display the sprite of the area to render
+                    thisLayerSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+                    // Add the newly created object for this layer into the list of layer objects
+                    layerGroupObjects.Add(thisLayerGroupObject);
+                }
             }
         }
     }
 
+    // When this is called it creates a new layer group with a specified type, and then adds a layer number to this new layer group
+    private PDKLayerGroup CreateNewLayerGroup(TIKLayer.layerTypes layerGroupType, int firstLayerNumber)
+    {
+        // Create the new layer group
+        PDKLayerGroup layerGroupToReturn = new PDKLayerGroup();
+        // Set this layer group's type
+        layerGroupToReturn.groupType = layerGroupType;
+        // Add the first layer to this layer group
+        layerGroupToReturn.layerNumbers.Add(firstLayerNumber);
+        // Return the newly created layer group
+        return layerGroupToReturn;
+    }
+
     // When this is called this function creates a texture from a given rectangle of the map
-    private Texture2D CreateTextureFromASectionOfALayer(TIKMap levelMap, int layerToRender, Rect rectangleOfLayerToRender)
+    private Texture2D CreateTextureFromASectionOfASetOfLayers(TIKMap levelMap, List<int> layerNumbersToCreateTextureFrom, Rect rectangleOfLayerToRender)
     {
         // Create a new transparent texture to store the requested rectangle of the map
         Texture2D textureToReturn = CreateTransparentTexture((int)rectangleOfLayerToRender.width * levelMap.tilewidth, (int)rectangleOfLayerToRender.height * levelMap.tileheight);
         // Set the texture filter mode to point
         textureToReturn.filterMode = FilterMode.Point;
-        // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
-        Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerToRender, rectangleOfLayerToRender);
 
-        // Go through each tile ID in the requested rectangle of the map
-        foreach (int thisTileID in tilePositions.Keys)
+        // For each layer to render
+        foreach (int layerNumber in layerNumbersToCreateTextureFrom)
         {
-            // Create an array of colors and put the pixels from this tile into it
-            Color[] thisTilesPixels = levelMap.GetTilePixels(thisTileID);
-            // Go through each occurance of this tile in the requested rectangle of the map
-            foreach(int tilePosition in tilePositions[thisTileID])
+            // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
+            Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerNumber, rectangleOfLayerToRender);
+
+            // Go through each tile ID in the requested rectangle of the map
+            foreach (int thisTileID in tilePositions.Keys)
             {
-                // Draw that tile in the corect position in the texture to return 
-                textureToReturn.SetPixels(
-                    x: levelMap.tilewidth * (tilePosition % (int)rectangleOfLayerToRender.width), 
-                    y: levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - tilePosition - 1) / (int)rectangleOfLayerToRender.width),
-                    blockWidth: levelMap.tilewidth,
-                    blockHeight: levelMap.tileheight, 
-                    colors: thisTilesPixels);
+                // Create an array of colors and put the pixels from this tile into it
+                Color[] thisTilesPixels = levelMap.GetTilePixels(thisTileID);
+                // Go through each occurance of this tile in the requested rectangle of the map
+                foreach (int tilePosition in tilePositions[thisTileID])
+                {
+                    // Draw that tile in the corect position in the texture to return 
+                    textureToReturn.SetPixels(
+                        x: levelMap.tilewidth * (tilePosition % (int)rectangleOfLayerToRender.width),
+                        y: levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - tilePosition - 1) / (int)rectangleOfLayerToRender.width),
+                        blockWidth: levelMap.tilewidth,
+                        blockHeight: levelMap.tileheight,
+                        colors: thisTilesPixels);
+                }
             }
+            // Apply the changes to the texture
+            textureToReturn.Apply();
         }
-        // Apply the changes to the texture
-        textureToReturn.Apply();
 
         // Return the completed texture
         return textureToReturn;
