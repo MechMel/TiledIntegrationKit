@@ -109,13 +109,22 @@ public class PDKLevelRenderer : MonoBehaviour
                 // Go through each occurance of this tile in the requested rectangle of the map
                 foreach (int tilePosition in tilePositions[thisTileID])
                 {
-                    // Draw that tile in the corect position in the texture to return 
-                    textureToReturn.SetPixels(
-                        x: levelMap.tilewidth * (tilePosition % (int)rectangleOfLayerToRender.width),
-                        y: levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - tilePosition - 1) / (int)rectangleOfLayerToRender.width),
-                        blockWidth: levelMap.tilewidth,
-                        blockHeight: levelMap.tileheight,
-                        colors: thisTilesPixels);
+                    // Calculate The x position of the pixel that this tile will start at
+                    int initialPixelX = levelMap.tilewidth * (tilePosition % (int)rectangleOfLayerToRender.width);
+                    // Calculate The y position of the pixel that this tile will start at
+                    int initialPixelY = levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - tilePosition - 1) / (int)rectangleOfLayerToRender.width);
+                    // For each pixel in this tile
+                    for (int pixelPosition = 0; pixelPosition < thisTilesPixels.Length; pixelPosition++)
+                    {
+                        // Calculate the x poxiiton of this pixel in the texture to return
+                        int pixelX = initialPixelX + (pixelPosition % levelMap.tilewidth);
+                        // Calculate the y poxiiton of this pixel in the texture to return
+                        int pixelY = initialPixelY + (pixelPosition / levelMap.tilewidth);
+                        // Calculate the new combined color for this pixel in the texture to return
+                        Color newPixelColor = (thisTilesPixels[pixelPosition] * (1 - textureToReturn.GetPixel(pixelX, pixelY).a)) + (textureToReturn.GetPixel(pixelX, pixelY) * textureToReturn.GetPixel(pixelX, pixelY).a);
+                        // Set this pixel to the new compined color
+                        textureToReturn.SetPixel(pixelX, pixelY, newPixelColor);
+                    }
                 }
             }
             // Apply the changes to the texture
