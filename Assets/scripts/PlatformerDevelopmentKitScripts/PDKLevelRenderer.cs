@@ -48,7 +48,7 @@ public class PDKLevelRenderer : MonoBehaviour
             // Create a game object to render this layer group on
             GameObject thisLayerGroupObject = new GameObject();
             // Name this layer's object
-            thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString();
+            thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString() + rectangleToRender.x.ToString() + "," + rectangleToRender.y.ToString();
             // Add a sprite renderer to this layer group's game object
             SpriteRenderer thisLayerSpriteRenderer = thisLayerGroupObject.AddComponent<SpriteRenderer>();
             // Put this layer in the correct position
@@ -61,6 +61,8 @@ public class PDKLevelRenderer : MonoBehaviour
                 {
                     // TODO: get sorting layers working
                     //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
+                    //
+                    Rect rectangleToRenderTopLeft = new Rect(rectangleToRender.x - (rectangleToRender.width / 2), rectangleToRender.y + (rectangleToRender.height / 2), rectangleToRender.width, rectangleToRender.height);
                     // Create a texture from the given rectangle
                     Texture2D textureToRender = CreateTextureFromASectionOfASetOfLayers(mapToRender, layerGroupsToRender[layerGroupNumber].layerNumbers, rectangleToRender);
                     // Create a sprite from the texture to render

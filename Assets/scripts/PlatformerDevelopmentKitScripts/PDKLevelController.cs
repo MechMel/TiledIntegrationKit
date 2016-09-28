@@ -13,25 +13,48 @@ public class PDKLevelController : MonoBehaviour
     public int bufferDistance;
     //
     float screenRatio = (float)Screen.width / (float)Screen.height;
+    //
+    Vector3 mainCameraPosition;
+    //
+    bool firstLoopIsDone = false;
 
+    void Awake()
+    {
+        //
+        transform.position = new Vector3(mainCameraPosition.x, mainCameraPosition.y, transform.position.z);
+    }
 
     void Start()
     {
+        //
+        transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
+        //
+        Reload();
+        //
+        firstLoopIsDone = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
-        if (Vector2.Distance(mainCameraPosition, this.gameObject.transform.position) > bufferDistance)
+        //
+        mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
+        //
+        if (firstLoopIsDone)
         {
-            transform.position = new Vector3(mainCameraPosition.x, mainCameraPosition.y, transform.position.z);
-            Reload();
+            //
+            if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
+            {
+                //
+                transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
+                //
+                Reload();
+            }
         }
     }
 
     public void Reload()
     {
         //
-        levelRenderer.RenderRectangleOfMapAtPosition(levelMap, new Rect(0, 20, (int)(2 * screenRatio * loadDistance), 2 * loadDistance), transform.position);
+        levelRenderer.RenderRectangleOfMapAtPosition(levelMap, new Rect(transform.position.x, -transform.position.y, (int)(2 * screenRatio * loadDistance), 2 * loadDistance), transform.position);
     }
 }
