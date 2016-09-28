@@ -21,7 +21,7 @@ public class PDKLevelRenderer : MonoBehaviour
             // If this layer is visible
             if (mapToRender.layers[layerNumberToRender].visible)
             {
-                if (currentLayerGroupNumber <= 0) // If no layer groups have been created yet
+                if (currentLayerGroupNumber < 0) // If no layer groups have been created yet
                 {
                     // CThe first layer group should be created at position 0
                     currentLayerGroupNumber = 0;
@@ -131,19 +131,19 @@ public class PDKLevelRenderer : MonoBehaviour
     {
         // Create a new texture
         Texture2D textureToReturn = new Texture2D(width, height);
-        // Create an array with enough pixels for the new texture
-        Color[] transparentPixels = new Color[width * height];
+        // Calculate how many pixels there are in the texture to return
+        int numberOfPixelsInTextureToReturn = textureToReturn.width * textureToReturn.height;
+        // Create a new white pixel
+        Color transparentPixel = Color.white;
+        // Make this pixel transparent
+        transparentPixel.a = 0;
 
-        // For each pixel in transparentPixels
-        for (int pixelNumber = 0; pixelNumber < transparentPixels.Length; pixelNumber++)
+        // For each pixel in the texture to return
+        for (int pixelNumber = 0; pixelNumber < numberOfPixelsInTextureToReturn; pixelNumber++)
         {
-            // Make this pixel white
-            transparentPixels[pixelNumber] = Color.white;
-            // Make this pixel transparent
-            transparentPixels[pixelNumber].a = 0;
+            // Make each pixel in the texture to retun transparent
+            textureToReturn.SetPixel(pixelNumber % textureToReturn.width, pixelNumber / textureToReturn.width, transparentPixel);
         }
-        // Make this texture transparent
-        textureToReturn.SetPixels(transparentPixels);
         // Apply the changes to this texture
         textureToReturn.Apply();
 
