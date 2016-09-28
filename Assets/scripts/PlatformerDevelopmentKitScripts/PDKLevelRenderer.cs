@@ -45,20 +45,20 @@ public class PDKLevelRenderer : MonoBehaviour
         //
         foreach (int layerGroupNumber in layerGroupsToRender.Keys)
         {
+            // Create a game object to render this layer group on
+            GameObject thisLayerGroupObject = new GameObject();
+            // Name this layer's object
+            thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString();
+            // Add a sprite renderer to this layer group's game object
+            SpriteRenderer thisLayerSpriteRenderer = thisLayerGroupObject.AddComponent<SpriteRenderer>();
+            // Put this layer in the correct position
+            thisLayerGroupObject.transform.position = positionToCreateLayersAt;
             // Go through each layer in this group
             for (int layerNumberToRender = layerGroupsToRender[layerGroupNumber].layerNumbers.Count - 1; layerNumberToRender >= 0; layerNumberToRender--)
             {
                 // If this layer is a tile layer
                 if (layerGroupsToRender[layerGroupNumber].groupType == TIKLayer.layerTypes.Tile)
                 {
-                    // Create a game object to render this layer group on
-                    GameObject thisLayerGroupObject = new GameObject();
-                    // Name this layer's object
-                    thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString();
-                    // Add a sprite renderer to this layer group's game object
-                    SpriteRenderer thisLayerSpriteRenderer = thisLayerGroupObject.AddComponent<SpriteRenderer>();
-                    // Put this layer in the correct position
-                    thisLayerGroupObject.transform.position = positionToCreateLayersAt;
                     // TODO: get sorting layers working
                     //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
                     // Create a texture from the given rectangle
