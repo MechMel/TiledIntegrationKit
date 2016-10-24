@@ -4,8 +4,14 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
+    // This is used to remember what area of the map is currently rendered
+    public Rect renderedRectOfMap;
+    // This is the texture that is being put to gether so that it can be rendered
+    public Texture2D textureToRender;
+    // This is the texture that is currently rendered
+    public Texture2D renderedTexture;
     // This is used to store all layer group objects that this renderer creates
-    public List<GameObject> layerGroupObjects = new List<GameObject>();
+    public Dictionary<int, GameObject> layerGroupObjects = new Dictionary<int, GameObject>();
 
     // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
     public void RenderRectangleOfMapAtPosition(TIKMap mapToRender, Rect rectangleToRender, Vector3 positionToCreateLayersAt)
@@ -42,38 +48,39 @@ public class PDKLevelRenderer : MonoBehaviour
                 }
             }
         }
-        //
+        // Go through each layer group to render
         foreach (int layerGroupNumber in layerGroupsToRender.Keys)
         {
-            // Create a game object to render this layer group on
-            GameObject thisLayerGroupObject = new GameObject();
-            // Name this layer's object
-            thisLayerGroupObject.name = "Layer Group " + layerGroupNumber.ToString() + rectangleToRender.x.ToString() + "," + rectangleToRender.y.ToString();
-            // Add a sprite renderer to this layer group's game object
-            SpriteRenderer thisLayerSpriteRenderer = thisLayerGroupObject.AddComponent<SpriteRenderer>();
-            // Put this layer in the correct position
-            thisLayerGroupObject.transform.position = positionToCreateLayersAt;
-            // Go through each layer in this group
-            for (int layerNumberToRender = layerGroupsToRender[layerGroupNumber].layerNumbers.Count - 1; layerNumberToRender >= 0; layerNumberToRender--)
+            //
+            if (layerGroupObjects.Keys.Count == 0)
             {
-                // If this layer is a tile layer
-                if (layerGroupsToRender[layerGroupNumber].groupType == TIKLayer.layerTypes.Tile)
-                {
-                    // TODO: get sorting layers working
-                    //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
-                    //
-                    Rect rectangleToRenderTopLeft = new Rect(rectangleToRender.x - (rectangleToRender.width / 2), rectangleToRender.y + (rectangleToRender.height / 2), rectangleToRender.width, rectangleToRender.height);
-                    // Create a texture from the given rectangle
-                    Texture2D textureToRender = CreateTextureFromASectionOfASetOfLayers(mapToRender, layerGroupsToRender[layerGroupNumber].layerNumbers, rectangleToRender);
-                    // Create a sprite from the texture to render
-                    Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
-                    // Display the sprite of the area to render
-                    thisLayerSpriteRenderer.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-                    // Add the newly created object for this layer into the list of layer objects
-                    layerGroupObjects.Add(thisLayerGroupObject);
-                }
+                // Create a game object to render this layer group on
+                GameObject thisLayerGroupObject = new GameObject();
+                // Add the newly created object for this layer into the list of layer objects
+                layerGroupObjects.Add(layerGroupNumber, thisLayerGroupObject);
+                // Name this layer's object
+                layerGroupObjects[layerGroupNumber].name = "Layer Group " + layerGroupNumber.ToString() + rectangleToRender.x.ToString() + "," + rectangleToRender.y.ToString();
+                // Add a sprite renderer to this layer group's game object
+                SpriteRenderer thisLayerSpriteRenderer = layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
             }
+            //
+            textureToRender = new Texture2D((int)rectangleToRender.width * mapToRender.tilewidth, (int)rectangleToRender.height * mapToRender.tileheight);
+
+            // TODO: get sorting layers working
+            //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
+            //
+            Rect rectangleToRenderTopLeft = new Rect(rectangleToRender.x - (rectangleToRender.width / 2), rectangleToRender.y + (rectangleToRender.height / 2), rectangleToRender.width, rectangleToRender.height);
+            // Create a texture from the given rectangle
+            textureToRender = CreateTextureFromASectionOfASetOfLayers(mapToRender, layerGroupsToRender[layerGroupNumber].layerNumbers, rectangleToRender);
+            // Create a sprite from the texture to render
+            Sprite spriteToDisplay = Sprite.Create(textureToRender, new Rect(0, 0, textureToRender.width, textureToRender.height), new Vector2(0.5f, 0.5f), mapToRender.tilewidth);
+            // Display the sprite of the area to render
+            layerGroupObjects[layerGroupNumber].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+            // Put this layer in the correct position
+            layerGroupObjects[layerGroupNumber].transform.position = positionToCreateLayersAt;
         }
+        // Store the curretly rendered rectangle of the map
+        renderedRectOfMap = rectangleToRender;
     }
 
     // When this is called it creates a new layer group with a specified type, and then adds a layer number to this new layer group
@@ -126,6 +133,87 @@ public class PDKLevelRenderer : MonoBehaviour
                         Color newPixelColor = (thisTilesPixels[pixelPosition] * (1 - textureToReturn.GetPixel(pixelX, pixelY).a)) + (textureToReturn.GetPixel(pixelX, pixelY) * textureToReturn.GetPixel(pixelX, pixelY).a);
                         // Set this pixel to the new compined color
                         textureToReturn.SetPixel(pixelX, pixelY, newPixelColor);
+                    }
+                }
+            }
+            // Apply the changes to the texture
+            textureToReturn.Apply();
+        }
+
+        // Return the completed texture
+        return textureToReturn;
+    }
+
+    // When this is called this function creates a texture from a given rectangle of the map
+    private Texture2D CreateTextureForLayerGroup(TIKMap levelMap, List<int> layerNumbersToCreateTextureFrom, Rect rectangleOfLayerToRender)
+    {
+        // Create a new transparent texture to store the requested rectangle of the map
+        Texture2D textureToReturn = CreateTransparentTexture((int)rectangleOfLayerToRender.width * levelMap.tilewidth, (int)rectangleOfLayerToRender.height * levelMap.tileheight);
+        // Set the texture filter mode to point
+        textureToReturn.filterMode = FilterMode.Point;
+        List<int> positionsWithTiles = new List<int>();
+
+        // Start at the closest layer
+        layerNumbersToCreateTextureFrom.Reverse();
+        // For each layer to render
+        foreach (int layerNumber in layerNumbersToCreateTextureFrom)
+        {
+            // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
+            Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerNumber, rectangleOfLayerToRender);
+
+            // Go through each tile ID in the requested rectangle of the map
+            foreach (int thisTileID in tilePositions.Keys)
+            {
+                // Create an array of colors and put the pixels from this tile into it
+                Color[] thisTilesPixels = levelMap.GetTilePixels(thisTileID);
+
+                // Go through each occurance of this tile in the requested rectangle of the map
+                foreach (int thisTilePosition in tilePositions[thisTileID])
+                {
+                    // Calculate The x position of the pixel that this tile will start at
+                    int initialPixelX = levelMap.tilewidth * (thisTilePosition % (int)rectangleOfLayerToRender.width);
+                    // Calculate The y position of the pixel that this tile will start at
+                    int initialPixelY = levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - thisTilePosition - 1) / (int)rectangleOfLayerToRender.width);
+                    // If there is no tile already at this position
+                    if (!positionsWithTiles.Contains(thisTilePosition))
+                    {
+                        // Place this tile in the texture to return
+                        textureToReturn.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
+                        // Remember that there is tile at this position
+                        positionsWithTiles.Add(thisTilePosition);
+                    }
+                    else
+                    {
+                        // For each pixel in this tile
+                        for (int pixelPosition = 0; pixelPosition < thisTilesPixels.Length; pixelPosition++)
+                        {
+                            // Calculate the x poxiiton of this pixel in the texture to return
+                            int pixelX = initialPixelX + (pixelPosition % levelMap.tilewidth);
+                            // Calculate the y poxiiton of this pixel in the texture to return
+                            int pixelY = initialPixelY + (pixelPosition / levelMap.tilewidth);
+
+                            // If the new pixel is transparent or the old pixel is completely opaque
+                            if (thisTilesPixels[pixelPosition].a == 0 || textureToReturn.GetPixel(pixelX, pixelY).a == 1)
+                            {
+                                // Do not bother to place this pixel
+                                break;
+                            }
+                            else if (textureToReturn.GetPixel(pixelX, pixelY).a == 0) // If the old tile is transparent
+                            {
+                                // Just place this pixel on top
+                                textureToReturn.SetPixel(pixelX, pixelY, thisTilesPixels[pixelPosition]);
+                                // This pixel has been placed
+                                break;
+                            }
+                            else // If this pixel will be placed behind another one
+                            {
+                                // Calculate the new combined color for this pixel in the texture to return
+                                Color newPixelColor = (textureToReturn.GetPixel(pixelX, pixelY) * (1 - thisTilesPixels[pixelPosition].a)) + (thisTilesPixels[pixelPosition] * thisTilesPixels[pixelPosition].a);
+
+                                // Set this pixel to the new compined color
+                                textureToReturn.SetPixel(pixelX, pixelY, newPixelColor);
+                            }
+                        }
                     }
                 }
             }

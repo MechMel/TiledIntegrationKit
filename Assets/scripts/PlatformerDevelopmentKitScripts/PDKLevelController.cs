@@ -34,7 +34,7 @@ public class PDKLevelController : MonoBehaviour
         firstLoopIsDone = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
@@ -50,11 +50,23 @@ public class PDKLevelController : MonoBehaviour
                 Reload();
             }
         }
+        //
+        logDeltaTimeGreaterThanMinimum("Continual", .02f);
     }
 
     public void Reload()
     {
         //
         levelRenderer.RenderRectangleOfMapAtPosition(levelMap, new Rect(transform.position.x, -transform.position.y, (int)(2 * screenRatio * loadDistance), 2 * loadDistance), transform.position);
+    }
+
+    private void logDeltaTimeGreaterThanMinimum(string NameOfTime, float minimumDelta)
+    {
+        // If the delta time was greater than the minimum
+        if (Time.deltaTime > minimumDelta)
+        {
+            // Log the delta time
+            Debug.Log(Time.time + " " + NameOfTime + ": " + Time.deltaTime);
+        }
     }
 }
