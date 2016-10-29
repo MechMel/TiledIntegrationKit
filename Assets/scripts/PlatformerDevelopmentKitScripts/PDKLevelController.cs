@@ -15,9 +15,13 @@ public class PDKLevelController : MonoBehaviour
     float screenRatio = (float)Screen.width / (float)Screen.height;
     //
     Vector3 mainCameraPosition;
+    //
+    bool firstLoopIsDone = false;
 
     void Awake()
     {
+        //
+        transform.position = new Vector3(mainCameraPosition.x, mainCameraPosition.y, transform.position.z);
     }
 
     void Start()
@@ -25,7 +29,9 @@ public class PDKLevelController : MonoBehaviour
         //
         transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
         //
-        logDeltaTimeGreaterThanMinimum("Continual", .018f);
+        Reload();
+        //
+        firstLoopIsDone = true;
     }
 
     void Update()
@@ -33,15 +39,19 @@ public class PDKLevelController : MonoBehaviour
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //
-        if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
+        if (firstLoopIsDone)
         {
             //
-            transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
-            //
-            Reload();
+            if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
+            {
+                //
+                transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
+                //
+                Reload();
+            }
         }
         //
-        logDeltaTimeGreaterThanMinimum("Continual", .018f);
+        logDeltaTimeGreaterThanMinimum("Continual", .02f);
     }
 
     public void Reload()
@@ -56,7 +66,7 @@ public class PDKLevelController : MonoBehaviour
         if (Time.deltaTime > minimumDelta)
         {
             // Log the delta time
-            //Debug.Log(Time.time + " " + NameOfTime + ": " + Time.deltaTime);
+            Debug.Log(Time.time + " " + NameOfTime + ": " + Time.deltaTime);
         }
     }
 }
