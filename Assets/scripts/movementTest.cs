@@ -6,6 +6,8 @@ public class movementTest : MonoBehaviour
     public float velocity = 3;
 
     Rigidbody2D myRigidbody;
+    float dPadX = 0;
+    float dPadY = 0;
 
     void Awake()
     {
@@ -15,6 +17,9 @@ public class movementTest : MonoBehaviour
 
     void Update ()
     {
-        myRigidbody.velocity = new Vector3(velocity, 0, 0);
+        dPadX = Input.GetAxis("dPadX");
+        dPadY = Input.GetAxis("dPadY");
+        //
+        myRigidbody.velocity = new Vector3(velocity * dPadX, velocity * dPadY, 0);
     }
 }
