@@ -12,6 +12,9 @@ public class PDKLevelRenderer : MonoBehaviour
     public Texture2D renderedTexture;
     // This is used to store all layer group objects that this renderer creates
     public Dictionary<int, GameObject> layerGroupObjects = new Dictionary<int, GameObject>();
+    // TODO: Remove this later
+    private float timeOfLastCheck = 0;
+
 
     // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
     public void RenderRectangleOfMapAtPosition(TIKMap mapToRender, Rect rectangleToRender, Vector3 positionToCreateLayersAt)
@@ -20,7 +23,7 @@ public class PDKLevelRenderer : MonoBehaviour
         Dictionary<int, PDKLayerGroup> layerGroupsToRender = new Dictionary<int, PDKLayerGroup>();
         // This is used to track which layer group is currently being compared against
         int currentLayerGroupNumber = -1;
-
+        
         // Go through each layer in this map
         for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
         {
@@ -149,10 +152,14 @@ public class PDKLevelRenderer : MonoBehaviour
     {
         // Create a new transparent texture to store the requested rectangle of the map
         Texture2D textureToReturn = CreateTransparentTexture((int)rectangleOfLayerToRender.width * levelMap.tilewidth, (int)rectangleOfLayerToRender.height * levelMap.tileheight);
+        // TODO: Fill This In Later
+        List<int> positionsWithTiles = new List<int>();
+        // These store the width and height of tiles in this map
+        int tileWidth = levelMap.tilewidth;
+        int tileHeight = levelMap.tileheight;
+
         // Set the texture filter mode to point
         textureToReturn.filterMode = FilterMode.Point;
-        List<int> positionsWithTiles = new List<int>();
-
         // Start at the closest layer
         layerNumbersToCreateTextureFrom.Reverse();
         // For each layer to render
@@ -171,42 +178,37 @@ public class PDKLevelRenderer : MonoBehaviour
                 foreach (int thisTilePosition in tilePositions[thisTileID])
                 {
                     // Calculate The x position of the pixel that this tile will start at
-                    int initialPixelX = levelMap.tilewidth * (thisTilePosition % (int)rectangleOfLayerToRender.width);
+                    int initialPixelX = tileWidth * (thisTilePosition % (int)rectangleOfLayerToRender.width);
                     // Calculate The y position of the pixel that this tile will start at
-                    int initialPixelY = levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - thisTilePosition - 1) / (int)rectangleOfLayerToRender.width);
+                    int initialPixelY = tileHeight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - thisTilePosition - 1) / (int)rectangleOfLayerToRender.width);
                     // If there is no tile already at this position
                     if (!positionsWithTiles.Contains(thisTilePosition))
                     {
-                        // Place this tile in the texture to return
-                        textureToReturn.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
                         // Remember that there is tile at this position
                         positionsWithTiles.Add(thisTilePosition);
                     }
                     else
                     {
+                        Color[] oldTilePixels = textureToReturn.GetPixels(initialPixelX, initialPixelY, tileWidth, tileHeight);
+
                         // For each pixel in this tile
                         for (int pixelPosition = 0; pixelPosition < thisTilesPixels.Length; pixelPosition++)
                         {
-                            // Calculate the x poxiiton of this pixel in the texture to return
-                            int pixelX = initialPixelX + (pixelPosition % levelMap.tilewidth);
-                            // Calculate the y poxiiton of this pixel in the texture to return
-                            int pixelY = initialPixelY + (pixelPosition / levelMap.tilewidth);
 
-                            if (textureToReturn.GetPixel(pixelX, pixelY).a == 0) // If the old tile is transparent
+                            if (thisTilesPixels[pixelPosition].a <= .001) // If this pixel the new tile is transparent
                             {
-                                // Just place this pixel on top
-                                textureToReturn.SetPixel(pixelX, pixelY, thisTilesPixels[pixelPosition]);
+                                // Keep the old pixel
+                                thisTilesPixels[pixelPosition] = oldTilePixels[pixelPosition];
                             }
-                            else // If this pixel will be placed behind another one
+                            else if (thisTilesPixels[pixelPosition].a <= .999)
                             {
-                                // Calculate the new combined color for this pixel in the texture to return
-                                Color newPixelColor = (textureToReturn.GetPixel(pixelX, pixelY) * (1 - thisTilesPixels[pixelPosition].a)) + (thisTilesPixels[pixelPosition] * thisTilesPixels[pixelPosition].a);
-
-                                // Set this pixel to the new compined color
-                                textureToReturn.SetPixel(pixelX, pixelY, newPixelColor);
+                                // Merge the old pixel with the new pixel
+                                thisTilesPixels[pixelPosition] = (oldTilePixels[pixelPosition] * (1 - thisTilesPixels[pixelPosition].a)) + (thisTilesPixels[pixelPosition] * thisTilesPixels[pixelPosition].a);
                             }
                         }
                     }
+                    // Place this tile in the texture to return
+                    textureToReturn.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
                 }
             }
             // Apply the changes to the texture
@@ -241,4 +243,16 @@ public class PDKLevelRenderer : MonoBehaviour
         // Return this completed texture
         return textureToReturn;
     }
+
+    /*
+    private void LogTimeTakenForAction(string nameOfActionTaken)
+    {
+        float millisecondsScinceLastCheck = (Time.realtimeSinceStartup - timeOfLastCheck) * 1000;
+
+        if (millisecondsScinceLastCheck > .095)
+        {
+            Debug.Log(nameOfActionTaken + ": " + ((Time.realtimeSinceStartup - timeOfLastCheck) * 1000).ToString() + " milliseconds");
+            timeOfLastCheck = Time.realtimeSinceStartup;
+        }
+    }*/
 }
