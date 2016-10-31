@@ -6,48 +6,26 @@ using UnityEditor;
 [CustomEditor(typeof(PDKLevelConfigurator))]
 public class PDKLevelConfiguratorEditor : Editor
 {
+    //
+    private PDKEditorUtil editorUtilities = new PDKEditorUtil();
+
     // This will overide unity's standard GUI
     public override void OnInspectorGUI()
     {
         // Define the target script to use
-        PDKLevelConfigurator myTarget = (PDKLevelConfigurator)target;
-
-        // Display a fiedl for load distance
-        myTarget.loadDistance = EditorGUILayout.IntField("Load Distance", myTarget.loadDistance);
+        PDKLevelConfigurator levelConfigurator = (PDKLevelConfigurator)target;
+        
+        // Display a field for load distance
+        editorUtilities.CreateField("Load Distance", ref levelConfigurator.loadDistance);
         // Display a field for buffer distance
-        myTarget.bufferDistance = EditorGUILayout.IntField("Buffer Distance",  myTarget.bufferDistance);
+        editorUtilities.CreateField("Buffer Distance", ref levelConfigurator.bufferDistance);
         // Create the map type selection drop down
-        myTarget.mapType = (PDKLevelConfigurator.mapTypes)EditorGUILayout.EnumPopup("Map Type", myTarget.mapType);
-
-        #region Map TextAsset Change Check
-        // Check to see if the GUI has been changed
-        EditorGUI.BeginChangeCheck();
-        if (myTarget.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
+        editorUtilities.CreateField("Map Type", ref levelConfigurator.mapType);
+        // If the user has picked a tiled map
+        if (levelConfigurator.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
         {
-            // Display a slot for the map's TextAsset
-            myTarget.mapSettings.mapTextAsset = (TextAsset)EditorGUILayout.ObjectField("Tile Map", myTarget.mapSettings.mapTextAsset, typeof(TextAsset), false);
+            // Create the appropriate fields for a tiled map
+            editorUtilities.CreateFeildsForTiledMap(levelConfigurator);
         }
-        // Stop checking to see if the GUI has been changed
-        if (EditorGUI.EndChangeCheck())
-        {
-            // Tell the level configurator it's text asset has been changed
-            myTarget.TextAssetChanged();
-        }
-        #endregion
-
-        #region Display Tileset Slots
-        // If tilesetTextures has ben instatiated, and the map type is not none
-        if (myTarget.mapSettings.tilesetTextures != null && myTarget.mapType != PDKLevelConfigurator.mapTypes.None)
-        {
-            // Create a slot to put the Texture2D from each Tileset in
-            for (int currentTileset = 0; currentTileset < myTarget.mapSettings.tilesetTextures.Length; currentTileset++)
-            {
-                myTarget.mapSettings.tilesetTextures[currentTileset] =
-                    (Texture2D)EditorGUILayout.ObjectField(
-                        myTarget.mapSettings.tikMap.tilesets[currentTileset].name,
-                        myTarget.mapSettings.tilesetTextures[currentTileset], typeof(Texture2D), false);
-            }
-        }
-        #endregion
     }
 }
