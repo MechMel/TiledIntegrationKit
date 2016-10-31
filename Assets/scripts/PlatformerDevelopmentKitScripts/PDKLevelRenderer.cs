@@ -21,7 +21,7 @@ public class PDKLevelRenderer : MonoBehaviour
         Dictionary<int, PDKLayerGroup> layerGroupsToRender = new Dictionary<int, PDKLayerGroup>();
         // This is used to track which layer group is currently being compared against
         int currentLayerGroupNumber = -1;
-        
+
         // Go through each layer in this map
         for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
         {

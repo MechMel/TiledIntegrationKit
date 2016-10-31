@@ -16,16 +16,34 @@ public class PDKLevelConfiguratorEditor : Editor
         PDKLevelConfigurator levelConfigurator = (PDKLevelConfigurator)target;
         
         // Display a field for load distance
-        editorUtilities.CreateField("Load Distance", ref levelConfigurator.loadDistance);
+        editorUtilities.Field("Load Distance", ref levelConfigurator.loadDistance);
         // Display a field for buffer distance
-        editorUtilities.CreateField("Buffer Distance", ref levelConfigurator.bufferDistance);
-        // Create the map type selection drop down
-        editorUtilities.CreateField("Map Type", ref levelConfigurator.mapType);
+        editorUtilities.Field("Buffer Distance", ref levelConfigurator.bufferDistance);
+        // Display the map type selection drop down
+        editorUtilities.Field("Map Type", ref levelConfigurator.mapType);
+        #region Display Appropriate Fields for this MapType
         // If the user has picked a tiled map
         if (levelConfigurator.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
         {
             // Create the appropriate fields for a tiled map
-            editorUtilities.CreateFeildsForTiledMap(levelConfigurator);
+            if (editorUtilities.Field("Tile Map", ref levelConfigurator.mapSettings.mapTextAsset))// If the text asset is changed
+            {
+                // Tell the level configurator the text asset has been changed
+                levelConfigurator.TextAssetChanged();
+            }
         }
+        #endregion
+        #region When Applicable Display the Tileset Fields
+        // If tilesetTextures has ben instatiated, and the map type is not none
+        if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        {
+            // For each tilset in this map
+            for (int currentTileset = 0; currentTileset < levelConfigurator.mapSettings.tilesetTextures.Length; currentTileset++)
+            {
+                // Display a field for this texture
+                editorUtilities.Field(levelConfigurator.mapSettings.tikMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.tilesetTextures[currentTileset]);
+            }
+        }
+        #endregion
     }
 }

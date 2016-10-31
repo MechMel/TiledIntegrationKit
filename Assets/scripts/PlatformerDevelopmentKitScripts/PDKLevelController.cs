@@ -15,8 +15,6 @@ public class PDKLevelController : MonoBehaviour
     float screenRatio = (float)Screen.width / (float)Screen.height;
     //
     Vector3 mainCameraPosition;
-    //
-    bool firstLoopIsDone = false;
 
     void Awake()
     {
@@ -30,8 +28,6 @@ public class PDKLevelController : MonoBehaviour
         transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
         //
         Reload();
-        //
-        firstLoopIsDone = true;
     }
 
     void Update()
@@ -39,19 +35,14 @@ public class PDKLevelController : MonoBehaviour
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //
-        if (firstLoopIsDone)
+        if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
         {
             //
-            if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
-            {
-                //
-                transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
-                //
-                Reload();
-            }
+            transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
+            //
+            Reload();
         }
-        //
-        logDeltaTimeGreaterThanMinimum("Continual", .02f);
+        logDeltaTimeGreaterThanMinimum("Continual", .025f);
     }
 
     public void Reload()

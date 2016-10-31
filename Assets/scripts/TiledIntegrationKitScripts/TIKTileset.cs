@@ -21,6 +21,7 @@ public class TIKTileset
     #region Image Attributes
     public string image;
     public Texture2D imageTexture;
+    public Color[][] tileColorArrays;
     public int imagewidth;
     public int imageheight;
     #endregion
@@ -31,6 +32,7 @@ public class TIKTileset
     #endregion
 
 
+
     // This is used to remove all letters off of an extension
     private char[] allLetters = new char[] { 'a', 'b', 'b', 'c', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
@@ -39,6 +41,42 @@ public class TIKTileset
     {
         // Instatiate this tilest's texture
         imageTexture = tilesetTexture;
+        // Compile this Tileset
+        compileTileset();
+    }
+
+    // TODO: Fill this in later
+    public void compileTileset()
+    {
+        // Create an array of color arrays to hold all the tiles
+        Color[][] thisTilesetColors = new Color[tilecount][];
+
+        // Go through each tile in this tileset
+        for (int thisTileIndex = 0; thisTileIndex < thisTilesetColors.Length; thisTileIndex++)
+        {
+            // Get this tile's colors
+            Color[] thisTileColors = imageTexture.GetPixels(
+                x: tilewidth * ((thisTileIndex + 1 - firstgid) % columns),
+                y: tileheight * ((tilecount - thisTileIndex + firstgid - 2) / columns),
+                blockWidth: tilewidth,
+                blockHeight: tileheight);
+            // Look through each previous tile in this set
+            for (int previousTileIndex = 0; previousTileIndex < thisTileIndex; previousTileIndex++)
+            {
+                // If a tile that is ecactly the same as this tile already exists
+                if (thisTilesetColors[previousTileIndex] == thisTileColors)
+                {
+                    // Point to the previous tile in memory
+                    thisTileColors = thisTilesetColors[previousTileIndex];
+                    // There is no need to continue this search
+                    break;
+                }
+            }
+            // Add this tile's colors to this tilest's aray of tile colors
+            thisTilesetColors[thisTileIndex] = thisTileColors;
+        }
+        // Add this compressed array of colors to the tikMap
+        tileColorArrays = thisTilesetColors;
     }
 
     // When this is called it creates a Tileset from a given XmlNode for a tileset
@@ -108,12 +146,7 @@ public class TIKTileset
     // When this is called it creates and returns an array of colors for a tile from a given tile ID
     public Color[] GetTilePixels(int tileID)
     {
-        // Return the pixels from the requested tile
-        return imageTexture.GetPixels(
-            x: tilewidth * ((tileID - firstgid) % columns), 
-            y: tileheight * ((tilecount - tileID + firstgid - 1) / columns), 
-            blockWidth: tilewidth, 
-            blockHeight: tileheight
-        );
+        // Return the appropriate tile color array
+        return tileColorArrays[tileID - 1];
     }
 }

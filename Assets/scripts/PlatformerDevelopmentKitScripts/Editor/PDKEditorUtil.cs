@@ -5,41 +5,122 @@ using UnityEditor;
 public class PDKEditorUtil : Editor
 {
     // Creates an interger field tied to a variable instance
-    public void CreateField(string labelText, ref int fieldInstance)
+    public bool Field(string fieldName, ref int intInstance)
     {
-        fieldInstance = EditorGUILayout.IntField(labelText, fieldInstance);
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        intInstance = EditorGUILayout.IntField(fieldName, intInstance);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates an boolean field tied to a variable instance
+    public bool Field(string fieldName, ref bool boolInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        boolInstance = EditorGUILayout.Toggle(fieldName, boolInstance);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates an boolean field tied to a variable instance
+    public bool Button(string buttonName)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this buton
+        GUILayout.Button(buttonName);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates an TextAsset field tied to a variable instance
+    public bool Field(string fieldName, ref TextAsset textAssetInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        textAssetInstance = (TextAsset)EditorGUILayout.ObjectField(fieldName, textAssetInstance, typeof(TextAsset), false);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
     }
 
     // Creates a field for map type selection
-    public void CreateField(string labelText, ref PDKLevelConfigurator.mapTypes mapTypesInstance)
+    public bool Field(string fieldName, ref PDKLevelConfigurator.mapTypes mapTypesInstance)
     {
-        mapTypesInstance = (PDKLevelConfigurator.mapTypes)EditorGUILayout.EnumPopup(labelText, mapTypesInstance);
-    }
-
-    // Creates all nessecary fields for a tiled map
-    public void CreateFeildsForTiledMap(PDKLevelConfigurator configuratorInstance)
-    {
-        // Check to see if the tile map GUI has been changed
+        // Check to see if this field has been changed
         EditorGUI.BeginChangeCheck();
-        // Create a field for a tile map text asset
-        configuratorInstance.mapSettings.mapTextAsset = (TextAsset)EditorGUILayout.ObjectField("Tile Map", configuratorInstance.mapSettings.mapTextAsset, typeof(TextAsset), false);
-        // If the tile map GUI has been changed
+        // Display this field
+        mapTypesInstance = (PDKLevelConfigurator.mapTypes)EditorGUILayout.EnumPopup(fieldName, mapTypesInstance);
+        // If this field has been changed
         if (EditorGUI.EndChangeCheck())
         {
-            // Tell the level configurator it's text asset has been changed
-            configuratorInstance.TextAssetChanged();
+            // Tell the caller this field has been changed
+            return true;
         }
-        // If tilesetTextures has ben instatiated, and the map type is not none
-        if (configuratorInstance.mapSettings.tilesetTextures != null && configuratorInstance.mapType != PDKLevelConfigurator.mapTypes.None)
+        else
         {
-            // Create a slot to put the Texture2D from each Tileset in
-            for (int currentTileset = 0; currentTileset < configuratorInstance.mapSettings.tilesetTextures.Length; currentTileset++)
-            {
-                configuratorInstance.mapSettings.tilesetTextures[currentTileset] =
-                    (Texture2D)EditorGUILayout.ObjectField(
-                        configuratorInstance.mapSettings.tikMap.tilesets[currentTileset].name,
-                        configuratorInstance.mapSettings.tilesetTextures[currentTileset], typeof(Texture2D), false);
-            }
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates a field for map type selection
+    public bool Field(string fieldName, ref Texture2D textureInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        textureInstance = (Texture2D)EditorGUILayout.ObjectField(fieldName, textureInstance, typeof(Texture2D), false);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
         }
     }
 }
