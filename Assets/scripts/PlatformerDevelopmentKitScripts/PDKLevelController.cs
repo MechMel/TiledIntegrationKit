@@ -7,17 +7,19 @@ public class PDKLevelController : MonoBehaviour
     public TIKMap levelMap;
     // This is the PDKLevelRenderer for this level
     public PDKLevelRenderer levelRenderer = new PDKLevelRenderer();
-    // This is how far from out from the camera to load this level
-    public int loadDistance;
-    // This is how close the camera can get to the edge of the loaded area before a new section should be loaded
+    // This is how many tiles out from the camera to load this level
     public int bufferDistance;
     //
-    float screenRatio = (float)Screen.width / (float)Screen.height;
+    float screenRatioWidthToHeight = (float)Screen.width / (float)Screen.height;
+    //
+    Camera mainCamera;
     //
     Vector3 mainCameraPosition;
 
     void Awake()
     {
+        //
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         //
         transform.position = new Vector3(mainCameraPosition.x, mainCameraPosition.y, transform.position.z);
     }
@@ -35,7 +37,7 @@ public class PDKLevelController : MonoBehaviour
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //
-        if (Vector2.Distance(mainCameraPosition, transform.position) > bufferDistance)
+        if (Vector2.Distance(mainCameraPosition, transform.position) > 1)
         {
             //
             transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
@@ -47,8 +49,19 @@ public class PDKLevelController : MonoBehaviour
 
     public void Reload()
     {
-        //
-        levelRenderer.RenderRectangleOfMapAtPosition(levelMap, new Rect(transform.position.x, -transform.position.y, (int)(2 * screenRatio * loadDistance), 2 * loadDistance), transform.position);
+        // Calculate the width and the height of the area to render
+        int renderAreaWidth = (int)(2 * screenRatioWidthToHeight * (mainCamera.orthographicSize + bufferDistance));
+        int renderAreaHeight = (int)(2 * (mainCamera.orthographicSize + bufferDistance));
+
+        // Render the appropriate area of the level
+        levelRenderer.RenderRectangleOfMapAtPosition(
+            mapToRender: levelMap, 
+            rectangleToRender: new Rect(
+                x: transform.position.x - (renderAreaWidth / 2),
+                y:  -(transform.position.y - (renderAreaHeight / 2)), 
+                width: renderAreaWidth, 
+                height: renderAreaHeight), 
+            positionToCreateLayersAt: transform.position);
     }
 
     private void logDeltaTimeGreaterThanMinimum(string NameOfTime, float minimumDelta)

@@ -5,10 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PDKLevelConfigurator : MonoBehaviour
 {
-    // This is how far from out from the camera to load this level
-    [SerializeField]
-    public int loadDistance;
-    // This is how close the camera can get to the edge of the loaded area before a new section should be loaded
+    // This is how many tiles out from the camera to load this level
     [SerializeField]
     public int bufferDistance;
     // This is all possible map types a user can choose
@@ -59,8 +56,6 @@ public class PDKLevelConfigurator : MonoBehaviour
             PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
             // Give the TIKMap with the user's settings to the levelController
             levelController.levelMap = mapSettings.tikMap;
-            // Tell the level controller how far from the camera to load this level
-            levelController.loadDistance = loadDistance;
             // Tell the level controller how close the camera can get to the edge of the loaded area before a new section of the level should be loaded
             levelController.bufferDistance = bufferDistance;
             // Disable this script

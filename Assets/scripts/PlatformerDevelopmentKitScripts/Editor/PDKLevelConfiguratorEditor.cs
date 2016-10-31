@@ -15,8 +15,6 @@ public class PDKLevelConfiguratorEditor : Editor
         // Define the target script to use
         PDKLevelConfigurator levelConfigurator = (PDKLevelConfigurator)target;
         
-        // Display a field for load distance
-        editorUtilities.Field("Load Distance", ref levelConfigurator.loadDistance);
         // Display a field for buffer distance
         editorUtilities.Field("Buffer Distance", ref levelConfigurator.bufferDistance);
         // Display the map type selection drop down
