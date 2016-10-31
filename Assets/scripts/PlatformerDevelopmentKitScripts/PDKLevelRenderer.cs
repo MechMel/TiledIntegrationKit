@@ -9,58 +9,26 @@ public class PDKLevelRenderer : MonoBehaviour
     // This is used to remember what area of the map is currently rendered
     public Rect renderedRectOfMap;
     // This is used to store all layer group objects that this renderer creates
-    public Dictionary<int, GameObject> layerGroupObjects = new Dictionary<int, GameObject>();
+    public List<GameObject> layerGroupObjects = new List<GameObject>();
     // TODO: Remove this later
     private float timeOfLastCheck = 0;
 
 
-    // When this is called a sprite for each layer is created and a given rectangle of the map rendered on the appropriate layers
-    public void RenderRectangleOfMapAtPosition(TIKMap mapToRender, Rect rectangleToRender, Vector3 positionToCreateLayersAt)
+    // TODO: Fill this in
+    public void RenderRectOfMap(TIKMap levelMap, Rect rectToRender)
     {
-        // This is used to store an ordered set of a layer groups in this map
-        Dictionary<int, PDKLayerGroup> layerGroupsToRender = new Dictionary<int, PDKLayerGroup>();
-        // This is used to track which layer group is currently being compared against
-        int currentLayerGroupNumber = -1;
-
-        // Go through each layer in this map
-        for (int layerNumberToRender = mapToRender.layers.Length - 1; layerNumberToRender >= 0; layerNumberToRender--)
-        {
-            // If this layer is visible
-            if (mapToRender.layers[layerNumberToRender].visible)
-            {
-                if (currentLayerGroupNumber < 0) // If no layer groups have been created yet
-                {
-                    // CThe first layer group should be created at position 0
-                    currentLayerGroupNumber = 0;
-                    // Create A new LayerGroup dictionary for this type of layer
-                    layerGroupsToRender.Add(currentLayerGroupNumber, CreateNewLayerGroup(mapToRender.layers[layerNumberToRender].layerType, layerNumberToRender));
-                }
-                else if (layerGroupsToRender[currentLayerGroupNumber].groupType == mapToRender.layers[layerNumberToRender].layerType) // If this layer is the same type as the current layer group
-                {
-                    // Add this layer to the current layer group
-                    layerGroupsToRender[currentLayerGroupNumber].layerNumbers.Add(layerNumberToRender);
-                }
-                else
-                {
-                    // Increase the current layer group number
-                    currentLayerGroupNumber++;
-                    // Create A new LayerGroup dictionary for this type of layer
-                    layerGroupsToRender.Add(currentLayerGroupNumber, CreateNewLayerGroup(mapToRender.layers[layerNumberToRender].layerType, layerNumberToRender));
-                }
-            }
-        }
         // Go through each layer group to render
-        foreach (int layerGroupNumber in layerGroupsToRender.Keys)
+        for (int layerGroupNumber = 0; layerGroupNumber < levelMap.layerGroups.Count; layerGroupNumber++)
         {
-            //
-            if (layerGroupObjects.Keys.Count == 0)
+            // If layer group objects have not been created yet
+            if (layerGroupObjects.Count < levelMap.layerGroups.Count)
             {
                 // Create a game object to render this layer group on
                 GameObject thisLayerGroupObject = new GameObject();
                 // Add the newly created object for this layer into the list of layer objects
-                layerGroupObjects.Add(layerGroupNumber, thisLayerGroupObject);
+                layerGroupObjects.Add(thisLayerGroupObject);
                 // Name this layer's object
-                layerGroupObjects[layerGroupNumber].name = "Layer Group " + layerGroupNumber.ToString() + rectangleToRender.x.ToString() + "," + rectangleToRender.y.ToString();
+                layerGroupObjects[layerGroupNumber].name = "Layer Group: " + layerGroupNumber.ToString();
                 // Add a sprite renderer to this layer group's game object
                 SpriteRenderer thisLayerSpriteRenderer = layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
             }
@@ -68,43 +36,30 @@ public class PDKLevelRenderer : MonoBehaviour
             if (renderedTexture == null)
             {
                 // Create an appropriately sized texture
-                renderedTexture = new Texture2D((int)rectangleToRender.width * mapToRender.tilewidth, (int)rectangleToRender.height * mapToRender.tileheight);
+                renderedTexture = new Texture2D((int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight);
                 // Set the filter type
                 renderedTexture.filterMode = FilterMode.Point;
             }
             // Render this texture
-            UpdateTextureForRectOfLayerGroup(renderedTexture, mapToRender, layerGroupsToRender[layerGroupNumber], rectangleToRender);
+            UpdateTextureForRectOfLayerGroup(renderedTexture, levelMap, levelMap.layerGroups[layerGroupNumber], rectToRender);
 
             // TODO: get sorting layers working
             //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
             // TODO: Fill this in later
-            Rect rectangleToRenderTopLeft = new Rect(rectangleToRender.x - (rectangleToRender.width / 2), rectangleToRender.y + (rectangleToRender.height / 2), rectangleToRender.width, rectangleToRender.height);
+            Rect rectangleToRenderTopLeft = new Rect(rectToRender.x - (rectToRender.width / 2), rectToRender.y + (rectToRender.height / 2), rectToRender.width, rectToRender.height);
             // Create a sprite from the texture to render
             Sprite spriteToDisplay = Sprite.Create(
                 texture: renderedTexture, 
-                rect: new Rect(0, 0, (int)rectangleToRender.width * mapToRender.tilewidth, (int)rectangleToRender.height * mapToRender.tileheight), 
+                rect: new Rect(0, 0, (int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight), 
                 pivot: new Vector2(0.5f, 0.5f), 
-                pixelsPerUnit: mapToRender.tilewidth);
+                pixelsPerUnit: levelMap.tilewidth);
             // Display the sprite of the area to render
             layerGroupObjects[layerGroupNumber].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
             // Put this layer in the correct position
-            layerGroupObjects[layerGroupNumber].transform.position = positionToCreateLayersAt;
+            layerGroupObjects[layerGroupNumber].transform.position = new Vector3((int)rectToRender.x + ((int)rectToRender.width / 2), -(int)rectToRender.y + ((int)rectToRender.height / 2), -layerGroupNumber);
         }
         // Store the curretly rendered rectangle of the map
-        renderedRectOfMap = rectangleToRender;
-    }
-
-    // When this is called it creates a new layer group with a specified type, and then adds a layer number to this new layer group
-    private PDKLayerGroup CreateNewLayerGroup(TIKLayer.layerTypes layerGroupType, int firstLayerNumber)
-    {
-        // Create the new layer group
-        PDKLayerGroup layerGroupToReturn = new PDKLayerGroup();
-        // Set this layer group's type
-        layerGroupToReturn.groupType = layerGroupType;
-        // Add the first layer to this layer group
-        layerGroupToReturn.layerNumbers.Add(firstLayerNumber);
-        // Return the newly created layer group
-        return layerGroupToReturn;
+        renderedRectOfMap = rectToRender;
     }
 
     // When this is called this function creates a texture from a given rectangle of the map

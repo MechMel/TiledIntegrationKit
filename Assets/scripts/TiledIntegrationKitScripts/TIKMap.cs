@@ -17,22 +17,57 @@ public class TIKMap
     public int nextobjectid;
     public TIKLayer[] layers;
     public TIKTileset[] tilesets;
+    public List<PDKLayerGroup> layerGroups;
     #endregion
 
 
     //The InitializeMap function initializes all the layers and tilests
     public void InitializeMap(Texture2D[] tilesetTextures)
     {
+        // This is used to determine which layer group is being looked at
+        int currentLayerGroupNumber = -1;
+
+        #region Initialize Layers
         // Tell each of this map's layers to initialize
-        foreach(TIKLayer layerToInitialize in layers)
+        foreach (TIKLayer layerToInitialize in layers)
         {
             layerToInitialize.InitializeLayer();
         }
+        #endregion
+        #region Initialize Tilesets
         // Tell each of this map's tilesets to initialize
         for (int numberOfTilesetToInitialze = 0; numberOfTilesetToInitialze < tilesets.Length; numberOfTilesetToInitialze++)
         {
             tilesets[numberOfTilesetToInitialze].InitializeTileset(tilesetTextures[numberOfTilesetToInitialze]);
         }
+        #endregion
+        #region Create Layer Groups
+        // Instatiate a list for layerGroups
+        layerGroups = new List<PDKLayerGroup>();
+        // Go through each layer in this map
+        for (int thisLayerNumber = layers.Length - 1; thisLayerNumber >= 0; thisLayerNumber--)
+        {
+            // If this layer is visible
+            if (layers[thisLayerNumber].visible)
+            { 
+                // If this layer is the same type as the current layer group
+                if (layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].layerType)
+                {
+                    // Add this layer to the current layer group
+                    layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
+                }
+                else
+                {
+                    // Increase the current layer group number
+                    currentLayerGroupNumber++;
+                    // Create A new LayerGroup dictionary for this type of layer
+                    layerGroups.Add(new PDKLayerGroup(layers[thisLayerNumber].layerType));
+                    // Add this layer to the newly created layer group
+                    layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
+                }
+            }
+        }
+        #endregion
     }
 
     /* When this is called this function finds all tile IDs in a given rectangle, and then 

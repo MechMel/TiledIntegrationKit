@@ -8,4 +8,13 @@ public class PDKLayerGroup
     public TIKLayer.layerTypes groupType;
     // This is a list of the numbers of all layers in this layer group
     public List<int> layerNumbers = new List<int>();
+
+    // Creates a new layer group
+    public PDKLayerGroup(TIKLayer.layerTypes groupTypeToBe)
+    {
+        // Set this layer group's group type to the group type to be
+        groupType = groupTypeToBe;
+        // A new layer group has been created
+        return;
+    }
 }

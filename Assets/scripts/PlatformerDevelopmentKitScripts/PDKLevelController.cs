@@ -44,7 +44,7 @@ public class PDKLevelController : MonoBehaviour
             //
             Reload();
         }
-        logDeltaTimeGreaterThanMinimum("Continual", .025f);
+        //logDeltaTimeGreaterThanMinimum("Continual", .025f);
     }
 
     public void Reload()
@@ -54,14 +54,13 @@ public class PDKLevelController : MonoBehaviour
         int renderAreaHeight = (int)(2 * (mainCamera.orthographicSize + bufferDistance));
 
         // Render the appropriate area of the level
-        levelRenderer.RenderRectangleOfMapAtPosition(
-            mapToRender: levelMap, 
-            rectangleToRender: new Rect(
-                x: transform.position.x - (renderAreaWidth / 2),
-                y:  -(transform.position.y - (renderAreaHeight / 2)), 
+        levelRenderer.RenderRectOfMap(
+            levelMap: levelMap, 
+            rectToRender: new Rect(
+                x: mainCameraPosition.x - (renderAreaWidth / 2),
+                y:  -mainCameraPosition.y + (renderAreaHeight / 2), 
                 width: renderAreaWidth, 
-                height: renderAreaHeight), 
-            positionToCreateLayersAt: transform.position);
+                height: renderAreaHeight));
     }
 
     private void logDeltaTimeGreaterThanMinimum(string NameOfTime, float minimumDelta)
