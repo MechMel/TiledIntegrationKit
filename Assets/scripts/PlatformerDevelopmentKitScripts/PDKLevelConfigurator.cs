@@ -51,13 +51,13 @@ public class PDKLevelConfigurator : MonoBehaviour
             // Tell this level's map to initialize
             mapSettings.tikMap.InitializeMap(mapSettings.tilesetTextures);
             // Add the level controller to this object
-            this.gameObject.AddComponent<PDKLevelController>();
-            // Locate the level controller on this object
-            PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
+            PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();
             // Give the TIKMap with the user's settings to the levelController
             levelController.levelMap = mapSettings.tikMap;
             // Tell the level controller how close the camera can get to the edge of the loaded area before a new section of the level should be loaded
             levelController.bufferDistance = bufferDistance;
+            //
+            levelController.levelRenderer = new PDKLevelRenderer(mapSettings.tikMap);
             // Disable this script
             //this.gameObject.GetComponent<PDKLevelConfigurator>().enabled = false;
         }

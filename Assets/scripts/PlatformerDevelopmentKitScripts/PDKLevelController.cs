@@ -6,7 +6,7 @@ public class PDKLevelController : MonoBehaviour
     // This is the TIKMap for this level
     public TIKMap levelMap;
     // This is the PDKLevelRenderer for this level
-    public PDKLevelRenderer levelRenderer = new PDKLevelRenderer();
+    public PDKLevelRenderer levelRenderer;
     // This is how many tiles out from the camera to load this level
     public int bufferDistance;
     //
@@ -15,6 +15,7 @@ public class PDKLevelController : MonoBehaviour
     Camera mainCamera;
     //
     Vector3 mainCameraPosition;
+
 
     void Awake()
     {
@@ -26,6 +27,8 @@ public class PDKLevelController : MonoBehaviour
 
     void Start()
     {
+        //
+        mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //
         transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
         //
@@ -54,9 +57,7 @@ public class PDKLevelController : MonoBehaviour
         int renderAreaHeight = (int)(2 * (mainCamera.orthographicSize + bufferDistance));
 
         // Render the appropriate area of the level
-        levelRenderer.RenderRectOfMap(
-            levelMap: levelMap, 
-            rectToRender: new Rect(
+        levelRenderer.RenderRectOfMap(new Rect(
                 x: mainCameraPosition.x - (renderAreaWidth / 2),
                 y:  -mainCameraPosition.y + (renderAreaHeight / 2), 
                 width: renderAreaWidth, 

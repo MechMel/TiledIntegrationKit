@@ -72,6 +72,43 @@ public class TIKMap
 
     /* When this is called this function finds all tile IDs in a given rectangle, and then 
     returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
+    public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInList(int layerToGetTilesFrom, List<int> tilePositions)
+    {
+        // This dictionary will contain all positions of a tile ID in the given rectangle
+        Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
+
+        //
+        foreach (int thisTilePosition in tilePositions)
+        {
+            // If the tile ID to check is not 0(a blank tile)
+            if (thisTilePosition >= 0 && layers[layerToGetTilesFrom].data[thisTilePosition] != 0)
+            {
+                // This will be used to determine if it exits and then store the list this tile position should be placed in
+                List<int> matchingID;
+
+                // If the ID at the position being checked has been disovered
+                if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].data[thisTilePosition], out matchingID))
+                {
+                    // Add this position to that ID's list of positions
+                    matchingID.Add(thisTilePosition);
+                }
+                else
+                {
+                    // Create a new list for the tile ID at the position being checked
+                    matchingID = new List<int>();
+                    // Add this position to this tile ID's new list
+                    matchingID.Add(thisTilePosition);
+                    // Add this tile ID's new list to the dictionary of discovered tile IDs
+                    disoveredTilePostitions[layers[layerToGetTilesFrom].data[thisTilePosition]] = matchingID;
+                }
+            }
+        }
+        // Return the lsit of all discovered tiles and their positions
+        return disoveredTilePostitions;
+    }
+
+    /* When this is called this function finds all tile IDs in a given rectangle, and then 
+    returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
     public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInRectangle(int layerToGetTilesFrom, Rect rectangleToGeTileFrom)
     {
         // This is the ID at a position in the given rectangle

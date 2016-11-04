@@ -5,78 +5,150 @@ using System.Collections.Generic;
 public class PDKLevelRenderer : MonoBehaviour
 {
     // This is the texture that is currently rendered
-    public Texture2D renderedTexture = null;
+    public Texture2D[] layerGroupTextures;
+    // TODO: Fill this in later
+    public TIKMap levelMap;
     // This is used to remember what area of the map is currently rendered
     public Rect renderedRectOfMap;
     // This is used to store all layer group objects that this renderer creates
     public List<GameObject> layerGroupObjects = new List<GameObject>();
     // TODO: Remove this later
-    private float timeOfLastCheck = 0;
+    //private float timeOfLastCheck = 0;
 
 
-    // TODO: Fill this in
-    public void RenderRectOfMap(TIKMap levelMap, Rect rectToRender)
+
+    // TODO: Fill this in later
+    public PDKLevelRenderer(TIKMap mapToUse)
+    {
+        // TODO: Fill this in later  
+        levelMap = mapToUse;
+        // Set the layer group textures to the appropriate size
+        layerGroupTextures = new Texture2D[levelMap.layerGroups.Count];
+        //
+        renderedRectOfMap = new Rect(0, 0, 1, 1);
+        // Go through each layer group in this map
+        for (int layerGroupNumber = 0; layerGroupNumber < mapToUse.layerGroups.Count; layerGroupNumber++)
+        {
+            // Create a game object to render this layer group on
+            GameObject thisLayerGroupObject = new GameObject();
+            // Add the newly created object for this layer into the list of layer objects
+            layerGroupObjects.Add(thisLayerGroupObject);
+            // Name this layer's object
+            layerGroupObjects[layerGroupNumber].name = "Layer Group: " + layerGroupNumber.ToString();
+            // Add a sprite renderer to this layer group's game object
+            SpriteRenderer thisLayerSpriteRenderer = layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
+            // Create an appropriately sized texture
+            layerGroupTextures[layerGroupNumber] = new Texture2D(1, 1);
+            // Set the filter mode
+            layerGroupTextures[layerGroupNumber].filterMode = FilterMode.Point;
+            // Aplly these changes
+            layerGroupTextures[layerGroupNumber].Apply();
+
+        }
+    }
+    
+    // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
+    public void RenderRectOfMap(Rect rectToRender)
     {
         // Go through each layer group to render
         for (int layerGroupNumber = 0; layerGroupNumber < levelMap.layerGroups.Count; layerGroupNumber++)
         {
-            // If layer group objects have not been created yet
-            if (layerGroupObjects.Count < levelMap.layerGroups.Count)
-            {
-                // Create a game object to render this layer group on
-                GameObject thisLayerGroupObject = new GameObject();
-                // Add the newly created object for this layer into the list of layer objects
-                layerGroupObjects.Add(thisLayerGroupObject);
-                // Name this layer's object
-                layerGroupObjects[layerGroupNumber].name = "Layer Group: " + layerGroupNumber.ToString();
-                // Add a sprite renderer to this layer group's game object
-                SpriteRenderer thisLayerSpriteRenderer = layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
-            }
-            // If no texture has been rendred yet
-            if (renderedTexture == null)
-            {
-                // Create an appropriately sized texture
-                renderedTexture = new Texture2D((int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight);
-                // Set the filter type
-                renderedTexture.filterMode = FilterMode.Point;
-            }
             // Render this texture
-            UpdateTextureForRectOfLayerGroup(renderedTexture, levelMap, levelMap.layerGroups[layerGroupNumber], rectToRender);
-
-            // TODO: get sorting layers working
-            //thisLayerSpriteRenderer.sortingLayerName = layerNumberToRender.ToString() + " " + mapToRender.layers[layerNumberToRender].name;
-            // TODO: Fill this in later
-            Rect rectangleToRenderTopLeft = new Rect(rectToRender.x - (rectToRender.width / 2), rectToRender.y + (rectToRender.height / 2), rectToRender.width, rectToRender.height);
+            UpdateTextureForRectOfLayerGroup(ref layerGroupTextures[layerGroupNumber], levelMap.layerGroups[layerGroupNumber], rectToRender);
             // Create a sprite from the texture to render
             Sprite spriteToDisplay = Sprite.Create(
-                texture: renderedTexture, 
-                rect: new Rect(0, 0, (int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight), 
-                pivot: new Vector2(0.5f, 0.5f), 
+                texture: layerGroupTextures[layerGroupNumber], 
+                rect: new Rect(
+                    x: 0, 
+                    y: 0, 
+                    width: layerGroupTextures[layerGroupNumber].width, 
+                    height: layerGroupTextures[layerGroupNumber].height), 
+                pivot: new Vector2(
+                    x: 0.5f, 
+                    y: 0.5f), 
                 pixelsPerUnit: levelMap.tilewidth);
             // Display the sprite of the area to render
             layerGroupObjects[layerGroupNumber].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-            // Put this layer in the correct position
-            layerGroupObjects[layerGroupNumber].transform.position = new Vector3((int)rectToRender.x + ((int)rectToRender.width / 2), -(int)rectToRender.y + ((int)rectToRender.height / 2), -layerGroupNumber);
+            // Move the object for this layer group to the correct position
+            layerGroupObjects[layerGroupNumber].transform.position = new Vector3(
+                x:  (int)rectToRender.x + ((int)rectToRender.width / 2),
+                y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
+                z:  -layerGroupNumber);
         }
         // Store the curretly rendered rectangle of the map
         renderedRectOfMap = rectToRender;
     }
 
-    // When this is called this function creates a texture from a given rectangle of the map
-    private void UpdateTextureForRectOfLayerGroup(Texture2D textureToUpdate, TIKMap levelMap, PDKLayerGroup givenLayerGroup, Rect rectangleOfLayerToRender)
+    // When this is called this function creates a texture from a given rectangle of a given layer group
+    private void UpdateTextureForRectOfLayerGroup(ref Texture2D textureToUpdate, PDKLayerGroup givenLayerGroup, Rect rectToRender)
     {
-        // Create a new transparent texture to store the requested rectangle of the map
-        SetTextureToTransparent(textureToUpdate);
         // TODO: Fill This In Later
         List<int> positionsWithTiles = new List<int>();
         // TODO: Fill This In Later
         List<int> opaqueTilePositions = new List<int>();
-        
+        // TODO: Fill This In Later
+        Rect overlapRect = GetOverlap(renderedRectOfMap, rectToRender);
+        //
+        List<int> outsidePositions = new List<int>();
+
+        if (overlapRect.width > 0 && overlapRect.height > 0)
+        {
+            // TODO: Fill This In Later
+            Color[] colorsInOverlap = textureToUpdate.GetPixels(
+                x: (int)(overlapRect.xMin - renderedRectOfMap.xMin) * levelMap.tilewidth,
+                y: (int)(renderedRectOfMap.height - (overlapRect.yMax - renderedRectOfMap.yMin)) * levelMap.tileheight,
+                blockWidth: (int)overlapRect.width * levelMap.tilewidth,
+                blockHeight: (int)overlapRect.height * levelMap.tileheight);
+        }
+        #region TEST
+        for (int y = (int)rectToRender.yMin; y < overlapRect.yMin; y++)
+        {
+            for (int x = (int)rectToRender.xMin; x <= rectToRender.xMax; x++)
+            {
+                outsidePositions.Add((y * levelMap.width) + x);
+            }
+        }
+        for (int y = (int)overlapRect.yMin; y < overlapRect.yMax; y++)
+        {
+            for (int x = (int)rectToRender.xMin; x < overlapRect.xMin; x++)
+            {
+                outsidePositions.Add((y * levelMap.width) + x);
+            }
+            for (int x = (int)overlapRect.xMin; x < rectToRender.xMax; x++)
+            {
+                outsidePositions.Add((y * levelMap.width) + x);
+            }
+        }
+        for (int y = (int)overlapRect.yMax; y < rectToRender.yMax; y++)
+        {
+            if (y < rectToRender.yMin)
+                y = (int)rectToRender.yMin;
+            for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
+            {
+                outsidePositions.Add((y * levelMap.width) + x);
+            }
+        }
+        #endregion
+        // If the rect to render has diffrent dimmensions then the current texture
+        if (rectToRender.width * levelMap.tilewidth != textureToUpdate.width || rectToRender.height * levelMap.tileheight  != textureToUpdate.height)
+        {
+            // Adjust the size of the texture to update
+            textureToUpdate = new Texture2D((int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight);
+            // Set the filter mode
+            textureToUpdate.filterMode = FilterMode.Point;
+            // Aplly these changes
+            textureToUpdate.Apply();
+        }
+        // Create a new transparent texture to store the requested rectangle of the map
+        SetTextureToTransparent(textureToUpdate);
+
         // For each layer to render
         foreach (int layerNumber in givenLayerGroup.layerNumbers)
         {
+            // TODO: REMOVE THIS LATER
+            Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInList(layerNumber, outsidePositions);
             // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
-            Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerNumber, rectangleOfLayerToRender);
+            //Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerNumber, rectToRender);
 
             // Go through each tile ID in the requested rectangle of the map
             foreach (int thisTileID in tilePositions.Keys)
@@ -90,13 +162,19 @@ public class PDKLevelRenderer : MonoBehaviour
                     // If this tile is not already completely opaque
                     if (!opaqueTilePositions.Contains(thisTilePosition))
                     {
+                        int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width) ;
                         // Calculate The x position of the pixel that this tile will start at
-                        int initialPixelX = levelMap.tilewidth * (thisTilePosition % (int)rectangleOfLayerToRender.width);
+                        int initialPixelX = levelMap.tilewidth * (thisLocalTilePosition % (int)rectToRender.width);
                         // Calculate The y position of the pixel that this tile will start at
-                        int initialPixelY = levelMap.tileheight * (((int)(rectangleOfLayerToRender.height * rectangleOfLayerToRender.width) - thisTilePosition - 1) / (int)rectangleOfLayerToRender.width);
+                        int initialPixelY = levelMap.tileheight * (((int)(rectToRender.height * rectToRender.width) - thisLocalTilePosition) / (int)rectToRender.width);
                         // If there is no tile already at this position
                         if (!positionsWithTiles.Contains(thisTilePosition))
                         {
+                            if (initialPixelX > textureToUpdate.width - 1 || initialPixelX < 0 ||
+                                initialPixelY > textureToUpdate.height - 1 || initialPixelY < 0)
+                            {
+                                int test = 3;
+                            }
                             // Place this tile in the texture to return
                             textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
                             // Remember that there is tile at this position
@@ -137,7 +215,7 @@ public class PDKLevelRenderer : MonoBehaviour
     }
 
     // When this is called this function creates a texture from a given rectangle of the map
-    private void GetPixesForRectOfLayerGroup(Color[] colorArrayToModify, TIKMap levelMap, PDKLayerGroup givenLayerGroup, Rect rectOfToRender)
+    private void GetPixesForRectOfLayerGroup(Color[] colorArrayToModify, PDKLayerGroup givenLayerGroup, Rect rectOfToRender)
     {
         // These store the width and height of tiles in this map
         int tileWidth = levelMap.tilewidth;
@@ -211,6 +289,25 @@ public class PDKLevelRenderer : MonoBehaviour
         }
         // This Function Is complete
         return;
+    }
+
+    // This finds the overlaping area of two rectangles and returns the overlap relative to the first rectangle
+    private Rect GetOverlap(Rect firstRect, Rect secondRect)
+    {
+        // Create a rectangle to store the overlap
+        Rect overlapRect = new Rect();
+        // Find the x and y offset between the two rectangles
+        int xOffset = (int)firstRect.xMin - (int)secondRect.xMin;
+        int yOffset = (int)firstRect.yMin - (int)secondRect.yMin;
+
+        // Determine where this rectangle starts
+        overlapRect.x = secondRect.xMin + xOffset;
+        overlapRect.y = secondRect.yMin + yOffset;
+        // Determine how wide the rectangle should be
+        overlapRect.width = firstRect.width - Mathf.Abs(xOffset);
+        overlapRect.height = firstRect.height - Mathf.Abs(yOffset);
+        // Return a rectangle containing the overlap
+        return overlapRect;
     }
 
     // When this is called it takes an given texture and sets all the pixels to clear
