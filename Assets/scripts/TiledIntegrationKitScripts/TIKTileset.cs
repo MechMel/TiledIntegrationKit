@@ -49,7 +49,7 @@ public class TIKTileset
     public void compileTileset()
     {
         // Create an array of color arrays to hold all the tiles
-        Color[][] thisTilesetColors = new Color[tilecount][];
+        Color[][] thisTilesetColors = new Color[tilecount + 1][];
 
         // Go through each tile in this tileset
         for (int thisTileIndex = 0; thisTileIndex < thisTilesetColors.Length; thisTileIndex++)
@@ -60,6 +60,7 @@ public class TIKTileset
                 y: tileheight * ((tilecount - thisTileIndex + firstgid - 2) / columns),
                 blockWidth: tilewidth,
                 blockHeight: tileheight);
+
             // Look through each previous tile in this set
             for (int previousTileIndex = 0; previousTileIndex < thisTileIndex; previousTileIndex++)
             {

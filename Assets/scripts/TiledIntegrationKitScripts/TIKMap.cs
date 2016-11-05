@@ -19,7 +19,8 @@ public class TIKMap
     public TIKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
     #endregion
-
+    // This will store a blank tile
+    Color[] blankTile;
 
     //The InitializeMap function initializes all the layers and tilests
     public void InitializeMap(Texture2D[] tilesetTextures)
@@ -68,6 +69,16 @@ public class TIKMap
             }
         }
         #endregion
+        #region Create a blank tile
+        // Initialize blankTile at the appropriate size
+        blankTile = new Color[tilewidth * tileheight];
+        // For each pixel in the blank tile
+        for (int thisPixelIndex = 0; thisPixelIndex < blankTile.Length; thisPixelIndex++)
+        {
+            // Set this pixel to transparent
+            blankTile[thisPixelIndex] = Color.clear;
+        }
+        #endregion
     }
 
     /* When this is called this function finds all tile IDs in a given rectangle, and then 
@@ -77,11 +88,11 @@ public class TIKMap
         // This dictionary will contain all positions of a tile ID in the given rectangle
         Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
 
-        //
+        // Go through each tile in the given list
         foreach (int thisTilePosition in tilePositions)
         {
             // If the tile ID to check is not 0(a blank tile)
-            if (thisTilePosition >= 0 && layers[layerToGetTilesFrom].data[thisTilePosition] != 0)
+            if (thisTilePosition >= 0)
             {
                 // This will be used to determine if it exits and then store the list this tile position should be placed in
                 List<int> matchingID;
@@ -172,8 +183,17 @@ public class TIKMap
     // When this is called this function finds the tileset with the texture for the requested tile and then returns an array of colors for that tile
     public Color[] GetTilePixels(int tileID)
     {
-        // Return the pixels for the requested tile
-        return GetTileSetFromID(tileID).GetTilePixels(tileID);
+        // If this tile is not zero
+        if (tileID > 0)
+        {
+            // Return the pixels for the requested tile
+            return GetTileSetFromID(tileID).GetTilePixels(tileID);
+        }
+        else
+        {
+            // Return a blank tile
+            return blankTile;
+        }
     }
 
     // When this is called this function looks through all tilesets, finds the tileset that contains the given tile ID, and then returns that tileset
