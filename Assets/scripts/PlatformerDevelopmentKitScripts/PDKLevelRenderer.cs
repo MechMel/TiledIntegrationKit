@@ -14,18 +14,19 @@ public class PDKLevelRenderer : MonoBehaviour
     public List<GameObject> layerGroupObjects = new List<GameObject>();
     // TODO: Remove this later
     private float timeOfLastCheck = 0;
+    
 
 
-
-    // TODO: Fill this in later
+    // Creates a new instance of a PDKLevelRenderer
     public PDKLevelRenderer(TIKMap mapToUse)
     {
-        // TODO: Fill this in later  
+        // Get the map to use
         levelMap = mapToUse;
         // Set the layer group textures to the appropriate size
         layerGroupTextures = new Texture2D[levelMap.layerGroups.Count];
-        //
+        // Initizlse the rendered rect of the map
         renderedRectOfMap = new Rect(0, 0, 1, 1);
+        #region Setup Layer Group objects
         // Go through each layer group in this map
         for (int layerGroupNumber = 0; layerGroupNumber < mapToUse.layerGroups.Count; layerGroupNumber++)
         {
@@ -43,10 +44,12 @@ public class PDKLevelRenderer : MonoBehaviour
             layerGroupTextures[layerGroupNumber].filterMode = FilterMode.Point;
             // Aplly these changes
             layerGroupTextures[layerGroupNumber].Apply();
-
         }
+        #endregion
     }
-    
+
+
+
     // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
     public void RenderRectOfMap(Rect rectToRender)
     {
@@ -79,28 +82,37 @@ public class PDKLevelRenderer : MonoBehaviour
         renderedRectOfMap = rectToRender;
     }
 
+
+
+
     // When this is called this function creates a texture from a given rectangle of a given layer group
     private void UpdateTextureForRectOfLayerGroup(ref Texture2D textureToUpdate, PDKLayerGroup givenLayerGroup, Rect rectToRender)
     {
-        // TODO: Fill This In Later
-        List<int> positionsWithTiles = new List<int>();
-        // TODO: Fill This In Later
-        List<int> opaqueTilePositions = new List<int>();
-        // TODO: Fill This In Later
+        #region Overlap Variables
+        // This stores the overlap between the rendered rect and the rect to render
         Rect overlapRect = GetOverlap(renderedRectOfMap, rectToRender);
-        //
-        List<int> outsidePositions = new List<int>();
         // This stores the colors in the overlaping area between the renderd rect and the rect to render
         Color[] overlapColors = new Color[0];
+        #endregion
+        #region Tile Position Variables
+        // This is used to store which positions already have tiles at them
+        List<int> positionsWithTiles = new List<int>();
+        // This is used to stroe which positions have no transparent pixels at them
+        List<int> opaqueTilePositions = new List<int>();
+        // This stores the positions of tiles outside the overlap
+        List<int> outsidePositions = new List<int>();
         // This will store each tile ID and the positions of these IDs for all tiles outside of the overlap
         Dictionary<int, List<int>> tilePositions;
+        #endregion
+        #region Tile Placement Variables
         // This will store the pixels for each tile
         Color[] thisTilesPixels;
         // This will store the old stack of tiles when one tile is placed ontop of another
         Color[] combinedTile;
         // This will be used to determine when there are no more transparent pixels in each tile
         bool isCompletelyOpaque;
-
+        #endregion
+        
         #region Copy Overlap and Update Texture
         // If there is an overlap
         if (overlapRect.width > 0 && overlapRect.height > 0)
@@ -185,30 +197,37 @@ public class PDKLevelRenderer : MonoBehaviour
                 }
             }
         }
-        #endregion
+        #endregion;
         #region Render the Outside Tiles
         // For each layer to render
         foreach (int layerNumber in givenLayerGroup.layerNumbers)
         {
+            #region Get all Tiles Outside the Overlap
             // Get each tile ID and the positions of these IDs for all tiles outside of the overlap
             tilePositions = levelMap.GetAllTilePositionsFromLayerInList(layerNumber, outsidePositions);
+            #endregion
+            #region Put Each Tile on the Texture to Update
             // Go through each tile ID in the requested rectangle of the map
             foreach (int thisTileID in tilePositions.Keys)
             {
                 // Get the pixels for this tile
                 thisTilesPixels = levelMap.GetTilePixels(thisTileID);
+                #region Place this Tile at Each of Its Positions
                 // Go through each occurance of this tile in the requested rectangle of the map
                 foreach (int thisTilePosition in tilePositions[thisTileID])
                 {
                     // If this tile is not already completely opaque
                     if (!opaqueTilePositions.Contains(thisTilePosition))
                     {
+                        #region Get the X and Y Positons For this Tile on the Textue to  Update
                         // Translate the global position of this tile to a local position
                         int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width);
                         // Calculate The x position of the pixel that this tile will start at
                         int initialPixelX = levelMap.tilewidth * (thisLocalTilePosition % (int)rectToRender.width);
                         // Calculate The y position of the pixel that this tile will start at
                         int initialPixelY = levelMap.tileheight * (((int)(rectToRender.height * rectToRender.width) - (thisLocalTilePosition + 1)) / (int)rectToRender.width);
+                        #endregion
+                        #region Place this Tile
                         // If there is no tile already at this position
                         if (!positionsWithTiles.Contains(thisTilePosition))
                         {
@@ -251,14 +270,15 @@ public class PDKLevelRenderer : MonoBehaviour
                                 opaqueTilePositions.Add(thisTilePosition);
                             }
                             #endregion
-                            #region Place this Tile
                             // Place this tile in the texture to update
                             textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, combinedTile);
-                            #endregion
                         }
+                        #endregion
                     }
                 }
+                #endregion
             }
+            #endregion
             // Apply these changes to the texture to update
             textureToUpdate.Apply();
         }
@@ -266,83 +286,8 @@ public class PDKLevelRenderer : MonoBehaviour
         // The texture has been updated
         return;
     }
+    
 
-    // When this is called this function creates a texture from a given rectangle of the map
-    private void GetPixesForRectOfLayerGroup(Color[] colorArrayToModify, PDKLayerGroup givenLayerGroup, Rect rectOfToRender)
-    {
-        // These store the width and height of tiles in this map
-        int tileWidth = levelMap.tilewidth;
-        int tileHeight = levelMap.tileheight;
-        // TODO: Fill this in later
-        Color[] colorsToReturn = new Color[(int)(rectOfToRender.width * tileWidth * rectOfToRender.height * tileHeight)];
-        // Create a new layer group so as not to dammage the given layer group
-        List<int> numbersOfLayersToRender = new List<int>(givenLayerGroup.layerNumbers);
-        // TODO: Fill this in later
-        List<int> positionsWithTiles = new List<int>();
-
-        // Start at the closest layer
-        numbersOfLayersToRender.Reverse();
-        // For each pixel in the colorsToReturn
-        for (int thisTileindex = 0; thisTileindex < colorsToReturn.Length; thisTileindex++)
-        {
-            // Set this pixel to transparent
-            colorsToReturn[thisTileindex] = Color.clear;
-        }
-        // For each layer to render
-        foreach (int layerNumber in numbersOfLayersToRender)
-        {
-            // Create a dictionary to store each tile ID and the positions of these IDs in the requested rectangle of the map
-            Dictionary<int, List<int>> tilePositions = levelMap.GetAllTilePositionsFromLayerInRectangle(layerNumber, rectOfToRender);
-
-            // Go through each tile ID in the requested rectangle of the map
-            foreach (int thisTileID in tilePositions.Keys)
-            {
-                // Create an array of colors and put the pixels from this tile into it
-                Color[] thisTilesPixels = levelMap.GetTilePixels(thisTileID);
-
-                // Go through each occurance of this tile in the requested rectangle of the map
-                foreach (int thisTilePosition in tilePositions[thisTileID])
-                {
-                    // Calculate The x position of the pixel that this tile will start at
-                    int initialPixelX = tileWidth * (thisTilePosition % (int)rectOfToRender.width);
-                    // Calculate The y position of the pixel that this tile will start at
-                    int initialPixelY = tileHeight * (((int)(rectOfToRender.height * rectOfToRender.width) - thisTilePosition - 1) / (int)rectOfToRender.width);
-                    // If there is no tile already at this position
-                    if (!positionsWithTiles.Contains(thisTilePosition))
-                    {
-                        // Remember that there is tile at this position
-                        positionsWithTiles.Add(thisTilePosition);
-                    }
-                    else
-                    {
-                        Color[] oldTilePixels = new Color[5]; //textureToReturn.GetPixels(initialPixelX, initialPixelY, tileWidth, tileHeight);
-
-                        // For each pixel in this tile
-                        for (int pixelPosition = 0; pixelPosition < thisTilesPixels.Length; pixelPosition++)
-                        {
-                            if (oldTilePixels[pixelPosition].a >= .999) // If this pixel the new tile is transparent
-                            {
-                                // Keep the old pixel
-                                thisTilesPixels[pixelPosition] = oldTilePixels[pixelPosition];
-                            }
-                            else if (oldTilePixels[pixelPosition].a <= .999)
-                            {
-                                // Merge the old pixel with the new pixel
-                                thisTilesPixels[pixelPosition] = (oldTilePixels[pixelPosition] * (1 - thisTilesPixels[pixelPosition].a)) + (thisTilesPixels[pixelPosition] * thisTilesPixels[pixelPosition].a);
-                            }
-                        }
-                    }
-                    for (int thisPixelIndex = 0; thisPixelIndex < tileWidth * tileHeight; thisPixelIndex++)
-                    {
-                        //
-                        colorsToReturn[0] = thisTilesPixels[thisPixelIndex];
-                    }
-                }
-            }
-        }
-        // This Function Is complete
-        return;
-    }
 
     // This finds the overlaping area of two rectangles and returns that as a rectangle
     private Rect GetOverlap(Rect firstRect, Rect secondRect)
@@ -361,6 +306,8 @@ public class PDKLevelRenderer : MonoBehaviour
         // Return a rectangle containing the overlap
         return overlapRect;
     }
+
+
 
     // TODO: Remove this later
     private void LogTimeTakenForAction(string nameOfActionTaken)

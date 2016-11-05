@@ -47,7 +47,7 @@ public class PDKLevelController : MonoBehaviour
             //
             Reload();
         }
-        logDeltaTimeGreaterThanMinimum("Continual", 0.019f);
+        //logDeltaTimeGreaterThanMinimum("Continual", 0.019f);
     }
 
     public void Reload()
