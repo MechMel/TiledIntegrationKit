@@ -8,10 +8,10 @@ public class PlayerController : MonoBehaviour {
     #region PLAYER
     // The player speed
     [HideInInspector]
-    public float playerSpeed = 0.1f;
+    private float playerSpeed = 0.1f;
     // The player jump speed
     [HideInInspector]
-    public float playerJumpSpeed = 500f;
+    private float playerJumpSpeed = 700f;
     // The player health
     [HideInInspector]
     public int playerHealth = 4;
@@ -100,11 +100,9 @@ public class PlayerController : MonoBehaviour {
         // Jumping
         if (Up)
         {
-            Debug.Log("Up pressed");
             // If the player is grounded
             if (playerGrounded)
             {
-                Debug.Log("playerGrounded = true");
                 // Set the upwards velocity to zero, to counter the gravity
                 playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
                 // Add force upwards to the rigidbody
@@ -115,7 +113,6 @@ public class PlayerController : MonoBehaviour {
             // Else if the playerCanDoubleJump is true
             else if (playerCanDoubleJump)
             {
-                Debug.Log("playerCanDoubleJump = true");
                 // Set the playerCanDoubleJump to false
                 playerCanDoubleJump = false;
                 // Set the upwards velocity to zero, to counter gravity
