@@ -47,7 +47,7 @@ public class PDKLevelController : MonoBehaviour
             //
             Reload();
         }
-        //logDeltaTimeGreaterThanMinimum("Continual", .025f);
+        logDeltaTimeGreaterThanMinimum("Continual", 0.019f);
     }
 
     public void Reload()
@@ -58,8 +58,8 @@ public class PDKLevelController : MonoBehaviour
 
         // Render the appropriate area of the level
         levelRenderer.RenderRectOfMap(new Rect(
-                x: mainCameraPosition.x - (renderAreaWidth / 2),
-                y:  -mainCameraPosition.y + (renderAreaHeight / 2), 
+                x: (int)mainCameraPosition.x - (renderAreaWidth / 2),
+                y:  -(int)mainCameraPosition.y + (renderAreaHeight / 2), 
                 width: renderAreaWidth, 
                 height: renderAreaHeight));
     }
@@ -70,7 +70,7 @@ public class PDKLevelController : MonoBehaviour
         if (Time.deltaTime > minimumDelta)
         {
             // Log the delta time
-            Debug.Log(Time.time + " " + NameOfTime + ": " + Time.deltaTime);
+            Debug.Log(Time.time + " " + NameOfTime + ": " + Time.deltaTime * 1000 + "miliseconds");
         }
     }
 }
