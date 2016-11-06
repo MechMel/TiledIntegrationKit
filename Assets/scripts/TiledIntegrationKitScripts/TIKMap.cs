@@ -22,6 +22,8 @@ public class TIKMap
     // This will store a blank tile
     Color[] blankTile;
 
+
+
     //The InitializeMap function initializes all the layers and tilests
     public void InitializeMap(Texture2D[] tilesetTextures)
     {
@@ -81,6 +83,7 @@ public class TIKMap
         #endregion
     }
 
+
     /* When this is called this function finds all tile IDs in a given rectangle, and then 
     returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
     public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInList(int layerToGetTilesFrom, List<int> tilePositions)
@@ -91,7 +94,7 @@ public class TIKMap
         // Go through each tile in the given list
         foreach (int thisTilePosition in tilePositions)
         {
-            // If the tile ID to check is not 0(a blank tile)
+            // If this tile position is within the map
             if (thisTilePosition >= 0)
             {
                 // This will be used to determine if it exits and then store the list this tile position should be placed in
@@ -111,74 +114,35 @@ public class TIKMap
                     matchingID.Add(thisTilePosition);
                     // Add this tile ID's new list to the dictionary of discovered tile IDs
                     disoveredTilePostitions[layers[layerToGetTilesFrom].data[thisTilePosition]] = matchingID;
+
                 }
             }
-        }
-        // Return the lsit of all discovered tiles and their positions
-        return disoveredTilePostitions;
-    }
-
-    /* When this is called this function finds all tile IDs in a given rectangle, and then 
-    returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
-    public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInRectangle(int layerToGetTilesFrom, Rect rectangleToGeTileFrom)
-    {
-        // This is the ID at a position in the given rectangle
-        int[] tileIDsInRectangle = new int[(int)rectangleToGeTileFrom.width * (int)rectangleToGeTileFrom.height];
-        // This dictionary will contain all positions of a tile ID in the given rectangle
-        Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
-        // Find where in the map the rectangle should start
-        int rectStartPosition = (width * (int)(rectangleToGeTileFrom.y)) + (int)rectangleToGeTileFrom.x;
-
-        // Go through each row of the rectangle
-        for (int rectY = 0; rectY < rectangleToGeTileFrom.height; rectY++)
-        {
-            // Go through each tile in this row of the rectangle
-            for (int rectX = 0; rectX < rectangleToGeTileFrom.width; rectX++)
-            {
-                if (rectX + rectangleToGeTileFrom.x >= 0 && rectX + rectangleToGeTileFrom.x < width && rectY + rectangleToGeTileFrom.y >= 0 && rectY + rectangleToGeTileFrom.y < height) // If the tile in the given rectangle is inside this map
-                {
-                    // Find the position in the map of this tile ID from the rectangle
-                    int positionOfTileIDToGet = (rectY * width) + rectX + rectStartPosition;
-                    // Add the this tile ID from the map to the array of tile IDs in the given rectangle
-                    tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = layers[layerToGetTilesFrom].data[positionOfTileIDToGet];
-                }
-                else // If the tile in the given rectangle is outside this map
-                {
-                    // There is no tile at this position
-                    tileIDsInRectangle[(rectY * (int)rectangleToGeTileFrom.width) + rectX] = 0;
-                }
-            }
-        }
-
-        // Go through each position in the given rectangle
-        for (int positionOfIDBeingChecked = 0; positionOfIDBeingChecked < tileIDsInRectangle.Length; positionOfIDBeingChecked++)
-        {
-            // If the tile ID to check is not 0(a blank tile)
-            if (tileIDsInRectangle[positionOfIDBeingChecked] != 0)
+            else // If this tile position is outside the map
             {
                 // This will be used to determine if it exits and then store the list this tile position should be placed in
                 List<int> matchingID;
+
                 // If the ID at the position being checked has been disovered
-                if (disoveredTilePostitions.TryGetValue(tileIDsInRectangle[positionOfIDBeingChecked], out matchingID))
+                if (disoveredTilePostitions.TryGetValue(0, out matchingID))
                 {
                     // Add this position to that ID's list of positions
-                    matchingID.Add(positionOfIDBeingChecked);
+                    matchingID.Add(thisTilePosition);
                 }
                 else
                 {
                     // Create a new list for the tile ID at the position being checked
                     matchingID = new List<int>();
                     // Add this position to this tile ID's new list
-                    matchingID.Add(positionOfIDBeingChecked);
+                    matchingID.Add(thisTilePosition);
                     // Add this tile ID's new list to the dictionary of discovered tile IDs
-                    disoveredTilePostitions[tileIDsInRectangle[positionOfIDBeingChecked]] = matchingID;
+                    disoveredTilePostitions[layers[layerToGetTilesFrom].data[thisTilePosition]] = matchingID;
                 }
             }
         }
-
         // Return the lsit of all discovered tiles and their positions
         return disoveredTilePostitions;
     }
+
 
     // When this is called this function finds the tileset with the texture for the requested tile and then returns an array of colors for that tile
     public Color[] GetTilePixels(int tileID)
@@ -195,6 +159,7 @@ public class TIKMap
             return blankTile;
         }
     }
+
 
     // When this is called this function looks through all tilesets, finds the tileset that contains the given tile ID, and then returns that tileset
     public TIKTileset GetTileSetFromID(int tileID)
