@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour {
     // Whether the player is grounded
     [HideInInspector]
     public bool playerGrounded = false;
+    // Whether the player is touching a wall to the left
+    [HideInInspector]
+    public bool playerTouchingLeftWall = false;
+    // Whether the player is touching a wall to the right
+    [HideInInspector]
+    public bool playerTouchingRightWall = false;
     // The player jump speed
     [HideInInspector]
     public bool playerCanDoubleJump = false;
@@ -39,6 +45,12 @@ public class PlayerController : MonoBehaviour {
     // The GroundCheck GameObject
     [HideInInspector]
     public GameObject groundCheck;
+    // The WallRightCheck GameObject
+    [HideInInspector]
+    public GameObject rightWallCheck;
+    // The WallLeftCheck GameObject
+    [HideInInspector]
+    public GameObject leftWallCheck;
     #endregion
 
     void Start ()
@@ -48,23 +60,30 @@ public class PlayerController : MonoBehaviour {
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         sprRend = GetComponent<SpriteRenderer>();
         groundCheck = gameObject.transform.Find("GroundCheck").gameObject;
-	}
+        rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
+        leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
+    }
 
     void Update()
     {
         // Update() has all the physic checks
 
+        // Update gravity if touching wall
+        if(playerTouchingLeftWall || playerTouchingRightWall)
+        {
+            playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, -0.2f);
+        }
         // Update the check if the player is grounded 
         // Create a ray pointing down
-        RaycastHit2D hit = Physics2D.Raycast(groundCheck.transform.position, -Vector2.up);
+        RaycastHit2D bottomWall = Physics2D.Raycast(groundCheck.transform.position, -Vector2.up);
         // If the object hit not equal to null
-        if (hit.collider != null)
+        if (bottomWall.collider != null)
         {
             // Calculate the distance to the object
-            float distance = Mathf.Abs(hit.point.y - transform.position.y);
+            float distance = Mathf.Abs(bottomWall.point.y - transform.position.y);
             //Debug.Log("Name: " + hit.rigidbody.ToString() + distance.ToString());
             // If the distance is less than 0.1f, the player must be grounded
-            if(distance <= 1f)
+            if(distance <= 1)
             {
                 playerGrounded = true;
             }
@@ -75,6 +94,44 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        // Update the check if the player is touching 
+        // Create a ray pointing down
+        RaycastHit2D leftWall = Physics2D.Raycast(leftWallCheck.transform.position, -Vector2.right);
+        // If the object hit not equal to null
+        if (leftWall.collider != null)
+        {
+            // Calculate the distance to the object
+            float distanceToLeftWall = Mathf.Abs(Vector2.Distance(transform.position, leftWall.point));
+            // If the distance is less than 1f
+            if (distanceToLeftWall <= 0.65f)
+            {
+                playerTouchingLeftWall = true;
+                playerCanDoubleJump = true;
+            }
+            else
+            {
+                playerTouchingLeftWall = false;
+            }
+        }
+        // Update the check if the player is touching the right wall
+        // Create a ray pointing right
+        RaycastHit2D rightWall = Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right);
+        // If the object hit not equal to null
+        if (rightWall.collider != null)
+        {
+            // Calculate the distance to the object
+            float distanceToRightWall = Mathf.Abs(Vector2.Distance(transform.position, rightWall.point));
+            // If the distance is less than 1f
+            if (distanceToRightWall <= 0.65f)
+            {
+                playerTouchingLeftWall = true;
+                playerCanDoubleJump = true;
+            }
+            else
+            {
+                playerTouchingLeftWall = false;
+            }
+        }
     }
 
     void FixedUpdate()
