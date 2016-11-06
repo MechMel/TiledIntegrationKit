@@ -53,6 +53,21 @@ public class PlayerController : MonoBehaviour {
     public GameObject leftWallCheck;
     #endregion
 
+    bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
+    {
+        // Checks if touching an object in the specified direction
+
+        // Create a ray pointing in the direction
+        RaycastHit2D objectTouching = Physics2D.Raycast(origin, direction, distance); Debug.Log(objectTouching.distance.ToString());
+        // If the object hit not equal to null and the tag is the same as the argument
+        if (objectTouching.collider != null && objectTouching.transform.tag == tagOfObject)
+        {
+            return true;
+        }
+        // If it doesn't, return false
+        return false;
+    }
+
     void Start ()
     {
         // Hookup components
@@ -63,7 +78,7 @@ public class PlayerController : MonoBehaviour {
         rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
         leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
     }
-
+    
     void Update()
     {
         // Update() has all the physic checks
@@ -74,64 +89,41 @@ public class PlayerController : MonoBehaviour {
             playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, -0.2f);
         }
         // Update the check if the player is grounded 
-        // Create a ray pointing down
-        RaycastHit2D bottomWall = Physics2D.Raycast(groundCheck.transform.position, -Vector2.up);
-        // If the object hit not equal to null
-        if (bottomWall.collider != null)
+        if (CheckIfTouchingObject(groundCheck.transform.position, -Vector2.up, 0f, "Tile"))
         {
-            // Calculate the distance to the object
-            float distance = Mathf.Abs(bottomWall.point.y - transform.position.y);
-            //Debug.Log("Name: " + hit.rigidbody.ToString() + distance.ToString());
-            // If the distance is less than 0.1f, the player must be grounded
-            if(distance <= 1)
-            {
-                playerGrounded = true;
-            }
-            // Else, the player is not grounded
-            else
-            {
-                playerGrounded = false;
-            }
+            playerGrounded = true;
+            Debug.Log("Grounded!");
         }
+        // Else, the player is not grounded
+        else
+        {
+            playerGrounded = false;
+            Debug.Log("Not grounded!");
+        }
+        
 
-        // Update the check if the player is touching 
-        // Create a ray pointing down
-        RaycastHit2D leftWall = Physics2D.Raycast(leftWallCheck.transform.position, -Vector2.right);
-        // If the object hit not equal to null
-        if (leftWall.collider != null)
+        // Update the check if the player is touching the left wall
+        if (CheckIfTouchingObject(leftWallCheck.transform.position, -Vector2.right, 0.65f, "Tile"))
         {
-            // Calculate the distance to the object
-            float distanceToLeftWall = Mathf.Abs(Vector2.Distance(transform.position, leftWall.point));
-            // If the distance is less than 1f
-            if (distanceToLeftWall <= 0.65f)
-            {
-                playerTouchingLeftWall = true;
-                playerCanDoubleJump = true;
-            }
-            else
-            {
-                playerTouchingLeftWall = false;
-            }
+            playerTouchingLeftWall = true;
+            playerCanDoubleJump = true;
         }
-        // Update the check if the player is touching the right wall
-        // Create a ray pointing right
-        RaycastHit2D rightWall = Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right);
-        // If the object hit not equal to null
-        if (rightWall.collider != null)
+        else
         {
-            // Calculate the distance to the object
-            float distanceToRightWall = Mathf.Abs(Vector2.Distance(transform.position, rightWall.point));
-            // If the distance is less than 1f
-            if (distanceToRightWall <= 0.65f)
-            {
-                playerTouchingLeftWall = true;
-                playerCanDoubleJump = true;
-            }
-            else
-            {
-                playerTouchingLeftWall = false;
-            }
+            playerTouchingLeftWall = false;
         }
+        
+        // Update the check if the player is touching the right wall        
+        if (CheckIfTouchingObject(rightWallCheck.transform.position, Vector2.right, 0.65f, "Tile"))
+        {
+            playerTouchingRightWall = true;
+            playerCanDoubleJump = true;
+        }
+        else
+        {
+            playerTouchingRightWall = false;
+        }
+        
     }
 
     void FixedUpdate()
@@ -146,12 +138,23 @@ public class PlayerController : MonoBehaviour {
         {
             // Move the player left 
             transform.Translate(-playerSpeed, 0, 0);
+            // If grounded, flip the sprite, and run the walking animation
+            sprRend.flipX = true;
+            if (playerGrounded) anim.SetInteger("AnimState", 1);
         }
         // If pressing right
         else if (Right)
         {
             // Move the player right
             transform.Translate(playerSpeed, 0, 0);
+            // If grounded, flip the sprite, and run the walking animation
+            sprRend.flipX = false;
+            if (playerGrounded) anim.SetInteger("AnimState", 1);
+        }
+        else if(!Up && playerGrounded)
+        {
+            // If not pressing any keys and the player is grounded, run the idle animation
+            anim.SetInteger("AnimState", 0);
         }
 
         // Jumping
@@ -166,6 +169,7 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
                 // Set the bool playerCanDoubleJump to true, since we have only jumped once
                 playerCanDoubleJump = true;
+                anim.SetInteger("AnimState", 2);
             }
             // Else if the playerCanDoubleJump is true
             else if (playerCanDoubleJump)
@@ -176,8 +180,13 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
                 // Add the force for jumping upwards
                 playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
+                // Update animation
+                anim.SetInteger("AnimState", 3);
             }
-
         }
+
+        // This update on the animation is for special cases like falling
+        if (!playerGrounded && !playerCanDoubleJump) anim.SetInteger("AnimState", 3);
+        else if (!playerGrounded && playerCanDoubleJump) anim.SetInteger("AnimState", 2);
     }
 }
