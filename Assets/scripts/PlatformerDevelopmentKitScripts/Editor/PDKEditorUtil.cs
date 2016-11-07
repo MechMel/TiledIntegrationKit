@@ -44,26 +44,6 @@ public class PDKEditorUtil : Editor
         }
     }
 
-    // Creates an boolean field tied to a variable instance
-    public bool Button(string buttonName)
-    {
-        // Check to see if this field has been changed
-        EditorGUI.BeginChangeCheck();
-        // Display this buton
-        GUILayout.Button(buttonName);
-        // If this field has been changed
-        if (EditorGUI.EndChangeCheck())
-        {
-            // Tell the caller this field has been changed
-            return true;
-        }
-        else
-        {
-            // Tell the caller this field has not been changed
-            return false;
-        }
-    }
-
     // Creates an TextAsset field tied to a variable instance
     public bool Field(string fieldName, ref TextAsset textAssetInstance)
     {
@@ -111,6 +91,26 @@ public class PDKEditorUtil : Editor
         EditorGUI.BeginChangeCheck();
         // Display this field
         textureInstance = (Texture2D)EditorGUILayout.ObjectField(fieldName, textureInstance, typeof(Texture2D), false);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates an boolean field tied to a variable instance
+    public bool Button(string buttonName)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this buton
+        GUILayout.Button(buttonName);
         // If this field has been changed
         if (EditorGUI.EndChangeCheck())
         {

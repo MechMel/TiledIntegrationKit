@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-
+using System.Collections.Generic;
 
 [CustomEditor(typeof(PDKLevelConfigurator))]
 public class PDKLevelConfiguratorEditor : Editor
 {
+    //
+    int[] solidTiles = new int[0];
+
     //
     private PDKEditorUtil editorUtilities = new PDKEditorUtil();
 
@@ -28,6 +31,30 @@ public class PDKLevelConfiguratorEditor : Editor
             {
                 // Tell the level configurator the text asset has been changed
                 levelConfigurator.TextAssetChanged();
+            }
+        }
+        #endregion
+        #region When Applicable Display the Solid Tiles
+        // If tilesetTextures has ben instatiated, and the map type is not none
+        if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        {
+            levelConfigurator.mapSettings.solidTiles = new HashSet<int>();
+            //
+            for (int thisTileIndex = 0; thisTileIndex < solidTiles.Length; thisTileIndex++)
+            {
+                //
+                levelConfigurator.mapSettings.solidTiles.Add(solidTiles[thisTileIndex]);
+                //
+                editorUtilities.Field("", ref solidTiles[thisTileIndex]);
+            }
+            //
+            if (editorUtilities.Button("Add Solid Tile"))
+            {
+                int[] newSolidTiles = new int[solidTiles.Length + 1];
+
+                solidTiles.CopyTo(newSolidTiles, 0);
+                //
+                solidTiles[solidTiles.Length - 1] = newSolidTiles[newSolidTiles.Length - 1];
             }
         }
         #endregion
