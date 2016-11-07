@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour {
     // Whether riding an animal or not
     [HideInInspector]
     public bool Riding = false;
+    // Whether the animal the player is riding is grounded
+    [HideInInspector]
+    public bool animalPlayerIsRidingGrounded = false;
     #endregion
     #region COMPONENTS
     // The animator component
@@ -117,15 +120,8 @@ public class PlayerController : MonoBehaviour {
             playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, -0.2f);
         }
         // Update the check if the player is grounded 
-        if (CheckIfTouchingObject(groundCheck.transform.position, -Vector2.up, 0f, "Tile"))
-        {
-            playerGrounded = true;
-        }
-        // Else, the player is not grounded
-        else
-        {
-            playerGrounded = false;
-        }
+        playerGrounded = CheckIfTouchingObject(groundCheck.transform.position, -Vector2.up, 0f, "Tile");
+        
         
 
         // Update the check if the player is touching the left wall
@@ -163,10 +159,13 @@ public class PlayerController : MonoBehaviour {
                 animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
             }
         }
-        // Update position if riding
+        
         if (Riding)
-        {          
+        {   
+            // Update position if riding       
             transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
+            // Update the grounded check for the animal the player is riding
+            animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
         }
         #endregion
     }
@@ -217,7 +216,6 @@ public class PlayerController : MonoBehaviour {
                     playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
                     // Set the bool playerCanDoubleJump to true, since we have only jumped once
                     playerCanDoubleJump = true;
-                    anim.SetInteger("AnimState", 2);
                 }
                 // Else if the playerCanDoubleJump is true
                 else if (playerCanDoubleJump)
@@ -228,8 +226,6 @@ public class PlayerController : MonoBehaviour {
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
                     // Add the force for jumping upwards
                     playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
-                    // Update animation
-                    anim.SetInteger("AnimState", 3);
                 }
             }
 
@@ -242,14 +238,16 @@ public class PlayerController : MonoBehaviour {
         }
         // If riding an animal
         else
-        {            
+        {
+            // Get the rigidbody2d of the animal the player is riding
+            Rigidbody2D RigidBody2DOfAnimalPlayerIsRiding = animalPlayerIsRiding.GetComponent<Rigidbody2D>();   
             // Disable the player's collider
             GetComponent<Collider2D>().enabled = false;
             // If pressing left
             if (Left)
             {
                 // Move the animal left 
-                animalPlayerIsRiding.transform.Translate(playerSpeed, 0, 0);
+                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f, 0, 0);
                 // If grounded, flip the sprite, and run the walking animation
                 animalPlayerIsRiding.transform.localScale = new Vector2(-1, 1);
                 sprRend.flipX = true;
@@ -260,7 +258,7 @@ public class PlayerController : MonoBehaviour {
             else if (Right)
             {
                 // Move the player right
-                animalPlayerIsRiding.transform.Translate(playerSpeed, 0, 0);
+                animalPlayerIsRiding.transform.Translate(playerSpeed*1.5f, 0, 0);
                 animalPlayerIsRiding.transform.localScale = new Vector2(1, 1);
                 sprRend.flipX = false;
                 //if (playerGrounded) 
@@ -271,6 +269,21 @@ public class PlayerController : MonoBehaviour {
                 // If not pressing any keys and grounded, run the idle animation
                 animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 0);
             }
+
+            // Jumping
+            if (Up)
+            {
+                // If the player is grounded
+                if (animalPlayerIsRidingGrounded)
+                {
+                    // Set the upwards velocity to zero, to counter the gravity
+                    RigidBody2DOfAnimalPlayerIsRiding.velocity = new Vector2(RigidBody2DOfAnimalPlayerIsRiding.velocity.x, 0);
+                    // Add force upwards to the rigidbody
+                    RigidBody2DOfAnimalPlayerIsRiding.AddForce(new Vector2(0, playerJumpSpeed*1.5f), ForceMode2D.Force);
+                }
+            }
+            // Update the jump/falling animation
+            if (!animalPlayerIsRidingGrounded) animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 2);
         }
     }
 
