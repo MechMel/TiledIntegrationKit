@@ -12,12 +12,6 @@ public class TIKMapSettings
     // This is an array of textures for each tileset
     [SerializeField]
     public Texture2D[] tilesetTextures;
-    // This contains all oneway tiles in this map
-    [SerializeField]
-    public HashSet<int> oneWayTiles;
-    // This contains all completely tiles in this map
-    [SerializeField]
-    public HashSet<int> solidTiles;
     #endregion
 
     // This is the TIKMap for this level

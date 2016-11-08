@@ -13,6 +13,12 @@ public class PDKLevelConfigurator : MonoBehaviour
     // This will be used to track the map type that the user has chosen
     [SerializeField]
     public mapTypes mapType = mapTypes.None;
+    // This contains all oneway tiles in this map
+    [SerializeField]
+    public int[] oneWayTiles;
+    // This contains all completely tiles in this map
+    [SerializeField]
+    public int[] solidTiles;
 
     #region Tiled Map Settings
     //
@@ -48,7 +54,7 @@ public class PDKLevelConfigurator : MonoBehaviour
         // If a TIKMap has been created
         if (mapSettings.tikMap != null && mapSettings.mapTextAsset != null)
         {
-            // Tell this level's map to initialize
+            // Tell this level's map to initializewwwwww
             mapSettings.tikMap.InitializeMap(mapSettings.tilesetTextures);
             // Add the level controller to this object
             PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();

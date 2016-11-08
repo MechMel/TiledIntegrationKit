@@ -7,9 +7,6 @@ using System.Collections.Generic;
 public class PDKLevelConfiguratorEditor : Editor
 {
     //
-    int[] solidTiles = new int[0];
-
-    //
     private PDKEditorUtil editorUtilities = new PDKEditorUtil();
 
     // This will overide unity's standard GUI
@@ -17,7 +14,7 @@ public class PDKLevelConfiguratorEditor : Editor
     {
         // Define the target script to use
         PDKLevelConfigurator levelConfigurator = (PDKLevelConfigurator)target;
-        
+
         // Display a field for buffer distance
         editorUtilities.Field("Buffer Distance", ref levelConfigurator.bufferDistance);
         // Display the map type selection drop down
@@ -34,30 +31,6 @@ public class PDKLevelConfiguratorEditor : Editor
             }
         }
         #endregion
-        #region When Applicable Display the Solid Tiles
-        // If tilesetTextures has ben instatiated, and the map type is not none
-        if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
-        {
-            levelConfigurator.mapSettings.solidTiles = new HashSet<int>();
-            //
-            for (int thisTileIndex = 0; thisTileIndex < solidTiles.Length; thisTileIndex++)
-            {
-                //
-                levelConfigurator.mapSettings.solidTiles.Add(solidTiles[thisTileIndex]);
-                //
-                editorUtilities.Field("", ref solidTiles[thisTileIndex]);
-            }
-            //
-            if (editorUtilities.Button("Add Solid Tile"))
-            {
-                int[] newSolidTiles = new int[solidTiles.Length + 1];
-
-                solidTiles.CopyTo(newSolidTiles, 0);
-                //
-                solidTiles[solidTiles.Length - 1] = newSolidTiles[newSolidTiles.Length - 1];
-            }
-        }
-        #endregion
         #region When Applicable Display the Tileset Fields
         // If tilesetTextures has ben instatiated, and the map type is not none
         if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
@@ -69,6 +42,10 @@ public class PDKLevelConfiguratorEditor : Editor
                 editorUtilities.Field(levelConfigurator.mapSettings.tikMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.tilesetTextures[currentTileset]);
             }
         }
+        #endregion
+        #region When Applicable Display the Solid and Oneway Tile Fields
+        editorUtilities.Field("Solid Tiles", "Solid Tile", ref levelConfigurator.solidTiles);
+        editorUtilities.Field("One-way Tiles", "On-eway Tile", ref levelConfigurator.oneWayTiles);
         #endregion
     }
 }
