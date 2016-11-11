@@ -68,4 +68,122 @@ public class PDKLevelConfigurator : MonoBehaviour
             //this.gameObject.GetComponent<PDKLevelConfigurator>().enabled = false;
         }
     }
+
+
+    //
+    private Vector2[][] CalculateCollisions(int[] data)
+    {
+        // This will store the solid tiles
+        HashSet<int> solidTilesHashSet = new HashSet<int>();
+        // This will store the collision data
+        Vector2[][] collisionData = new Vector2[data.Length][];
+
+        // For each solid tile
+        foreach (int thisTileID in solidTiles)
+        {
+            // Add this tile to the solid tiles hashset
+            solidTilesHashSet.Add(thisTileID);
+        }
+        // For each tile
+        for (int thisTileIndex = 0; thisTileIndex < data.Length; thisTileIndex++)
+        {
+            bool[] collisionSides = new bool[4];
+            //
+            Vector2[] thisSideCollider;
+
+            if (mapSettings.tikMap.width % thisTileIndex == 0) // If this tile is on the left edge of the map
+            {
+                // The left side of this tile should have a collider
+                collisionSides[1] = true;
+                // If this tile is sold, but the next tile is not
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + 1]))
+                {
+                    // The right side of this tile should have a collider
+                    collisionSides[3] = true;
+                }
+            }
+            else if  (mapSettings.tikMap.width % (thisTileIndex + 1) == 0) // If this tile is on the right edge of the map
+            {
+                // The right side of this tile should have a collider
+                collisionSides[3] = true;
+                // If this tile is sold, but the last tile is not
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - 1]))
+                {
+                    // The left side of this tile should have a collider
+                    collisionSides[1] = true;
+                }
+            }
+            else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+            {
+                // If the last tile is not solid
+                if (!solidTilesHashSet.Contains(data[thisTileIndex - 1]))
+                {
+                    // The left side of this tile should have a collider
+                    collisionSides[1] = true;
+                }
+                // If the next tile is not solid
+                if (!solidTilesHashSet.Contains(data[thisTileIndex + 1]))
+                {
+                    // The right side of this tile should have a collider
+                    collisionSides[3] = true;
+                }
+            }
+
+            if (thisTileIndex < mapSettings.tikMap.width) // If this tile is on the top edge of the map
+            {
+                // The top side of this tile should have a collider
+                collisionSides[0] = true;
+                // If this tile is sold, but tile below is not
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.tikMap.width]))
+                {
+                    // The bottom side of this tile should have a collider
+                    collisionSides[2] = true;
+                }
+            }
+            else if (thisTileIndex >= data.Length - mapSettings.tikMap.width) // If this tile is on the bottom edge of the map
+            {
+                // The bottom side of this tile should have a collider
+                collisionSides[2] = true;
+                // If this tile is sold, but the above tile is not
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.tikMap.width]))
+                {
+                    // The top side of this tile should have a collider
+                    collisionSides[0] = true;
+                }
+            }
+            else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+            {
+                // If the below tile is not solid
+                if (!solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.tikMap.width]))
+                {
+                    // The bottom side of this tile should have a collider
+                    collisionSides[2] = true;
+                }
+                // If the above tile is not solid
+                if (!solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.tikMap.width]))
+                {
+                    // The top side of this tile should have a collider
+                    collisionSides[0] = true;
+                }
+            }
+            // Go through each side
+            for (int thisSide = 0; thisSide < collisionSides.Length; thisSide++)
+            {
+                // If this side should not have a collider
+                if (!collisionSides[thisSide])
+                {
+                    // Go through each other side
+                    for (int thisOtherSide = thisSide + 1; thisOtherSide % collisionSides.Length != thisSide; thisOtherSide++)
+                    {
+                        // If this other side should have a collider
+                        if (collisionSides[thisOtherSide % collisionSides.Length])
+                        {
+                            // 
+                        }
+                    }
+                }
+            }
+        }
+        return collisionData;
+    }
 }
