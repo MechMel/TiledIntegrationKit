@@ -71,12 +71,12 @@ public class PDKLevelConfigurator : MonoBehaviour
 
 
     //
-    private Vector2[][] CalculateCollisions(int[] data)
+    private List<Vector2>[] CalculateCollisions(int[] data)
     {
         // This will store the solid tiles
         HashSet<int> solidTilesHashSet = new HashSet<int>();
         // This will store the collision data
-        Vector2[][] collisionData = new Vector2[data.Length][];
+        List<Vector2>[] collisionData = new List<Vector2>[data.Length];
 
         // For each solid tile
         foreach (int thisTileID in solidTiles)
@@ -169,16 +169,37 @@ public class PDKLevelConfigurator : MonoBehaviour
             // Go through each side
             for (int thisSide = 0; thisSide < collisionSides.Length; thisSide++)
             {
-                // If this side should not have a collider
-                if (!collisionSides[thisSide])
+                // If this side should have a collider but the previous side should not
+                if (collisionSides[thisSide] && !collisionSides[(thisSide + 3) % 4])
                 {
+                    collisionData[thisTileIndex] = new List<Vector2>();
+                    switch (thisSide)
+                    {
+                        case 0:
+                            collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
+                            collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
+                            break;
+                        case 01:
+                            collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
+                            collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
+                            break;
+                        case 2:
+                            collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
+                            collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
+                            break;
+                        case 3:
+                            collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
+                            collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
+                            break;
+                    }
                     // Go through each other side
-                    for (int thisOtherSide = thisSide + 1; thisOtherSide % collisionSides.Length != thisSide; thisOtherSide++)
+                    for (int thisOtherSide = thisSide; thisOtherSide % collisionSides.Length != thisSide; thisOtherSide++)
                     {
                         // If this other side should have a collider
                         if (collisionSides[thisOtherSide % collisionSides.Length])
                         {
                             // 
+
                         }
                     }
                 }
