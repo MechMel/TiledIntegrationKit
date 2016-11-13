@@ -72,7 +72,7 @@ public class PDKLevelRenderer : MonoBehaviour
     {
             // Update the texture for this layer group
             UpdateTextureForRectOfLayerGroup(ref layerGroupTextures[layerGroupIndex], levelMap.layerGroups[layerGroupIndex], rectToRender);
-            // Create a sprite from this layer group's Texture
+            // Create a sprite from this layer group's newly created texture
             Sprite spriteToDisplay = Sprite.Create(
                 texture: layerGroupTextures[layerGroupIndex],
                 rect: new Rect(
@@ -84,9 +84,9 @@ public class PDKLevelRenderer : MonoBehaviour
                     x: 0.5f,
                     y: 0.5f),
                 pixelsPerUnit: levelMap.tilewidth);
-            // Display the sprite of the area to render
+            // Display the newly created sprite for this layergroup
             layerGroupObjects[layerGroupIndex].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-            // Move the object for this layer group to the correct position
+            // Move this layer group's object to the correct position
             layerGroupObjects[layerGroupIndex].transform.position = new Vector3(
                 x: (int)rectToRender.x + ((int)rectToRender.width / 2),
                 y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
@@ -94,7 +94,7 @@ public class PDKLevelRenderer : MonoBehaviour
     }
 
 
-    // When this is called this function creates a texture from a given rectangle of a given layer group
+    // Alters a given layer group's texture based on the rectangle that is being rendered
     private void UpdateTextureForRectOfLayerGroup(ref Texture2D textureToUpdate, PDKLayerGroup givenLayerGroup, Rect rectToRender)
     {
         #region Overlap Variables
@@ -121,8 +121,18 @@ public class PDKLevelRenderer : MonoBehaviour
         // This will be used to determine when there are no more transparent pixels in each tile
         bool isCompletelyOpaque;
         #endregion
-        
+
         #region Copy Overlap and Update Texture
+        #region SUMMARY:
+        /*
+        If the currently loaded rectangle of the map overlaps with the rect to render
+            then record all pixels that are in that overlap from this layer group's current texture.
+        If the rect to render has diffrent dimensions than the currently loaded rectangle of the map
+            then create a new texture with the appropriate dimensions, for the rect to render
+            and replace this layer group's texture with this new one.
+        Paste all the pixels that were in that overlap, onto this layer group's texture.
+        */
+        #endregion
         // If there is an overlap
         if (overlapRect.width > 0 && overlapRect.height > 0)
         {
@@ -155,7 +165,16 @@ public class PDKLevelRenderer : MonoBehaviour
                 blockHeight: (int)overlapRect.height * levelMap.tileheight);
         }
         #endregion
-        #region Find Tiles Outside Overlap
+        #region Find Tile Positions to Render
+        #region SUMMARY:
+        /*
+        To optimize rendering, find the tiles that are outside the currently loaded rect of the map and inside the rect to render
+        If the rect to render overlaps with the currently loaded rect
+            add the position of each tile above, beside, and below the overlap to the list of tile positions to render.
+        If the rect to render does not overlap with the currently loaded rect
+            add the position of all tiles in the rect to render to the list of tile positions to render.
+        */
+        #endregion
         // If there is an overlap
         if (overlapRect.width > 0 && overlapRect.height > 0)
         {
@@ -211,6 +230,15 @@ public class PDKLevelRenderer : MonoBehaviour
         }
         #endregion;
         #region Render the Outside Tiles
+        #region SUMMARY:
+        /*
+        To optimize rendering, find the tiles that are outside the currently loaded rect of the map and inside the rect to render
+        If the rect to render overlaps with the currently loaded rect
+            add the position of each tile above, beside, and below the overlap to the list of tile positions to render.
+        If the rect to render does not overlap with the currently loaded rect
+            add the position of all tiles in the rect to render to the list of tile positions to render.
+        */
+        #endregion
         // For each layer to render
         foreach (int layerNumber in givenLayerGroup.layerNumbers)
         {
