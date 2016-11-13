@@ -56,8 +56,8 @@ public class PDKLevelController : MonoBehaviour
         int renderAreaWidth = (int)(2 * screenRatioWidthToHeight * (mainCamera.orthographicSize + bufferDistance));
         int renderAreaHeight = (int)(2 * (mainCamera.orthographicSize + bufferDistance));
 
-        // Render the appropriate area of the level
-        levelRenderer.RenderRectOfMap(new Rect(
+        // Load the appropriate area of the level
+        levelRenderer.LoadRectOfMap(new Rect(
                 x: (int)mainCameraPosition.x - (renderAreaWidth / 2),
                 y:  -(int)mainCameraPosition.y + (renderAreaHeight / 2), 
                 width: renderAreaWidth, 

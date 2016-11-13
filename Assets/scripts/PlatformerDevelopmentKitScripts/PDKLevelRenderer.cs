@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
-    // This is the texture that is currently rendered
+    // These store the textures that are currently rendered for each layer group
     public Texture2D[] layerGroupTextures;
-    // TODO: Fill this in later
+    // Stores the TIKMap that this instance of PDKLevelRenderer will Use
     public TIKMap levelMap;
-    // This is used to remember what area of the map is currently rendered
-    public Rect renderedRectOfMap;
+    // This is used to remember what area of the map is currently loaded
+    public Rect loadedRectOfMap;
     // This is used to store all layer group objects that this renderer creates
     public List<GameObject> layerGroupObjects = new List<GameObject>();
     // TODO: Remove this later
@@ -25,7 +25,7 @@ public class PDKLevelRenderer : MonoBehaviour
         // Set the layer group textures to the appropriate size
         layerGroupTextures = new Texture2D[levelMap.layerGroups.Count];
         // Initizlse the rendered rect of the map
-        renderedRectOfMap = new Rect(0, 0, 1, 1);
+        loadedRectOfMap = new Rect(0, 0, 1, 1);
         #region Setup Layer Group objects
         // Go through each layer group in this map
         for (int layerGroupNumber = 0; layerGroupNumber < mapToUse.layerGroups.Count; layerGroupNumber++)
@@ -49,40 +49,49 @@ public class PDKLevelRenderer : MonoBehaviour
     }
 
 
-
     // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
-    public void RenderRectOfMap(Rect rectToRender)
+    public void LoadRectOfMap(Rect rectToLoad)
     {
-        // Go through each layer group to render
-        for (int layerGroupNumber = 0; layerGroupNumber < levelMap.layerGroups.Count; layerGroupNumber++)
+        // Go through each layer group in the level map
+        for (int thisLayerGroupIndex = 0; thisLayerGroupIndex < levelMap.layerGroups.Count; thisLayerGroupIndex++)
         {
-            // Render this texture
-            UpdateTextureForRectOfLayerGroup(ref layerGroupTextures[layerGroupNumber], levelMap.layerGroups[layerGroupNumber], rectToRender);
-            // Create a sprite from the texture to render
-            Sprite spriteToDisplay = Sprite.Create(
-                texture: layerGroupTextures[layerGroupNumber], 
-                rect: new Rect(
-                    x: 0, 
-                    y: 0, 
-                    width: layerGroupTextures[layerGroupNumber].width, 
-                    height: layerGroupTextures[layerGroupNumber].height), 
-                pivot: new Vector2(
-                    x: 0.5f, 
-                    y: 0.5f), 
-                pixelsPerUnit: levelMap.tilewidth);
-            // Display the sprite of the area to render
-            layerGroupObjects[layerGroupNumber].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-            // Move the object for this layer group to the correct position
-            layerGroupObjects[layerGroupNumber].transform.position = new Vector3(
-                x:  (int)rectToRender.x + ((int)rectToRender.width / 2),
-                y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
-                z:  -layerGroupNumber);
+            // If this layer group is made up of tile layers
+            if (levelMap.layerGroups[thisLayerGroupIndex].groupType == TIKLayer.layerTypes.Tile)
+            {
+                // Update this layer group
+                UpdateTileLayerGroup(thisLayerGroupIndex, rectToLoad);
+            }
         }
-        // Store the curretly rendered rectangle of the map
-        renderedRectOfMap = rectToRender;
+        // Store the curretly loaded rectangle of the map
+        loadedRectOfMap = rectToLoad;
     }
 
 
+    // This updates a given tile Layer Group's texture, and then moves the layer group the apropriate position
+    public void UpdateTileLayerGroup(int layerGroupIndex, Rect rectToRender)
+    {
+            // Update the texture for this layer group
+            UpdateTextureForRectOfLayerGroup(ref layerGroupTextures[layerGroupIndex], levelMap.layerGroups[layerGroupIndex], rectToRender);
+            // Create a sprite from this layer group's Texture
+            Sprite spriteToDisplay = Sprite.Create(
+                texture: layerGroupTextures[layerGroupIndex],
+                rect: new Rect(
+                    x: 0,
+                    y: 0,
+                    width: layerGroupTextures[layerGroupIndex].width,
+                    height: layerGroupTextures[layerGroupIndex].height),
+                pivot: new Vector2(
+                    x: 0.5f,
+                    y: 0.5f),
+                pixelsPerUnit: levelMap.tilewidth);
+            // Display the sprite of the area to render
+            layerGroupObjects[layerGroupIndex].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+            // Move the object for this layer group to the correct position
+            layerGroupObjects[layerGroupIndex].transform.position = new Vector3(
+                x: (int)rectToRender.x + ((int)rectToRender.width / 2),
+                y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
+                z: -layerGroupIndex);
+    }
 
 
     // When this is called this function creates a texture from a given rectangle of a given layer group
@@ -90,7 +99,7 @@ public class PDKLevelRenderer : MonoBehaviour
     {
         #region Overlap Variables
         // This stores the overlap between the rendered rect and the rect to render
-        Rect overlapRect = GetOverlap(renderedRectOfMap, rectToRender);
+        Rect overlapRect = GetOverlap(loadedRectOfMap, rectToRender);
         // This stores the colors in the overlaping area between the renderd rect and the rect to render
         Color[] overlapColors = new Color[0];
         #endregion
@@ -99,8 +108,8 @@ public class PDKLevelRenderer : MonoBehaviour
         List<int> positionsWithTiles = new List<int>();
         // This is used to stroe which positions have no transparent pixels at them
         List<int> opaqueTilePositions = new List<int>();
-        // This stores the positions of tiles outside the overlap
-        List<int> outsidePositions = new List<int>();
+        // This stores the positions of tiles that will be rendered
+        List<int> tilePositionsToRender = new List<int>();
         // This will store each tile ID and the positions of these IDs for all tiles outside of the overlap
         Dictionary<int, List<int>> tilePositions;
         #endregion
@@ -119,8 +128,8 @@ public class PDKLevelRenderer : MonoBehaviour
         {
             // Get the pixels from the old area
             overlapColors = textureToUpdate.GetPixels(
-                    x: (int)(overlapRect.xMin - renderedRectOfMap.xMin) * levelMap.tilewidth,
-                    y: (int)(renderedRectOfMap.height - (overlapRect.yMax - renderedRectOfMap.yMin)) * levelMap.tileheight,
+                    x: (int)(overlapRect.xMin - loadedRectOfMap.xMin) * levelMap.tilewidth,
+                    y: (int)(loadedRectOfMap.height - (overlapRect.yMax - loadedRectOfMap.yMin)) * levelMap.tileheight,
                     blockWidth: (int)overlapRect.width * levelMap.tilewidth,
                     blockHeight: (int)overlapRect.height * levelMap.tileheight);
         }
@@ -156,8 +165,8 @@ public class PDKLevelRenderer : MonoBehaviour
                 // For each tile in this row
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
-                    // Add this tile to the list of tiles outside the overlap
-                    outsidePositions.Add((y * levelMap.width) + x);
+                    // Add the position of this tile to the list of positions to render
+                    tilePositionsToRender.Add((y * levelMap.width) + x);
                 }
             }
             // For each row inside the rect to render and beside the overlap
@@ -166,14 +175,14 @@ public class PDKLevelRenderer : MonoBehaviour
                 // For each tile on the left of the overlap
                 for (int x = (int)rectToRender.xMin; x < overlapRect.xMin; x++)
                 {
-                    // Add this tile to the list of tiles outside the overlap
-                    outsidePositions.Add((y * levelMap.width) + x);
+                    // Add the position of this tile to the list of positions to render
+                    tilePositionsToRender.Add((y * levelMap.width) + x);
                 }
                 // For each tile on the right of the overlap
                 for (int x = (int)overlapRect.xMax; x < rectToRender.xMax; x++)
                 {
-                    // Add this tile to the list of tiles outside the overlap
-                    outsidePositions.Add((y * levelMap.width) + x);
+                    // Add the position of this tile to the list of positions to render
+                    tilePositionsToRender.Add((y * levelMap.width) + x);
                 }
             }
             // For each row inside the rect to render and below the overlap
@@ -182,18 +191,21 @@ public class PDKLevelRenderer : MonoBehaviour
                 // For each tile in this row
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
-                    // Add this tile to the list of tiles outside the overlap
-                    outsidePositions.Add((y * levelMap.width) + x);
+                    // Add the position of this tile to the list of positions to render
+                    tilePositionsToRender.Add((y * levelMap.width) + x);
                 }
             }
         }
-        else
+        else // If there is no overlap
         {
+            // For each row inside the rect to render
             for (int y = (int)rectToRender.yMin; y < rectToRender.yMax; y++)
             {
+                // For each tile in this row
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
-                    outsidePositions.Add((y * levelMap.width) + x);
+                    // Add the position of this tile to the list of positions to render
+                    tilePositionsToRender.Add((y * levelMap.width) + x);
                 }
             }
         }
@@ -202,12 +214,12 @@ public class PDKLevelRenderer : MonoBehaviour
         // For each layer to render
         foreach (int layerNumber in givenLayerGroup.layerNumbers)
         {
-            #region Get all Tiles Outside the Overlap
+            #region Get all Tiles To Render
             // Get each tile ID and the positions of these IDs for all tiles outside of the overlap
-            tilePositions = levelMap.GetAllTilePositionsFromLayerInList(layerNumber, outsidePositions);
+            tilePositions = levelMap.GetAllTilePositionsFromLayerInList(layerNumber, tilePositionsToRender);
             #endregion
-            #region Put Each Tile on the Texture to Update
-            // Go through each tile ID in the requested rectangle of the map
+            #region Put Each Tile to Render on the Texture to Update
+            // Go through each tile ID in the tile positions to render
             foreach (int thisTileID in tilePositions.Keys)
             {
                 // Get the pixels for this tile
@@ -288,7 +300,6 @@ public class PDKLevelRenderer : MonoBehaviour
     }
     
 
-
     // This finds the overlaping area of two rectangles and returns that as a rectangle
     private Rect GetOverlap(Rect firstRect, Rect secondRect)
     {
@@ -306,7 +317,6 @@ public class PDKLevelRenderer : MonoBehaviour
         // Return a rectangle containing the overlap
         return overlapRect;
     }
-
 
 
     // TODO: Remove this later
