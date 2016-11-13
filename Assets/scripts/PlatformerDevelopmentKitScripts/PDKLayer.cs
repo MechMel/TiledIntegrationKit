@@ -5,7 +5,7 @@ using System.Collections;
 using System.Xml;
 
 [Serializable]
-public class TIKLayer
+public class PDKLayer
 {
     #region Layer Attributes
     public string name;

@@ -7,7 +7,7 @@ public class PDKLevelRenderer : MonoBehaviour
     // These store the textures that are currently rendered for each layer group
     public Texture2D[] layerGroupTextures;
     // Stores the TIKMap that this instance of PDKLevelRenderer will Use
-    public TIKMap levelMap;
+    public PDKMap levelMap;
     // This is used to remember what area of the map is currently loaded
     public Rect loadedRectOfMap;
     // This is used to store all layer group objects that this renderer creates
@@ -18,7 +18,7 @@ public class PDKLevelRenderer : MonoBehaviour
 
 
     // Creates a new instance of a PDKLevelRenderer
-    public PDKLevelRenderer(TIKMap mapToUse)
+    public PDKLevelRenderer(PDKMap mapToUse)
     {
         // Get the map to use
         levelMap = mapToUse;
@@ -56,7 +56,7 @@ public class PDKLevelRenderer : MonoBehaviour
         for (int thisLayerGroupIndex = 0; thisLayerGroupIndex < levelMap.layerGroups.Count; thisLayerGroupIndex++)
         {
             // If this layer group is made up of tile layers
-            if (levelMap.layerGroups[thisLayerGroupIndex].groupType == TIKLayer.layerTypes.Tile)
+            if (levelMap.layerGroups[thisLayerGroupIndex].groupType == PDKLayer.layerTypes.Tile)
             {
                 // Update this layer group
                 UpdateTileLayerGroup(thisLayerGroupIndex, rectToLoad);

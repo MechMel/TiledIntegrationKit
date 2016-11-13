@@ -22,10 +22,10 @@ public class PDKLevelConfigurator : MonoBehaviour
 
     #region Tiled Map Settings
     //
-    private TIKMapSettings newMapSettings;
+    private PDKMapSettings newMapSettings;
     // 
     [SerializeField]
-    public TIKMapSettings mapSettings = new TIKMapSettings(null);
+    public PDKMapSettings mapSettings = new PDKMapSettings(null);
     #endregion
 
     // This is called to update variables when the text asset has been changed
@@ -34,14 +34,14 @@ public class PDKLevelConfigurator : MonoBehaviour
         if (mapSettings.mapTextAsset == null) // If the current map has been removed
         {
             // Clear all current settings
-            mapSettings = new TIKMapSettings(mapSettings.mapTextAsset);
+            mapSettings = new PDKMapSettings(mapSettings.mapTextAsset);
             // Clear all remebered settings
             newMapSettings.Clone(mapSettings);
         }
         else // If a new text asset has been put in
         {
             // Create a new set of map settings from the new TextAsset
-            newMapSettings = new TIKMapSettings(mapSettings.mapTextAsset);
+            newMapSettings = new PDKMapSettings(mapSettings.mapTextAsset);
             // Copy over any settings that match between the current and the new TIKMapSettings
             newMapSettings.CopyMatchingSettings(mapSettings);
             // Display the new map settings

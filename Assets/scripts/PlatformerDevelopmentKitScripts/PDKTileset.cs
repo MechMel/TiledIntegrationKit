@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 [Serializable]
-public class TIKTileset
+public class PDKTileset
 {
     #region Tileset Attributes
     public int firstgid;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class TIKMapSettings
+public class PDKMapSettings
 {
     #region Variables for Map Settings
     // This is the text asset for this map
@@ -15,13 +15,13 @@ public class TIKMapSettings
     #endregion
 
     // This is the TIKMap for this level
-    public TIKMap tikMap;
+    public PDKMap tikMap;
     // Reference to TIK's jsonUtilies class
-    private TIKJsonUtilities tikJsonUtilities = new TIKJsonUtilities();
+    private PDKJsonUtilities tikJsonUtilities = new PDKJsonUtilities();
 
 
     // When this is called a new TIKMapSettings is created based on a given TextAsset for a map
-    public TIKMapSettings(TextAsset newMapTextAsset)
+    public PDKMapSettings(TextAsset newMapTextAsset)
     {
         // If the new text asset exists
         if (newMapTextAsset != null)
@@ -43,7 +43,7 @@ public class TIKMapSettings
     }
 
     // When this is called this TIKMapSettings coppies the values of another TIKMapSettings
-    public void Clone(TIKMapSettings mapSettingsToClone)
+    public void Clone(PDKMapSettings mapSettingsToClone)
     {
         // Clone each Variable
         mapTextAsset = mapSettingsToClone.mapTextAsset;
@@ -52,7 +52,7 @@ public class TIKMapSettings
     }
     
     // When this is called settings from another map are copied onto this map's settings
-    public void CopyMatchingSettings(TIKMapSettings mapSettingsToCopy)
+    public void CopyMatchingSettings(PDKMapSettings mapSettingsToCopy)
     {
         #region Check and Copy Tilesets
         // If the map settings to copy tilesetTextures is not blank

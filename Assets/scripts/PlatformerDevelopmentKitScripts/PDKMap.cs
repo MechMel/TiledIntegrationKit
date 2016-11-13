@@ -4,7 +4,7 @@ using System.Xml;
 using System.Collections.Generic;
 
 [Serializable]
-public class TIKMap
+public class PDKMap
 {
     #region Map Attributes
     public float version;
@@ -15,8 +15,8 @@ public class TIKMap
     public int tilewidth;
     public int tileheight;
     public int nextobjectid;
-    public TIKLayer[] layers;
-    public TIKTileset[] tilesets;
+    public PDKLayer[] layers;
+    public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
     #endregion
     // This will store a blank tile
@@ -32,7 +32,7 @@ public class TIKMap
 
         #region Initialize Layers
         // Tell each of this map's layers to initialize
-        foreach (TIKLayer layerToInitialize in layers)
+        foreach (PDKLayer layerToInitialize in layers)
         {
             layerToInitialize.InitializeLayer();
         }
@@ -162,10 +162,10 @@ public class TIKMap
 
 
     // When this is called this function looks through all tilesets, finds the tileset that contains the given tile ID, and then returns that tileset
-    public TIKTileset GetTileSetFromID(int tileID)
+    public PDKTileset GetTileSetFromID(int tileID)
     {
         // Look through each tileset in this map
-        foreach (TIKTileset tilesetToCheck in tilesets)
+        foreach (PDKTileset tilesetToCheck in tilesets)
         {
             // If the given tile ID is in the tileset being checked
             if (tileID >= tilesetToCheck.firstgid && tileID < tilesetToCheck.firstgid + tilesetToCheck.tilecount)

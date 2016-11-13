@@ -4,7 +4,7 @@ using System.Collections;
 public class PDKLevelController : MonoBehaviour
 {
     // This is the TIKMap for this level
-    public TIKMap levelMap;
+    public PDKMap levelMap;
     // This is the PDKLevelRenderer for this level
     public PDKLevelRenderer levelRenderer;
     // This is how many tiles out from the camera to load this level
