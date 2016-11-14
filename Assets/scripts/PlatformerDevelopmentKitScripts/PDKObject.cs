@@ -18,5 +18,5 @@ public class PDKObject
     public int rotation;
     public bool visible;
     // Stores the prefab for this object
-    //public Object prefab;
+    public UnityEngine.Object prefab;
 }
