@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="128" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="256" height="128" tilewidth="16" tileheight="16" nextobjectid="9">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <properties>
    <property name="contrainsObjects" value="true"/>
@@ -11,6 +11,9 @@
    </properties>
   </tile>
  </tileset>
+ <imagelayer name="Image Layer 1">
+  <image source="../tilesets/dirt-tiles.png"/>
+ </imagelayer>
  <layer name="Ground" width="256" height="128">
   <properties>
    <property name="No_Collisions" value="nope"/>
@@ -155,9 +158,12 @@
   </object>
   <object id="4" type="Player" gid="164" x="288" y="240" width="16" height="16"/>
   <object id="5" gid="164" x="288" y="240" width="16" height="16"/>
-  <object id="6" type="Enemy" gid="229" x="288" y="272" width="16" height="16"/>
+  <object id="6" name="s1" type="Enemy" gid="229" x="288" y="272" width="16" height="16">
+   <properties>
+    <property name="Health" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
- <imagelayer name="Image Layer 1"/>
  <layer name="floor" width="256" height="128">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

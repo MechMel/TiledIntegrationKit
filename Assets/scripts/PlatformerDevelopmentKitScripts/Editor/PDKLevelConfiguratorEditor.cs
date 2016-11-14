@@ -35,11 +35,27 @@ public class PDKLevelConfiguratorEditor : Editor
         // If tilesetTextures has ben instatiated, and the map type is not none
         if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
+            // Tell the user these are tileset fields
+            editorUtilities.Field("Tilesets");
             // For each tilset in this map
             for (int currentTileset = 0; currentTileset < levelConfigurator.mapSettings.tilesetTextures.Length; currentTileset++)
             {
                 // Display a field for this texture
-                editorUtilities.Field(levelConfigurator.mapSettings.tikMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.tilesetTextures[currentTileset]);
+                editorUtilities.Field(levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.tilesetTextures[currentTileset]);
+            }
+        }
+        #endregion
+        #region When Applicable Display the Object Fields
+        // If tilesetTextures has ben instatiated, and the map type is not none
+        if (levelConfigurator.mapSettings.obectPrefabs != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        {
+            // Tell the user these are object prefab fields
+            editorUtilities.Field("Object Prefabs");
+            // For each layer in this map
+            for (int thisObjectIndex = 0; thisObjectIndex < levelConfigurator.mapSettings.objectTypes.Count; thisObjectIndex++)
+            {
+                // Display a field for this texture
+                editorUtilities.Field(levelConfigurator.mapSettings.objectTypes[thisObjectIndex], ref levelConfigurator.mapSettings.obectPrefabs[thisObjectIndex]);
             }
         }
         #endregion

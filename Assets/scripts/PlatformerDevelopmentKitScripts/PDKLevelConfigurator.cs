@@ -52,18 +52,18 @@ public class PDKLevelConfigurator : MonoBehaviour
     void Awake()
     {
         // If a TIKMap has been created
-        if (mapSettings.tikMap != null && mapSettings.mapTextAsset != null)
+        if (mapSettings.pdkMap != null && mapSettings.mapTextAsset != null)
         {
             // Tell this level's map to initializewwwwww
-            mapSettings.tikMap.InitializeMap(mapSettings.tilesetTextures);
+            mapSettings.pdkMap.InitializeMap(mapSettings.tilesetTextures);
             // Add the level controller to this object
             PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();
             // Give the TIKMap with the user's settings to the levelController
-            levelController.levelMap = mapSettings.tikMap;
+            levelController.levelMap = mapSettings.pdkMap;
             // Tell the level controller how close the camera can get to the edge of the loaded area before a new section of the level should be loaded
             levelController.bufferDistance = bufferDistance;
             //
-            levelController.levelRenderer = new PDKLevelRenderer(mapSettings.tikMap);
+            levelController.levelRenderer = new PDKLevelRenderer(mapSettings.pdkMap);
             // Disable this script
             //this.gameObject.GetComponent<PDKLevelConfigurator>().enabled = false;
         }
@@ -91,7 +91,7 @@ public class PDKLevelConfigurator : MonoBehaviour
             //
             Vector2[] thisSideCollider;
 
-            if (mapSettings.tikMap.width % thisTileIndex == 0) // If this tile is on the left edge of the map
+            if (mapSettings.pdkMap.width % thisTileIndex == 0) // If this tile is on the left edge of the map
             {
                 // The left side of this tile should have a collider
                 collisionSides[1] = true;
@@ -102,7 +102,7 @@ public class PDKLevelConfigurator : MonoBehaviour
                     collisionSides[3] = true;
                 }
             }
-            else if  (mapSettings.tikMap.width % (thisTileIndex + 1) == 0) // If this tile is on the right edge of the map
+            else if  (mapSettings.pdkMap.width % (thisTileIndex + 1) == 0) // If this tile is on the right edge of the map
             {
                 // The right side of this tile should have a collider
                 collisionSides[3] = true;
@@ -129,23 +129,23 @@ public class PDKLevelConfigurator : MonoBehaviour
                 }
             }
 
-            if (thisTileIndex < mapSettings.tikMap.width) // If this tile is on the top edge of the map
+            if (thisTileIndex < mapSettings.pdkMap.width) // If this tile is on the top edge of the map
             {
                 // The top side of this tile should have a collider
                 collisionSides[0] = true;
                 // If this tile is sold, but tile below is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.tikMap.width]))
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.pdkMap.width]))
                 {
                     // The bottom side of this tile should have a collider
                     collisionSides[2] = true;
                 }
             }
-            else if (thisTileIndex >= data.Length - mapSettings.tikMap.width) // If this tile is on the bottom edge of the map
+            else if (thisTileIndex >= data.Length - mapSettings.pdkMap.width) // If this tile is on the bottom edge of the map
             {
                 // The bottom side of this tile should have a collider
                 collisionSides[2] = true;
                 // If this tile is sold, but the above tile is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.tikMap.width]))
+                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.pdkMap.width]))
                 {
                     // The top side of this tile should have a collider
                     collisionSides[0] = true;
@@ -154,13 +154,13 @@ public class PDKLevelConfigurator : MonoBehaviour
             else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
             {
                 // If the below tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.tikMap.width]))
+                if (!solidTilesHashSet.Contains(data[thisTileIndex - mapSettings.pdkMap.width]))
                 {
                     // The bottom side of this tile should have a collider
                     collisionSides[2] = true;
                 }
                 // If the above tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.tikMap.width]))
+                if (!solidTilesHashSet.Contains(data[thisTileIndex + mapSettings.pdkMap.width]))
                 {
                     // The top side of this tile should have a collider
                     collisionSides[0] = true;

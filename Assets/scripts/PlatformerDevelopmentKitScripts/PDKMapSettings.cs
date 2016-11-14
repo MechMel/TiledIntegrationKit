@@ -12,12 +12,18 @@ public class PDKMapSettings
     // This is an array of textures for each tileset
     [SerializeField]
     public Texture2D[] tilesetTextures;
+    // TODO: FILL THIS IN LATER
+    [SerializeField]
+    public Object[] obectPrefabs;
+    // TODO: FILL THIS IN LATER
+    [SerializeField]
+    public List<string> objectTypes;
     #endregion
 
-    // This is the TIKMap for this level
-    public PDKMap tikMap;
-    // Reference to TIK's jsonUtilies class
-    private PDKJsonUtilities tikJsonUtilities = new PDKJsonUtilities();
+    // This is the PDKMap for this level
+    public PDKMap pdkMap;
+    // Reference to PDK's jsonUtilies class
+    private PDKJsonUtilities pdkJsonUtilities = new PDKJsonUtilities();
 
 
     // When this is called a new TIKMapSettings is created based on a given TextAsset for a map
@@ -29,9 +35,33 @@ public class PDKMapSettings
             // Remeber the text asset used to create this map
             mapTextAsset = newMapTextAsset;
             // Create a new TIKMap from the TextAsset for the new map
-            tikMap = tikJsonUtilities.CreateTIKMapFromTextAsset(mapTextAsset);
+            pdkMap = pdkJsonUtilities.CreatePDKMapFromTextAsset(mapTextAsset);
             // Make tilesetTextures have enough slots for each tilest in the new map
-            tilesetTextures = new Texture2D[tikMap.tilesets.Length];
+            tilesetTextures = new Texture2D[pdkMap.tilesets.Length];
+            #region Create Object Prefab List
+            // Instatiate the object types list
+            objectTypes = new List<string>();
+            // For each layer in this map
+            foreach (PDKLayer thisLayer in pdkMap.layers)
+            {
+                // If this layer is an object layer
+                if (thisLayer.type == "objectgroup")
+                {
+                    // Go through each object in this layer
+                    foreach (PDKObject thisObject in thisLayer.objects)
+                    {
+                        // If this object type has not been found already
+                        if (!objectTypes.Contains(thisObject.type))
+                        {
+                            // Add this object type to the hashset of discovered object types
+                            objectTypes.Add(thisObject.type);
+                        }
+                    }
+                }
+            }
+            // Make obectPrefabs have enough slots for each object type in the new map
+            obectPrefabs = new Object[objectTypes.Count];
+            #endregion
         }
         else
         {
@@ -39,6 +69,10 @@ public class PDKMapSettings
             mapTextAsset = null;
             // Clear tilesetTexture
             tilesetTextures = null;
+            // Clear objectPrefabs
+            obectPrefabs = null;
+            // Clear objectPrefabs
+            obectPrefabs = null;
         }
     }
 
@@ -47,8 +81,10 @@ public class PDKMapSettings
     {
         // Clone each Variable
         mapTextAsset = mapSettingsToClone.mapTextAsset;
-        tikMap = mapSettingsToClone.tikMap;
+        pdkMap = mapSettingsToClone.pdkMap;
         tilesetTextures = mapSettingsToClone.tilesetTextures;
+        objectTypes = mapSettingsToClone.objectTypes;
+        obectPrefabs = mapSettingsToClone.obectPrefabs;
     }
     
     // When this is called settings from another map are copied onto this map's settings
@@ -56,7 +92,7 @@ public class PDKMapSettings
     {
         #region Check and Copy Tilesets
         // If the map settings to copy tilesetTextures is not blank
-        if (mapSettingsToCopy.tilesetTextures != null)
+        if (mapSettingsToCopy.tilesetTextures != null && mapSettingsToCopy.pdkMap.height > 0)
         {
             // For each tileset in this map
             for (int tilesetToCheck = 0; tilesetToCheck < tilesetTextures.Length; tilesetToCheck++)
@@ -65,11 +101,27 @@ public class PDKMapSettings
                 for (int tilesetToCopy = 0; tilesetToCopy < mapSettingsToCopy.tilesetTextures.Length; tilesetToCopy++)
                 {
                     // If these tilesets have the same name
-                    if (tikMap.tilesets[tilesetToCheck].name == mapSettingsToCopy.tikMap.tilesets[tilesetToCopy].name)
+                    if (pdkMap.tilesets[tilesetToCheck].name == mapSettingsToCopy.pdkMap.tilesets[tilesetToCopy].name)
                     {
                         // Copy that tileset from mapSettingsToCopy to this TIKMapSettings
                         tilesetTextures[tilesetToCheck] = mapSettingsToCopy.tilesetTextures[tilesetToCopy];
                     }
+                }
+            }
+        }
+        #endregion
+        #region Check and Copy Object Prefabs
+        // If the map settings to copy obectPrefabs is not blank
+        if (mapSettingsToCopy.obectPrefabs != null)
+        {
+            // For each object type in this map
+            for (int thisObjectIndex = 0; thisObjectIndex < objectTypes.Count; thisObjectIndex++)
+            {
+                // If this object type exists in the map settings to copy
+                if (mapSettingsToCopy.objectTypes.Contains(objectTypes[thisObjectIndex]))
+                {
+                    // Copy the prefab for this object from the map settings to copy
+                    obectPrefabs[thisObjectIndex] = mapSettingsToCopy.obectPrefabs[thisObjectIndex];
                 }
             }
         }

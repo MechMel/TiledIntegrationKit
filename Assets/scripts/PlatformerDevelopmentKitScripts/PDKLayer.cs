@@ -29,7 +29,7 @@ public class PDKLayer
 
     #region Object Layer Attributes
     public string draworder;
-    //public List<string> objects;
+    public PDKObject[] objects;
     #endregion
 
     #region Image Layer Attributes
