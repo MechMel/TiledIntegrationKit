@@ -54,8 +54,19 @@ public class PDKLevelConfigurator : MonoBehaviour
         // If a TIKMap has been created
         if (mapSettings.pdkMap != null && mapSettings.mapTextAsset != null)
         {
-            // Tell this level's map to initializewwwwww
-            mapSettings.pdkMap.InitializeMap(mapSettings.tilesetTextures);
+            // This stores the prefabs for each object type
+            Dictionary<string, UnityEngine.Object> objects = new Dictionary<string, Object>();
+
+            #region Compile Object Dictionary
+            // Go through each object
+            for (int thisObjectIndex = 0; thisObjectIndex < mapSettings.objectTypes.Count; thisObjectIndex++)
+            {
+                // Add this object to the dictionary of objects
+                objects.Add(mapSettings.objectTypes[thisObjectIndex], mapSettings.objectPrefabs[thisObjectIndex]);
+            }
+            #endregion
+            // Tell this level's map to initialize
+            mapSettings.pdkMap.InitializeMap(mapSettings.tilesetTextures, objects);
             // Add the level controller to this object
             PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();
             // Give the TIKMap with the user's settings to the levelController

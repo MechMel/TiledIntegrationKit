@@ -27,8 +27,8 @@ public class PDKTileset
     #endregion
 
     #region Custom Properties
-    public Dictionary<string, string> customTilesetProperties;
-    public Dictionary<string, string>[] customTiles;
+    // Stores the custom properties for this tileset
+    public PDKCustomProperty[] properties;
     #endregion
 
 

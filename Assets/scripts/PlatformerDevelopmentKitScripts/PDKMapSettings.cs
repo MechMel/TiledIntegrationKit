@@ -14,7 +14,7 @@ public class PDKMapSettings
     public Texture2D[] tilesetTextures;
     // TODO: FILL THIS IN LATER
     [SerializeField]
-    public Object[] obectPrefabs;
+    public Object[] objectPrefabs;
     // TODO: FILL THIS IN LATER
     [SerializeField]
     public List<string> objectTypes;
@@ -60,7 +60,7 @@ public class PDKMapSettings
                 }
             }
             // Make obectPrefabs have enough slots for each object type in the new map
-            obectPrefabs = new Object[objectTypes.Count];
+            objectPrefabs = new Object[objectTypes.Count];
             #endregion
         }
         else
@@ -70,9 +70,9 @@ public class PDKMapSettings
             // Clear tilesetTexture
             tilesetTextures = null;
             // Clear objectPrefabs
-            obectPrefabs = null;
+            objectPrefabs = null;
             // Clear objectPrefabs
-            obectPrefabs = null;
+            objectPrefabs = null;
         }
     }
 
@@ -84,7 +84,7 @@ public class PDKMapSettings
         pdkMap = mapSettingsToClone.pdkMap;
         tilesetTextures = mapSettingsToClone.tilesetTextures;
         objectTypes = mapSettingsToClone.objectTypes;
-        obectPrefabs = mapSettingsToClone.obectPrefabs;
+        objectPrefabs = mapSettingsToClone.objectPrefabs;
     }
     
     // When this is called settings from another map are copied onto this map's settings
@@ -112,7 +112,7 @@ public class PDKMapSettings
         #endregion
         #region Check and Copy Object Prefabs
         // If the map settings to copy obectPrefabs is not blank
-        if (mapSettingsToCopy.obectPrefabs != null)
+        if (mapSettingsToCopy.objectPrefabs != null)
         {
             // For each object type in this map
             for (int thisObjectIndex = 0; thisObjectIndex < objectTypes.Count; thisObjectIndex++)
@@ -121,7 +121,7 @@ public class PDKMapSettings
                 if (mapSettingsToCopy.objectTypes.Contains(objectTypes[thisObjectIndex]))
                 {
                     // Copy the prefab for this object from the map settings to copy
-                    obectPrefabs[thisObjectIndex] = mapSettingsToCopy.obectPrefabs[thisObjectIndex];
+                    objectPrefabs[thisObjectIndex] = mapSettingsToCopy.objectPrefabs[thisObjectIndex];
                 }
             }
         }

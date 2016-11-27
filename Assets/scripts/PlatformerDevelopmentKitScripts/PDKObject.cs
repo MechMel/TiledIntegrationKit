@@ -17,6 +17,8 @@ public class PDKObject
     public int width;
     public int rotation;
     public bool visible;
+    // Stores this object's custom properties
+    public PDKCustomProperty[] properties;
     // Stores the prefab for this object
     public UnityEngine.Object prefab;
 }

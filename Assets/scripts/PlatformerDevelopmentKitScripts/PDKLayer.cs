@@ -19,8 +19,8 @@ public class PDKLayer
 
     public enum layerTypes { Tile, Object, Image };
     public layerTypes layerType;
-    //public List<Tuple<string, string>> properties;
-    public Dictionary<string, string> properties;
+    // Stores the custom properties for this map
+    public PDKCustomProperty[] properties;
     #endregion
 
     #region Tile Layer Attributes
@@ -37,15 +37,21 @@ public class PDKLayer
     #endregion
 
     //The Initialize function sets up the tile layer, objects, and images
-    public void InitializeLayer()
+    public void InitializeLayer(Dictionary<string, UnityEngine.Object> objectsInMap)
     {
-        if(type == "tilelayer")
+        if (type == "tilelayer")
         {
             layerType = layerTypes.Tile;
         }
         else if(type == "objectgroup")
         {
             layerType = layerTypes.Object;
+            // Go through each object
+            foreach (PDKObject thisObject in objects)
+            {
+                // Apply the appropriate prefab
+                thisObject.prefab = objectsInMap[thisObject.type];
+            }
         }
         else if(type == "imagelayer")
         {

@@ -27,6 +27,7 @@ public class PDKLevelController : MonoBehaviour
 
     void Start()
     {
+        string test = levelMap.properties[0].name;
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //

@@ -19,22 +19,27 @@ public class PDKMap
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
     #endregion
+    // Stores the custom properties for this map
+    public PDKCustomProperty[] properties;
     // This will store a blank tile
     Color[] blankTile;
+    // TODO: FILL THIS IN LATER
+    Dictionary<string, UnityEngine.Object> objectsInMap;
 
 
 
     //The InitializeMap function initializes all the layers and tilests
-    public void InitializeMap(Texture2D[] tilesetTextures)
+    public void InitializeMap(Texture2D[] tilesetTextures, Dictionary<string, UnityEngine.Object> objectsToAdd)
     {
         // This is used to determine which layer group is being looked at
         int currentLayerGroupNumber = -1;
 
+        objectsInMap = objectsToAdd;
         #region Initialize Layers
         // Tell each of this map's layers to initialize
         foreach (PDKLayer layerToInitialize in layers)
         {
-            layerToInitialize.InitializeLayer();
+            layerToInitialize.InitializeLayer(objectsInMap);
         }
         #endregion
         #region Initialize Tilesets
@@ -52,7 +57,7 @@ public class PDKMap
         {
             // If this layer is visible
             if (layers[thisLayerNumber].visible)
-            { 
+            {
                 // If this layer is the same type as the current layer group
                 if (layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].layerType)
                 {
