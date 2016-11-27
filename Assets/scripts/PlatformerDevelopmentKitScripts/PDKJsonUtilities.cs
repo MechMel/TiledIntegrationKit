@@ -100,28 +100,39 @@ public class PDKJsonUtilities
 
 
     // TODO: FILL THIS IN LATER
-    string RewriteTileProperties(string stringToCorrect)
+    void CorrectTileProperties(ref string stringToCorrect)
     {
         // This is the string used to find the beginning of tile properties
         string[] tilePropertiesIdentifier = { "\"tileproperties\":\r\n" };
         // This will store the parts of the string to correct
-        string[] correctedString;
-        // This stores the tile properties text
-        string tilePropertiesText = "";
-        // This stores all the nodes in tileproperties
-        List<string> nodes;
-        // This stores the number of curly brackets in the tile properties
-        int numberOfCurlyBrackets = 1;
+        string[] splitStringToCorrect;
+        // Stores the position of the character that is being examined
+        int currentCharPosition = 0;
 
         // Find and split at the beginning of tie custom properties
-        correctedString = stringToCorrect.Split(tilePropertiesIdentifier, StringSplitOptions.RemoveEmptyEntries);
+        splitStringToCorrect = stringToCorrect.Split(tilePropertiesIdentifier, StringSplitOptions.RemoveEmptyEntries);
         // Add the tile properties identifier back onto the corrected string
-        correctedString[0] += "\"tileproperties\":[\r\n";
+        splitStringToCorrect[0] += "\"tileproperties\":[\r\n";
         // Go through each char after tile properties
-        for (int thisCharIndex = 15; thisCharIndex < correctedString[1].Length; thisCharIndex++)
+        do
         {
-            //
+            // Start at the first unescaped quote or end curly bracket
+            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[1], currentCharPosition + 1, new Char[] { '"', '}' });
+            // If this char is a quotation mark
+            if (splitStringToCorrect[1][currentCharPosition] == '"')
+            {
+                // Find the index of the end of this quote
+                int indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[1], currentCharPosition + 1, new Char[] { '"' });
+
+                // This is the start of a custom tile, so add the appropriate text
+                splitStringToCorrect[0] += "{";
+                // Get and add the tileid
+                splitStringToCorrect[0] += "\"tileid\":" + splitStringToCorrect[1].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + ',';
+                // Get and add this tile's properties
+                splitStringToCorrect[0] += "\"tileproperties\":[";
+            }
         }
+        while (splitStringToCorrect[1][currentCharPosition] == '}');
     }
 
 
@@ -266,8 +277,8 @@ public class PDKJsonUtilities
     }
 
 
-    // This searches a string and returns the position the first nonesacped instance of one of the requested characters
-    int PositionOfNextUnescapedChar(string stringToSearch, int startPosition, params char[] charsToFind)
+    // This searches a string and returns the index the first nonesacped instance of one of the requested characters
+    int IndexOfNextUnescapedChar(string stringToSearch, int startPosition, params char[] charsToFind)
     {
         // If the initial index is out of bounds
         if (startPosition >= stringToSearch.Length)
