@@ -14,266 +14,167 @@ public class PDKJsonUtilities
     // When this is called it creates and returns a new TIKMap from a given TextAsset from a tiled map
     public PDKMap CreatePDKMapFromTextAsset(TextAsset textAssetToCreateMapFrom)
     {
-        // TODO: REMOVE THIS LATER
-        string stringToCreateMapFrom = RewriteCustomProperties(textAssetToCreateMapFrom.ToString(), "\"properties\":\r\n", '"', '"');
-        // Create a TIKMap based on the map's Json file
-        PDKMap pdkMap = JsonUtility.FromJson<PDKMap>(stringToCreateMapFrom);
-        // Return the newly created TIKMap
+        // TODO: FILL THIS IN LATER
+        string stringToCreateMapFrom = textAssetToCreateMapFrom.ToString();
+        // Stores the map to return
+        PDKMap pdkMap;
+
+        // Correct custom properties
+        CorrectCustomProperties(ref stringToCreateMapFrom);
+        // Correct tile properties
+        CorrectTileProperties(ref stringToCreateMapFrom);
+        // Create a PDKMap based on the map's Json file
+        pdkMap = JsonUtility.FromJson<PDKMap>(stringToCreateMapFrom);
+        // Return the newly created PDKMap
         return pdkMap;
     }
 
 
-    // TODO: FILL THIS IN LATER
-    public string CorrectCustomProperties(string stringToCorrect)
+    // This modifies custom properties so that they can be properly parsed
+    void CorrectCustomProperties(ref string stringToCorrect)
     {
-        // TODO: FILL THIS IN LATER
-        string[] chunks;
-
-        // TODO: FILL THIS IN LATER
-        chunks = stringToCorrect.Split(PROPERTIES_INDENTIFIER, StringSplitOptions.RemoveEmptyEntries);
-        // TODO: FILL THIS IN LATER
-        for (int thisChunkIndex = 1; thisChunkIndex < chunks.Length; thisChunkIndex++)
-        {
-            // TODO: FILL THIS IN LATER
-            string propertiesText = "";
-            // TODO: FILL THIS IN LATER
-            List<int> indexOfQuotes = new List<int>();
-
-            // Add the properties indicator back on the previous chunk
-            chunks[0] += "\"properties\":[\r\n";
-            // TODO: FILL THIS IN LATER
-            for (int thisCharIndex = 0; !(chunks[thisChunkIndex][thisCharIndex] == '}' && indexOfQuotes.Count % 2 == 0); thisCharIndex++)
-            {
-                // If this character is a {
-                if (chunks[thisChunkIndex][thisCharIndex] == '{' && )
-                // If this character is a quotation mark
-                if (chunks[thisChunkIndex][thisCharIndex] == '"')
-                {
-                    // Store the index of this quotation mark
-                    indexOfQuotes.Add(thisCharIndex);
-                }
-            }
-            // TODO: FILL THIS IN LATER
-            for (int indexOfThisProperty = 0; indexOfThisProperty < indexOfQuotes.Count / 4; indexOfThisProperty++)
-            {
-                // Insert initial name text
-                propertiesText += "{\r\n\"name\":";
-                // TODO: FILL THIS IN LATER
-                for (int thisCharIndex = indexOfQuotes[indexOfThisProperty * 4]; thisCharIndex <= indexOfQuotes[indexOfThisProperty * 4 + 1]; thisCharIndex++)
-                {
-                    // Insert this character into the properties text
-                    propertiesText += chunks[thisChunkIndex][thisCharIndex].ToString();
-                }
-                // Insert comma
-                propertiesText += ",\r\n";
-                // Insert initial value text
-                propertiesText += "\"value\":";
-                // TODO: FILL THIS IN LATER
-                for (int thisCharIndex = indexOfQuotes[indexOfThisProperty * 4 + 2]; thisCharIndex <= indexOfQuotes[indexOfThisProperty * 4 + 3]; thisCharIndex++)
-                {
-                    // Insert this character into the properties text
-                    propertiesText += chunks[thisChunkIndex][thisCharIndex].ToString();
-                }
-                // Insert end curly brackets
-                propertiesText += "}";
-                // If this is not the last propertey
-                if (indexOfThisProperty < (indexOfQuotes.Count / 4) - 1)
-                {
-                    // Insert comma
-                    propertiesText += ",";
-                }
-                // Add the return and null characters
-                propertiesText += "\r\n";
-            }
-            // Insert end square brackets
-            propertiesText += "],\r\n";
-            // TODO: FILL THIS IN LATER
-            chunks[thisChunkIndex] = chunks[thisChunkIndex].Remove(0, chunks[thisChunkIndex].IndexOf("},\r\n") + 4);
-            // TODO: FILL THIS IN LATER
-            chunks[0] += propertiesText;
-            // Add this chunk onto the end of the first one
-            chunks[0] += chunks[thisChunkIndex];
-        }
-        // TODO: FILL THIS IN LATER
-        return chunks[0];
-    }
-
-
-    // TODO: FILL THIS IN LATER
-    void CorrectTileProperties(ref string stringToCorrect)
-    {
-        // This is the string used to find the beginning of tile properties
-        string[] tilePropertiesIdentifier = { "\"tileproperties\":\r\n" };
         // This will store the parts of the string to correct
         string[] splitStringToCorrect;
         // Stores the position of the character that is being examined
         int currentCharPosition = 0;
 
         // Find and split at the beginning of tie custom properties
-        splitStringToCorrect = stringToCorrect.Split(tilePropertiesIdentifier, StringSplitOptions.RemoveEmptyEntries);
-        // Add the tile properties identifier back onto the corrected string
-        splitStringToCorrect[0] += "\"tileproperties\":[\r\n";
-        // Go through each char after tile properties
-        do
+        splitStringToCorrect = stringToCorrect.Split(new string[] { "\"properties\":\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+        // Go through each set of properties
+        for (int indexOfCurrentString = 1; indexOfCurrentString < splitStringToCorrect.Length; indexOfCurrentString++)
         {
+            // Used to determine if the current property is the first propery in this list
+            bool isFirstProperty = true;
+            // Used to store the index of the end of each quote
+            int indexOfEndQuote;
+
+            // Add the properties identifier back onto the corrected string
+            splitStringToCorrect[0] += "\"properties\":[";
             // Start at the first unescaped quote or end curly bracket
-            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[1], currentCharPosition + 1, new Char[] { '"', '}' });
-            // If this char is a quotation mark
-            if (splitStringToCorrect[1][currentCharPosition] == '"')
+            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], 0, new Char[] { '"', '}' });
+            do
             {
-                // Find the index of the end of this quote
-                int indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[1], currentCharPosition + 1, new Char[] { '"' });
-
-                // This is the start of a custom tile, so add the appropriate text
-                splitStringToCorrect[0] += "{";
-                // Get and add the tileid
-                splitStringToCorrect[0] += "\"tileid\":" + splitStringToCorrect[1].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + ',';
-                // Get and add this tile's properties
-                splitStringToCorrect[0] += "\"tileproperties\":[";
+                // If this char is a quotation mark
+                if (splitStringToCorrect[indexOfCurrentString][currentCharPosition] == '"')
+                {
+                    // If this is not the first custom property add a comma to the end of the last custom property
+                    splitStringToCorrect[0] += (isFirstProperty) ? "" : ",";
+                    // This is the start of a custom property, so add the appropriate text
+                    splitStringToCorrect[0] += "{";
+                    // Find the index of the end of this quote
+                    indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"' });
+                    // Get and add the name
+                    splitStringToCorrect[0] += "\"name\":\"" + splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + "\",";
+                    // Move to the start of the value
+                    currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], indexOfEndQuote + 1, new Char[] { '"' });
+                    // Find the index of the end of this quote
+                    indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"' });
+                    // Get and add the value
+                    splitStringToCorrect[0] += "\"value\":\"" + splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + "\"";
+                    // Move to the first unescaped quote or end curly bracket
+                    currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], indexOfEndQuote + 1, new Char[] { '"', '}' });
+                    // This is the end of a custom property, so add the appropriate text
+                    splitStringToCorrect[0] += "}";
+                    // The next custom property is not the first property
+                    isFirstProperty = false;
+                }
             }
+            while (splitStringToCorrect[indexOfCurrentString][currentCharPosition] != '}'); // While the end of custom properties has not been reached
+            // This is the end of this property set, so add the appropriate text
+            splitStringToCorrect[0] += "]";
+            // Stitch together the corrected, first string with everything in the current string after this set of properties
+            splitStringToCorrect[0] += splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1);
         }
-        while (splitStringToCorrect[1][currentCharPosition] == '}');
+        stringToCorrect = splitStringToCorrect[0];
     }
 
 
-    // TODO: FILL THIS IN LATER
-    public string RewriteCustomProperties(string stringToCorrect, string propertiesIdentifier, char nameIdentifer, char valueIdentifier)
+    // This modifies tile properties so that they can be properly parsed
+    void CorrectTileProperties(ref string stringToCorrect)
     {
-        // Setup the identifiers
-        string[] propertiesIdentifiers = {propertiesIdentifier};
-        // TODO: FILL THIS IN LATER
-        string[] chunks;
+        // This will store the parts of the string to correct
+        string[] splitStringToCorrect;
+        // Stores the position of the character that is being examined
+        int currentCharPosition = 0;
+        // Used to determine if the current tile is the first tile in this list
+        bool isFirstTile = true;
+        // Used to store the index of the end of each quote
+        int indexOfEndQuote;
 
-
-        // TODO: FILL THIS IN LATER
-        propertiesIdentifier = propertiesIdentifier.Remove(propertiesIdentifier.Length - 2) + "[\r\n";
-        // TODO: FILL THIS IN LATER
-        chunks = stringToCorrect.Split(propertiesIdentifiers, StringSplitOptions.RemoveEmptyEntries);
-        // TODO: FILL THIS IN LATER
-        for (int thisChunkIndex = 1; thisChunkIndex < chunks.Length; thisChunkIndex++)
+        // Find and split at the beginning of tie custom properties
+        splitStringToCorrect = stringToCorrect.Split(new string[] { "\"tileproperties\":\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+        // If there are no tile properties in this map do not proceed any further
+        if (splitStringToCorrect.Length <= 1) { return; }
+        // Go through each set of properties
+        for (int indexOfCurrentString = 1; indexOfCurrentString < splitStringToCorrect.Length; indexOfCurrentString++)
         {
-            // TODO: FILL THIS IN LATER
-            string propertiesText = "";
-            // TODO: FILL THIS IN LATER
-            List<int> indexOfIdentifiers = new List<int>();
-
-            // Add this properties indicator back
-            chunks[0] += propertiesIdentifier;
-            // TODO: FILL THIS IN LATER
-            for (int thisCharIndex = 0; !(IsCharFollowedByRN(chunks[thisChunkIndex], thisChunkIndex, '}') && indexOfIdentifiers.Count % 2 == 0); thisCharIndex++)
+            // Add the tile properties identifier back onto the corrected string
+            splitStringToCorrect[0] += "\"tileproperties\":[";
+            // Start at the first unescaped quote or end curly bracket
+            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], 0, new Char[] { '"', '}' });
+            do
             {
-                // If this character is a {
-                if (IsCharFollowedByRN(chunks[thisChunkIndex], thisChunkIndex, '}'))
+                // If this char is a quotation mark
+                if (splitStringToCorrect[indexOfCurrentString][currentCharPosition] == '"')
                 {
+                    // Used to determine if the current property is the first custom property in this list
+                    bool isFirstProperty = true;
 
-                }
-                // If this character is a quotation mark
-                if (chunks[thisChunkIndex][thisCharIndex] == nameIdentifer || chunks[thisChunkIndex][thisCharIndex] == valueIdentifier)
-                {
-                    // Store the index of this quotation mark
-                    indexOfIdentifiers.Add(thisCharIndex);
+                    // Find the index of the end of this quote
+                    indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"' });
+                    // If this is not the first tile add a comma to the end of the last tile properties
+                    splitStringToCorrect[0] += (isFirstTile) ? "" : ",";
+                    // This is the start of a custom tile, so add the appropriate text
+                    splitStringToCorrect[0] += "{";
+                    // Get and add the tileid
+                    splitStringToCorrect[0] += "\"tileid\":" + splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + ',';
+                    // Move to the first unescaped quote or end curly bracket
+                    currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], indexOfEndQuote + 1, new Char[] { '"', '}' });
+                    // Get and add this tile's properties
+                    splitStringToCorrect[0] += "\"customproperties\":[";
+                    do
+                    {
+                        // If this char is a quotation mark
+                        if (splitStringToCorrect[indexOfCurrentString][currentCharPosition] == '"')
+                        {
+                            // If this is not the first custom property add a comma to the end of the last custom property
+                            splitStringToCorrect[0] += (isFirstProperty) ? "" : ",";
+                            // This is the start of a custom property, so add the appropriate text
+                            splitStringToCorrect[0] += "{";
+                            // Find the index of the end of this quote
+                            indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"' });
+                            // Get and add the name
+                            splitStringToCorrect[0] += "\"name\":\"" + splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + "\",";
+                            // Move to the start of the value
+                            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], indexOfEndQuote + 1, new Char[] { '"' });
+                            // Find the index of the end of this quote
+                            indexOfEndQuote = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"' });
+                            // Get and add the value
+                            splitStringToCorrect[0] += "\"value\":\"" + splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1, indexOfEndQuote - currentCharPosition - 1) + "\"";
+                            // Move to the first unescaped quote or end curly bracket
+                            currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], indexOfEndQuote + 1, new Char[] { '"', '}' });
+                            // This is the end of a custom property, so add the appropriate text
+                            splitStringToCorrect[0] += "}";
+                            // The next custom property is not the first property
+                            isFirstProperty = false;
+                        }
+                    }
+                    while (splitStringToCorrect[indexOfCurrentString][currentCharPosition] != '}'); // While the end of custom properties has not been reached
+                                                                                 // Move to the first unescaped quote or end curly bracket
+                    currentCharPosition = IndexOfNextUnescapedChar(splitStringToCorrect[indexOfCurrentString], currentCharPosition + 1, new Char[] { '"', '}' });
+                    // This is the end of this tile's custom properties, so add the appropriate text
+                    splitStringToCorrect[0] += "]}";
+                    // The next tile is not the first tile
+                    isFirstTile = false;
                 }
             }
-            // TODO: FILL THIS IN LATER
-            for (int indexOfThisProperty = 0; indexOfThisProperty < indexOfIdentifiers.Count / 4; indexOfThisProperty++)
-            {
-                // Insert initial name text
-                propertiesText += "{\r\n\"name\":";
-                // TODO: FILL THIS IN LATER
-                for (int thisCharIndex = indexOfIdentifiers[indexOfThisProperty * 4]; thisCharIndex <= indexOfIdentifiers[indexOfThisProperty * 4 + 1]; thisCharIndex++)
-                {
-                    // Insert this character into the properties text
-                    propertiesText += chunks[thisChunkIndex][thisCharIndex].ToString();
-                }
-                // Insert comma
-                propertiesText += ",\r\n";
-                // Insert initial value text
-                propertiesText += "\"value\":";
-                // TODO: FILL THIS IN LATER
-                for (int thisCharIndex = indexOfIdentifiers[indexOfThisProperty * 4 + 2]; thisCharIndex <= indexOfIdentifiers[indexOfThisProperty * 4 + 3]; thisCharIndex++)
-                {
-                    // Insert this character into the properties text
-                    propertiesText += chunks[thisChunkIndex][thisCharIndex].ToString();
-                }
-                // Insert end curly brackets
-                propertiesText += "}";
-                // If this is not the last propertey
-                if (indexOfThisProperty < (indexOfIdentifiers.Count / 4) - 1)
-                {
-                    // Insert comma
-                    propertiesText += ",";
-                }
-                // Add the return and null characters
-                propertiesText += "\r\n";
-            }
-            // Insert end square brackets
-            propertiesText += "],\r\n";
-            // TODO: FILL THIS IN LATER
-            chunks[thisChunkIndex] = chunks[thisChunkIndex].Remove(0, chunks[thisChunkIndex].IndexOf("},\r\n") + 4);
-            // TODO: FILL THIS IN LATER
-            chunks[0] += propertiesText;
-            // Add this chunk onto the end of the first one
-            chunks[0] += chunks[thisChunkIndex];
+            while (splitStringToCorrect[indexOfCurrentString][currentCharPosition] != '}'); // While the end of tile properties has not been reached
+            // This is the end of this tile properties, so add the appropriate text
+            splitStringToCorrect[0] += "]";
+            // Stitch together the corrected, first string with everything in this string after the tile properties
+            splitStringToCorrect[0] += splitStringToCorrect[indexOfCurrentString].Substring(currentCharPosition + 1);
         }
-        // TODO: FILL THIS IN LATER
-        return chunks[0];
-    }
-
-
-    // This returns a list of all nodes (text inbetween curly brackets) in a given string
-    List<string> GetNodes(string textToGetNodesFrom)
-    {
-        // This will hold each of the nodes
-        List<string> nodes = new List<string>();
-        // This is used to determine the number of begin curly brackets a given node
-        int numberOfBrackets = 0;
-        // This stores the index of the current node
-        int thisNodeIndex = -1;
-        // This is used to determine when to stop adding characters to a node
-        bool shouldAddCharacters = false;
-
-        // Go through each character in the text to get nodes from
-        for (int thisCharIndex = 0; thisCharIndex < textToGetNodesFrom.Length; thisCharIndex++)
-        {
-            // If this character is a begin curly bracket
-            if (IsCharFollowedByRN(textToGetNodesFrom, thisCharIndex, '{'))
-            {
-                // Incriment the number of brackets in this node
-                numberOfBrackets++;
-                // If this is the first curly bracket in this node
-                if (numberOfBrackets == 1)
-                {
-                    // Start a new node
-                    nodes.Add("");
-                    // Add characters this new node
-                    thisNodeIndex++;
-                    // Start adding characters again
-                    shouldAddCharacters = true;
-                    // Skip past \r\n
-                    thisCharIndex += 2;
-                }
-            }
-            else if (IsCharFollowedByRN(textToGetNodesFrom, thisCharIndex, '}') || (IsCharFollowedByRN(textToGetNodesFrom, thisCharIndex, ',') && textToGetNodesFrom[thisCharIndex - 1] == '}')) // If this character is an end curly bracket
-            {
-                // Decriment the number of brackets in this node
-                numberOfBrackets--;
-                // If this is the last curly bracket in this node
-                if (numberOfBrackets == 0)
-                {
-                    // Skip past \r\n
-                    thisCharIndex += 2;
-                    // Stop adding characters to this node
-                    shouldAddCharacters = false;
-                }
-            }
-            else if (shouldAddCharacters) // If characters should be added to this node
-            {
-                // Add this character to this node
-                nodes[thisNodeIndex] += textToGetNodesFrom[thisCharIndex];
-            }
-        }
-        // Return the list of nodes
-        return nodes;
+        stringToCorrect = splitStringToCorrect[0];
     }
 
 
@@ -299,13 +200,5 @@ public class PDKJsonUtilities
             }
         }
         return -1;
-    }
-
-
-    // TODO: FILL THIS IN LATER
-    bool IsCharFollowedByRN(string stringToCheck, int indexOfChar, char charToCheckAgainst)
-    {
-        // TODO: FILL THIS IN LATER
-        return stringToCheck[indexOfChar] == charToCheckAgainst && stringToCheck[indexOfChar + 1] == '\r' && stringToCheck[indexOfChar + 2] == '\n';
     }
 }

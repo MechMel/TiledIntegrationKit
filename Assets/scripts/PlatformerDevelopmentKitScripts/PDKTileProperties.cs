@@ -4,7 +4,7 @@
 public class PDKTileProperties
 {
     // This tile's ID
-    int tileid;
+    public int tileid;
     // Stores this tile's custome properties
-    PDKCustomProperty[] customproperties;
+    public PDKCustomProperty[] customproperties;
 }

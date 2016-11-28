@@ -28,7 +28,7 @@ public class PDKTileset
 
     #region Custom Properties
     // Stores the custom properties for this tileset
-    public PDKCustomProperty[] properties;
+    public PDKTileProperties[] tileproperties;
     #endregion
 
 
