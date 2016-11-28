@@ -7,20 +7,15 @@ using System.Collections.Generic;
 public class PDKMap
 {
     #region Map Attributes
-    public float version;
-    public string orientation;
-    public string renderOrder;
     public int width;
     public int height;
-    public int tilewidth;
-    public int tileheight;
-    public int nextobjectid;
+    public int tileWidth;
+    public int tileHeight;
     public PDKLayer[] layers;
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
+    public Dictionary<string, string> properties;
     #endregion
-    // Stores the custom properties for this map
-    public PDKCustomProperty[] properties;
     // This will store a blank tile
     Color[] blankTile;
     // TODO: FILL THIS IN LATER
@@ -59,7 +54,7 @@ public class PDKMap
             if (layers[thisLayerNumber].visible)
             {
                 // If this layer is the same type as the current layer group
-                if (layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].layerType)
+                if (layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].type)
                 {
                     // Add this layer to the current layer group
                     layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
@@ -69,7 +64,7 @@ public class PDKMap
                     // Increase the current layer group number
                     currentLayerGroupNumber++;
                     // Create A new LayerGroup dictionary for this type of layer
-                    layerGroups.Add(new PDKLayerGroup(layers[thisLayerNumber].layerType));
+                    layerGroups.Add(new PDKLayerGroup(layers[thisLayerNumber].type));
                     // Add this layer to the newly created layer group
                     layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
                 }
@@ -78,7 +73,7 @@ public class PDKMap
         #endregion
         #region Create a blank tile
         // Initialize blankTile at the appropriate size
-        blankTile = new Color[tilewidth * tileheight];
+        blankTile = new Color[tileWidth * tileHeight];
         // For each pixel in the blank tile
         for (int thisPixelIndex = 0; thisPixelIndex < blankTile.Length; thisPixelIndex++)
         {
@@ -106,7 +101,7 @@ public class PDKMap
                 List<int> matchingID;
 
                 // If the ID at the position being checked has been disovered
-                if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].data[thisTilePosition], out matchingID))
+                if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].tileMap[thisTilePosition], out matchingID))
                 {
                     // Add this position to that ID's list of positions
                     matchingID.Add(thisTilePosition);
@@ -118,7 +113,7 @@ public class PDKMap
                     // Add this position to this tile ID's new list
                     matchingID.Add(thisTilePosition);
                     // Add this tile ID's new list to the dictionary of discovered tile IDs
-                    disoveredTilePostitions[layers[layerToGetTilesFrom].data[thisTilePosition]] = matchingID;
+                    disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[thisTilePosition]] = matchingID;
 
                 }
             }
@@ -140,7 +135,7 @@ public class PDKMap
                     // Add this position to this tile ID's new list
                     matchingID.Add(thisTilePosition);
                     // Add this tile ID's new list to the dictionary of discovered tile IDs
-                    disoveredTilePostitions[layers[layerToGetTilesFrom].data[thisTilePosition]] = matchingID;
+                    disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[thisTilePosition]] = matchingID;
                 }
             }
         }
@@ -173,7 +168,7 @@ public class PDKMap
         foreach (PDKTileset tilesetToCheck in tilesets)
         {
             // If the given tile ID is in the tileset being checked
-            if (tileID >= tilesetToCheck.firstgid && tileID < tilesetToCheck.firstgid + tilesetToCheck.tilecount)
+            if (tileID >= tilesetToCheck.firstGID && tileID < tilesetToCheck.firstGID + tilesetToCheck.tileCount)
             {
                 // Return this tileset
                 return tilesetToCheck;
@@ -184,60 +179,4 @@ public class PDKMap
         // The tile ID did not match any tileset in this map
         return null;
     }
-
-
-    /*
-    // When this is called it creates a new PDKmap from a given XmlDocument for a tiled map
-    public TIKMap(XmlDocument mapXML)
-    {
-        // Create a temporary node list to put all tilesets in
-        XmlNodeList allTilesetsXML = mapXML.GetElementsByTagName("tileset");
-        // Determine the number of tilesets in this map, and define the allTilesets array
-        allTilesets = new PDKTileset[allTilesetsXML.Count];
-        // For each tileset in this map
-        for (int currentTileset = 0; currentTileset < allTilesetsXML.Count; currentTileset++)
-        {
-            // Create a new tileset and add it to the allTilesets array
-            allTilesets[currentTileset] = new TIKTileset(allTilesetsXML[currentTileset]);
-        }
-        // Create a temporary node list to put all layers in
-        XmlNodeList allLayersXML = mapXML.GetElementsByTagName("layer");
-        // Determine the number of layers in this map, and define the allLayers array
-        allLayers = new PDKLayer[allLayersXML.Count];
-        // For each layer in this map
-        for (int currentLayer = 0; currentLayer < allLayersXML.Count; currentLayer++)
-        {
-            // Create a new tilLayer and add it to the allLayers array
-            allLayers[currentLayer] = new PDKTileLayer(allLayersXML[currentLayer]);
-        }
-    }
-
-
-    // When this is called it creates a new PDKmap from a given XmlDocument for a tiled map
-    public PDKMap(TextAsset mapJson)
-    {
-        //
-        orientation = mapJson.
-        // Create a temporary node list to put all tilesets in
-        XmlNodeList allTilesetsXML = mapJson.GetElementsByTagName("tileset");
-        // Determine the number of tilesets in this map, and define the allTilesets array
-        allTilesets = new PDKTileset[allTilesetsXML.Count];
-        // For each tileset in this map
-        for (int currentTileset = 0; currentTileset < allTilesetsXML.Count; currentTileset++)
-        {
-            // Create a new tileset and add it to the allTilesets array
-            allTilesets[currentTileset] = new PDKTileset(allTilesetsXML[currentTileset]);
-        }
-        // Create a temporary node list to put all layers in
-        XmlNodeList allLayersXML = mapJson.GetElementsByTagName("layer");
-        // Determine the number of layers in this map, and define the allLayers array
-        allLayers = new PDKLayer[allLayersXML.Count];
-        // For each layer in this map
-        for (int currentLayer = 0; currentLayer < allLayersXML.Count; currentLayer++)
-        {
-            // Create a new tilLayer and add it to the allLayers array
-            allLayers[currentLayer] = new PDKTileLayer(allLayersXML[currentLayer]);
-        }
-    }
-    */
 }

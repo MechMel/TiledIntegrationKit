@@ -83,7 +83,7 @@ public class PDKLevelRenderer : MonoBehaviour
                 pivot: new Vector2(
                     x: 0.5f,
                     y: 0.5f),
-                pixelsPerUnit: levelMap.tilewidth);
+                pixelsPerUnit: levelMap.tileWidth);
             // Display the newly created sprite for this layergroup
             layerGroupObjects[layerGroupIndex].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
             // Move this layer group's object to the correct position
@@ -138,16 +138,16 @@ public class PDKLevelRenderer : MonoBehaviour
         {
             // Get the pixels from the old area
             overlapColors = textureToUpdate.GetPixels(
-                    x: (int)(overlapRect.xMin - loadedRectOfMap.xMin) * levelMap.tilewidth,
-                    y: (int)(loadedRectOfMap.height - (overlapRect.yMax - loadedRectOfMap.yMin)) * levelMap.tileheight,
-                    blockWidth: (int)overlapRect.width * levelMap.tilewidth,
-                    blockHeight: (int)overlapRect.height * levelMap.tileheight);
+                    x: (int)(overlapRect.xMin - loadedRectOfMap.xMin) * levelMap.tileWidth,
+                    y: (int)(loadedRectOfMap.height - (overlapRect.yMax - loadedRectOfMap.yMin)) * levelMap.tileHeight,
+                    blockWidth: (int)overlapRect.width * levelMap.tileWidth,
+                    blockHeight: (int)overlapRect.height * levelMap.tileHeight);
         }
         // If the rect to render has diffrent dimmensions then the current texture
-        if (rectToRender.width * levelMap.tilewidth != textureToUpdate.width || rectToRender.height * levelMap.tileheight != textureToUpdate.height)
+        if (rectToRender.width * levelMap.tileWidth != textureToUpdate.width || rectToRender.height * levelMap.tileHeight != textureToUpdate.height)
         {
             // Adjust the size of the texture to update
-            textureToUpdate = new Texture2D((int)rectToRender.width * levelMap.tilewidth, (int)rectToRender.height * levelMap.tileheight);
+            textureToUpdate = new Texture2D((int)rectToRender.width * levelMap.tileWidth, (int)rectToRender.height * levelMap.tileHeight);
             // Set the filter mode
             textureToUpdate.filterMode = FilterMode.Point;
             // Aplly these changes
@@ -159,10 +159,10 @@ public class PDKLevelRenderer : MonoBehaviour
             // Copy the pixels from the old area to the new area
             textureToUpdate.SetPixels(
                 colors: overlapColors,
-                x: (int)(overlapRect.xMin - rectToRender.xMin) * levelMap.tilewidth,
-                y: (int)(rectToRender.height - (overlapRect.yMax - rectToRender.yMin)) * levelMap.tileheight,
-                blockWidth: (int)overlapRect.width * levelMap.tilewidth,
-                blockHeight: (int)overlapRect.height * levelMap.tileheight);
+                x: (int)(overlapRect.xMin - rectToRender.xMin) * levelMap.tileWidth,
+                y: (int)(rectToRender.height - (overlapRect.yMax - rectToRender.yMin)) * levelMap.tileHeight,
+                blockWidth: (int)overlapRect.width * levelMap.tileWidth,
+                blockHeight: (int)overlapRect.height * levelMap.tileHeight);
         }
         #endregion
         #region Find Tile Positions to Render
@@ -263,16 +263,16 @@ public class PDKLevelRenderer : MonoBehaviour
                         // Translate the global position of this tile to a local position
                         int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width);
                         // Calculate The x position of the pixel that this tile will start at
-                        int initialPixelX = levelMap.tilewidth * (thisLocalTilePosition % (int)rectToRender.width);
+                        int initialPixelX = levelMap.tileWidth * (thisLocalTilePosition % (int)rectToRender.width);
                         // Calculate The y position of the pixel that this tile will start at
-                        int initialPixelY = levelMap.tileheight * (((int)(rectToRender.height * rectToRender.width) - (thisLocalTilePosition + 1)) / (int)rectToRender.width);
+                        int initialPixelY = levelMap.tileHeight * (((int)(rectToRender.height * rectToRender.width) - (thisLocalTilePosition + 1)) / (int)rectToRender.width);
                         #endregion
                         #region Place this Tile
                         // If there is no tile already at this position
                         if (!positionsWithTiles.Contains(thisTilePosition))
                         {
                             // Place this tile in the texture to return
-                            textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, thisTilesPixels);
+                            textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight, thisTilesPixels);
                             // Remember that there is tile at this position
                             positionsWithTiles.Add(thisTilePosition);
                         }
@@ -280,7 +280,7 @@ public class PDKLevelRenderer : MonoBehaviour
                         {
                             #region Get the Old Pixels / Setup isCompletelyOpaque
                             // Get the old stack of tiles
-                            combinedTile = textureToUpdate.GetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight);
+                            combinedTile = textureToUpdate.GetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight);
                             // It has not yet been proven that this tile is completely opaque
                             isCompletelyOpaque = true;
                             #endregion
@@ -311,7 +311,7 @@ public class PDKLevelRenderer : MonoBehaviour
                             }
                             #endregion
                             // Place this tile in the texture to update
-                            textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tilewidth, levelMap.tileheight, combinedTile);
+                            textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight, combinedTile);
                         }
                         #endregion
                     }

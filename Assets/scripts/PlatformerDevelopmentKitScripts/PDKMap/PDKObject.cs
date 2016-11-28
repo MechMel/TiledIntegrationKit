@@ -6,7 +6,6 @@ using System;
 [Serializable]
 public class PDKObject
 {
-    // Object Attributes
     public string name;
     public string type;
     public int id;
@@ -17,8 +16,6 @@ public class PDKObject
     public int width;
     public int rotation;
     public bool visible;
-    // Stores this object's custom properties
-    public PDKCustomProperty[] properties;
-    // Stores the prefab for this object
+    public Dictionary<string, string> properties;
     public UnityEngine.Object prefab;
 }

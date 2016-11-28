@@ -45,7 +45,7 @@ public class PDKMapSettings
             foreach (PDKLayer thisLayer in pdkMap.layers)
             {
                 // If this layer is an object layer
-                if (thisLayer.type == "objectgroup")
+                if (thisLayer.type == PDKLayer.layerTypes.Object)
                 {
                     // Go through each object in this layer
                     foreach (PDKObject thisObject in thisLayer.objects)
