@@ -71,6 +71,7 @@ public class PDKTiledMap
     */
 }
 
+[Serializable]
 public class PDKTiledLayer
 {
     public string name;
@@ -99,6 +100,7 @@ public class PDKTiledLayer
     */
 }
 
+[Serializable]
 public class PDKTiledTileset
 {
     public string name;
@@ -170,6 +172,7 @@ public class PDKTiledTileset
     */
 }
 
+[Serializable]
 public class PDKTiledObject
 {
     public string name;
@@ -185,12 +188,14 @@ public class PDKTiledObject
     public PDKTiledCustomProperty[] properties;
 }
 
+[Serializable]
 public class PDKTiledTileProperties
 {
     public int tileid;
     public PDKTiledCustomProperty[] customproperties;
 }
 
+[Serializable]
 public class PDKTiledCustomProperty
 {
     public string name;

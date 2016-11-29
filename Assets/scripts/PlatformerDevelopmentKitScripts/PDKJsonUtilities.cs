@@ -54,9 +54,13 @@ public class PDKJsonUtilities
         pdkMap.height = pdkTiledMapToConvert.height;
         pdkMap.tileWidth = pdkTiledMapToConvert.tilewidth;
         pdkMap.tileHeight = pdkTiledMapToConvert.tileheight;
-        foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.properties)
+        pdkMap.properties = new Dictionary<string, string>();
+        if (pdkTiledMapToConvert.properties != null)
         {
-            pdkMap.properties.Add(currentProperty.name, currentProperty.value);
+            foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.properties)
+            {
+                pdkMap.properties.Add(currentProperty.name, currentProperty.value);
+            }
         }
         #endregion
         #region Copy Layer Properties
@@ -85,9 +89,12 @@ public class PDKJsonUtilities
             pdkMap.layers[currentLayerIndex].horizontalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].x;
             pdkMap.layers[currentLayerIndex].verticalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].y;
             pdkMap.layers[currentLayerIndex].properties = new Dictionary<string, string>();
-            foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
+            if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
             {
-                pdkMap.layers[currentLayerIndex].properties.Add(currentProperty.name, currentProperty.value);
+                foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
+                {
+                    pdkMap.layers[currentLayerIndex].properties.Add(currentProperty.name, currentProperty.value);
+                }
             }
             if (pdkTiledMapToConvert.layers[currentLayerIndex].data != null)
             {
@@ -99,6 +106,7 @@ public class PDKJsonUtilities
                 pdkMap.layers[currentLayerIndex].objects = new PDKObject[pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length];
                 for (int currentObjectIndex = 0; currentObjectIndex < pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length; currentObjectIndex++)
                 {
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].name = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].name;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].type;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id;
@@ -110,9 +118,12 @@ public class PDKJsonUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].rotation = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].rotation;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].visible = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].visible;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new Dictionary<string, string>();
-                    foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
+                    if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
                     {
-                        pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties.Add(currentProperty.name, currentProperty.value);
+                        foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
+                        {
+                            pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties.Add(currentProperty.name, currentProperty.value);
+                        }
                     }
                 }
             }
@@ -122,6 +133,7 @@ public class PDKJsonUtilities
         pdkMap.tilesets = new PDKTileset[pdkTiledMapToConvert.tilesets.Length];
         for (int currentTilesetIndex = 0; currentTilesetIndex < pdkTiledMapToConvert.tilesets.Length; currentTilesetIndex++)
         {
+            pdkMap.tilesets[currentTilesetIndex] = new PDKTileset();
             pdkMap.tilesets[currentTilesetIndex].name = pdkTiledMapToConvert.tilesets[currentTilesetIndex].name;
             pdkMap.tilesets[currentTilesetIndex].tileWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilewidth;
             pdkMap.tilesets[currentTilesetIndex].tileHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileheight;
@@ -141,13 +153,16 @@ public class PDKJsonUtilities
             for (int currentTileIndex = 0; currentTileIndex < pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount; currentTileIndex++)
             {
                 pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex] = new Dictionary<string, string>();
-                foreach (PDKTiledTileProperties currentTileProperties in pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties)
+                if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties != null)
                 {
-                    if (currentTileIndex == currentTileProperties.tileid)
+                    foreach (PDKTiledTileProperties currentTileProperties in pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties)
                     {
-                        foreach (PDKTiledCustomProperty currentCustomProperty in currentTileProperties.customproperties)
+                        if (currentTileIndex == currentTileProperties.tileid)
                         {
-                            pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex].Add(currentCustomProperty.name, currentCustomProperty.value);
+                            foreach (PDKTiledCustomProperty currentCustomProperty in currentTileProperties.customproperties)
+                            {
+                                pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex].Add(currentCustomProperty.name, currentCustomProperty.value);
+                            }
                         }
                     }
                 }
