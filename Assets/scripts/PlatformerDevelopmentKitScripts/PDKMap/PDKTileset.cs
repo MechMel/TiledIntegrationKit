@@ -5,18 +5,19 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKTileset
 {
-    public int firstGID;
     public string name;
     public int tileWidth;
     public int tileHeight;
     public int tileCount;
     public int columns;
+    public int firstGID;
     public int margin;
     public int spacing;
     public Texture2D imageTexture;
     public Color[][] tileColorArrays;
     public int imageWidth;
     public int imageHeight;
+    public Dictionary<string, string> properties;
     public Dictionary<string, string>[] tileProperties;
     
 

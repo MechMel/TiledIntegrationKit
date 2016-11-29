@@ -6,7 +6,6 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKMap
 {
-    #region Map Attributes
     public int width;
     public int height;
     public int tileWidth;
@@ -15,7 +14,6 @@ public class PDKMap
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
     public Dictionary<string, string> properties;
-    #endregion
     // This will store a blank tile
     Color[] blankTile;
     // TODO: FILL THIS IN LATER

@@ -101,12 +101,12 @@ public class PDKTiledLayer
 
 public class PDKTiledTileset
 {
-    public int firstgid;
     public string name;
     public int tilewidth;
     public int tileheight;
     public int tilecount;
     public int columns;
+    public int firstgid;
     public int margin;
     public int spacing;
     public string image;
@@ -178,8 +178,8 @@ public class PDKTiledObject
     public int gid;
     public int x;
     public int y;
-    public int height;
     public int width;
+    public int height;
     public int rotation;
     public bool visible;
     public PDKTiledCustomProperty[] properties;

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -7,13 +7,13 @@ public class PDKLayer
 {
     public enum layerTypes { Tile, Object, Image };
     public string name;
+    public layerTypes type;
     public int height;
     public int width;
     public bool visible;
     public int opacity;
     public int horizontalOffset;
     public int verticalOffset;
-    public layerTypes type;
     // Stores the custom properties for this map
     public Dictionary<string, string> properties;
     // Tile Layer Attributes

@@ -12,8 +12,8 @@ public class PDKObject
     public int gid;
     public int x;
     public int y;
-    public int height;
     public int width;
+    public int height;
     public int rotation;
     public bool visible;
     public Dictionary<string, string> properties;
