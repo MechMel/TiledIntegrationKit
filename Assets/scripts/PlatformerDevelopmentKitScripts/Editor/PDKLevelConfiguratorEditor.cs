@@ -59,9 +59,5 @@ public class PDKLevelConfiguratorEditor : Editor
             }
         }
         #endregion
-        #region When Applicable Display the Solid and Oneway Tile Fields
-        editorUtilities.Field("Solid Tiles", "Solid Tile", ref levelConfigurator.solidTiles);
-        editorUtilities.Field("One-way Tiles", "On-eway Tile", ref levelConfigurator.oneWayTiles);
-        #endregion 
     }
 }

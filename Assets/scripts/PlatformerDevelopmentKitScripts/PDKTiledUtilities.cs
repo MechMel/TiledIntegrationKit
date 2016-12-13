@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 
-public class PDKJsonUtilities
+public class PDKTiledUtilities
 {
-    // This stores the characters to look for inorder to find custom properties
-    string[] PROPERTIES_INDENTIFIER = { "\"properties\":\r\n" };
-
-
-
     // When this is called it creates and returns a new TIKMap from a given TextAsset from a tiled map
     public PDKMap CreatePDKMapFromTextAsset(TextAsset textAssetToCreateMapFrom)
     {

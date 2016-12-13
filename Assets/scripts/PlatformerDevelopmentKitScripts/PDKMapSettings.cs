@@ -23,7 +23,7 @@ public class PDKMapSettings
     // This is the PDKMap for this level
     public PDKMap pdkMap;
     // Reference to PDK's jsonUtilies class
-    private PDKJsonUtilities pdkJsonUtilities = new PDKJsonUtilities();
+    private PDKTiledUtilities pdkJsonUtilities = new PDKTiledUtilities();
 
 
     // When this is called a new TIKMapSettings is created based on a given TextAsset for a map
