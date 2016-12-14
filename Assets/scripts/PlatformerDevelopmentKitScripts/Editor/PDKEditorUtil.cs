@@ -112,12 +112,12 @@ public class PDKEditorUtil : Editor
     }
 
     // Creates a field for an object
-    public bool Field(string fieldName, ref Object textureInstance)
+    public bool Field(string fieldName, ref Object objectInstance)
     {
         // Check to see if this field has been changed
         EditorGUI.BeginChangeCheck();
         // Display this field
-        textureInstance = (Object)EditorGUILayout.ObjectField(fieldName, textureInstance, typeof(Object), false);
+        objectInstance = (Object)EditorGUILayout.ObjectField(fieldName, objectInstance, typeof(Object), false);
         // If this field has been changed
         if (EditorGUI.EndChangeCheck())
         {

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Xml;
 using System.Collections.Generic;
 
 [Serializable]
@@ -14,32 +13,24 @@ public class PDKMap
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
     public Dictionary<string, string> properties;
+    // TODO: FILL THIS IN LATER
+    public Dictionary<string, UnityEngine.Object> objectsInMap;
     // This will store a blank tile
     Color[] blankTile;
-    // TODO: FILL THIS IN LATER
-    Dictionary<string, UnityEngine.Object> objectsInMap;
 
 
 
     //The InitializeMap function initializes all the layers and tilests
-    public void InitializeMap(Texture2D[] tilesetTextures, Dictionary<string, UnityEngine.Object> objectsToAdd)
+    public void InitializeMap()
     {
         // This is used to determine which layer group is being looked at
         int currentLayerGroupNumber = -1;
-
-        objectsInMap = objectsToAdd;
+        
         #region Initialize Layers
         // Tell each of this map's layers to initialize
         foreach (PDKLayer layerToInitialize in layers)
         {
             layerToInitialize.InitializeLayer(objectsInMap);
-        }
-        #endregion
-        #region Initialize Tilesets
-        // Tell each of this map's tilesets to initialize
-        for (int numberOfTilesetToInitialze = 0; numberOfTilesetToInitialze < tilesets.Length; numberOfTilesetToInitialze++)
-        {
-            tilesets[numberOfTilesetToInitialze].InitializeTileset(tilesetTextures[numberOfTilesetToInitialze]);
         }
         #endregion
         #region Create Layer Groups

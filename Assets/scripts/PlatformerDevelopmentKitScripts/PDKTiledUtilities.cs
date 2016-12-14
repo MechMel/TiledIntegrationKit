@@ -6,19 +6,30 @@ using System.Collections.Generic;
 public class PDKTiledUtilities
 {
     // When this is called it creates and returns a new TIKMap from a given TextAsset from a tiled map
+    /* Detailed Explanation...
+        A tiled map does not store data in the optimal format for a pdkMap. Thus a PDKTiledMap must
+        first be created from the json file for a tiled map, and then converted into a PDKMap.
+    */
     public PDKMap CreatePDKMapFromTextAsset(TextAsset textAssetToCreateMapFrom)
     {
-        // Stores the PDKTiledMap version of the given tiled map
-        PDKTiledMap pdkTiledMap;
-
         // Create a PDKTiledMap from the given text asset
-        pdkTiledMap = CreatePDKTiledMapFromTextAsset(textAssetToCreateMapFrom);
+        PDKTiledMap pdkTiledMap = CreatePDKTiledMapFromTextAsset(textAssetToCreateMapFrom);
+        // Convert the PDKTiledMap to a PDKMap
+        PDKMap pdkMap = ConvertPDKTiledMapToPDKMap(pdkTiledMap);
+
         // Return the newly created PDKMap
-        return ConvertPDKTiledMapToPDKMap(pdkTiledMap);
+        return pdkMap;
     }
-    
+
 
     // When this is called it creates and returns a new TIKMap from a given TextAsset from a tiled map
+    /* Detailed Explanation...
+    The name of a custom property in a tiled map is the name of that custom property in the 
+        json file. However, to obtain the value of a property in a json, we need to know the name
+        of that property. The name of user defined custom properties cannot be known. So after the
+        json is conferted to a string, all custom properties are converted to name value pairs, and
+        then this string is used to created a PDKTiledMap.
+    */
     public PDKTiledMap CreatePDKTiledMapFromTextAsset(TextAsset textAssetToCreateMapFrom)
     {
         // Convert the given text asset to a string
@@ -38,6 +49,9 @@ public class PDKTiledUtilities
 
 
     // This Converts a PDKTiledMap to a PDKMap
+    /* Detailed Explanation...
+        This goes through each property PDKTiledMap tiled map and coppies it to a PDKMap
+    */
     public PDKMap ConvertPDKTiledMapToPDKMap(PDKTiledMap pdkTiledMapToConvert)
     {
         // Stores the pdkMap that will be returned
@@ -194,6 +208,14 @@ public class PDKTiledUtilities
 
 
     // This modifies custom properties so that they can be properly parsed
+    /* Detailed Explanation...
+         In order to find and modify all custom properties the given string for a tiled map is 
+         split at "\"properties\":\r\n". Then Each property is copied and changed from
+         userDefinedName: userDefinedValue to {name: userDefinedName, value: userDefinedValue}.
+         This corrected property is added onto the end of the previous string(in the array made by
+         splitting at properties). After all properties are corrected and coppied the old
+         properties are removed.
+    */
     void CorrectCustomProperties(ref string stringToCorrect)
     {
         // This will store the parts of the string to correct
@@ -253,6 +275,18 @@ public class PDKTiledUtilities
 
 
     // This modifies tile properties so that they can be properly parsed
+    /* Detailed Explanation...
+         In order to find and modify all tiles with custom properties the given string for a tiled 
+         map is split at "\"tileproperties\":\r\n". Then Each tile is copied and changed from
+         rawtileID: {userDefinedProperties} to {tileID: {userDefinedProperties}}. However each of 
+         these tiles have a set of custom Properteis. In order to find and modify all custom 
+         properties on this tile this string is split at "\"properties\":\r\n". Then Each property 
+         is copied and changed from 
+         userDefinedName: userDefinedValue to {name: userDefinedName, value: userDefinedValue}.
+         This corrected property is added onto the end of the previous string(in the array made by
+         splitting at properties). After all properties are corrected and coppied the old
+         properties are removed.
+    */
     void CorrectTileProperties(ref string stringToCorrect)
     {
         // This will store the parts of the string to correct
@@ -365,3 +399,4 @@ public class PDKTiledUtilities
         return -1;
     }
 }
+ 

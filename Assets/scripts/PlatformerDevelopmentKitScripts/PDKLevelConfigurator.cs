@@ -5,11 +5,12 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PDKLevelConfigurator : MonoBehaviour
 {
+    // This is all possible map types a user can choose
+    public enum mapTypes { None, Tiled };
+
     // This is how many tiles out from the camera to load this level
     [SerializeField]
     public int bufferDistance;
-    // This is all possible map types a user can choose
-    public enum mapTypes { None, Tiled };
     // This will be used to track the map type that the user has chosen
     [SerializeField]
     public mapTypes mapType = mapTypes.None;
@@ -54,19 +55,8 @@ public class PDKLevelConfigurator : MonoBehaviour
         // If a TIKMap has been created
         if (mapSettings.pdkMap != null && mapSettings.mapTextAsset != null)
         {
-            // This stores the prefabs for each object type
-            Dictionary<string, UnityEngine.Object> objects = new Dictionary<string, Object>();
-
-            #region Compile Object Dictionary
-            // Go through each object
-            for (int thisObjectIndex = 0; thisObjectIndex < mapSettings.objectTypes.Count; thisObjectIndex++)
-            {
-                // Add this object to the dictionary of objects
-                objects.Add(mapSettings.objectTypes[thisObjectIndex], mapSettings.objectPrefabs[thisObjectIndex]);
-            }
-            #endregion
             // Tell this level's map to initialize
-            mapSettings.pdkMap.InitializeMap(mapSettings.tilesetTextures, objects);
+            mapSettings.pdkMap.InitializeMap();
             // Add the level controller to this object
             PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();
             // Give the TIKMap with the user's settings to the levelController

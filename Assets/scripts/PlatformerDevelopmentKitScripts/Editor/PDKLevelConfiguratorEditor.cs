@@ -33,30 +33,40 @@ public class PDKLevelConfiguratorEditor : Editor
         #endregion
         #region When Applicable Display the Tileset Fields
         // If tilesetTextures has ben instatiated, and the map type is not none
-        if (levelConfigurator.mapSettings.tilesetTextures != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        if (levelConfigurator.mapSettings.pdkMap.tilesets != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // Tell the user these are tileset fields
             editorUtilities.Field("Tilesets");
             // For each tilset in this map
-            for (int currentTileset = 0; currentTileset < levelConfigurator.mapSettings.tilesetTextures.Length; currentTileset++)
+            for (int currentTileset = 0; currentTileset < levelConfigurator.mapSettings.pdkMap.tilesets.Length; currentTileset++)
             {
                 // Display a field for this texture
-                editorUtilities.Field(levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.tilesetTextures[currentTileset]);
+                editorUtilities.Field(levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].imageTexture);
             }
         }
         #endregion
         #region When Applicable Display the Object Fields
         // If tilesetTextures has ben instatiated, and the map type is not none
-        if (levelConfigurator.mapSettings.objectPrefabs != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        if (levelConfigurator.mapSettings.pdkMap.objectsInMap != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
+            // This will store a temporary version of the updated object types
+            Dictionary<string, UnityEngine.Object> tempObjects = new Dictionary<string, UnityEngine.Object>();
+
             // Tell the user these are object prefab fields
             editorUtilities.Field("Object Prefabs");
             // For each layer in this map
-            for (int thisObjectIndex = 0; thisObjectIndex < levelConfigurator.mapSettings.objectTypes.Count; thisObjectIndex++)
+            foreach (string currentObjectType in levelConfigurator.mapSettings.pdkMap.objectsInMap.Keys)
             {
+                // Create an temporary object that is a copy of the current object type
+                UnityEngine.Object tempObject = levelConfigurator.mapSettings.pdkMap.objectsInMap[currentObjectType];
+
                 // Display a field for this texture
-                editorUtilities.Field(levelConfigurator.mapSettings.objectTypes[thisObjectIndex], ref levelConfigurator.mapSettings.objectPrefabs[thisObjectIndex]);
+                editorUtilities.Field(currentObjectType, ref tempObject);
+                // Add the temporary object to the temporary object typses
+                tempObjects.Add(currentObjectType, tempObject);
             }
+            // Update the object types dictionary
+            levelConfigurator.mapSettings.pdkMap.objectsInMap = tempObjects;
         }
         #endregion
     }
