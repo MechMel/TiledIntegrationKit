@@ -283,7 +283,18 @@ public class PlayerController : MonoBehaviour {
                 }
             }
             // Update the jump/falling animation
-            if (!animalPlayerIsRidingGrounded) animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 2);
+            if (!animalPlayerIsRidingGrounded)
+            {
+                if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y > 0)
+                {
+                    animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpUp");
+                }
+                else if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y < 0)
+                {
+                    animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpDown");
+                }
+            }
+            
         }
     }
 
