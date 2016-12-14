@@ -28,6 +28,7 @@ public class PDKLayer
     //The Initialize function sets up the tile layer, objects, and images
     public void InitializeLayer(Dictionary<string, UnityEngine.Object> objectsInMap)
     {
+        // If this is an object layer
         if (type == layerTypes.Object)
         {
             // Go through each object

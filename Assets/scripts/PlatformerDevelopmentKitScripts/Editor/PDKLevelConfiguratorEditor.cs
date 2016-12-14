@@ -24,7 +24,7 @@ public class PDKLevelConfiguratorEditor : Editor
         if (levelConfigurator.mapType == PDKLevelConfigurator.mapTypes.Tiled) // If the user has selected a Tiled map type
         {
             // Create the appropriate fields for a tiled map
-            if (editorUtilities.Field("Tile Map", ref levelConfigurator.mapSettings.mapTextAsset))// If the text asset is changed
+            if (editorUtilities.Field("Tile Map", ref levelConfigurator.mapTextAsset))// If the text asset is changed
             {
                 // Tell the level configurator the text asset has been changed
                 levelConfigurator.TextAssetChanged();
@@ -33,21 +33,21 @@ public class PDKLevelConfiguratorEditor : Editor
         #endregion
         #region When Applicable Display the Tileset Fields
         // If tilesetTextures has ben instatiated, and the map type is not none
-        if (levelConfigurator.mapSettings.pdkMap.tilesets != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        if (levelConfigurator.pdkMap.tilesets != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // Tell the user these are tileset fields
             editorUtilities.Field("Tilesets");
             // For each tilset in this map
-            for (int currentTileset = 0; currentTileset < levelConfigurator.mapSettings.pdkMap.tilesets.Length; currentTileset++)
+            for (int currentTileset = 0; currentTileset < levelConfigurator.pdkMap.tilesets.Length; currentTileset++)
             {
                 // Display a field for this texture
-                editorUtilities.Field(levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].name, ref levelConfigurator.mapSettings.pdkMap.tilesets[currentTileset].imageTexture);
+                editorUtilities.Field(levelConfigurator.pdkMap.tilesets[currentTileset].name, ref levelConfigurator.pdkMap.tilesets[currentTileset].imageTexture);
             }
         }
         #endregion
         #region When Applicable Display the Object Fields
         // If tilesetTextures has ben instatiated, and the map type is not none
-        if (levelConfigurator.mapSettings.pdkMap.objectsInMap != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
+        if (levelConfigurator.pdkMap.objectsInMap != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // This will store a temporary version of the updated object types
             Dictionary<string, UnityEngine.Object> tempObjects = new Dictionary<string, UnityEngine.Object>();
@@ -55,10 +55,10 @@ public class PDKLevelConfiguratorEditor : Editor
             // Tell the user these are object prefab fields
             editorUtilities.Field("Object Prefabs");
             // For each layer in this map
-            foreach (string currentObjectType in levelConfigurator.mapSettings.pdkMap.objectsInMap.Keys)
+            foreach (string currentObjectType in levelConfigurator.pdkMap.objectsInMap.Keys)
             {
                 // Create an temporary object that is a copy of the current object type
-                UnityEngine.Object tempObject = levelConfigurator.mapSettings.pdkMap.objectsInMap[currentObjectType];
+                UnityEngine.Object tempObject = levelConfigurator.pdkMap.objectsInMap[currentObjectType];
 
                 // Display a field for this texture
                 editorUtilities.Field(currentObjectType, ref tempObject);
@@ -66,7 +66,7 @@ public class PDKLevelConfiguratorEditor : Editor
                 tempObjects.Add(currentObjectType, tempObject);
             }
             // Update the object types dictionary
-            levelConfigurator.mapSettings.pdkMap.objectsInMap = tempObjects;
+            levelConfigurator.pdkMap.objectsInMap = tempObjects;
         }
         #endregion
     }
