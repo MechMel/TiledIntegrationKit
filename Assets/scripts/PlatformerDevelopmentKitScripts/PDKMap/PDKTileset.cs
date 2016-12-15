@@ -17,16 +17,16 @@ public class PDKTileset
     public Color[][] tileColorArrays;
     public int imageWidth;
     public int imageHeight;
-    public Dictionary<string, string> properties;
-    public Dictionary<string, string>[] tileProperties;
+    [SerializeField]
+    public PDKMap.PDKCustomProperties properties;
+    [SerializeField]
+    public PDKMap.PDKCustomProperties[] tileProperties;
     
 
 
     // When this is called this tileset instatiates the nessecary variables
-    public void InitializeTileset(Texture2D tilesetTexture)
+    public void InitializeTileset()
     {
-        // Instatiate this tilest's texture
-        imageTexture = tilesetTexture;
         // Compile this Tileset
         compileTileset();
     }

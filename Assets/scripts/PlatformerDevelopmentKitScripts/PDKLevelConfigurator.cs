@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PDKLevelConfigurator : MonoBehaviour
 {
-    public enum mapTypes { None, Tiled };// This is all possible map types a user can choose
+    public enum mapTypes { None, Tiled }; // This is all possible map types a user can choose
     [SerializeField]
     public int bufferDistance; // This is how many tiles out from the camera to load this level
     [SerializeField]
@@ -19,6 +19,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     public int[] solidTiles; // This contains all completely tiles in this map
     [SerializeField]
     public PDKMap pdkMap; // This is the PDKMap for this level
+
 
 
 
@@ -57,7 +58,7 @@ public class PDKLevelConfigurator : MonoBehaviour
             newPDKMap = pdkTiledUtilities.CreatePDKMapFromTextAsset(newMapTextAsset);
             #region Create Object Prefab List
             // Insatiate the object dictionary
-            newPDKMap.objectsInMap = new Dictionary<string, Object>();
+            newPDKMap.objectsInMap = new PDKMap.PDKObjectTypes();
             // For each layer in this map
             foreach (PDKLayer thisLayer in newPDKMap.layers)
             {

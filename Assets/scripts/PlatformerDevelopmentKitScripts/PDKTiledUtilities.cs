@@ -62,7 +62,7 @@ public class PDKTiledUtilities
         pdkMap.height = pdkTiledMapToConvert.height;
         pdkMap.tileWidth = pdkTiledMapToConvert.tilewidth;
         pdkMap.tileHeight = pdkTiledMapToConvert.tileheight;
-        pdkMap.properties = new Dictionary<string, string>();
+        pdkMap.properties = new PDKMap.PDKCustomProperties();
         // If the map had custom properties
         if (pdkTiledMapToConvert.properties != null)
         {
@@ -100,7 +100,7 @@ public class PDKTiledUtilities
             pdkMap.layers[currentLayerIndex].opacity = pdkTiledMapToConvert.layers[currentLayerIndex].opacity;
             pdkMap.layers[currentLayerIndex].horizontalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].x;
             pdkMap.layers[currentLayerIndex].verticalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].y;
-            pdkMap.layers[currentLayerIndex].properties = new Dictionary<string, string>();
+            pdkMap.layers[currentLayerIndex].properties = new PDKMap.PDKCustomProperties();
             // If this layer had custom properties
             if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
             {
@@ -134,7 +134,7 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].height = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].height;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].rotation = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].rotation;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].visible = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].visible;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new Dictionary<string, string>();
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new PDKMap.PDKCustomProperties();
                     // If this object had custom properties
                     if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
                     {
@@ -167,7 +167,7 @@ public class PDKTiledUtilities
                 pdkMap.tilesets[currentTilesetIndex].spacing = pdkTiledMapToConvert.tilesets[currentTilesetIndex].spacing;
                 pdkMap.tilesets[currentTilesetIndex].imageWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imagewidth;
                 pdkMap.tilesets[currentTilesetIndex].imageHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imageheight;
-                pdkMap.tilesets[currentTilesetIndex].properties = new Dictionary<string, string>();
+                pdkMap.tilesets[currentTilesetIndex].properties = new PDKMap.PDKCustomProperties();
                 // If this tileset has costom properties
                 if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].properties != null)
                 {
@@ -177,11 +177,11 @@ public class PDKTiledUtilities
                         pdkMap.tilesets[currentTilesetIndex].properties.Add(currentProperty.name, currentProperty.value);
                     }
                 }
-                pdkMap.tilesets[currentTilesetIndex].tileProperties = new Dictionary<string, string>[pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount];
+                pdkMap.tilesets[currentTilesetIndex].tileProperties = new PDKMap.PDKCustomProperties[pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount];
                 // Go through each tile in this map
                 for (int currentTileIndex = 0; currentTileIndex < pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount; currentTileIndex++)
                 {
-                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex] = new Dictionary<string, string>();
+                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex] = new PDKMap.PDKCustomProperties();
                     // If this tile has tile properties
                     if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties != null)
                     {

@@ -16,6 +16,7 @@ public class PDKObject
     public int height;
     public int rotation;
     public bool visible;
-    public Dictionary<string, string> properties;
+    [SerializeField]
+    public PDKMap.PDKCustomProperties properties;
     public UnityEngine.Object prefab;
 }

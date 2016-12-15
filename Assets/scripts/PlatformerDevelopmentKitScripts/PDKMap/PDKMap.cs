@@ -5,6 +5,10 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKMap
 {
+    [System.Serializable]
+    public class PDKCustomProperties : PDKSerializableDictionay<string, string> { }
+    [System.Serializable]
+    public class PDKObjectTypes : PDKSerializableDictionay<string, UnityEngine.Object> { }
     public int width;
     public int height;
     public int tileWidth;
@@ -12,9 +16,11 @@ public class PDKMap
     public PDKLayer[] layers;
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
-    public Dictionary<string, string> properties;
+    [SerializeField]
+    public PDKCustomProperties properties;
     // TODO: FILL THIS IN LATER
-    public Dictionary<string, UnityEngine.Object> objectsInMap;
+    [SerializeField]
+    public PDKObjectTypes objectsInMap;
     // This will store a blank tile
     Color[] blankTile;
 
@@ -26,6 +32,13 @@ public class PDKMap
         // This is used to determine which layer group is being looked at
         int currentLayerGroupNumber = -1;
         
+        #region Initialize Tilesets
+        // Tell each of this map's layers to initialize
+        foreach (PDKTileset CurrentTileset in tilesets)
+        {
+            CurrentTileset.InitializeTileset();
+        }
+        #endregion
         #region Initialize Layers
         // Tell each of this map's layers to initialize
         foreach (PDKLayer layerToInitialize in layers)
