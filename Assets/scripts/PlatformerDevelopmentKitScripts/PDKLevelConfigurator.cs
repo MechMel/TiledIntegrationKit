@@ -10,7 +10,6 @@ public class PDKLevelConfigurator : MonoBehaviour
     public int bufferDistance; // This is how many tiles out from the camera to load this level
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
-    [SerializeField]
     public PDKMap pdkMap; // This is the PDKMap for this level
 
 
@@ -143,6 +142,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     }
 
 
+    /* collision calculations
     private List<Vector2>[] CalculateCollisions(int[] data)
     {
         // This will store the solid tiles
@@ -278,4 +278,5 @@ public class PDKLevelConfigurator : MonoBehaviour
             }
         }
         return collisionData;
+    }*/
 }

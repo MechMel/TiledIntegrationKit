@@ -14,8 +14,6 @@ public class PDKLayer
     public int opacity;
     public int horizontalOffset;
     public int verticalOffset;
-    // Stores the custom properties for this map
-    [SerializeField]
     public PDKMap.PDKCustomProperties properties;
     // Tile Layer Attributes
     public int[] tileMap;
