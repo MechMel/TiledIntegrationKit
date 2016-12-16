@@ -17,9 +17,7 @@ public class PDKTileset
     public Color[][] tileColorArrays;
     public int imageWidth;
     public int imageHeight;
-    [SerializeField]
     public PDKMap.PDKCustomProperties properties;
-    [SerializeField]
     public PDKMap.PDKCustomProperties[] tileProperties;
     
 

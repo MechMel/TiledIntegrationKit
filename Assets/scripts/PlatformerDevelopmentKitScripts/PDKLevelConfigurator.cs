@@ -7,16 +7,9 @@ using System.Collections.Generic;
 public class PDKLevelConfigurator : MonoBehaviour
 {
     public enum mapTypes { None, Tiled }; // This is all possible map types a user can choose
-    [SerializeField]
     public int bufferDistance; // This is how many tiles out from the camera to load this level
-    [SerializeField]
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
-    [SerializeField]
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
-    [SerializeField]
-    public int[] oneWayTiles; // This contains all oneway tiles in this map
-    [SerializeField]
-    public int[] solidTiles; // This contains all completely tiles in this map
     [SerializeField]
     public PDKMap pdkMap; // This is the PDKMap for this level
 
@@ -150,7 +143,6 @@ public class PDKLevelConfigurator : MonoBehaviour
     }
 
 
-    //
     private List<Vector2>[] CalculateCollisions(int[] data)
     {
         // This will store the solid tiles
@@ -286,5 +278,4 @@ public class PDKLevelConfigurator : MonoBehaviour
             }
         }
         return collisionData;
-    }
 }

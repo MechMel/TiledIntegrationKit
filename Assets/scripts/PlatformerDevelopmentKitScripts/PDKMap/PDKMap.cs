@@ -16,10 +16,8 @@ public class PDKMap
     public PDKLayer[] layers;
     public PDKTileset[] tilesets;
     public List<PDKLayerGroup> layerGroups;
-    [SerializeField]
     public PDKCustomProperties properties;
     // TODO: FILL THIS IN LATER
-    [SerializeField]
     public PDKObjectTypes objectsInMap;
     // This will store a blank tile
     Color[] blankTile;
