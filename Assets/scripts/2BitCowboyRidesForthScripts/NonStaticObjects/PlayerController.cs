@@ -27,12 +27,23 @@ public class PlayerController : MonoBehaviour {
     // The player jump speed
     [HideInInspector]
     public bool playerCanDoubleJump = false;
+    // Whether the player can shoot
+    [HideInInspector]
+    public bool playerCanShoot = true;
+    // The reload time of the player
+    [HideInInspector]
+    public float playerReloadTime = 0.5f;
     // The player animation speed
     // NOT YET IMPLEMENTED
     [HideInInspector]
     public float playerAnimationSpeed = 8f;
+    // Whether the player is flipped or not
+    [HideInInspector]
+    public bool playerFlipped = true;
     #endregion
     #region OBJECTS
+    // The bullet prefab
+    public GameObject bullet;
     // The nearest rideable animal
     [HideInInspector]
     public GameObject animalPlayerIsRiding;
@@ -174,7 +185,14 @@ public class PlayerController : MonoBehaviour {
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
         bool Right = Input.GetButton("Right") || Input.GetButton("dPadRight");
         bool Up = Input.GetButtonDown("Up") || Input.GetButtonDown("Jump");
+        bool Space = Input.GetButtonDown("Space");
 
+        #region Movement
+        // Update the flip of player
+        if (playerFlipped)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else
+            transform.localScale = new Vector3(1, 1, 1);
         // If not riding
         if(!Riding)
         {
@@ -182,9 +200,9 @@ public class PlayerController : MonoBehaviour {
             if (Left)
             {
                 // Move the player left 
-                transform.Translate(-playerSpeed, 0, 0);
+                transform.Translate(playerSpeed, 0, 0);
                 // If grounded, flip the sprite, and run the walking animation
-                sprRend.flipX = true;
+                playerFlipped = true;
                 if (playerGrounded) anim.SetInteger("AnimState", 1);
             }
             // If pressing right
@@ -193,7 +211,7 @@ public class PlayerController : MonoBehaviour {
                 // Move the player right
                 transform.Translate(playerSpeed, 0, 0);
                 // If grounded, flip the sprite, and run the walking animation
-                sprRend.flipX = false;
+                playerFlipped = false;
                 if (playerGrounded) anim.SetInteger("AnimState", 1);
             }
             else if(!Up && playerGrounded)
@@ -248,7 +266,7 @@ public class PlayerController : MonoBehaviour {
                 animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f, 0, 0);
                 // If grounded, flip the sprite, and run the walking animation
                 animalPlayerIsRiding.transform.localScale = new Vector2(-1, 1);
-                sprRend.flipX = true;
+                playerFlipped = true;
                 //if (playerGrounded) 
                 animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 1);
             }
@@ -258,7 +276,7 @@ public class PlayerController : MonoBehaviour {
                 // Move the player right
                 animalPlayerIsRiding.transform.Translate(playerSpeed*1.5f, 0, 0);
                 animalPlayerIsRiding.transform.localScale = new Vector2(1, 1);
-                sprRend.flipX = false;
+                playerFlipped = false;
                 //if (playerGrounded) 
                 animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 1);
             }
@@ -294,8 +312,54 @@ public class PlayerController : MonoBehaviour {
             }
             
         }
+        #endregion
+        #region Shooting
+
+        // If space is pressed, and canShoot is true
+        if(Space && playerCanShoot)
+        {
+            // Set the playerCanShoot back to false, so as not to have rapid fire
+            playerCanShoot = false;
+            // Create a new bullet at the BulletPos of the player
+            GameObject newBullet;
+            if (!playerGrounded && !playerCanDoubleJump)
+                newBullet = (GameObject)Instantiate(bullet, transform.Find("BulletDownPos").transform.position, Quaternion.identity);
+            else
+                newBullet = (GameObject)Instantiate(bullet, transform.Find("BulletPos").transform.position, Quaternion.identity);
+
+            // Decide the direction and velocity of the new bullet, based on the direction of the player
+
+            // If the player is in a double jump
+            if (!playerGrounded && !playerCanDoubleJump)
+            {
+                // Set the bullet y velocity to -1    
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -30);
+                // Rotate the bullet down
+                newBullet.transform.Rotate(new Vector3(0, 0, 270));
+            }
+            // Else, if the player is facing left
+            else if (playerFlipped)
+            {
+                // Set the bullet x velocity to -1
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-30, 0);
+                // Rotate the bullet left
+                newBullet.transform.Rotate(new Vector3(0, 0, 180));
+            }
+            // Else if the player is facing right
+            else if (!playerFlipped)
+                // Set the bullet x velocity to 1
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(30, 0);
+
+            // Invoke the reset for the playerCanShoot
+            Invoke("ResetCanShoot", playerReloadTime);
+        }
+        #endregion
     }
 
+    void ResetCanShoot()
+    {
+        playerCanShoot = true;
+    }
     void OnColliderStay(Collider other)
     {
         // If colliding with a Rideable animal, ignore the collision with it
