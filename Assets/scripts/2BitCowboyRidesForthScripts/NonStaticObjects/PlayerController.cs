@@ -72,9 +72,7 @@ public class PlayerController : MonoBehaviour {
         RaycastHit2D objectTouching = Physics2D.Raycast(origin, direction, distance);
         // If the object hit not equal to null and the tag is the same as the argument
         if (objectTouching.collider != null && objectTouching.transform.tag == tagOfObject)
-        {
             return true;
-        }
         // If it doesn't, return false
         return false;
     }
