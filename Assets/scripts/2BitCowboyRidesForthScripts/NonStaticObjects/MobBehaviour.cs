@@ -24,6 +24,7 @@ public class MobBehaviour : MonoBehaviour
     // The check for whether the mob is affected by gravity
     public bool isAffectedByGravity;
     // Whether the sprite is flipped or not
+    [HideInInspector]
     public bool spriteFlipped = false;
     #endregion
     #region AI
@@ -69,13 +70,12 @@ public class MobBehaviour : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         // Go through the GameObjects with components
         for(int i = 0; i < gameObjectsWithComponents.Length; i++)
-        {
-            // Update the sprite
-            //gameObjectsWithComponents[i].GetComponent<SpriteRenderer>().flipX = spriteFlipped;
             // Update the animator 
             gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
-        }
-            
+
+        // Check for death
+        if (health <= 0)
+            Destroy(gameObject);
 
         #region PATROL
         // Updated only if the mob is a PATROL type
@@ -114,7 +114,8 @@ public class MobBehaviour : MonoBehaviour
         // Updated only if the mob is a BLOCK type
         if (mobType == MobType.BLOCK)
         {
-
+            // Set the rigidbody to kinimatic
+            rigidBody2D.isKinematic = true;
         }
         #endregion
         #region CHASE
@@ -124,5 +125,11 @@ public class MobBehaviour : MonoBehaviour
 
         }
         #endregion
+    }
+
+    void Hit()
+    {
+        // When hit, subtract the health
+        health--;
     }
 }
