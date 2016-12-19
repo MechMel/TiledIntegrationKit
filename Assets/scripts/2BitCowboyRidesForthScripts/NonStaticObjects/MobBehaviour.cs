@@ -164,10 +164,10 @@ public class MobBehaviour : MonoBehaviour
                     while (true)
                     {
                         // If hit something 
-                        if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 3).transform != transform)
+                        if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).transform != transform)
                         {
                             // Start turning right 
-                            towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 3).normal * 20;
+                            towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).normal * 20;
                         }
                         else
                             // If not running into something, stop rotating
