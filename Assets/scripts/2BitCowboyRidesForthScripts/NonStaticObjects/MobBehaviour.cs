@@ -23,6 +23,8 @@ public class MobBehaviour : MonoBehaviour
     public float speed;
     // The check for whether the mob is affected by gravity
     public bool isAffectedByGravity;
+    // How far away the mob can see
+    public float visibleDistance;
     // Whether the sprite is flipped or not
     [HideInInspector]
     public bool spriteFlipped = false;
@@ -34,13 +36,19 @@ public class MobBehaviour : MonoBehaviour
     // The animator state
     [HideInInspector]
     public int animState = 0;
+    // The target of the enemy
+    [HideInInspector]
+    public GameObject currentTarget;
     #endregion
 
     // With a PATROL mob, this will need to be set
-    [Tooltip("The two points that the mob will patrol between. NOTE: Only necessary to set if the mob is a PATROL type.")]
+    [Tooltip("The left boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
     public Transform patrolPoint1;
-    [Tooltip("The two points that the mob will patrol between. NOTE: Only necessary to set if the mob is a PATROL type.")]
+    [Tooltip("The right boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
     public Transform patrolPoint2;
+    // This will need to be set for CHASE MOBS
+    [Tooltip("The rotatable child of the mob. NOTE: Only necessary to set if the mob is a CHASE type.")]
+    public GameObject rotatableObject;
 
     #region Components
     // The array sprite renderers of the mob
@@ -122,7 +130,61 @@ public class MobBehaviour : MonoBehaviour
         // Updated only if the mob is a CHASE type
         if (mobType == MobType.CHASE)
         {
+            // This is the only mobtype that actually has states, or rather, actually thinks
+            if(AIState == 0)
+            {
+                // Idle/Reset state
+                while (true)
+                {
+                    // Check if a player is close enough
+                    if (Vector2.Distance(transform.position, GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("Player")).transform.position) < visibleDistance)
+                    {
+                        // Set the target
+                        currentTarget = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("Player"));
+                        // Go to the chase state
+                        AIState = 1;
+                        // End the code early, so we actually change states right away
+                        break;
+                    }
 
+                    // Break at the end, because we don't really want this to loop
+                    break;
+                }
+            }
+            else if(AIState == 1)
+            {
+                // Chase state
+
+                while (true)
+                {
+                    // Get the goal vector
+                    Vector2 towardsTargetVector = (currentTarget.transform.position - rotatableObject.transform.position).normalized;
+
+                    // Setup a loop, instead of continually turning and moving forward(Decides the direction imediantly)
+                    while (true)
+                    {
+                        // If hit something 
+                        if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 3).transform != transform)
+                        {
+                            // Start turning right 
+                            towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 3).normal * 20;
+                        }
+                        else
+                            // If not running into something, stop rotating
+                            break;                   
+                    }
+
+                    // Translate the new vector into a rotation
+                    Quaternion newRotation = Quaternion.LookRotation(towardsTargetVector);
+                    // Rotate the rotatable object to the new rotation
+                    rotatableObject.transform.localRotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime);
+                    // Move the actual mob in the new direction 
+                    transform.position += rotatableObject.transform.forward * speed * Time.deltaTime;
+
+                    // Break at the end, because we don't really want this to loop
+                    break;
+                }
+            }
         }
         #endregion
     }
@@ -131,5 +193,23 @@ public class MobBehaviour : MonoBehaviour
     {
         // When hit, subtract the health
         health--;
+    }
+    GameObject GetNearestObjectInArray(GameObject[] objects)
+    {
+        GameObject closestObjectWithTag = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialObject in objects)
+        {
+            Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                closestObjectWithTag = potentialObject;
+            }
+        }
+
+        return closestObjectWithTag;
     }
 }

@@ -7,11 +7,11 @@ public class BulletBehaviour : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        // When collided with something
+
         // Check if other is not a player
         if(other.transform.tag != "Player")
         {
-            // If collided with something
-            Debug.Log("Bullet hit something");
             // Send the hit message to the object that was hit
             other.gameObject.SendMessage("Hit", null, SendMessageOptions.DontRequireReceiver);
             // Destroy itself

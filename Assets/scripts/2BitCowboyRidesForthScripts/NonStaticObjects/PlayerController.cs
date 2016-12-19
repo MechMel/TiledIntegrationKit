@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     private float playerSpeed = 0.1f;
     // The player jump speed
     [HideInInspector]
-    private float playerJumpSpeed = 700f;
+    private float playerJumpSpeed = 600f;
     // The player health
     [HideInInspector]
     public int playerHealth = 4;
