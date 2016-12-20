@@ -161,23 +161,24 @@ public class MobBehaviour : MonoBehaviour
                     Vector2 towardsTargetVector = (currentTarget.transform.position - rotatableObject.transform.position).normalized;
 
                     // Setup a loop, instead of continually turning and moving forward(Decides the direction imediantly)
-                    while (true)
-                    {
+                    //while (true)
+                    //{
                         // If hit something 
                         if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).transform != transform)
                         {
                             // Start turning right 
                             towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).normal * 20;
+                            Debug.DrawLine(rotatableObject.transform.position, rotatableObject.transform.position + Vector3.forward);
                         }
-                        else
+                        //else
                             // If not running into something, stop rotating
-                            break;                   
-                    }
+                        //    break;                   
+                    //}
 
                     // Translate the new vector into a rotation
                     Quaternion newRotation = Quaternion.LookRotation(towardsTargetVector);
                     // Rotate the rotatable object to the new rotation
-                    rotatableObject.transform.localRotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime);
+                    rotatableObject.transform.localRotation = Quaternion.Slerp(rotatableObject.transform.localRotation, newRotation, Time.deltaTime);
                     // Move the actual mob in the new direction 
                     transform.position += rotatableObject.transform.forward * speed * Time.deltaTime;
 

@@ -5,13 +5,13 @@ public class PlayerController : MonoBehaviour {
 
     // The PlayerController class is the basic controller for the player, and the base class for add-ons
 
-    #region PLAYER
+    #region Player
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.1f;
+    private float playerSpeed = 0.2f;
     // The player jump speed
     [HideInInspector]
-    private float playerJumpSpeed = 600f;
+    private float playerJumpSpeed = 1100f;
     // The player health
     [HideInInspector]
     public int playerHealth = 4;
@@ -29,10 +29,19 @@ public class PlayerController : MonoBehaviour {
     public bool playerCanDoubleJump = false;
     // Whether the player can shoot
     [HideInInspector]
-    public bool playerCanShoot = true;
+    private bool playerCanShoot = true;
+    // Whether the player can slide down a wall
+    [HideInInspector]
+    private bool playerCanSlide = false;
+    // The run once variable for sliding
+    [HideInInspector]
+    private bool playerCanSlideOnce = false;
+    // How long the player waits on the wall before sliding
+    [HideInInspector]
+    private float playerWaitToSlideTime = 3f;
     // The reload time of the player
     [HideInInspector]
-    public float playerReloadTime = 0.5f;
+    public float playerReloadTime = 0.3f;
     // The player animation speed
     // NOT YET IMPLEMENTED
     [HideInInspector]
@@ -41,7 +50,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public bool playerFlipped = true;
     #endregion
-    #region OBJECTS
+    #region Objects
     // The bullet prefab
     public GameObject bullet;
     // The nearest rideable animal
@@ -54,7 +63,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public bool animalPlayerIsRidingGrounded = false;
     #endregion
-    #region COMPONENTS
+    #region Components
     // The animator component
     [HideInInspector]
     public Animator anim;
@@ -75,38 +84,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject leftWallCheck;
     #endregion
 
-    bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
-    {
-        // Checks if touching an object in the specified direction
-
-        // Create a ray pointing in the direction
-        RaycastHit2D objectTouching = Physics2D.Raycast(origin, direction, distance);
-        // If the object hit not equal to null and the tag is the same as the argument
-        if (objectTouching.collider != null && objectTouching.transform.tag == tagOfObject)
-            return true;
-        // If it doesn't, return false
-        return false;
-    }
-
-    GameObject GetNearestObjectInArray(GameObject[] objects)
-    {
-        GameObject closestObjectWithTag = null;
-        float closestDistanceSqr = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-        foreach (GameObject potentialObject in objects)
-        {
-            Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
-            {
-                closestDistanceSqr = dSqrToTarget;
-                closestObjectWithTag = potentialObject;
-            }
-        }
-
-        return closestObjectWithTag;
-    }
-
+    
     void Start ()
     {
         // Hookup components
@@ -117,11 +95,11 @@ public class PlayerController : MonoBehaviour {
         rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
         leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
     }
-    
+    /*
     void Update()
     {
         // Update() has all the physics checks
-
+        
         #region GRAVITY
         // Update gravity if touching wall
         if(playerTouchingLeftWall || playerTouchingRightWall)
@@ -177,9 +155,10 @@ public class PlayerController : MonoBehaviour {
             animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
         }
         #endregion
-    }
+        
+    }*/
 
-    void FixedUpdate()
+    void Update()
     {
         // FixedUpdate() has the input and movement
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
@@ -187,6 +166,42 @@ public class PlayerController : MonoBehaviour {
         bool Up = Input.GetButtonDown("Up") || Input.GetButtonDown("Jump");
         bool Space = Input.GetButtonDown("Space");
 
+        #region Collision Detection
+
+        // Set the collisions by default off
+        playerTouchingLeftWall = false;
+        playerTouchingRightWall = false;
+        playerGrounded = false;
+
+        // Get the collision points
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f);
+        Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.2f);
+        Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.2f);
+        // Check for the player being grounded
+        for (int i = 0; i < groundColliders.Length; i++)
+        {
+            if (groundColliders[i].gameObject != gameObject)
+                playerGrounded = true;
+        }
+        // Check for the player touching the left wall
+        for (int i = 0; i < leftWallColliders.Length; i++)
+        {
+            if (leftWallColliders[i].gameObject != gameObject)
+            {
+                playerTouchingLeftWall = true;
+                playerCanDoubleJump = true;
+            }
+        }
+        // Check for the player touching the right wall
+        for (int i = 0; i < rightWallColliders.Length; i++)
+        {
+            if (rightWallColliders[i].gameObject != gameObject)
+            {
+                playerTouchingRightWall = true;
+                playerCanDoubleJump = true;
+            }
+        }
+        #endregion
         #region Movement
         // Update the flip of player
         if (playerFlipped)
@@ -195,7 +210,7 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = new Vector3(1, 1, 1);
         // If not riding
         if(!Riding)
-        {
+        {            
             // If pressing left
             if (Left)
             {
@@ -246,8 +261,37 @@ public class PlayerController : MonoBehaviour {
             }
 
             // This update on the animation is for special cases like falling
-            if (!playerGrounded && !playerCanDoubleJump) anim.SetInteger("AnimState", 3);
-            else if (!playerGrounded && playerCanDoubleJump) anim.SetInteger("AnimState", 2);
+            if (!playerGrounded && !playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
+                anim.SetInteger("AnimState", 3);
+            else if (!playerGrounded && playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
+                anim.SetInteger("AnimState", 2);
+
+            // If touching the ground, reset the wall sliding
+            if (playerGrounded)
+                playerCanSlideOnce = false;
+
+            // Wall sliding
+            if (playerTouchingLeftWall && !playerGrounded || playerTouchingRightWall && !playerGrounded)
+            {
+                // Set the animator state to wall sliding
+                anim.SetInteger("AnimState", 4);
+                // If the player can slide
+                if (playerCanSlide)
+                {
+                    // Set the slide once to on, so the sliding doesn't continue to reset
+                    playerCanSlideOnce = true;
+                    // Set the sliding on the rigidBody2D
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1.2f);
+                }
+                // Otherwise, invoke the sliding to start
+                else if(!playerCanSlideOnce)
+                {
+                    Invoke("WaitForSlide", playerWaitToSlideTime);
+                    // Stop the falling
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1.7f);
+                }
+                    
+            }
 
             // Update the enabled of the collider
             GetComponent<Collider2D>().enabled = true;         
@@ -319,7 +363,7 @@ public class PlayerController : MonoBehaviour {
         if(Space && playerCanShoot)
         {
             // Set the playerCanShoot back to false, so as not to have rapid fire
-            playerCanShoot = false;
+            //playerCanShoot = false;
             // Create a new bullet at the BulletPos of the player
             GameObject newBullet;
             if (!playerGrounded && !playerCanDoubleJump)
@@ -333,25 +377,50 @@ public class PlayerController : MonoBehaviour {
             if (!playerGrounded && !playerCanDoubleJump)
             {
                 // Set the bullet y velocity to -1    
-                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -30);
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
                 // Rotate the bullet down
                 newBullet.transform.Rotate(new Vector3(0, 0, 270));
             }
             // Else, if the player is facing left
-            else if (playerFlipped)
+            else if (playerFlipped || playerTouchingRightWall)
             {
-                // Set the bullet x velocity to -1
-                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-30, 0);
+                // Set the bullet x velocity to -10
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
                 // Rotate the bullet left
-                newBullet.transform.Rotate(new Vector3(0, 0, 180));
+                newBullet.transform.Rotate(new Vector3(0, 0, 180));              
             }
             // Else if the player is facing right
-            else if (!playerFlipped)
-                // Set the bullet x velocity to 1
-                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(30, 0);
+            else if (!playerFlipped || playerTouchingLeftWall)
+            {
+                // Set the bullet x velocity to 10
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
 
+            }
             // Invoke the reset for the playerCanShoot
             Invoke("ResetCanShoot", playerReloadTime);
+        }
+        #endregion
+        
+        #region Rideable animals
+        // If close enough to a rideable animal
+        if (Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
+        {
+            // If pressing the Interact key
+            if (Input.GetButtonDown("Interact"))
+            {
+                // Either get on, or get off, depending on the state of Riding
+                Riding = !Riding;
+                // Set the animal the player is riding
+                animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
+            }
+        }
+
+        if (Riding)
+        {
+            // Update position if riding       
+            transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
+            // Update the grounded check for the animal the player is riding
+            animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
         }
         #endregion
     }
@@ -360,10 +429,55 @@ public class PlayerController : MonoBehaviour {
     {
         playerCanShoot = true;
     }
-    void OnColliderStay(Collider other)
+    void WaitForSlide()
     {
-        // If colliding with a Rideable animal, ignore the collision with it
-        //if (other.tag == "RideableAnimal")
-            //Physics2D.IgnoreCollision(transform.GetComponent<Collider2D>(), other.transform.GetComponent<Collider2D>(), true);
+        playerCanSlide = true;
+    }
+
+    bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
+    {
+        // Checks if touching an object in the specified direction
+
+        // Create a ray pointing in the direction
+        RaycastHit2D objectTouching = Physics2D.Raycast(origin, direction, distance);
+        // If the object hit not equal to null and the tag is the same as the argument
+        if (objectTouching.collider != null && objectTouching.transform.tag == tagOfObject)
+            return true;
+        // If it doesn't, return false
+        return false;
+    }
+
+    GameObject GetNearestObjectInArray(GameObject[] objects)
+    {
+        GameObject closestObjectWithTag = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (GameObject potentialObject in objects)
+        {
+            Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                closestObjectWithTag = potentialObject;
+            }
+        }
+
+        return closestObjectWithTag;
+    }
+
+    void OnCollider2DStay(Collision2D other)
+    {
+        /*
+        if (other.contacts.Length > 0)
+        {
+            // The first contact point
+            ContactPoint2D contact = other.contacts[0];
+            // If the contact point is below the player
+            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5)
+            {
+                playerGrounded = true;
+            }
+        }*/      
     }
 }
