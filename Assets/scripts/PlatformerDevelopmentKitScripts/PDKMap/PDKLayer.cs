@@ -19,6 +19,7 @@ public class PDKLayer
     public int[] tileMap;
     // Object Layer Attributes
     public PDKObject[] objects;
+    public HashSet<PDKObject>[][] objectMap;
     // Image Layer Attributes
     public Texture2D image;
 

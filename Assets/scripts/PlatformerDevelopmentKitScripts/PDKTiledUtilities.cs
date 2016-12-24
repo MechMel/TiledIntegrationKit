@@ -119,7 +119,22 @@ public class PDKTiledUtilities
             // If this layer had objects
             if (pdkTiledMapToConvert.layers[currentLayerIndex].objects != null)
             {
+                // Initialize the obects array
                 pdkMap.layers[currentLayerIndex].objects = new PDKObject[pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length];
+                // Initialize the object map
+                pdkMap.layers[currentLayerIndex].objectMap = new HashSet<PDKObject>[pdkTiledMapToConvert.width][];
+                // For each column
+                for (int currentColumnIndex = 0; currentColumnIndex < pdkTiledMapToConvert.width; currentColumnIndex++)
+                {
+                    // Initialize this column
+                    pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex] = new HashSet<PDKObject>[pdkTiledMapToConvert.height];
+                    // For each row
+                    for (int currentRowIndex = 0; currentRowIndex < pdkTiledMapToConvert.height; currentRowIndex++)
+                    {
+                        // Initialize this slot
+                        pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex][currentRowIndex] = new HashSet<PDKObject>();
+                    }
+                }
                 // Go through each object
                 for (int currentObjectIndex = 0; currentObjectIndex < pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length; currentObjectIndex++)
                 {
@@ -130,8 +145,11 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].gid = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].gid;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].width = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].width;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].height = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].height;
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect = new Rect(
+                        x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x,
+                        y: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y,
+                        width: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].width,
+                        height: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].height);
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].rotation = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].rotation;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].visible = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].visible;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new PDKMap.PDKCustomProperties();
@@ -142,6 +160,15 @@ public class PDKTiledUtilities
                         foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
                         {
                             pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties.Add(currentProperty.name, currentProperty.value);
+                        }
+                    }
+                    for (int currentColumnIndex = (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.x / pdkTiledMapToConvert.tilewidth;
+                        currentColumnIndex <= (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.xMax / pdkTiledMapToConvert.tilewidth; currentColumnIndex++)
+                    {
+                        for (int currentRowIndex = (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.y / pdkTiledMapToConvert.tileheight;
+                            currentRowIndex <= (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.yMax / pdkTiledMapToConvert.tileheight; currentColumnIndex++)
+                        {
+                            pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex][currentRowIndex].Add(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
                         }
                     }
                 }

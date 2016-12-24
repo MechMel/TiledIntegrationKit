@@ -8,7 +8,13 @@ using System.Collections.Generic;
 public class PDKLevelConfiguratorEditor : Editor
 {
     //
-    private PDKEditorUtil editorUtilities = new PDKEditorUtil();
+    private PDKEditorUtil editorUtilities;
+    
+    //
+    private void OnEnable()
+    {
+        editorUtilities = ScriptableObject.CreateInstance<PDKEditorUtil>();
+    }  
 
     // This will overide unity's standard GUI
     public override void OnInspectorGUI()

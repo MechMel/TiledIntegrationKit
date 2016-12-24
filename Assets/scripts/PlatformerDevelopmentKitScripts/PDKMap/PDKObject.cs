@@ -12,8 +12,7 @@ public class PDKObject
     public int gid;
     public int x;
     public int y;
-    public int width;
-    public int height;
+    public Rect objectRect;
     public int rotation;
     public bool visible;
     public PDKMap.PDKCustomProperties properties;
