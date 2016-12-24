@@ -5,7 +5,7 @@ public class BulletBehaviour : MonoBehaviour {
 
 	// BulletBehaviour class determines the behaviour of the standard player bullet
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         // When collided with something
 

@@ -67,6 +67,13 @@ public class MobBehaviour : MonoBehaviour
         // Set the rigidBody2D
         rigidBody2D = GetComponentInChildren<Rigidbody2D>();
         #endregion
+        #region SetBasic
+        // Check to update gravity
+        if (!isAffectedByGravity)
+            rigidBody2D.gravityScale = 0;
+        // Freeze the rotation
+        rigidBody2D.freezeRotation = true;
+        #endregion
     }
 
     void Update()
@@ -76,6 +83,7 @@ public class MobBehaviour : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         else
             transform.localScale = new Vector3(1, 1, 1);
+        
         // Go through the GameObjects with components
         for(int i = 0; i < gameObjectsWithComponents.Length; i++)
             // Update the animator 

@@ -17,16 +17,16 @@ public class PlayerController : MonoBehaviour {
     public int playerHealth = 4;
     // Whether the player is grounded
     [HideInInspector]
-    public bool playerGrounded = false;
+    private bool playerGrounded = false;
     // Whether the player is touching a wall to the left
     [HideInInspector]
-    public bool playerTouchingLeftWall = false;
+    private bool playerTouchingLeftWall = false;
     // Whether the player is touching a wall to the right
     [HideInInspector]
-    public bool playerTouchingRightWall = false;
+    private bool playerTouchingRightWall = false;
     // The player jump speed
     [HideInInspector]
-    public bool playerCanDoubleJump = false;
+    private bool playerCanDoubleJump = false;
     // Whether the player can shoot
     [HideInInspector]
     private bool playerCanShoot = true;
@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour {
         // Check for the player touching the left wall
         for (int i = 0; i < leftWallColliders.Length; i++)
         {
-            if (leftWallColliders[i].gameObject != gameObject)
+            if (leftWallColliders[i].gameObject != gameObject && leftWallColliders[i].gameObject.tag == "Tile")
             {
                 playerTouchingLeftWall = true;
                 playerCanDoubleJump = true;
@@ -206,7 +206,7 @@ public class PlayerController : MonoBehaviour {
         // Update the flip of player
         if (playerFlipped)
             transform.localScale = new Vector3(-1, 1, 1);
-        else
+        else 
             transform.localScale = new Vector3(1, 1, 1);
         // If not riding
         if(!Riding)
@@ -214,20 +214,38 @@ public class PlayerController : MonoBehaviour {
             // If pressing left
             if (Left)
             {
-                // Move the player left 
-                transform.Translate(playerSpeed, 0, 0);
-                // If grounded, flip the sprite, and run the walking animation
-                playerFlipped = true;
-                if (playerGrounded) anim.SetInteger("AnimState", 1);
+                // If not touching a wall
+                if (!playerTouchingLeftWall && !playerTouchingRightWall)
+                {
+                    // Move the player left
+                    transform.Translate(playerSpeed, 0, 0);
+                    // Flip the sprite
+                    playerFlipped = true;
+                }
+                else
+                    // Move the player right
+                    transform.Translate(-playerSpeed, 0, 0);
+                // If grounded, run the walking animation
+                if (playerGrounded)
+                    anim.SetInteger("AnimState", 1);
             }
             // If pressing right
             else if (Right)
             {
-                // Move the player right
-                transform.Translate(playerSpeed, 0, 0);
-                // If grounded, flip the sprite, and run the walking animation
-                playerFlipped = false;
-                if (playerGrounded) anim.SetInteger("AnimState", 1);
+                // If not touching a wall
+                if (!playerTouchingLeftWall && !playerTouchingRightWall)
+                {
+                    // Move the player right
+                    transform.Translate(playerSpeed, 0, 0);
+                    // Flip the sprite
+                    playerFlipped = false;
+                }
+                else
+                    // Move the player left
+                    transform.Translate(-playerSpeed, 0, 0);
+                // If grounded, run the walking animation
+                if (playerGrounded)
+                    anim.SetInteger("AnimState", 1);
             }
             else if(!Up && playerGrounded)
             {
