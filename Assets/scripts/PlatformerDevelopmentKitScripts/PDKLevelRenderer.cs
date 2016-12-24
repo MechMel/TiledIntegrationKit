@@ -37,7 +37,7 @@ public class PDKLevelRenderer : MonoBehaviour
             // Name this layer's object
             layerGroupObjects[layerGroupNumber].name = "Layer Group: " + layerGroupNumber.ToString();
             // Add a sprite renderer to this layer group's game object
-            SpriteRenderer thisLayerSpriteRenderer = layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
+            layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
             // Create an appropriately sized texture
             layerGroupTextures[layerGroupNumber] = new Texture2D(1, 1);
             // Set the filter mode

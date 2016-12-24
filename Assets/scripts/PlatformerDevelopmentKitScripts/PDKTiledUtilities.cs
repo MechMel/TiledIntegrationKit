@@ -162,12 +162,15 @@ public class PDKTiledUtilities
                             pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties.Add(currentProperty.name, currentProperty.value);
                         }
                     }
+                    // Go through each collumn of the map that this object exists in
                     for (int currentColumnIndex = (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.x / pdkTiledMapToConvert.tilewidth;
-                        currentColumnIndex <= (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.xMax / pdkTiledMapToConvert.tilewidth; currentColumnIndex++)
+                        currentColumnIndex < Math.Ceiling(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.xMax / pdkTiledMapToConvert.tilewidth); currentColumnIndex++)
                     {
+                        // Go through each row of the map that this object exists in
                         for (int currentRowIndex = (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.y / pdkTiledMapToConvert.tileheight;
-                            currentRowIndex <= (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.yMax / pdkTiledMapToConvert.tileheight; currentColumnIndex++)
+                            currentRowIndex < Math.Ceiling(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.yMax / pdkTiledMapToConvert.tileheight); currentRowIndex++)
                         {
+                            // Add this object at this position, to the object map
                             pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex][currentRowIndex].Add(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
                         }
                     }
