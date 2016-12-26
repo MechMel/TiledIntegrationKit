@@ -198,11 +198,12 @@ public class MobBehaviour : MonoBehaviour
         #endregion
     }
 
-    void Hit()
+    void Hit(int damage)
     {
         // When hit, subtract the health
-        health--;
+        health -= damage;
     }
+
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {
         GameObject closestObjectWithTag = null;

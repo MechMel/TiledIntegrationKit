@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     #region Player
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.2f;
+    private float playerSpeed = 0.15f;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour {
     private float playerWaitToSlideTime = 3f;
     // The reload time of the player
     [HideInInspector]
-    public float playerReloadTime = 0.3f;
+    public float playerReloadTime = 0.5f;
     // The player animation speed
     // NOT YET IMPLEMENTED
     [HideInInspector]
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject animalPlayerIsRiding;
     // Whether riding an animal or not
     [HideInInspector]
-    public bool Riding = false;
+    public bool riding = false;
     // Whether the animal the player is riding is grounded
     [HideInInspector]
     public bool animalPlayerIsRidingGrounded = false;
@@ -83,8 +83,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public GameObject leftWallCheck;
     #endregion
-
-    
+   
     void Start ()
     {
         // Hookup components
@@ -95,68 +94,6 @@ public class PlayerController : MonoBehaviour {
         rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
         leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
     }
-    /*
-    void Update()
-    {
-        // Update() has all the physics checks
-        
-        #region GRAVITY
-        // Update gravity if touching wall
-        if(playerTouchingLeftWall || playerTouchingRightWall)
-        {
-            playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, -0.2f);
-        }
-        // Update the check if the player is grounded 
-        playerGrounded = CheckIfTouchingObject(groundCheck.transform.position, -Vector2.up, 0f, "Tile");
-        
-        
-
-        // Update the check if the player is touching the left wall
-        if (CheckIfTouchingObject(leftWallCheck.transform.position, -Vector2.right, 0.65f, "Tile"))
-        {
-            playerTouchingLeftWall = true;
-            playerCanDoubleJump = true;
-        }
-        else
-        {
-            playerTouchingLeftWall = false;
-        }
-        
-        // Update the check if the player is touching the right wall        
-        if (CheckIfTouchingObject(rightWallCheck.transform.position, Vector2.right, 0.65f, "Tile"))
-        {
-            playerTouchingRightWall = true;
-            playerCanDoubleJump = true;
-        }
-        else
-        {
-            playerTouchingRightWall = false;
-        }
-        #endregion
-        #region Rideable animals
-        // If close enough to a rideable animal
-        if (Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
-        {
-            // If pressing the Interact key
-            if(Input.GetButtonDown("Interact"))
-            {
-                // Either get on, or get off, depending on the state of Riding
-                Riding = !Riding;
-                // Set the animal the player is riding
-                animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
-            }
-        }
-        
-        if (Riding)
-        {   
-            // Update position if riding       
-            transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
-            // Update the grounded check for the animal the player is riding
-            animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
-        }
-        #endregion
-        
-    }*/
 
     void Update()
     {
@@ -174,31 +111,46 @@ public class PlayerController : MonoBehaviour {
         playerGrounded = false;
 
         // Get the collision points
-        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f);
-        Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.2f);
-        Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.2f);
-        // Check for the player being grounded
-        for (int i = 0; i < groundColliders.Length; i++)
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+
+        // Make sure a collision exists
+        if (groundColliders.Length > 0)
         {
-            if (groundColliders[i].gameObject != gameObject)
-                playerGrounded = true;
-        }
-        // Check for the player touching the left wall
-        for (int i = 0; i < leftWallColliders.Length; i++)
-        {
-            if (leftWallColliders[i].gameObject != gameObject && leftWallColliders[i].gameObject.tag == "Tile")
+            // Check for the player being grounded
+            for (int i = 0; i < groundColliders.Length; i++)
             {
-                playerTouchingLeftWall = true;
-                playerCanDoubleJump = true;
+                if (groundColliders[i].gameObject != gameObject)
+                    playerGrounded = true;
             }
         }
-        // Check for the player touching the right wall
-        for (int i = 0; i < rightWallColliders.Length; i++)
+
+        // Make sure a collision exists
+        if (leftWallColliders.Length > 0)
         {
-            if (rightWallColliders[i].gameObject != gameObject)
+            // Check for the player touching the left wall
+            for (int i = 0; i < leftWallColliders.Length; i++)
             {
-                playerTouchingRightWall = true;
-                playerCanDoubleJump = true;
+                if (leftWallColliders[i].gameObject != gameObject)
+                {
+                    playerTouchingLeftWall = true;
+                    playerCanDoubleJump = true;
+                }
+            }
+        }
+
+        // Make sure a collision exists
+        if (rightWallColliders.Length > 0)
+        {
+            // Check for the player touching the right wall
+            for (int i = 0; i < rightWallColliders.Length; i++)
+            {
+                if (rightWallColliders[i].gameObject != gameObject)
+                {
+                    playerTouchingRightWall = true;
+                    playerCanDoubleJump = true;                                       
+                }
             }
         }
         #endregion
@@ -209,22 +161,19 @@ public class PlayerController : MonoBehaviour {
         else 
             transform.localScale = new Vector3(1, 1, 1);
         // If not riding
-        if(!Riding)
+        if(!riding)
         {            
             // If pressing left
             if (Left)
             {
-                // If not touching a wall
-                if (!playerTouchingLeftWall && !playerTouchingRightWall)
+                // If not touching a wall to the left
+                //if (!playerTouchingLeftWall)
                 {
                     // Move the player left
                     transform.Translate(playerSpeed, 0, 0);
                     // Flip the sprite
                     playerFlipped = true;
                 }
-                else
-                    // Move the player right
-                    transform.Translate(-playerSpeed, 0, 0);
                 // If grounded, run the walking animation
                 if (playerGrounded)
                     anim.SetInteger("AnimState", 1);
@@ -232,17 +181,14 @@ public class PlayerController : MonoBehaviour {
             // If pressing right
             else if (Right)
             {
-                // If not touching a wall
-                if (!playerTouchingLeftWall && !playerTouchingRightWall)
+                // If not touching a wall to the right
+                //if (!playerTouchingRightWall)
                 {
                     // Move the player right
                     transform.Translate(playerSpeed, 0, 0);
                     // Flip the sprite
                     playerFlipped = false;
                 }
-                else
-                    // Move the player left
-                    transform.Translate(-playerSpeed, 0, 0);
                 // If grounded, run the walking animation
                 if (playerGrounded)
                     anim.SetInteger("AnimState", 1);
@@ -257,7 +203,7 @@ public class PlayerController : MonoBehaviour {
             if (Up)
             {
                 // If the player is grounded
-                if (playerGrounded)
+                if (playerGrounded && !playerTouchingLeftWall && !playerTouchingRightWall)
                 {
                     // Set the upwards velocity to zero, to counter the gravity
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
@@ -267,7 +213,7 @@ public class PlayerController : MonoBehaviour {
                     playerCanDoubleJump = true;
                 }
                 // Else if the playerCanDoubleJump is true
-                else if (playerCanDoubleJump)
+                else if (playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
                 {
                     // Set the playerCanDoubleJump to false
                     playerCanDoubleJump = false;
@@ -279,9 +225,9 @@ public class PlayerController : MonoBehaviour {
             }
 
             // This update on the animation is for special cases like falling
-            if (!playerGrounded && !playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
+            if (!playerGrounded && !playerCanDoubleJump)
                 anim.SetInteger("AnimState", 3);
-            else if (!playerGrounded && playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
+            if (!playerGrounded && playerCanDoubleJump)
                 anim.SetInteger("AnimState", 2);
 
             // If touching the ground, reset the wall sliding
@@ -427,13 +373,13 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Interact"))
             {
                 // Either get on, or get off, depending on the state of Riding
-                Riding = !Riding;
+                riding = !riding;
                 // Set the animal the player is riding
                 animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
             }
         }
 
-        if (Riding)
+        if (riding)
         {
             // Update position if riding       
             transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
@@ -447,9 +393,16 @@ public class PlayerController : MonoBehaviour {
     {
         playerCanShoot = true;
     }
+
     void WaitForSlide()
     {
         playerCanSlide = true;
+    }
+
+    void Hit(int damage)
+    {
+        Debug.Log("Player was just hit!");
+        playerHealth -= damage;
     }
 
     bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)

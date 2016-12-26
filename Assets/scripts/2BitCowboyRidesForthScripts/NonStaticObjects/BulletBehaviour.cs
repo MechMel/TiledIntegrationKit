@@ -13,7 +13,7 @@ public class BulletBehaviour : MonoBehaviour {
         if(other.transform.tag != "Player")
         {
             // Send the hit message to the object that was hit
-            other.gameObject.SendMessage("Hit", null, SendMessageOptions.DontRequireReceiver);
+            other.gameObject.SendMessage("Hit", 1, SendMessageOptions.DontRequireReceiver);
             // Destroy itself
             Destroy(gameObject);
         }

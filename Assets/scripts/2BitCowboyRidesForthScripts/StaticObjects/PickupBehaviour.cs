@@ -67,7 +67,7 @@ public class PickupBehaviour : MonoBehaviour {
                 {
                     // Create a random pickup from the possibleDrops array
                     Instantiate(possibleDrops[Mathf.RoundToInt(Random.Range(0, possibleDrops.Length))],
-                        new Vector2(transform.position.x - i / 2, transform.position.y), Quaternion.identity);
+                        new Vector2(transform.position.x + amountToDrop/2 - i, transform.position.y), Quaternion.identity);
                 }
             }
             else
@@ -82,16 +82,19 @@ public class PickupBehaviour : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         // If the pickup is of BUFF pickup type
-        if (pickupType == PickupType.BUFF)
+        if (pickupType == PickupType.BUFF && other.tag != "Bullet")
         {
             // Destroy itself
             Destroy(gameObject);
         }
     }
 
-    void Hit()
+    void Hit(int damage)
     {
-        // Decrement health when hit
-        health--;
+        Debug.Log("Pickup was just hit!");
+        // If pickup is a BUFF
+        if (pickupType == PickupType.ITEMBOX)
+            // Decrement health when hit
+            health -= damage;
     }
 }
