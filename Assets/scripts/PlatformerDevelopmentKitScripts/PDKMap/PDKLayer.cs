@@ -53,13 +53,34 @@ public class PDKLayer
             // Go through each row in this collumn
             for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
             {
-                // Add each object from this slot in the object map
+                // For each object in this slot
                 foreach (PDKObject currentObject in objectMap[currentCollumnIndex][currentRowIndex])
                 {
+                    // Add this object to the objects to return
                     objectsInRect.Add(currentObject);
+                    // Remove this object from this slot in the object map
+                    objectMap[currentCollumnIndex][currentRowIndex].Remove(currentObject);
                 }
             }
         }
         return objectsInRect;
+    }
+
+
+    // Places an object in the object map
+    public void PutObjectInMap(PDKObject objectToInsert, int tileWidth, int tileHeight)
+    {
+        // Go through each collumn of the map that this object exists in
+        for (int currentColumnIndex = (int)objectToInsert.objectRect.x / tileWidth;
+            currentColumnIndex < Math.Ceiling(objectToInsert.objectRect.xMax / tileHeight); currentColumnIndex++)
+        {
+            // Go through each row of the map that this object exists in
+            for (int currentRowIndex = (int)objectToInsert.objectRect.y / tileWidth;
+                currentRowIndex < Math.Ceiling(objectToInsert.objectRect.yMax / tileHeight); currentRowIndex++)
+            {
+                // Add this object at this position, to the object map
+                objectMap[currentColumnIndex][currentRowIndex].Add(objectToInsert);
+            }
+        }
     }
 }

@@ -4,14 +4,10 @@ using System.Collections.Generic;
 
 public class PDKLevelRenderer : MonoBehaviour
 {
-    // These store the textures that are currently rendered for each layer group
-    public Texture2D[] layerGroupTextures;
     // Stores the TIKMap that this instance of PDKLevelRenderer will Use
     public PDKMap levelMap;
     // This is used to remember what area of the map is currently loaded
     public Rect loadedRectOfMap;
-    // This is used to store all layer group objects that this renderer creates
-    public List<GameObject> layerGroupObjects = new List<GameObject>();
     // TODO: Remove this later
     private float timeOfLastCheck = 0;
     
@@ -22,28 +18,24 @@ public class PDKLevelRenderer : MonoBehaviour
     {
         // Get the map to use
         levelMap = mapToUse;
-        // Set the layer group textures to the appropriate size
-        layerGroupTextures = new Texture2D[levelMap.layerGroups.Count];
         // Initizlse the rendered rect of the map
         loadedRectOfMap = new Rect(0, 0, 1, 1);
         #region Setup Layer Group objects
         // Go through each layer group in this map
-        for (int layerGroupNumber = 0; layerGroupNumber < mapToUse.layerGroups.Count; layerGroupNumber++)
+        for (int layerGroupIndex = 0; layerGroupIndex < mapToUse.layerGroups.Count; layerGroupIndex++)
         {
             // Create a game object to render this layer group on
-            GameObject thisLayerGroupObject = new GameObject();
-            // Add the newly created object for this layer into the list of layer objects
-            layerGroupObjects.Add(thisLayerGroupObject);
+            levelMap.layerGroups[layerGroupIndex].layerGroupObject = new GameObject();
             // Name this layer's object
-            layerGroupObjects[layerGroupNumber].name = "Layer Group: " + layerGroupNumber.ToString();
+            levelMap.layerGroups[layerGroupIndex].layerGroupObject.name = "Layer Group: " + layerGroupIndex.ToString();
             // Add a sprite renderer to this layer group's game object
-            layerGroupObjects[layerGroupNumber].AddComponent<SpriteRenderer>();
+            levelMap.layerGroups[layerGroupIndex].layerGroupObject.AddComponent<SpriteRenderer>();
             // Create an appropriately sized texture
-            layerGroupTextures[layerGroupNumber] = new Texture2D(1, 1);
+            levelMap.layerGroups[layerGroupIndex].layerGroupTexture = new Texture2D(1, 1);
             // Set the filter mode
-            layerGroupTextures[layerGroupNumber].filterMode = FilterMode.Point;
+            levelMap.layerGroups[layerGroupIndex].layerGroupTexture.filterMode = FilterMode.Point;
             // Aplly these changes
-            layerGroupTextures[layerGroupNumber].Apply();
+            levelMap.layerGroups[layerGroupIndex].layerGroupTexture.Apply();
         }
         #endregion
     }
@@ -59,7 +51,7 @@ public class PDKLevelRenderer : MonoBehaviour
             if (levelMap.layerGroups[thisLayerGroupIndex].groupType == PDKLayer.layerTypes.Tile)
             {
                 // Update this layer group
-                UpdateTileLayerGroup(thisLayerGroupIndex, rectToLoad);
+                UpdateTileLayerGroup(levelMap.layerGroups[thisLayerGroupIndex], rectToLoad);
             }
         }
         // Store the curretly loaded rectangle of the map
@@ -68,29 +60,29 @@ public class PDKLevelRenderer : MonoBehaviour
 
 
     // This updates a given tile Layer Group's texture, and then moves the layer group the apropriate position
-    public void UpdateTileLayerGroup(int layerGroupIndex, Rect rectToRender)
+    public void UpdateTileLayerGroup(PDKLayerGroup layerGroupToUpdate, Rect rectToRender)
     {
-            // Update the texture for this layer group
-            UpdateTextureForRectOfLayerGroup(ref layerGroupTextures[layerGroupIndex], levelMap.layerGroups[layerGroupIndex], rectToRender);
-            // Create a sprite from this layer group's newly created texture
-            Sprite spriteToDisplay = Sprite.Create(
-                texture: layerGroupTextures[layerGroupIndex],
-                rect: new Rect(
-                    x: 0,
-                    y: 0,
-                    width: layerGroupTextures[layerGroupIndex].width,
-                    height: layerGroupTextures[layerGroupIndex].height),
-                pivot: new Vector2(
-                    x: 0.5f,
-                    y: 0.5f),
-                pixelsPerUnit: levelMap.tileWidth);
-            // Display the newly created sprite for this layergroup
-            layerGroupObjects[layerGroupIndex].GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
-            // Move this layer group's object to the correct position
-            layerGroupObjects[layerGroupIndex].transform.position = new Vector3(
+        // Update the texture for this layer group
+        UpdateTextureForRectOfLayerGroup(ref layerGroupToUpdate.layerGroupTexture, layerGroupToUpdate, rectToRender);
+        // Create a sprite from this layer group's newly created texture
+        Sprite spriteToDisplay = Sprite.Create(
+            texture: layerGroupToUpdate.layerGroupTexture,
+            rect: new Rect(
+                x: 0,
+                y: 0,
+                width: layerGroupToUpdate.layerGroupTexture.width,
+                height: layerGroupToUpdate.layerGroupTexture.height),
+            pivot: new Vector2(
+                x: 0.5f,
+                y: 0.5f),
+            pixelsPerUnit: levelMap.tileWidth);
+        // Display the newly created sprite for this layergroup
+        layerGroupToUpdate.layerGroupObject.GetComponent<SpriteRenderer>().sprite = spriteToDisplay;
+        // Move this layer group's object to the correct position
+        layerGroupToUpdate.layerGroupObject.transform.position = new Vector3(
                 x: (int)rectToRender.x + ((int)rectToRender.width / 2),
                 y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
-                z: -layerGroupIndex);
+                z: layerGroupToUpdate.zPosition);
     }
 
 

@@ -8,6 +8,12 @@ public class PDKLayerGroup
     public PDKLayer.layerTypes groupType;
     // This is a list of the numbers of all layers in this layer group
     public List<int> layerNumbers = new List<int>();
+    // This is the z position this group should be rendred at
+    public int zPosition;
+    // Refrence to this layer group's object (Used with Tile and Image Layer Groups)
+    public GameObject layerGroupObject;
+    // The Texture currently applied to this layer group (Used with Tile LayerGroups)
+    public Texture2D layerGroupTexture;
 
     // Creates a new layer group
     public PDKLayerGroup(PDKLayer.layerTypes groupTypeToBe)

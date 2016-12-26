@@ -65,6 +65,8 @@ public class PDKMap
                     currentLayerGroupNumber++;
                     // Create A new LayerGroup dictionary for this type of layer
                     layerGroups.Add(new PDKLayerGroup(layers[thisLayerNumber].type));
+                    // Calculate the Z position of this layer group
+                    layerGroups[currentLayerGroupNumber].zPosition = currentLayerGroupNumber;
                     // Add this layer to the newly created layer group
                     layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
                 }
