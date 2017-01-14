@@ -53,12 +53,18 @@ public class PDKLevelRenderer : MonoBehaviour
                 // Update this layer group
                 UpdateTileLayerGroup(levelMap.layerGroups[thisLayerGroupIndex], rectToLoad);
             }
+            else if (levelMap.layerGroups[thisLayerGroupIndex].groupType == PDKLayer.layerTypes.Object) // If this layer group is made up of object layers
+            {
+                // Update objects
+
+            }
         }
         // Store the curretly loaded rectangle of the map
         loadedRectOfMap = rectToLoad;
     }
 
 
+    #region Tile LayerGroup Rendering
     // This updates a given tile Layer Group's texture, and then moves the layer group the apropriate position
     public void UpdateTileLayerGroup(PDKLayerGroup layerGroupToUpdate, Rect rectToRender)
     {
@@ -318,7 +324,23 @@ public class PDKLevelRenderer : MonoBehaviour
         // The texture has been updated
         return;
     }
-    
+    #endregion
+
+    #region Object LayerGroup Rendering
+    //
+    private void UpdateObjectGroup(PDKLayerGroup groupToUpdate, Rect rectToLoad)
+    {
+        PDKLayer objectLayer = levelMap.layers[groupToUpdate.layerNumbers[0]];
+        HashSet<PDKObject> objectsInRect;
+
+        // Dehydrate any objects outside of the rect to load
+        objectLayer.DehydrateExternalObjects(rectToLoad);
+        // Find all the dehydrated objects that should be loaded
+        //objectsInRect = objectLayer.GetAllObjectsInRect(rectToLoad);
+        // For each object in this rect
+    }
+    #endregion
+
 
     // This finds the overlaping area of two rectangles and returns that as a rectangle
     private Rect GetOverlap(Rect firstRect, Rect secondRect)
