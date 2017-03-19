@@ -44,27 +44,29 @@ public class PDKLevelRenderer : MonoBehaviour
     // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
     public void LoadRectOfMap(Rect rectToLoad)
     {
-        // Go through each layer group in the level map
-        for (int thisLayerGroupIndex = 0; thisLayerGroupIndex < levelMap.layerGroups.Count; thisLayerGroupIndex++)
+        // Update each layer group
+        for (int indexOfLayerGroupToUpdate = 0; indexOfLayerGroupToUpdate < levelMap.layerGroups.Count; indexOfLayerGroupToUpdate++)
         {
-            // If this layer group is made up of tile layers
-            if (levelMap.layerGroups[thisLayerGroupIndex].groupType == PDKLayer.layerTypes.Tile)
+            //Create a variable to more easily refrence the layer group to update
+            PDKLayerGroup layerGroupToUpdate = levelMap.layerGroups[indexOfLayerGroupToUpdate];
+            // If the layer group to update is a tileLayerGroup
+            if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Tile)
             {
                 // Update this layer group
-                UpdateTileLayerGroup(levelMap.layerGroups[thisLayerGroupIndex], rectToLoad);
+                UpdateTileLayerGroup(layerGroupToUpdate, rectToLoad);
             }
-            else if (levelMap.layerGroups[thisLayerGroupIndex].groupType == PDKLayer.layerTypes.Object) // If this layer group is made up of object layers
+            // If the layer group to update is an objectLayerGroup
+            else if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Object)
             {
-                // Update objects
-
+                // Update this object group
+                UpdateObjectGroup(layerGroupToUpdate, rectToLoad);
             }
         }
         // Store the curretly loaded rectangle of the map
         loadedRectOfMap = rectToLoad;
     }
 
-
-    #region Tile LayerGroup Rendering
+    #region TileLayerGroup Rendering
     // This updates a given tile Layer Group's texture, and then moves the layer group the apropriate position
     public void UpdateTileLayerGroup(PDKLayerGroup layerGroupToUpdate, Rect rectToRender)
     {
@@ -326,23 +328,36 @@ public class PDKLevelRenderer : MonoBehaviour
     }
     #endregion
 
-    #region Object LayerGroup Rendering
-    //
+    #region ObjectLayerGroupRendering
+    // This updates a given layer group, such that objects that should be hydrated are, and all others are dehydrated
     private void UpdateObjectGroup(PDKLayerGroup groupToUpdate, Rect rectToLoad)
     {
-        PDKLayer objectLayer = levelMap.layers[groupToUpdate.layerNumbers[0]];
-        HashSet<PDKObject> objectsInRect;
+        /* For each object layer in this layer group, dehydrate objects out side of the given rect
+        and hydrate objects, within the given rect, that are not hydrated but should be */
+        foreach (int indexOfObjectLayerToUpdate in groupToUpdate.layerNumbers)
+        {
+            // Create a variable to more easily refrence the object layer that is currently being updated
+            PDKLayer objectLayerToUpdate = levelMap.layers[indexOfObjectLayerToUpdate];
+            // This will be used to store all the objects that need to be hydrated
+            HashSet<PDKObject> objectsToHydrate;
 
-        // Dehydrate any objects outside of the rect to load
-        objectLayer.DehydrateExternalObjects(rectToLoad);
-        // Find all the dehydrated objects that should be loaded
-        //objectsInRect = objectLayer.GetAllObjectsInRect(rectToLoad);
-        // For each object in this rect
+            // Dehydrate any objects outside of the rect to load
+            objectLayerToUpdate.DehydrateExternalObjects(rectToLoad);
+            // Take all dehydrated objects in the rect to render, from the dehydrated object map
+            objectsToHydrate = objectLayerToUpdate.TakeDehydratedObjectsFromRect(rectToLoad);
+            // Hydrate each of the pdk objects, in this layer, that are not hydrated but should be
+            foreach (PDKObject pdkObjectToHydrate in objectsToHydrate)
+            {
+                // Create a hydrated copy of the current dehydrated pdk object
+                GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(pdkObjectToHydrate);
+                // Add the newly hydrated game object to the list of hydrated game objects
+                objectLayerToUpdate.hydratedObjects.Add((currentHydratedObject));
+            }
+        }
     }
     #endregion
 
-
-    // This finds the overlaping area of two rectangles and returns that as a rectangle
+    // This examines two rectangles and finds the rectangular area of overlap between them
     private Rect GetOverlap(Rect firstRect, Rect secondRect)
     {
         // Create a rectangle to store the overlap

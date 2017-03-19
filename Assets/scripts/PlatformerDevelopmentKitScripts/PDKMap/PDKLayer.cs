@@ -6,6 +6,10 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKLayer
 {
+    [System.Serializable]
+    public class PDKDehydratedObjectsHashSet : PDKSerializableHashSet<PDKObject> { }
+    [System.Serializable]
+    public class PDKGameObjectsHashSet : PDKSerializableHashSet<GameObject> { }
     public enum layerTypes { Tile, Object, Image };
     public string name;
     public layerTypes type;
@@ -20,8 +24,9 @@ public class PDKLayer
     public int[] tileMap;
     // Object Layer Attributes
     public PDKObject[] objects;
-    public HashSet<PDKObject>[][] dehydratedObjectMap;
-    public HashSet<GameObject> hydratedObjects;
+    public PDKDehydratedObjectsHashSet[][] dehydratedObjectMap;
+    public PDKDehydratedObjectsHashSet[] testDehydratedObjectHashSet;
+    public PDKGameObjectsHashSet hydratedObjects;
     // Image Layer Attributes
     public Texture2D image;
 
