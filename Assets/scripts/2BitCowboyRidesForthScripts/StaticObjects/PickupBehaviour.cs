@@ -62,13 +62,18 @@ public class PickupBehaviour : MonoBehaviour {
             {
                 // Destroy the object
                 Destroy(gameObject);
-                // Drop the right amount of items based on the given stats
-                for (int i = 0; i < amountToDrop; i++)
+                // If the amount to drop is greater than zero
+                if(amountToDrop > 0)
                 {
-                    // Create a random pickup from the possibleDrops array
-                    Instantiate(possibleDrops[Mathf.RoundToInt(Random.Range(0, possibleDrops.Length))],
-                        new Vector2(transform.position.x + amountToDrop/2 - i, transform.position.y), Quaternion.identity);
+                    // Drop the right amount of items based on the given stats
+                    for (int i = 0; i < amountToDrop; i++)
+                    {
+                        // Create a random pickup from the possibleDrops array
+                        Instantiate(possibleDrops[Mathf.RoundToInt(Random.Range(0, possibleDrops.Length))],
+                            new Vector2(transform.position.x + amountToDrop/2 - i, transform.position.y), Quaternion.identity);
+                    }
                 }
+                
             }
             else
             {
@@ -91,7 +96,6 @@ public class PickupBehaviour : MonoBehaviour {
 
     void Hit(int damage)
     {
-        Debug.Log("Pickup was just hit!");
         // If pickup is a BUFF
         if (pickupType == PickupType.ITEMBOX)
             // Decrement health when hit

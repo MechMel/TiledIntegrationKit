@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour {
                 //if (!playerTouchingLeftWall)
                 {
                     // Move the player left
-                    transform.Translate(playerSpeed, 0, 0);
+                    transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
                     // Flip the sprite
                     playerFlipped = true;
                 }
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour {
                 //if (!playerTouchingRightWall)
                 {
                     // Move the player right
-                    transform.Translate(playerSpeed, 0, 0);
+                    transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
                     // Flip the sprite
                     playerFlipped = false;
                 }
@@ -245,14 +245,14 @@ public class PlayerController : MonoBehaviour {
                     // Set the slide once to on, so the sliding doesn't continue to reset
                     playerCanSlideOnce = true;
                     // Set the sliding on the rigidBody2D
-                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1.2f);
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.7f);
                 }
                 // Otherwise, invoke the sliding to start
                 else if(!playerCanSlideOnce)
                 {
                     Invoke("WaitForSlide", playerWaitToSlideTime);
                     // Stop the falling
-                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1.7f);
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.65f);
                 }
                     
             }
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour {
             if (Left)
             {
                 // Move the animal left 
-                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f, 0, 0);
+                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f * transform.localScale.x, 0, 0);
                 // If grounded, flip the sprite, and run the walking animation
                 animalPlayerIsRiding.transform.localScale = new Vector2(-1, 1);
                 playerFlipped = true;
@@ -282,7 +282,7 @@ public class PlayerController : MonoBehaviour {
             else if (Right)
             {
                 // Move the player right
-                animalPlayerIsRiding.transform.Translate(playerSpeed*1.5f, 0, 0);
+                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f * transform.localScale.x, 0, 0);
                 animalPlayerIsRiding.transform.localScale = new Vector2(1, 1);
                 playerFlipped = false;
                 //if (playerGrounded) 
@@ -331,9 +331,11 @@ public class PlayerController : MonoBehaviour {
             // Create a new bullet at the BulletPos of the player
             GameObject newBullet;
             if (!playerGrounded && !playerCanDoubleJump)
-                newBullet = (GameObject)Instantiate(bullet, transform.Find("BulletDownPos").transform.position, Quaternion.identity);
+                newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
+                    transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
             else
-                newBullet = (GameObject)Instantiate(bullet, transform.Find("BulletPos").transform.position, Quaternion.identity);
+                newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPos").transform.position.x,
+                    transform.Find("BulletPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
 
             // Decide the direction and velocity of the new bullet, based on the direction of the player
 
@@ -351,13 +353,21 @@ public class PlayerController : MonoBehaviour {
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
                 // Rotate the bullet left
-                newBullet.transform.Rotate(new Vector3(0, 0, 180));              
+                newBullet.transform.Rotate(new Vector3(0, 0, 180));
+                // Move the player right as recoil
+                transform.Translate(0.3f * -transform.localScale.x * Time.deltaTime, 0, 0);
+                // Set the upwards velocity to zero, to counter the gravity
+                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
             }
             // Else if the player is facing right
             else if (!playerFlipped || playerTouchingLeftWall)
             {
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+                // Move the player left as recoil
+                transform.Translate(0.3f * -transform.localScale.x * Time.deltaTime, 0 , 0);
+                // Add force upwards to the rigidbody
+                playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
 
             }
             // Invoke the reset for the playerCanShoot
@@ -435,20 +445,5 @@ public class PlayerController : MonoBehaviour {
         }
 
         return closestObjectWithTag;
-    }
-
-    void OnCollider2DStay(Collision2D other)
-    {
-        /*
-        if (other.contacts.Length > 0)
-        {
-            // The first contact point
-            ContactPoint2D contact = other.contacts[0];
-            // If the contact point is below the player
-            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5)
-            {
-                playerGrounded = true;
-            }
-        }*/      
     }
 }

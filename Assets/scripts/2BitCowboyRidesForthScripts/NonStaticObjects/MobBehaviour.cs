@@ -84,10 +84,14 @@ public class MobBehaviour : MonoBehaviour
         else
             transform.localScale = new Vector3(1, 1, 1);
         
-        // Go through the GameObjects with components
-        for(int i = 0; i < gameObjectsWithComponents.Length; i++)
-            // Update the animator 
-            gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
+        // Go through the GameObjects with components   
+        if(mobType != MobType.CHASE)
+        {
+            for(int i = 0; i < gameObjectsWithComponents.Length; i++)
+                // Update the animator 
+                gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
+        }
+        
 
         // Check for death
         if (health <= 0)
@@ -111,7 +115,7 @@ public class MobBehaviour : MonoBehaviour
                     spriteFlipped = false;
                 else
                     // Otherwise, continue moving towards the patrolPoint
-                    transform.Translate(Vector3.right * speed);
+                    transform.Translate(Vector3.right * speed * transform.localScale.x);
             }
             // Otherwise, meaning its false
             else
@@ -122,7 +126,7 @@ public class MobBehaviour : MonoBehaviour
                     spriteFlipped = true;
                 else
                     // Otherwise, continue moving towards the patrolPoint
-                    transform.Translate(Vector3.right * speed);
+                    transform.Translate(Vector3.right * speed * transform.localScale.x);
             }
         }
         #endregion
