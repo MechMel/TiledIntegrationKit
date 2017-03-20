@@ -25,6 +25,7 @@ public class PDKLayer
     // Object Layer Attributes
     public PDKObject[] objects;
     public PDKDehydratedObjectsHashSet[][] dehydratedObjectMap;
+    // TODO: REMOVE THIS LATER
     public PDKDehydratedObjectsHashSet[] testDehydratedObjectHashSet;
     public PDKGameObjectsHashSet hydratedObjects;
     // Image Layer Attributes
