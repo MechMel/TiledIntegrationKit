@@ -39,7 +39,7 @@ public class PDKSerializableDictionay<TKey, TValue> : Dictionary<TKey, TValue>, 
         // Go thorugh each key value pair in this dictionary
         for (int indexOfCurrentKVP = 0; indexOfCurrentKVP < keys.Count; indexOfCurrentKVP++)
         {
-            // Add this key value pair, from the lists, back into the dictionary.
+            // Add this key value pair, from the lists, back into the dictionary
             this.Add(keys[indexOfCurrentKVP], values[indexOfCurrentKVP]);
         }
     }

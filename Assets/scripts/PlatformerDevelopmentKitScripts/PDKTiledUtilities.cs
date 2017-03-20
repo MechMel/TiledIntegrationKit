@@ -122,20 +122,35 @@ public class PDKTiledUtilities
                 // Initialize the obects array
                 pdkMap.layers[currentLayerIndex].objects = new PDKObject[pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length];
                 // Initialize the object map
-                pdkMap.layers[currentLayerIndex].objectMap = new HashSet<PDKObject>[pdkTiledMapToConvert.width][];
+                pdkMap.layers[currentLayerIndex].dehydratedObjectMap = new PDKLayer.PDKDehydratedObjectsHashSet[pdkTiledMapToConvert.width][];
                 // For each column
                 for (int currentColumnIndex = 0; currentColumnIndex < pdkTiledMapToConvert.width; currentColumnIndex++)
                 {
                     // Initialize this column
-                    pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex] = new HashSet<PDKObject>[pdkTiledMapToConvert.height];
+                    pdkMap.layers[currentLayerIndex].dehydratedObjectMap[currentColumnIndex] = new PDKLayer.PDKDehydratedObjectsHashSet[pdkTiledMapToConvert.height];
                     // For each row
                     for (int currentRowIndex = 0; currentRowIndex < pdkTiledMapToConvert.height; currentRowIndex++)
                     {
                         // Initialize this slot
-                        pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex][currentRowIndex] = new HashSet<PDKObject>();
+                        pdkMap.layers[currentLayerIndex].dehydratedObjectMap[currentColumnIndex][currentRowIndex] = new PDKLayer.PDKDehydratedObjectsHashSet();
                     }
                 }
-                // Go through each object
+                // TODO: REMOVE THIS LATER
+                pdkMap.layers[currentLayerIndex].hydratedObjects = new PDKLayer.PDKGameObjectsHashSet();
+                // TODO: REMOVE THIS LATER
+                pdkMap.layers[currentLayerIndex].testDehydratedObjectHashSet = new PDKLayer.PDKDehydratedObjectsHashSet[1];
+                // TODO: REMOVE THIS LATER
+                //for (int currentIndex = 0; currentIndex < 1; currentIndex++)
+                //{
+                    // TODO: REMOVE THIS LATER
+                   // pdkMap.layers[currentLayerIndex].testDehydratedObjectHashSet[currentIndex] = new PDKLayer.PDKDehydratedObjectsHashSet[1];
+                    // TODO: REMOVE THIS LATER
+                    for (int currentIndex2 = 0; currentIndex2 < 1; currentIndex2++)
+                    {
+                        // TODO: REMOVE THIS LATER
+                        pdkMap.layers[currentLayerIndex].testDehydratedObjectHashSet[currentIndex2] = new PDKLayer.PDKDehydratedObjectsHashSet();
+                    }
+                //}
                 for (int currentObjectIndex = 0; currentObjectIndex < pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length; currentObjectIndex++)
                 {
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
@@ -171,7 +186,7 @@ public class PDKTiledUtilities
                             currentRowIndex < Math.Ceiling(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect.yMax / pdkTiledMapToConvert.tileheight); currentRowIndex++)
                         {
                             // Add this object at this position, to the object map
-                            pdkMap.layers[currentLayerIndex].objectMap[currentColumnIndex][currentRowIndex].Add(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
+                            pdkMap.layers[currentLayerIndex].dehydratedObjectMap[currentColumnIndex][currentRowIndex].Add(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
                         }
                     }
                 }
