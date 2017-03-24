@@ -26,7 +26,9 @@ public class PDKLayer
     public PDKObject[] objects;
     public PDKDehydratedObjectsHashSet[][] dehydratedObjectMap;
     // TODO: REMOVE THIS LATER
-    public PDKDehydratedObjectsHashSet[] testDehydratedObjectHashSet;
+    public PDKDehydratedObjectsHashSet[][] test2DehydratedObjectHashSet;
+    public PDKDehydratedObjectsHashSet[] test1DehydratedObjectHashSet;
+    public PDKDehydratedObjectsHashSet test0DehydratedObjectHashSet;
     public PDKGameObjectsHashSet hydratedObjects;
     // Image Layer Attributes
     public Texture2D image;
