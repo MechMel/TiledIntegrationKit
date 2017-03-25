@@ -141,8 +141,11 @@ public class PDKTiledUtilities
                 pdkMap.layers[currentLayerIndex].test2DehydratedObjectHashSet = new PDKLayer.PDKDehydratedObjectsHashSet[1][];
                 pdkMap.layers[currentLayerIndex].test1DehydratedObjectHashSet = new PDKLayer.PDKDehydratedObjectsHashSet[1];
                 pdkMap.layers[currentLayerIndex].test0DehydratedObjectHashSet = new PDKLayer.PDKDehydratedObjectsHashSet();
+                pdkMap.layers[currentLayerIndex].test2DehydratedObjectHashSet[0] = new PDKLayer.PDKDehydratedObjectsHashSet[1];
+                pdkMap.layers[currentLayerIndex].test1DehydratedObjectHashSet[0] = new PDKLayer.PDKDehydratedObjectsHashSet();
+                pdkMap.layers[currentLayerIndex].test2DehydratedObjectHashSet[0][0] = new PDKLayer.PDKDehydratedObjectsHashSet();
                 // TODO: REMOVE THIS LATER
-                for (int currentIndex = 0; currentIndex < 1; currentIndex++)
+                /*for (int currentIndex = 0; currentIndex < 1; currentIndex++)
                 {
                     // TODO: REMOVE THIS LATER
                     pdkMap.layers[currentLayerIndex].test2DehydratedObjectHashSet[currentIndex] = new PDKLayer.PDKDehydratedObjectsHashSet[1];
@@ -153,7 +156,7 @@ public class PDKTiledUtilities
                         // TODO: REMOVE THIS LATER
                         pdkMap.layers[currentLayerIndex].test2DehydratedObjectHashSet[currentIndex][currentIndex2] = new PDKLayer.PDKDehydratedObjectsHashSet();
                     }
-                }
+                }*/
                 for (int currentObjectIndex = 0; currentObjectIndex < pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length; currentObjectIndex++)
                 {
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
