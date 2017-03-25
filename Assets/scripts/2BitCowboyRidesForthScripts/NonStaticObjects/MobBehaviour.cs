@@ -10,11 +10,12 @@ public class MobBehaviour : MonoBehaviour
     {
         PATROL,
         CHASE,
-        BLOCK
+        BLOCK,
+        RIDE
     }
     public MobType mobType;
 
-    #region Basic Stats
+    #region Mob Stats
     // Basic health
     public float health;
     // Basic damage
@@ -28,8 +29,9 @@ public class MobBehaviour : MonoBehaviour
     // Whether the sprite is flipped or not
     [HideInInspector]
     public bool spriteFlipped = false;
-    #endregion
-    #region AI
+    // Whether or not the mob is grounded
+    [HideInInspector]
+    public bool mobGrounded = false;
     // The state of the AI
     [HideInInspector]
     public int AIState = 0;
@@ -39,7 +41,18 @@ public class MobBehaviour : MonoBehaviour
     // The target of the enemy
     [HideInInspector]
     public GameObject currentTarget;
-    #endregion
+
+    // ---Controls
+
+    // Move left boolean
+    [HideInInspector]
+    public bool moveLeft = false;
+    // Move right boolean
+    [HideInInspector]
+    public bool moveRight = false;
+    // Jump boolean
+    [HideInInspector]
+    public bool moveJump = false;
 
     // With a PATROL mob, this will need to be set
     [Tooltip("The left boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
@@ -49,7 +62,7 @@ public class MobBehaviour : MonoBehaviour
     // This will need to be set for CHASE MOBS
     [Tooltip("The rotatable child of the mob. NOTE: Only necessary to set if the mob is a CHASE type.")]
     public GameObject rotatableObject;
-
+    #endregion
     #region Components
     // The array sprite renderers of the mob
     [Tooltip("The array of GameObjects that have a SpriteRenderer and Animator that is part of this object.")]
@@ -91,8 +104,22 @@ public class MobBehaviour : MonoBehaviour
                 // Update the animator 
                 gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
         }
-        
 
+        // Update the grounded state
+        /*
+        // Get the collision points
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(transform.Find("GroundCheck").position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        // Make sure a collision exists
+        if (groundColliders.Length > 0)
+        {
+            // Check for the player being grounded
+            for (int i = 0; i < groundColliders.Length; i++)
+            {
+                if (groundColliders[i].gameObject != gameObject)
+                    mobGrounded = true;
+            }
+        }
+        */
         // Check for death
         if (health <= 0)
             Destroy(gameObject);
@@ -200,13 +227,68 @@ public class MobBehaviour : MonoBehaviour
             }
         }
         #endregion
+        #region RIDE
+        // Updated if the mob is of RIDE mobType
+        if(mobType == MobType.RIDE)
+        {
+            /*
+            // If receiving left
+            if (moveLeft)
+            {
+                // Move the animal left 
+                transform.Translate(speed * transform.localScale.x, 0, 0);
+                // If grounded, flip the sprite, and run the walking animation
+                transform.localScale = new Vector2(-1, 1);
+                // Flip the sprite
+                spriteFlipped = true;
+                // Update the animation state
+                GetComponent<Animator>().SetInteger("AnimState", 1);
+            }
+            // If receiving right
+            else if (moveRight)
+            {
+                // Move the animal right 
+                transform.Translate(speed * transform.localScale.x, 0, 0);
+                // If grounded, flip the sprite, and run the walking animation
+                transform.localScale = new Vector2(1, 1);
+                // Flip the sprite
+                spriteFlipped = false;
+                // Update the animation state
+                GetComponent<Animator>().SetInteger("AnimState", 1);
+            }
+            else if (!Up && playerGrounded)
+            {
+                // If not pressing any keys and grounded, run the idle animation
+                animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 0);
+            }*/
+        }
+        #endregion
     }
 
+    #region Invokeable Functions
+    // This group of functions is designed to be invoked from the outside
+
+    void MoveLeft(bool setMoveLeft)
+    {
+        // Recieves the request to move left
+        moveLeft = setMoveLeft;
+    }
+    void MoveRight(bool setMoveRight)
+    {
+        // Recieves the request to move right
+        moveRight = setMoveRight;
+    }
+    void MoveJump(bool setMoveJump)
+    {
+        // Recieves the request to jump
+        moveJump = setMoveJump;
+    }
     void Hit(int damage)
     {
         // When hit, subtract the health
         health -= damage;
     }
+    #endregion
 
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {

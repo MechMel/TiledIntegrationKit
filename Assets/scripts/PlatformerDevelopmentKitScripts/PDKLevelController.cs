@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PDKLevelController : MonoBehaviour
 {
+
+    /* Put a summary of the purpose of the script?*/
+
     // This is the TIKMap for this level
     public PDKMap levelMap;
     // This is the PDKLevelRenderer for this level

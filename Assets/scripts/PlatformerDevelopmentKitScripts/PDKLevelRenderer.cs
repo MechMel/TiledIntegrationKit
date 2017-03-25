@@ -34,7 +34,7 @@ public class PDKLevelRenderer : MonoBehaviour
             levelMap.layerGroups[layerGroupIndex].layerGroupTexture = new Texture2D(1, 1);
             // Set the filter mode
             levelMap.layerGroups[layerGroupIndex].layerGroupTexture.filterMode = FilterMode.Point;
-            // Aplly these changes
+            // Apply these changes
             levelMap.layerGroups[layerGroupIndex].layerGroupTexture.Apply();
         }
         #endregion

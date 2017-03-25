@@ -267,32 +267,10 @@ public class PlayerController : MonoBehaviour {
             Rigidbody2D RigidBody2DOfAnimalPlayerIsRiding = animalPlayerIsRiding.GetComponent<Rigidbody2D>();   
             // Disable the player's collider
             GetComponent<Collider2D>().enabled = false;
-            // If pressing left
-            if (Left)
-            {
-                // Move the animal left 
-                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f * transform.localScale.x, 0, 0);
-                // If grounded, flip the sprite, and run the walking animation
-                animalPlayerIsRiding.transform.localScale = new Vector2(-1, 1);
-                playerFlipped = true;
-                //if (playerGrounded) 
-                animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 1);
-            }
-            // If pressing right
-            else if (Right)
-            {
-                // Move the player right
-                animalPlayerIsRiding.transform.Translate(playerSpeed * 1.5f * transform.localScale.x, 0, 0);
-                animalPlayerIsRiding.transform.localScale = new Vector2(1, 1);
-                playerFlipped = false;
-                //if (playerGrounded) 
-                animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 1);
-            }
-            else if (!Up && playerGrounded)
-            {
-                // If not pressing any keys and grounded, run the idle animation
-                animalPlayerIsRiding.GetComponent<Animator>().SetInteger("AnimState", 0);
-            }
+            // Update the left and right input to the animal
+            animalPlayerIsRiding.SendMessage("MoveLeft", Left, SendMessageOptions.DontRequireReceiver);
+            animalPlayerIsRiding.SendMessage("MoveRight", Right, SendMessageOptions.DontRequireReceiver);
+            
 
             // Jumping
             if (Up)
@@ -399,6 +377,7 @@ public class PlayerController : MonoBehaviour {
         #endregion
     }
 
+    #region Wait Functions
     void ResetCanShoot()
     {
         playerCanShoot = true;
@@ -414,6 +393,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Player was just hit!");
         playerHealth -= damage;
     }
+    #endregion
 
     bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
     {
@@ -430,20 +410,33 @@ public class PlayerController : MonoBehaviour {
 
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {
-        GameObject closestObjectWithTag = null;
-        float closestDistanceSqr = Mathf.Infinity;
+        // Returns the nearest object in the given array of GameObjects
+        // This probably isn't the most efficent way to to this, but it works, provided you have a small array
+
+        // This stores where the closest object from the given position
+        GameObject closestObjectInArray = null;
+        // This stores the distance that the closest object so far has
+        float closestDistanceOnRecord = Mathf.Infinity;
+        // The base position to check distance from
         Vector3 currentPosition = transform.position;
+
+        // For each potential GameObject in the objects
         foreach (GameObject potentialObject in objects)
         {
+            // Get the direction to the target
             Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+            // Get the distance to the target
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            // If the distance to the target is less than the closest distance on record
+            if (dSqrToTarget < closestDistanceOnRecord)
             {
-                closestDistanceSqr = dSqrToTarget;
-                closestObjectWithTag = potentialObject;
+                // Set the closest distance on record to the new distance
+                closestDistanceOnRecord = dSqrToTarget;
+                // Set the potential object to the closest one in the array, since this might be the closest object in the array
+                closestObjectInArray = potentialObject;
             }
         }
-
-        return closestObjectWithTag;
+        // After the loop is finished, return the closest object in array
+        return closestObjectInArray;
     }
 }
