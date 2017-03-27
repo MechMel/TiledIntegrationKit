@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(PDKObjectProperties))]
 
 public class MobBehaviour : MonoBehaviour
 {
@@ -17,7 +21,35 @@ public class MobBehaviour : MonoBehaviour
 
     #region Mob Stats
     // Basic health
-    public float health;
+    public int health;
+    // Setup the get set stuff for saving the health
+    public int Health
+    {
+        get
+        {
+            // If the health property exists in the object properties
+            if (pdkObjectProperties != null && pdkObjectProperties.objectProperties.ContainsKey("health"))
+            {
+                if(pdkObjectProperties.objectProperties.ContainsKey("health"))
+                    // Grab the value of the health from the PDKObjectProperties and returns it
+                    return int.Parse(pdkObjectProperties.objectProperties["health"]);
+                else
+                    // Otherwise, return -1 indicating a null value
+                    return 1;
+            }
+            else
+            {
+                // Otherwise, return 1 indicating a null value
+                return 1;
+            }
+        }
+        set
+        {
+            // Sets the local variable as well as updating it in the PDKObjectProperties
+            health = value;
+            pdkObjectProperties.objectProperties["health"] = health.ToString();
+        }
+    }
     // Basic damage
     public float damage;
     // Basic speed
@@ -69,16 +101,21 @@ public class MobBehaviour : MonoBehaviour
     public GameObject[] gameObjectsWithComponents;
     // The rigidbody of the mob
     [HideInInspector]
-    public Rigidbody2D rigidBody2D; 
+    public Rigidbody2D rigidBody2D;
+    // The PDK Object Properties of the mob
+    [HideInInspector]
+    public PDKObjectProperties pdkObjectProperties;
     #endregion
 
-    void Start()
+    void Awake()
     {
         #region SetComponents
         // Set the spriteRenderer
         //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         // Set the rigidBody2D
         rigidBody2D = GetComponentInChildren<Rigidbody2D>();
+        // Set the PDKObjectProperties variable for easy reference
+        pdkObjectProperties = GetComponent<PDKObjectProperties>();
         #endregion
         #region SetBasic
         // Check to update gravity
@@ -87,6 +124,14 @@ public class MobBehaviour : MonoBehaviour
         // Freeze the rotation
         rigidBody2D.freezeRotation = true;
         #endregion
+        #region SetupPDKObjectProperties
+        // This region sets up the PDKObjectProperties, so the object can be hydrated and dehydrated
+
+        // Initilize the objectProperties
+        pdkObjectProperties.objectProperties = new Dictionary<string, string>();
+        // Declare the variables that will be saved when the object is deloaded
+        pdkObjectProperties.objectProperties.Add("health", health.ToString());
+        #endregion     
     }
 
     void Update()
@@ -105,6 +150,9 @@ public class MobBehaviour : MonoBehaviour
                 gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
         }
 
+        // Update the debug text
+        if (transform.Find("DebugText") != null)
+            transform.Find("DebugText").GetComponent<TextMesh>().text = GetComponent<PDKObjectProperties>().objectProperties["health"];
         // Update the grounded state
         /*
         // Get the collision points
@@ -121,7 +169,7 @@ public class MobBehaviour : MonoBehaviour
         }
         */
         // Check for death
-        if (health <= 0)
+        if (Health <= 0)
             Destroy(gameObject);
 
         #region PATROL
@@ -266,7 +314,7 @@ public class MobBehaviour : MonoBehaviour
     }
 
     #region Invokeable Functions
-    // This group of functions is designed to be invoked from the outside
+    // This group of functions are designed to be invoked from the outside
 
     void MoveLeft(bool setMoveLeft)
     {
@@ -286,7 +334,7 @@ public class MobBehaviour : MonoBehaviour
     void Hit(int damage)
     {
         // When hit, subtract the health
-        health -= damage;
+        Health -= damage;
     }
     #endregion
 

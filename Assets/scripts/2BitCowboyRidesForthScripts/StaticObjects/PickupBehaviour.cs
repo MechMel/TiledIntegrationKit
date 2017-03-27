@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PickupBehaviour : MonoBehaviour {
 
@@ -16,6 +17,34 @@ public class PickupBehaviour : MonoBehaviour {
     [Header("---ITEMBOX VARIABLES---")]
     // The health of the pickup
     public int health;
+    // Setup the get set stuff for saving the health
+    public int Health
+    {
+        get
+        {
+            // If the health property exists in the object properties
+            if (pdkObjectProperties != null && pdkObjectProperties.objectProperties.ContainsKey("health"))
+            {
+                if (pdkObjectProperties.objectProperties.ContainsKey("health"))
+                    // Grab the value of the health from the PDKObjectProperties and returns it
+                    return int.Parse(pdkObjectProperties.objectProperties["health"]);
+                else
+                    // Otherwise, return -1 indicating a null value
+                    return 1;
+            }
+            else
+            {
+                // Otherwise, return 1 indicating a null value
+                return 1;
+            }
+        }
+        set
+        {
+            // Sets the local variable as well as updating it in the PDKObjectProperties
+            health = value;
+            pdkObjectProperties.objectProperties["health"] = health.ToString();
+        }
+    }
     // Whether the pickup is affected by gravity
     public bool isAffectedByGravity;
     // The array of images
@@ -27,18 +56,32 @@ public class PickupBehaviour : MonoBehaviour {
     // The amount of objects to drop
     [Tooltip("The amount of items to drop.")]
     public int amountToDrop;
-    
+    // While being destroyed, this is set to true, to avoid multiple drops
+    private bool beingDestroyed = false;
     #endregion
     #region Components
     // The sprite renderer of the pickup
     [HideInInspector]
     SpriteRenderer sprRend;
+    // The PDK Object Properties of the pickup
+    [HideInInspector]
+    public PDKObjectProperties pdkObjectProperties;
     #endregion
 
-    void Start ()
+    void Awake ()
     {
         // Setup the sprite renderer
         sprRend = GetComponent<SpriteRenderer>();
+        // Set the PDKObjectProperties variable for easy reference
+        pdkObjectProperties = GetComponent<PDKObjectProperties>();
+        #region SetupPDKObjectProperties
+        // This region sets up the PDKObjectProperties, so the object can be hydrated and dehydrated
+
+        // Initilize the objectProperties
+        pdkObjectProperties.objectProperties = new Dictionary<string, string>();
+        // Declare the variables that will be saved when the object is deloaded
+        pdkObjectProperties.objectProperties.Add("health", health.ToString());
+        #endregion     
 
         // Check to turn off gravity
         if (isAffectedByGravity)
@@ -58,10 +101,11 @@ public class PickupBehaviour : MonoBehaviour {
         if (pickupType == PickupType.ITEMBOX)
         {
             // Check if destroyed
-            if (health <= 0)
+            if (Health <= 0 && !beingDestroyed)
             {
                 // Destroy the object
-                Destroy(gameObject);
+                Invoke("DestroySelfWithDelay", 0.2f);
+                beingDestroyed = true;
                 // If the amount to drop is greater than zero
                 if(amountToDrop > 0)
                 {
@@ -78,7 +122,8 @@ public class PickupBehaviour : MonoBehaviour {
             else
             {
                 // Update the sprite of the pickup based on the health
-                sprRend.sprite = imagesOfPickup[Mathf.RoundToInt(health - 1)];
+                if(Health - 1 >= 0)
+                    sprRend.sprite = imagesOfPickup[Mathf.RoundToInt(Health - 1)];
             }
         }
         #endregion
@@ -99,6 +144,11 @@ public class PickupBehaviour : MonoBehaviour {
         // If pickup is a BUFF
         if (pickupType == PickupType.ITEMBOX)
             // Decrement health when hit
-            health -= damage;
+            Health -= damage;
+    }
+
+    void DestroySelfWithDelay()
+    {
+        Destroy(gameObject);
     }
 }
