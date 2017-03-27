@@ -87,10 +87,11 @@ public class MobBehaviour : MonoBehaviour
     public bool moveJump = false;
 
     // With a PATROL mob, this will need to be set
-    [Tooltip("The left boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
-    public Transform patrolPoint1;
-    [Tooltip("The right boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
-    public Transform patrolPoint2;
+    public Vector2 patrolPoint1;
+    public Vector2 patrolPoint2;
+    // If one of the patrol points wasn't set, these will be put to true
+    private bool patrolPoint1WasntSet = true;
+    private bool patrolPoint2WasntSet = true;
     // This will need to be set for CHASE MOBS
     [Tooltip("The rotatable child of the mob. NOTE: Only necessary to set if the mob is a CHASE type.")]
     public GameObject rotatableObject;
@@ -131,7 +132,120 @@ public class MobBehaviour : MonoBehaviour
         pdkObjectProperties.objectProperties = new Dictionary<string, string>();
         // Declare the variables that will be saved when the object is deloaded
         pdkObjectProperties.objectProperties.Add("health", health.ToString());
-        #endregion     
+        #endregion
+        #region SetupSpecificMobBehaviourVars
+
+        #region PATROL
+        if (mobType == MobType.PATROL)
+        {
+            #region InitPatrolPoints
+            // Initilaze the patrol points based off of either hitting a wall or an edge
+
+            /*
+             * Concept:
+             * 
+             * Basically, there will be a loop of raycasts out to a given distance.  
+             * The raycast distance increments.
+             * The raycasts will go in the pattern shown:
+             * 
+             *     -+-+-+-+-+
+             *     
+             * The - represents a raycast checking for a tile collision on the horizontal axis.
+             * The + represents a raycast checking for a tile collision on the vertical axis.
+             * 
+             * In this way, the raycasting checks for a wall, than a hole in the ground.
+             * If that fails, it will move over one more tile, and do the same thing.
+             * This will repeat out to a given distance, since you probably don't want enemies potentially patrolling accross the whole map.
+            */
+
+            // The maximum distance the mob will patrol on both sides
+            int maxDistanceToPatrol = 10;
+
+            // Loop through for the first patrol point
+            for (int i = (int)transform.position.x; i > (int)transform.position.x - maxDistanceToPatrol; i--)
+            {
+                // The object that was hit downwards, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitDown = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.down, 1f);
+                // The object that was hit to the left, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitLeft = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.left, 1f);
+                // Make sure that the object that was hit isn't null
+                if (!objectThatWasHitDown)
+                {
+                    // First off, check downwards to see if we have reached an edge
+                    //if (objectThatWasHitDown.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the left
+                        patrolPoint1 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint1WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+                // Make sure that the object that was hit isn't null
+                else if (objectThatWasHitLeft)
+                {
+                    // If this fails, check to the left to see if we have reached a wall
+                    if (objectThatWasHitLeft.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the left
+                        patrolPoint1 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint1WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+            }
+
+            // Loop through for the second patrol point
+            for (int i = (int)transform.position.x; i < (int)transform.position.x + maxDistanceToPatrol; i++)
+            {
+                // The object that was hit downwards, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitDown = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.down, 1f);
+                // The object that was hit to the right, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitRight = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.right, 1f);
+                // Make sure that the object that was hit isn't null
+                if(!objectThatWasHitDown)
+                {
+                    // First off, check downwards to see if we have reached an edge
+                    //if (objectThatWasHitDown.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the right
+                        patrolPoint2 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint2WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+                // Make sure that the object that was hit isn't null
+                else if (objectThatWasHitRight)
+                {
+                    // If this fails, check to the right to see if we have reached a wall
+                    if (objectThatWasHitRight.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the right
+                        patrolPoint2 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint2WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+            }
+
+            // Just in case those 2 loops didn't create a patrol point, meaning that there wasn't a limit in the patrol distance
+            if (patrolPoint1WasntSet)
+                patrolPoint1 = new Vector2(transform.position.x - maxDistanceToPatrol, transform.position.y);
+            if (patrolPoint2WasntSet)
+                patrolPoint2 = new Vector2(transform.position.x + maxDistanceToPatrol, transform.position.y);
+            #endregion
+
+        }
+        #endregion
+
+        #endregion
     }
 
     void Update()
@@ -185,7 +299,7 @@ public class MobBehaviour : MonoBehaviour
             if(spriteFlipped)
             {
                 // If close enough to the patrol point
-                if (transform.position.x < patrolPoint1.position.x)
+                if (transform.position.x < patrolPoint1.x)
                     // Flip direction
                     spriteFlipped = false;
                 else
@@ -196,7 +310,7 @@ public class MobBehaviour : MonoBehaviour
             else
             {
                 // If close enough to the patrol point
-                if (transform.position.x > patrolPoint2.position.x)
+                if (transform.position.x > patrolPoint2.x)
                     // Flip direction
                     spriteFlipped = true;
                 else
@@ -340,20 +454,33 @@ public class MobBehaviour : MonoBehaviour
 
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {
-        GameObject closestObjectWithTag = null;
-        float closestDistanceSqr = Mathf.Infinity;
+        // Returns the nearest object in the given array of GameObjects
+        // This probably isn't the most efficent way to to this, but it works, provided you have a small array
+
+        // This stores where the closest object from the given position
+        GameObject closestObjectInArray = null;
+        // This stores the distance that the closest object so far has
+        float closestDistanceOnRecord = Mathf.Infinity;
+        // The base position to check distance from
         Vector3 currentPosition = transform.position;
+
+        // For each potential GameObject in the objects
         foreach (GameObject potentialObject in objects)
         {
+            // Get the direction to the target
             Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+            // Get the distance to the target
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            // If the distance to the target is less than the closest distance on record
+            if (dSqrToTarget < closestDistanceOnRecord)
             {
-                closestDistanceSqr = dSqrToTarget;
-                closestObjectWithTag = potentialObject;
+                // Set the closest distance on record to the new distance
+                closestDistanceOnRecord = dSqrToTarget;
+                // Set the potential object to the closest one in the array, since this might be the closest object in the array
+                closestObjectInArray = potentialObject;
             }
         }
-
-        return closestObjectWithTag;
+        // After the loop is finished, return the closest object in array
+        return closestObjectInArray;
     }
 }
