@@ -56,6 +56,8 @@ public class MobBehaviour : MonoBehaviour
     public float speed;
     // The check for whether the mob is affected by gravity
     public bool isAffectedByGravity;
+    // Whether or not the mob can get hurt, usefull when not dealing with a mob
+    public bool canGetHurt;
     // How far away the mob can see
     public float visibleDistance;
     // Whether the sprite is flipped or not
@@ -283,7 +285,7 @@ public class MobBehaviour : MonoBehaviour
         }
         */
         // Check for death
-        if (Health <= 0)
+        if (Health <= 0 && canGetHurt)
             Destroy(gameObject);
 
         #region PATROL
@@ -448,7 +450,8 @@ public class MobBehaviour : MonoBehaviour
     void Hit(int damage)
     {
         // When hit, subtract the health
-        Health -= damage;
+        if(canGetHurt)
+            Health -= damage;
     }
     #endregion
 

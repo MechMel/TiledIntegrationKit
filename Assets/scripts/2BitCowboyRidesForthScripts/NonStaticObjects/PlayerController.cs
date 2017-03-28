@@ -331,7 +331,6 @@ public class PlayerController : MonoBehaviour {
             // Else if the player is touching the left wall
             else if (playerTouchingRightWall && playerFlipped)
             {
-                Debug.Log("LEFT WALL");
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
                 // Add force upwards to the rigidbody
@@ -340,7 +339,6 @@ public class PlayerController : MonoBehaviour {
             // Else if the player is touching the right wall
             else if (playerTouchingRightWall && !playerFlipped)
             {
-                Debug.Log("RIGHT WALL");
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
                 // Rotate the bullet left
@@ -409,13 +407,21 @@ public class PlayerController : MonoBehaviour {
     {
         playerCanSlide = true;
     }
-
+    #endregion
+    #region Outside Invoke Functions
     void Hit(int damage)
     {
         Debug.Log("Player was just hit!");
         playerHealth -= damage;
     }
+
+    void AddHealth(int amountOfHealthToAdd)
+    {
+        // Add the health, up to the max
+        playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
+    }
     #endregion
+
 
     bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
     {

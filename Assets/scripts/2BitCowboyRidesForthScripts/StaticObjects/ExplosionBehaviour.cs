@@ -14,7 +14,7 @@ public class ExplosionBehaviour : MonoBehaviour {
         Invoke("Explode", 0.2f);
     }
 
-	void Explode ()
+	void Explode()
     {
         // Run the explosion animation
         GetComponent<Animator>().SetTrigger("TriggerExplosion");
