@@ -132,7 +132,7 @@ public class PickupBehaviour : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         // If the pickup is of BUFF pickup type
-        if (pickupType == PickupType.BUFF && other.tag != "Bullet")
+        if (pickupType == PickupType.BUFF && other.tag == "Player")
         {
             // Destroy itself
             Destroy(gameObject);

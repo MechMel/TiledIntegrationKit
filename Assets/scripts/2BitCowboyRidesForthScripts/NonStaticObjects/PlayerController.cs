@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        // FixedUpdate() has the input and movement
+        // Update() has the input and movement
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
         bool Right = Input.GetButton("Right") || Input.GetButton("dPadRight");
         bool Up = Input.GetButtonDown("Up") || Input.GetButtonDown("Jump");
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour {
         playerGrounded = false;
 
         // Get the collision points
-        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid")) ;
         Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
 
@@ -253,8 +253,7 @@ public class PlayerController : MonoBehaviour {
                     Invoke("WaitForSlide", playerWaitToSlideTime);
                     // Stop the falling
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.65f);
-                }
-                    
+                }                   
             }
 
             // Update the enabled of the collider
@@ -311,7 +310,7 @@ public class PlayerController : MonoBehaviour {
             if (!playerGrounded && !playerCanDoubleJump)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
                     transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
-            else if(playerTouchingLeftWall || playerTouchingRightWall)
+            else if(playerTouchingLeftWall && !playerGrounded || playerTouchingRightWall && !playerGrounded)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPosOther").transform.position.x,
                     transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
             else
@@ -329,7 +328,7 @@ public class PlayerController : MonoBehaviour {
                 newBullet.transform.Rotate(new Vector3(0, 0, 270));
             }     
             // Else if the player is touching the left wall
-            else if (playerTouchingRightWall && playerFlipped)
+            else if (playerTouchingRightWall && playerFlipped && !playerGrounded)
             {
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
@@ -337,7 +336,7 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
             }
             // Else if the player is touching the right wall
-            else if (playerTouchingRightWall && !playerFlipped)
+            else if (playerTouchingRightWall && !playerFlipped && !playerGrounded)
             {
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
