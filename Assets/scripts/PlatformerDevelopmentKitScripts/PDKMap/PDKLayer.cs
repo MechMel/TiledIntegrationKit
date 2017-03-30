@@ -24,11 +24,7 @@ public class PDKLayer
     public int[] tileMap;
     // Object Layer Attributes
     public PDKObject[] objects;
-    public PDKDehydratedObjectsHashSet[][] dehydratedObjectMap;
-    // TODO: REMOVE THIS LATER
-    public PDKDehydratedObjectsHashSet[][] test2DehydratedObjectHashSet;
-    public PDKDehydratedObjectsHashSet[] test1DehydratedObjectHashSet;
-    public PDKDehydratedObjectsHashSet test0DehydratedObjectHashSet;
+    public PDKSerializable2DArray dehydratedObjectMap;
     public PDKGameObjectsHashSet hydratedObjects;
     // Image Layer Attributes
     public Texture2D image;
@@ -46,6 +42,14 @@ public class PDKLayer
             {
                 // Apply the appropriate prefab
                 thisObject.prefab = objectsInMap[thisObject.type];
+                if (thisObject.prefab == null)
+                {
+                    Debug.Log("null");
+                }
+                else
+                {
+                    Debug.Log("not null");
+                }
             }
         }
     }
@@ -56,20 +60,24 @@ public class PDKLayer
     {
         // Create a new hash set to put all objects in the given rect into
         HashSet<PDKObject> objectsInRect = new HashSet<PDKObject>();
+        // TODO: COMMENT LATER
+        PDKDehydratedObjectsHashSet hashSetToUse;
 
         // Go through each collumn in the given rect
-        for (int currentCollumnIndex = (int)rectToGet.xMin; currentCollumnIndex < (int)rectToGet.xMax; currentCollumnIndex++)
+        for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
         {
             // Go through each row in this collumn
             for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
             {
+                // TODO: COMMENT LATER
+                hashSetToUse = dehydratedObjectMap.GetItem(currentColumnIndex, currentRowIndex);
                 // For each object in this slot
-                foreach (PDKObject currentObject in dehydratedObjectMap[currentCollumnIndex][currentRowIndex])
+                foreach (PDKObject currentObject in hashSetToUse)
                 {
                     // Add this object to the objects to return
                     objectsInRect.Add(currentObject);
                     // Remove this object from this slot in the object map
-                    dehydratedObjectMap[currentCollumnIndex][currentRowIndex].Remove(currentObject);
+                    hashSetToUse.Remove(currentObject);
                 }
             }
         }
@@ -81,18 +89,10 @@ public class PDKLayer
     // Places an object in the dehydrated objects map
     public void PutObjectInDehydratedMap(PDKObject objectToInsert, int tileWidth, int tileHeight)
     {
-        // Go through each collumn of the map that this object exists in
-        for (int currentColumnIndex = (int)objectToInsert.objectRect.x / tileWidth;
-            currentColumnIndex < Math.Ceiling(objectToInsert.objectRect.xMax / tileHeight); currentColumnIndex++)
-        {
-            // Go through each row of the map that this object exists in
-            for (int currentRowIndex = (int)objectToInsert.objectRect.y / tileWidth;
-                currentRowIndex < Math.Ceiling(objectToInsert.objectRect.yMax / tileHeight); currentRowIndex++)
-            {
-                // Add this object at this position, to the object map
-                dehydratedObjectMap[currentColumnIndex][currentRowIndex].Add(objectToInsert);
-            }
-        }
+        // TODO: COMMENT LATER
+        PDKDehydratedObjectsHashSet hashSetToUse = dehydratedObjectMap.GetItem(objectToInsert.x, objectToInsert.y);
+        // Add this object at this position, to the object map
+        hashSetToUse.Add(objectToInsert);
     }
 
 
@@ -117,15 +117,19 @@ public class PDKLayer
     {
         // Create a new hash set to put all objects in the given rect into
         HashSet<PDKObject> objectsInRect = new HashSet<PDKObject>();
+        // TODO: COMMENT LATER
+        PDKDehydratedObjectsHashSet hashSetToUse;
 
         // Go through each collumn in the given rect
-        for (int currentCollumnIndex = (int)rectToGet.xMin; currentCollumnIndex < (int)rectToGet.xMax; currentCollumnIndex++)
+        for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
         {
             // Go through each row in this collumn
             for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
             {
+                // TODO: COMMENT LATER
+                hashSetToUse = dehydratedObjectMap.GetItem(currentColumnIndex, currentRowIndex);
                 // For each object at this slot in the dehydrated objects map
-                foreach (PDKObject currentObject in dehydratedObjectMap[currentCollumnIndex][currentRowIndex])
+                foreach (PDKObject currentObject in hashSetToUse)
                 {
                     // Add the current object to the objects to return
                     objectsInRect.Add(currentObject);
@@ -139,16 +143,12 @@ public class PDKLayer
     // Removes all instances of an object from the dehydrated objects map
     public void RemoveObjectFromDehydratedMap(PDKObject objectToRemove)
     {
-        // Go through each collumn this object exists in
-        for (int currentCollumnIndex = (int)objectToRemove.objectRect.xMin; currentCollumnIndex < (int)objectToRemove.objectRect.xMax; currentCollumnIndex++)
-        {
-            // Go through each row in this collumn
-            for (int currentRowIndex = (int)objectToRemove.objectRect.yMin; currentRowIndex < (int)objectToRemove.objectRect.yMax; currentRowIndex++)
-            {
-                // Remove the current object from this slot in the dehydrated objects map
-                dehydratedObjectMap[currentCollumnIndex][currentRowIndex].Remove(objectToRemove);
-            }
-        }
+        // TODO: COMMENT LATER
+        PDKDehydratedObjectsHashSet hashSetToUse;
+        // TODO: COMMENT LATER
+        hashSetToUse = dehydratedObjectMap.GetItem(objectToRemove.x, objectToRemove.y);
+        // Remove the current object from this slot in the dehydrated objects map
+        hashSetToUse.Remove(objectToRemove);
     }
     #endregion
 
@@ -180,6 +180,11 @@ public class PDKLayer
         PDKObjectProperties hydratedObjectProperties;
 
         // Instantiate this object
+        if (objectToHydrate.prefab == null)
+        {
+            hydratedObject = (GameObject)GameObject.Instantiate(objectToHydrate.prefab, new Vector3(objectToHydrate.x, objectToHydrate.y, 0), new Quaternion(0, 0, 0, 0));
+            hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
+        }
         hydratedObject = (GameObject)GameObject.Instantiate(objectToHydrate.prefab, new Vector3(objectToHydrate.x, objectToHydrate.y, 0), new Quaternion(0, 0, 0, 0));
         hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
         // Copy each property from the dehydrated objet to the hydrated object

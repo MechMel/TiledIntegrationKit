@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Sources: https://github.com/TheOddler/unity-helpers/blob/master/SerializableDictionary.cs
 */
 using UnityEngine;

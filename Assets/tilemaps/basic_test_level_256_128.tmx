@@ -168,7 +168,7 @@
   </object>
   <object id="4" type="Player" gid="164" x="288" y="240" width="16" height="16"/>
   <object id="5" gid="164" x="288" y="240" width="16" height="16"/>
-  <object id="6" name="s1" type="Enemy" gid="229" x="288" y="272" width="16" height="16">
+  <object id="6" name="s1" type="Enemy" gid="229" x="160" y="528" width="16" height="16">
    <properties>
     <property name="Health" value="3"/>
    </properties>

@@ -276,7 +276,7 @@ public class PDKLevelRenderer : MonoBehaviour
                             // Remember that there is tile at this position
                             positionsWithTiles.Add(thisTilePosition);
                         }
-                        else // If tehre is a tile already at this position
+                        else // If there is a tile already at this position
                         {
                             #region Get the Old Pixels / Setup isCompletelyOpaque
                             // Get the old stack of tiles

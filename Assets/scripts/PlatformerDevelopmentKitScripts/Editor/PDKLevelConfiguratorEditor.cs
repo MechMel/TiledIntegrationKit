@@ -43,7 +43,7 @@ public class PDKLevelConfiguratorEditor : Editor
         if (levelConfigurator.pdkMap.tilesets != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // Tell the user these are tileset fields
-            editorUtilities.Field("Tilesets");
+            editorUtilities.Field("Tilesets:");
             // For each tilset in this map
             for (int currentTileset = 0; currentTileset < levelConfigurator.pdkMap.tilesets.Length; currentTileset++)
             {
@@ -57,7 +57,7 @@ public class PDKLevelConfiguratorEditor : Editor
         if (levelConfigurator.pdkMap.objectsInMap != null && levelConfigurator.mapType != PDKLevelConfigurator.mapTypes.None)
         {
             // Tell the user these are object prefab fields
-            editorUtilities.Field("Object Prefabs");
+            editorUtilities.Field("Object Prefabs:");
             // For each layer in this map
             foreach (string currentObjectType in levelConfigurator.pdkMap.objectsInMap.Keys.ToList())
             {
