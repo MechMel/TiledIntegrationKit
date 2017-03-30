@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(PDKObjectProperties))]
 
 public class MobBehaviour : MonoBehaviour
 {
@@ -17,13 +21,43 @@ public class MobBehaviour : MonoBehaviour
 
     #region Mob Stats
     // Basic health
-    public float health;
+    public int health;
+    // Setup the get set stuff for saving the health
+    public int Health
+    {
+        get
+        {
+            // If the health property exists in the object properties
+            if (pdkObjectProperties != null && pdkObjectProperties.objectProperties.ContainsKey("health"))
+            {
+                if(pdkObjectProperties.objectProperties.ContainsKey("health"))
+                    // Grab the value of the health from the PDKObjectProperties and returns it
+                    return int.Parse(pdkObjectProperties.objectProperties["health"]);
+                else
+                    // Otherwise, return -1 indicating a null value
+                    return 1;
+            }
+            else
+            {
+                // Otherwise, return 1 indicating a null value
+                return 1;
+            }
+        }
+        set
+        {
+            // Sets the local variable as well as updating it in the PDKObjectProperties
+            health = value;
+            pdkObjectProperties.objectProperties["health"] = health.ToString();
+        }
+    }
     // Basic damage
     public float damage;
     // Basic speed
     public float speed;
     // The check for whether the mob is affected by gravity
     public bool isAffectedByGravity;
+    // Whether or not the mob can get hurt, usefull when not dealing with a mob
+    public bool canGetHurt;
     // How far away the mob can see
     public float visibleDistance;
     // Whether the sprite is flipped or not
@@ -55,10 +89,11 @@ public class MobBehaviour : MonoBehaviour
     public bool moveJump = false;
 
     // With a PATROL mob, this will need to be set
-    [Tooltip("The left boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
-    public Transform patrolPoint1;
-    [Tooltip("The right boundary of the mob. NOTE: Only necessary to set if the mob is a PATROL type.")]
-    public Transform patrolPoint2;
+    public Vector2 patrolPoint1;
+    public Vector2 patrolPoint2;
+    // If one of the patrol points wasn't set, these will be put to true
+    private bool patrolPoint1WasntSet = true;
+    private bool patrolPoint2WasntSet = true;
     // This will need to be set for CHASE MOBS
     [Tooltip("The rotatable child of the mob. NOTE: Only necessary to set if the mob is a CHASE type.")]
     public GameObject rotatableObject;
@@ -69,16 +104,21 @@ public class MobBehaviour : MonoBehaviour
     public GameObject[] gameObjectsWithComponents;
     // The rigidbody of the mob
     [HideInInspector]
-    public Rigidbody2D rigidBody2D; 
+    public Rigidbody2D rigidBody2D;
+    // The PDK Object Properties of the mob
+    [HideInInspector]
+    public PDKObjectProperties pdkObjectProperties;
     #endregion
 
-    void Start()
+    void Awake()
     {
         #region SetComponents
         // Set the spriteRenderer
         //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         // Set the rigidBody2D
         rigidBody2D = GetComponentInChildren<Rigidbody2D>();
+        // Set the PDKObjectProperties variable for easy reference
+        pdkObjectProperties = GetComponent<PDKObjectProperties>();
         #endregion
         #region SetBasic
         // Check to update gravity
@@ -86,6 +126,127 @@ public class MobBehaviour : MonoBehaviour
             rigidBody2D.gravityScale = 0;
         // Freeze the rotation
         rigidBody2D.freezeRotation = true;
+        #endregion
+        #region SetupPDKObjectProperties
+        // This region sets up the PDKObjectProperties, so the object can be hydrated and dehydrated
+
+        // Initilize the objectProperties
+        pdkObjectProperties.objectProperties = new Dictionary<string, string>();
+        // Declare the variables that will be saved when the object is deloaded
+        pdkObjectProperties.objectProperties.Add("health", health.ToString());
+        #endregion
+        #region SetupSpecificMobBehaviourVars
+
+        #region PATROL
+        if (mobType == MobType.PATROL)
+        {
+            #region InitPatrolPoints
+            // Initilaze the patrol points based off of either hitting a wall or an edge
+
+            /*
+             * Concept:
+             * 
+             * Basically, there will be a loop of raycasts out to a given distance.  
+             * The raycast distance increments.
+             * The raycasts will go in the pattern shown:
+             * 
+             *     -+-+-+-+-+
+             *     
+             * The - represents a raycast checking for a tile collision on the horizontal axis.
+             * The + represents a raycast checking for a tile collision on the vertical axis.
+             * 
+             * In this way, the raycasting checks for a wall, than a hole in the ground.
+             * If that fails, it will move over one more tile, and do the same thing.
+             * This will repeat out to a given distance, since you probably don't want enemies potentially patrolling accross the whole map.
+            */
+
+            // The maximum distance the mob will patrol on both sides
+            int maxDistanceToPatrol = 10;
+
+            // Loop through for the first patrol point
+            for (int i = (int)transform.position.x; i > (int)transform.position.x - maxDistanceToPatrol; i--)
+            {
+                // The object that was hit downwards, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitDown = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.down, 1f);
+                // The object that was hit to the left, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitLeft = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.left, 1f);
+                // Make sure that the object that was hit isn't null
+                if (!objectThatWasHitDown)
+                {
+                    // First off, check downwards to see if we have reached an edge
+                    //if (objectThatWasHitDown.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the left
+                        patrolPoint1 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint1WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+                // Make sure that the object that was hit isn't null
+                else if (objectThatWasHitLeft)
+                {
+                    // If this fails, check to the left to see if we have reached a wall
+                    if (objectThatWasHitLeft.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the left
+                        patrolPoint1 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint1WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+            }
+
+            // Loop through for the second patrol point
+            for (int i = (int)transform.position.x; i < (int)transform.position.x + maxDistanceToPatrol; i++)
+            {
+                // The object that was hit downwards, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitDown = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.down, 1f);
+                // The object that was hit to the right, possibly kept to null if nothing was hit
+                RaycastHit2D objectThatWasHitRight = Physics2D.Raycast(new Vector2(i, transform.position.y), Vector2.right, 1f);
+                // Make sure that the object that was hit isn't null
+                if(!objectThatWasHitDown)
+                {
+                    // First off, check downwards to see if we have reached an edge
+                    //if (objectThatWasHitDown.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the right
+                        patrolPoint2 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint2WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+                // Make sure that the object that was hit isn't null
+                else if (objectThatWasHitRight)
+                {
+                    // If this fails, check to the right to see if we have reached a wall
+                    if (objectThatWasHitRight.transform.gameObject.tag == "Tile")
+                    {
+                        // If so, set this current spot in the loop to the edge of patroling to the right
+                        patrolPoint2 = new Vector2(i, transform.position.y);
+                        // Make sure to set the wasn't set to false
+                        patrolPoint2WasntSet = false;
+                        // Break out of the loop, since we found what we were looking for
+                        break;
+                    }
+                }
+            }
+
+            // Just in case those 2 loops didn't create a patrol point, meaning that there wasn't a limit in the patrol distance
+            if (patrolPoint1WasntSet)
+                patrolPoint1 = new Vector2(transform.position.x - maxDistanceToPatrol, transform.position.y);
+            if (patrolPoint2WasntSet)
+                patrolPoint2 = new Vector2(transform.position.x + maxDistanceToPatrol, transform.position.y);
+            #endregion
+
+        }
+        #endregion
+
         #endregion
     }
 
@@ -105,6 +266,9 @@ public class MobBehaviour : MonoBehaviour
                 gameObjectsWithComponents[i].GetComponent<Animator>().SetInteger("AnimState", animState);
         }
 
+        // Update the debug text
+        if (transform.Find("DebugText") != null)
+            transform.Find("DebugText").GetComponent<TextMesh>().text = GetComponent<PDKObjectProperties>().objectProperties["health"];
         // Update the grounded state
         /*
         // Get the collision points
@@ -121,7 +285,7 @@ public class MobBehaviour : MonoBehaviour
         }
         */
         // Check for death
-        if (health <= 0)
+        if (Health <= 0 && canGetHurt)
             Destroy(gameObject);
 
         #region PATROL
@@ -137,7 +301,7 @@ public class MobBehaviour : MonoBehaviour
             if(spriteFlipped)
             {
                 // If close enough to the patrol point
-                if (transform.position.x < patrolPoint1.position.x)
+                if (transform.position.x < patrolPoint1.x)
                     // Flip direction
                     spriteFlipped = false;
                 else
@@ -148,7 +312,7 @@ public class MobBehaviour : MonoBehaviour
             else
             {
                 // If close enough to the patrol point
-                if (transform.position.x > patrolPoint2.position.x)
+                if (transform.position.x > patrolPoint2.x)
                     // Flip direction
                     spriteFlipped = true;
                 else
@@ -266,7 +430,7 @@ public class MobBehaviour : MonoBehaviour
     }
 
     #region Invokeable Functions
-    // This group of functions is designed to be invoked from the outside
+    // This group of functions are designed to be invoked from the outside
 
     void MoveLeft(bool setMoveLeft)
     {
@@ -286,26 +450,40 @@ public class MobBehaviour : MonoBehaviour
     void Hit(int damage)
     {
         // When hit, subtract the health
-        health -= damage;
+        if(canGetHurt)
+            Health -= damage;
     }
     #endregion
 
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {
-        GameObject closestObjectWithTag = null;
-        float closestDistanceSqr = Mathf.Infinity;
+        // Returns the nearest object in the given array of GameObjects
+        // This probably isn't the most efficent way to to this, but it works, provided you have a small array
+
+        // This stores where the closest object from the given position
+        GameObject closestObjectInArray = null;
+        // This stores the distance that the closest object so far has
+        float closestDistanceOnRecord = Mathf.Infinity;
+        // The base position to check distance from
         Vector3 currentPosition = transform.position;
+
+        // For each potential GameObject in the objects
         foreach (GameObject potentialObject in objects)
         {
+            // Get the direction to the target
             Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+            // Get the distance to the target
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            // If the distance to the target is less than the closest distance on record
+            if (dSqrToTarget < closestDistanceOnRecord)
             {
-                closestDistanceSqr = dSqrToTarget;
-                closestObjectWithTag = potentialObject;
+                // Set the closest distance on record to the new distance
+                closestDistanceOnRecord = dSqrToTarget;
+                // Set the potential object to the closest one in the array, since this might be the closest object in the array
+                closestObjectInArray = potentialObject;
             }
         }
-
-        return closestObjectWithTag;
+        // After the loop is finished, return the closest object in array
+        return closestObjectInArray;
     }
 }

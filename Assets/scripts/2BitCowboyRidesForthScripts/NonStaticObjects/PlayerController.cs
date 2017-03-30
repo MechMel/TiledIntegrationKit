@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject leftWallCheck;
     #endregion
    
-    void Start ()
+    void Awake ()
     {
         // Hookup components
         anim = GetComponent<Animator>();
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
-        // FixedUpdate() has the input and movement
+        // Update() has the input and movement
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
         bool Right = Input.GetButton("Right") || Input.GetButton("dPadRight");
         bool Up = Input.GetButtonDown("Up") || Input.GetButtonDown("Jump");
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour {
         playerGrounded = false;
 
         // Get the collision points
-        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid")) ;
         Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
 
@@ -253,8 +253,7 @@ public class PlayerController : MonoBehaviour {
                     Invoke("WaitForSlide", playerWaitToSlideTime);
                     // Stop the falling
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.65f);
-                }
-                    
+                }                   
             }
 
             // Update the enabled of the collider
@@ -311,6 +310,9 @@ public class PlayerController : MonoBehaviour {
             if (!playerGrounded && !playerCanDoubleJump)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
                     transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
+            else if(playerTouchingLeftWall && !playerGrounded || playerTouchingRightWall && !playerGrounded)
+                newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPosOther").transform.position.x,
+                    transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
             else
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPos").transform.position.x,
                     transform.Find("BulletPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
@@ -324,9 +326,27 @@ public class PlayerController : MonoBehaviour {
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
                 // Rotate the bullet down
                 newBullet.transform.Rotate(new Vector3(0, 0, 270));
+            }     
+            // Else if the player is touching the left wall
+            else if (playerTouchingRightWall && playerFlipped && !playerGrounded)
+            {
+                // Set the bullet x velocity to 10
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+                // Add force upwards to the rigidbody
+                playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
+            }
+            // Else if the player is touching the right wall
+            else if (playerTouchingRightWall && !playerFlipped && !playerGrounded)
+            {
+                // Set the bullet x velocity to -10
+                newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+                // Rotate the bullet left
+                newBullet.transform.Rotate(new Vector3(0, 0, 180));
+                // Set the upwards velocity to zero, to counter the gravity
+                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
             }
             // Else, if the player is facing left
-            else if (playerFlipped || playerTouchingRightWall)
+            else if (playerFlipped)
             {
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
@@ -346,7 +366,6 @@ public class PlayerController : MonoBehaviour {
                 transform.Translate(0.3f * -transform.localScale.x * Time.deltaTime, 0 , 0);
                 // Add force upwards to the rigidbody
                 playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
-
             }
             // Invoke the reset for the playerCanShoot
             Invoke("ResetCanShoot", playerReloadTime);
@@ -387,13 +406,21 @@ public class PlayerController : MonoBehaviour {
     {
         playerCanSlide = true;
     }
-
+    #endregion
+    #region Outside Invoke Functions
     void Hit(int damage)
     {
         Debug.Log("Player was just hit!");
         playerHealth -= damage;
     }
+
+    void AddHealth(int amountOfHealthToAdd)
+    {
+        // Add the health, up to the max
+        playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
+    }
     #endregion
+
 
     bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
     {
