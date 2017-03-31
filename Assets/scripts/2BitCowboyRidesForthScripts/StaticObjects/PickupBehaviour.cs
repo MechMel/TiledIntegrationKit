@@ -9,7 +9,8 @@ public class PickupBehaviour : MonoBehaviour {
     {
         ITEMBOX,
         DOOR,
-        BUFF
+        COIN,
+        HEALTH
     }
     public PickupType pickupType;
 
@@ -56,8 +57,15 @@ public class PickupBehaviour : MonoBehaviour {
     // The amount of objects to drop
     [Tooltip("The amount of items to drop.")]
     public int amountToDrop;
+    [Header("------------------------")]
     // While being destroyed, this is set to true, to avoid multiple drops
     private bool beingDestroyed = false;
+    // The amount of health to add to the collided object
+    [Tooltip("Only set for HEALTH.")]
+    public int amountOfHealthToAdd;
+    // The amount of coins to add to the collided object
+    [Tooltip("Only set for COIN.")]
+    public int amountOfCoinToAdd;
     #endregion
     #region Components
     // The sprite renderer of the pickup
@@ -89,8 +97,8 @@ public class PickupBehaviour : MonoBehaviour {
         else
             GetComponent<Rigidbody2D>().isKinematic = true;
 
-        // If pickup is a BUFF
-        if (pickupType == PickupType.BUFF)
+        // If pickup is a buff
+        if (pickupType == PickupType.COIN || pickupType == PickupType.HEALTH)
             // Set the BoxCollider2D to a trigger
             GetComponent<BoxCollider2D>().isTrigger = true;
     }
@@ -131,11 +139,44 @@ public class PickupBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // If the pickup is of BUFF pickup type
-        if (pickupType == PickupType.BUFF && other.tag == "Player")
+        #region COIN
+        if (pickupType == PickupType.COIN)
         {
-            // Destroy itself
-            Destroy(gameObject);
+            // If the collided object is a player
+            if (other.gameObject.tag == "Player")
+            {
+                // Add health to the player
+                other.gameObject.SendMessage("AddCoin", amountOfCoinToAdd, SendMessageOptions.DontRequireReceiver);
+                // Destroy this gameObject
+                Destroy(gameObject);
+            }
+        }
+
+        #endregion
+        #region HEALTH
+        if (pickupType == PickupType.HEALTH)
+        {
+            // If the collided object is a player
+            if (other.gameObject.tag == "Player")
+            {
+                // Add health to the player
+                other.gameObject.SendMessage("AddHealth", amountOfHealthToAdd, SendMessageOptions.DontRequireReceiver);
+                // Destroy this gameObject
+                Destroy(gameObject);
+            }
+        }
+        #endregion
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        // Otherwise, if collided with another pickup
+        if (pickupType == PickupType.COIN && other.gameObject.tag != "Tile")
+        {
+            // Ignore the collision, since we don't want coins stacking up on top of each other
+            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<BoxCollider2D>());
+            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<CircleCollider2D>());
         }
     }
 

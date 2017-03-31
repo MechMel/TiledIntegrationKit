@@ -419,6 +419,10 @@ public class PlayerController : MonoBehaviour {
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
     }
+    void AddCoin(int amountOfCoinToAdd)
+    {
+        // Add coins here
+    }
     #endregion
 
 
