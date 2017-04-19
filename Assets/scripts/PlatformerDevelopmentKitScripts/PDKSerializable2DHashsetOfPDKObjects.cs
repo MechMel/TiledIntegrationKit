@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class PDKSerializable2DArray
+public class PDKSerializable2DHashsetOfPDKObjects
 {
     [SerializeField]
     // This will store all the data from a two-dimensional array in a one-dimensional format
@@ -25,7 +25,7 @@ public class PDKSerializable2DArray
     }
 
     
-    public PDKSerializable2DArray(int width, int height)
+    public PDKSerializable2DHashsetOfPDKObjects(int width, int height)
     {
         // Set the width and height of the two-dimensional array
         _width = width;

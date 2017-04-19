@@ -122,7 +122,7 @@ public class PDKTiledUtilities
                 // Initialize the obects array
                 pdkMap.layers[currentLayerIndex].objects = new PDKObject[pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length];
                 // Initialize the object map
-                pdkMap.layers[currentLayerIndex].dehydratedObjectMap = new PDKSerializable2DArray(pdkMap.width, pdkMap.height);
+                pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap = new PDKSerializable2DHashestOfInts(pdkMap.width, pdkMap.height);
                 // For each column
                 for (int currentColumnIndex = 0; currentColumnIndex < pdkTiledMapToConvert.width; currentColumnIndex++)
                 {
@@ -130,7 +130,7 @@ public class PDKTiledUtilities
                     for (int currentRowIndex = 0; currentRowIndex < pdkTiledMapToConvert.height; currentRowIndex++)
                     {
                         // Initialize this slot
-                        pdkMap.layers[currentLayerIndex].dehydratedObjectMap.SetItem(currentColumnIndex, currentRowIndex, new PDKLayer.PDKDehydratedObjectsHashSet());
+                        pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap.SetIDs(currentColumnIndex, -currentRowIndex, new PDKLayer.PDKObjectIDHashSet());
                     }
                 }
                 // TODO: REMOVE THIS LATER
@@ -140,10 +140,10 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].name = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].name;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].type;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id;
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id - 1;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].gid = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].gid;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight;
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y = -((pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1);
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect = new Rect(
                         x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth,
                         y: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight,
@@ -162,12 +162,12 @@ public class PDKTiledUtilities
                         }
                     }
                     // Add this object at this position, to the object map
-                    PDKLayer.PDKDehydratedObjectsHashSet slotToUse = pdkMap.layers[currentLayerIndex].dehydratedObjectMap.GetItem(
+                    pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap.AddID(
                         x: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
-                        y: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y);
-                    slotToUse.Add(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
+                        y: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y,
+                        idToAdd: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id);
                     // TODO: REMOVE THIS LATER
-                    Debug.Log(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].name +  
+                    Debug.Log(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type +  
                         ": x:" + pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x.ToString() + 
                         " y:" + pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y);
                 }

@@ -131,7 +131,7 @@ public class MobBehaviour : MonoBehaviour
         // This region sets up the PDKObjectProperties, so the object can be hydrated and dehydrated
 
         // Initilize the objectProperties
-        pdkObjectProperties.objectProperties = new Dictionary<string, string>();
+        pdkObjectProperties.objectProperties = new PDKObjectProperties.PDKSerializableObjectProperties();
         // Declare the variables that will be saved when the object is deloaded
         pdkObjectProperties.objectProperties.Add("health", health.ToString());
         #endregion

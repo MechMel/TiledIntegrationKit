@@ -89,7 +89,7 @@ public class PDKLevelRenderer : MonoBehaviour
         // Move this layer group's object to the correct position
         layerGroupToUpdate.layerGroupObject.transform.position = new Vector3(
                 x: (int)rectToRender.x + ((int)rectToRender.width / 2),
-                y: -(int)rectToRender.y + ((int)rectToRender.height / 2),
+                y: -(int)rectToRender.y - ((int)rectToRender.height / 2),
                 z: layerGroupToUpdate.zPosition);
     }
 
@@ -339,17 +339,17 @@ public class PDKLevelRenderer : MonoBehaviour
             // Create a variable to more easily refrence the object layer that is currently being updated
             PDKLayer objectLayerToUpdate = levelMap.layers[indexOfObjectLayerToUpdate];
             // This will be used to store all the objects that need to be hydrated
-            HashSet<PDKObject> objectsToHydrate;
+            PDKLayer.PDKObjectIDHashSet objectIDsToHydrate;
 
             // Dehydrate any objects outside of the rect to load
             objectLayerToUpdate.DehydrateExternalObjects(rectToLoad);
             // Take all dehydrated objects in the rect to render, from the dehydrated object map
-            objectsToHydrate = objectLayerToUpdate.TakeDehydratedObjectsFromRect(rectToLoad);
+            objectIDsToHydrate = objectLayerToUpdate.TakeDehydratedObjectIDsInRect(rectToLoad);
             // Hydrate each of the pdk objects, in this layer, that are not hydrated but should be
-            foreach (PDKObject pdkObjectToHydrate in objectsToHydrate)
+            foreach (int objectIDToHydrate in objectIDsToHydrate)
             {
                 // Create a hydrated copy of the current dehydrated pdk object
-                GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(pdkObjectToHydrate);
+                GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(objectIDToHydrate);
                 // Add the newly hydrated game object to the list of hydrated game objects
                 objectLayerToUpdate.hydratedObjects.Add((currentHydratedObject));
             }
