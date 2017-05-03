@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-
+public class PlayerController : MonoBehaviour
+{
     // The PlayerController class is the basic controller for the player, and the base class for add-ons
 
     #region Player
@@ -49,6 +49,15 @@ public class PlayerController : MonoBehaviour {
     // Whether the player is flipped or not
     [HideInInspector]
     public bool playerFacingLeft = true;
+    // Whether the player is in water or not
+    [HideInInspector]
+    public bool playerIsInWater = false;
+    // Whether the player was just in water or not as of last frame
+    [HideInInspector]
+    public bool playerWasInWaterPrevious = false;
+    // Whether the player is touching the water line
+    [HideInInspector]
+    public bool playerTouchingWaterLine = false;
     #endregion
     #region Objects
     // The bullet prefab
@@ -82,6 +91,9 @@ public class PlayerController : MonoBehaviour {
     // The WallLeftCheck GameObject
     [HideInInspector]
     public GameObject leftWallCheck;
+    // The midcheck GameObject, used for detecting the water line and such
+    [HideInInspector]
+    public GameObject midCheck;
     #endregion
    
     void Awake ()
@@ -93,25 +105,30 @@ public class PlayerController : MonoBehaviour {
         groundCheck = gameObject.transform.Find("GroundCheck").gameObject;
         rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
         leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
+        midCheck = gameObject.transform.Find("MidCheck").gameObject;
     }
 
     void Update()
     {
-        // Update() has the input and movement
+        // The built in update function in Unity runs every frame
+
+        #region Input
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
         bool Right = Input.GetButton("Right") || Input.GetButton("dPadRight");
         bool Up = Input.GetButtonDown("Up") || Input.GetButtonDown("Jump");
+        bool UpDown = Input.GetButton("Up") || Input.GetButton("Jump");
         bool Space = Input.GetButtonDown("Space");
-
+        #endregion
         #region Collision Detection
 
         // Set the collisions by default off
         playerTouchingWall = false;
         playerGrounded = false;
+        playerTouchingWaterLine = false;
 
         // Get the collision points
-        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid")) ;
-        Collider2D[] leftWallColliders = Physics2D.OverlapCircleAll(leftWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        Collider2D[] midColliders = Physics2D.OverlapCircleAll(midCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
 
         // Make sure a collision exists
@@ -121,10 +138,25 @@ public class PlayerController : MonoBehaviour {
             for (int i = 0; i < groundColliders.Length; i++)
             {
                 if (groundColliders[i].gameObject != gameObject)
+                {
                     playerGrounded = true;
+                    break;
+                }
             }
         }
-
+        // Make sure a collision exists
+        if (midColliders.Length > 0)
+        {
+            // Check for the player touching the water line
+            for (int i = 0; i < midColliders.Length; i++)
+            {
+                if (midColliders[i].gameObject != gameObject && midColliders[i].gameObject.tag == "Water")
+                {
+                    playerTouchingWaterLine = true;
+                    break;
+                }
+            }
+        }
         // Make sure a collision exists
         if (rightWallColliders.Length > 0)
         {
@@ -134,8 +166,8 @@ public class PlayerController : MonoBehaviour {
                 if (rightWallColliders[i].gameObject != gameObject)
                 {
                     playerTouchingWall = true;
-                    Debug.Log("TOUCHING WALL");
-                    playerCanDoubleJump = true;                                       
+                    playerCanDoubleJump = true;
+                    break;
                 }
             }
         }
@@ -146,14 +178,38 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = new Vector3(-1, 1, 1);
         else 
             transform.localScale = new Vector3(1, 1, 1);
+        // Update the playerIsInWater state
+        if(playerIsInWater)
+        {
+            // If the player wasn't in water since last frame
+            if (!playerWasInWaterPrevious)
+                // We can assume the player has gotten out of the water, so reset the bool
+                playerIsInWater = false;
+            // If not pressing up
+            if (!Up)
+                // Set the upwards velocity to a minimal amount, to counter gravity and give floating effect
+                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, -0.15f);
+            // Update the animator
+
+            // Reset the playerWasInWaterPrevious, so that we can catch next frame whether the player has gotten out of water
+            playerWasInWaterPrevious = false;
+        }
         // If not riding
         if(!riding)
         {            
             // If pressing left
             if (Left)
             {
+                // If in water
+                if(playerIsInWater)
+                {
+                    // Move the player left at half speed
+                    transform.Translate( (playerSpeed / 2) * transform.localScale.x, 0, 0);
+                    // Flip the sprite
+                    playerFacingLeft = true;
+                }
                 // If touching a wall, but not facing it, allow the player to move. Without this, the player could push against walls.
-                if (playerTouchingWall && !playerFacingLeft)
+                else if (playerTouchingWall && !playerFacingLeft)
                 {
                     // Move the player left
                     transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
@@ -175,8 +231,16 @@ public class PlayerController : MonoBehaviour {
             // If pressing right
             else if (Right)
             {
+                // If in water
+                if(playerIsInWater)
+                {
+                    // Move the player left at half speed
+                    transform.Translate((playerSpeed / 2) * transform.localScale.x, 0, 0);
+                    // Flip the sprite
+                    playerFacingLeft = false;
+                }
                 // If touching a wall, but not facing it, allow the player to move. Without this, the player could push against walls.
-                if (playerTouchingWall && playerFacingLeft)
+                else if (playerTouchingWall && playerFacingLeft)
                 {
                     // Move the player right
                     transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
@@ -201,10 +265,28 @@ public class PlayerController : MonoBehaviour {
                 anim.SetInteger("AnimState", 0);
             }
 
-            // Jumping
-            if (Up)
+            // If the player is under water and up was just pressed
+            if (Up && playerIsInWater)
             {
-                // If the player is grounded
+                // Simply move upwards, instead of jumping
+                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
+                // Add force upwards to the rigidbody
+                playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed / 2), ForceMode2D.Force);
+                //transform.Translate(0, playerSpeed / 3, 0);
+            }
+            // If the player is under water and up is held down
+            else if (UpDown && playerIsInWater)
+            {           
+                // Simply move upwards, instead of jumping
+                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
+                // Add force upwards to the rigidbody
+                playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed / 4), ForceMode2D.Force);
+                //transform.Translate(0, playerSpeed / 3, 0);
+            }
+            // Jumping
+            else if (Up)
+            {                
+                // Else if the player is grounded
                 if (playerGrounded && !playerTouchingLeftWall && !playerTouchingWall)
                 {
                     // Set the upwards velocity to zero, to counter the gravity
@@ -229,7 +311,7 @@ public class PlayerController : MonoBehaviour {
             // This update on the animation is for special cases like falling
             if (!playerGrounded && !playerCanDoubleJump)
                 anim.SetInteger("AnimState", 3);
-            if (!playerGrounded && playerCanDoubleJump)
+            else if (!playerGrounded && playerCanDoubleJump)
                 anim.SetInteger("AnimState", 2);
 
             // If touching the ground, reset the wall sliding
@@ -417,6 +499,25 @@ public class PlayerController : MonoBehaviour {
     {
         Debug.Log("Player was just hit!");
         playerHealth -= damage;
+    }
+    void UpdateInWaterState(bool newWaterState)
+    {
+        // Updates the player's in water state
+
+        // Set the newWaterState to the current water state and previous water state
+        playerIsInWater = newWaterState;
+        playerWasInWaterPrevious = newWaterState;
+    }
+    void AutoJump()
+    {
+        // Forces the player to jump, useful for the water invoking this function on the player
+
+        // Set the upwards velocity to zero, to counter the gravity
+        playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
+        // Add force upwards to the rigidbody
+        playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
+        // Set the bool playerCanDoubleJump to true, since we have only jumped once
+        playerCanDoubleJump = true;
     }
 
     void AddHealth(int amountOfHealthToAdd)

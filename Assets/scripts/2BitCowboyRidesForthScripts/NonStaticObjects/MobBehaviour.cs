@@ -362,7 +362,7 @@ public class MobBehaviour : MonoBehaviour
                 {
                     // Get the goal vector
                     Vector2 towardsTargetVector = (currentTarget.transform.position - rotatableObject.transform.position).normalized;
-
+                    // Flip the sprite based on 
                     // Setup a loop, instead of continually turning and moving forward(Decides the direction imediantly)
                     //while (true)
                     //{
