@@ -455,6 +455,19 @@ public class MobBehaviour : MonoBehaviour
     }
     #endregion
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        // If collided with anything other than a tile, ignore the collision
+        if (other.gameObject.tag != "Tile")
+        {
+            // Send the hit
+            if (other.gameObject.tag == "Player")
+                other.gameObject.SendMessage("Hit", 1, SendMessageOptions.DontRequireReceiver);
+            // Ignore the collision
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), other.gameObject.GetComponent<BoxCollider2D>());
+        }
+    }
+
     GameObject GetNearestObjectInArray(GameObject[] objects)
     {
         // Returns the nearest object in the given array of GameObjects

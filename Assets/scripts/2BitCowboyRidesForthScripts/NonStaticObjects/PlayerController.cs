@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     private bool playerTouchingLeftWall = false;
     // Whether the player is touching a wall to the right
     [HideInInspector]
-    private bool playerTouchingRightWall = false;
+    private bool playerTouchingWall = false;
     // The player jump speed
     [HideInInspector]
     private bool playerCanDoubleJump = false;
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     private bool playerCanSlideOnce = false;
     // How long the player waits on the wall before sliding
     [HideInInspector]
-    private float playerWaitToSlideTime = 3f;
+    private float playerWaitToSlideTime = 0.7f;
     // The reload time of the player
     [HideInInspector]
     public float playerReloadTime = 0.5f;
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
     public float playerAnimationSpeed = 8f;
     // Whether the player is flipped or not
     [HideInInspector]
-    public bool playerFlipped = true;
+    public bool playerFacingLeft = true;
     #endregion
     #region Objects
     // The bullet prefab
@@ -106,8 +106,7 @@ public class PlayerController : MonoBehaviour {
         #region Collision Detection
 
         // Set the collisions by default off
-        playerTouchingLeftWall = false;
-        playerTouchingRightWall = false;
+        playerTouchingWall = false;
         playerGrounded = false;
 
         // Get the collision points
@@ -127,20 +126,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Make sure a collision exists
-        if (leftWallColliders.Length > 0)
-        {
-            // Check for the player touching the left wall
-            for (int i = 0; i < leftWallColliders.Length; i++)
-            {
-                if (leftWallColliders[i].gameObject != gameObject)
-                {
-                    playerTouchingLeftWall = true;
-                    playerCanDoubleJump = true;
-                }
-            }
-        }
-
-        // Make sure a collision exists
         if (rightWallColliders.Length > 0)
         {
             // Check for the player touching the right wall
@@ -148,7 +133,8 @@ public class PlayerController : MonoBehaviour {
             {
                 if (rightWallColliders[i].gameObject != gameObject)
                 {
-                    playerTouchingRightWall = true;
+                    playerTouchingWall = true;
+                    Debug.Log("TOUCHING WALL");
                     playerCanDoubleJump = true;                                       
                 }
             }
@@ -156,7 +142,7 @@ public class PlayerController : MonoBehaviour {
         #endregion
         #region Movement
         // Update the flip of player
-        if (playerFlipped)
+        if (playerFacingLeft)
             transform.localScale = new Vector3(-1, 1, 1);
         else 
             transform.localScale = new Vector3(1, 1, 1);
@@ -166,13 +152,21 @@ public class PlayerController : MonoBehaviour {
             // If pressing left
             if (Left)
             {
-                // If not touching a wall to the left
-                //if (!playerTouchingLeftWall)
+                // If touching a wall, but not facing it, allow the player to move. Without this, the player could push against walls.
+                if (playerTouchingWall && !playerFacingLeft)
                 {
                     // Move the player left
                     transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
                     // Flip the sprite
-                    playerFlipped = true;
+                    playerFacingLeft = true;
+                }
+                // Otherwise, if not touching a wall
+                else if(!playerTouchingWall)
+                {
+                    // Move the player left
+                    transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
+                    // Flip the sprite
+                    playerFacingLeft = true;
                 }
                 // If grounded, run the walking animation
                 if (playerGrounded)
@@ -181,13 +175,21 @@ public class PlayerController : MonoBehaviour {
             // If pressing right
             else if (Right)
             {
-                // If not touching a wall to the right
-                //if (!playerTouchingRightWall)
+                // If touching a wall, but not facing it, allow the player to move. Without this, the player could push against walls.
+                if (playerTouchingWall && playerFacingLeft)
                 {
                     // Move the player right
                     transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
                     // Flip the sprite
-                    playerFlipped = false;
+                    playerFacingLeft = false;
+                }
+                // Otherwise, if not touching a wall
+                else if (!playerTouchingWall)
+                {
+                    // Move the player right
+                    transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
+                    // Flip the sprite
+                    playerFacingLeft = false;
                 }
                 // If grounded, run the walking animation
                 if (playerGrounded)
@@ -203,7 +205,7 @@ public class PlayerController : MonoBehaviour {
             if (Up)
             {
                 // If the player is grounded
-                if (playerGrounded && !playerTouchingLeftWall && !playerTouchingRightWall)
+                if (playerGrounded && !playerTouchingLeftWall && !playerTouchingWall)
                 {
                     // Set the upwards velocity to zero, to counter the gravity
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
@@ -213,7 +215,7 @@ public class PlayerController : MonoBehaviour {
                     playerCanDoubleJump = true;
                 }
                 // Else if the playerCanDoubleJump is true
-                else if (playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingRightWall)
+                else if (playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingWall)
                 {
                     // Set the playerCanDoubleJump to false
                     playerCanDoubleJump = false;
@@ -231,11 +233,14 @@ public class PlayerController : MonoBehaviour {
                 anim.SetInteger("AnimState", 2);
 
             // If touching the ground, reset the wall sliding
-            if (playerGrounded)
+            if (playerGrounded || !playerTouchingWall)
+            {
                 playerCanSlideOnce = false;
+                playerCanSlide = false;
+            }
 
             // Wall sliding
-            if (playerTouchingLeftWall && !playerGrounded || playerTouchingRightWall && !playerGrounded)
+            if (playerTouchingWall && !playerGrounded)
             {
                 // Set the animator state to wall sliding
                 anim.SetInteger("AnimState", 4);
@@ -247,13 +252,13 @@ public class PlayerController : MonoBehaviour {
                     // Set the sliding on the rigidBody2D
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.7f);
                 }
-                // Otherwise, invoke the sliding to start
+                // Else if the player can slide once, invoke the sliding to start
                 else if(!playerCanSlideOnce)
                 {
                     Invoke("WaitForSlide", playerWaitToSlideTime);
                     // Stop the falling
-                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.65f);
-                }                   
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1f);
+                }
             }
 
             // Update the enabled of the collider
@@ -310,7 +315,7 @@ public class PlayerController : MonoBehaviour {
             if (!playerGrounded && !playerCanDoubleJump)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
                     transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
-            else if(playerTouchingLeftWall && !playerGrounded || playerTouchingRightWall && !playerGrounded)
+            else if(playerTouchingWall && !playerGrounded)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPosOther").transform.position.x,
                     transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
             else
@@ -328,7 +333,7 @@ public class PlayerController : MonoBehaviour {
                 newBullet.transform.Rotate(new Vector3(0, 0, 270));
             }     
             // Else if the player is touching the left wall
-            else if (playerTouchingRightWall && playerFlipped && !playerGrounded)
+            else if (playerTouchingWall && playerFacingLeft && !playerGrounded)
             {
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
@@ -336,7 +341,7 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
             }
             // Else if the player is touching the right wall
-            else if (playerTouchingRightWall && !playerFlipped && !playerGrounded)
+            else if (playerTouchingWall && !playerFacingLeft && !playerGrounded)
             {
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
@@ -346,7 +351,7 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
             }
             // Else, if the player is facing left
-            else if (playerFlipped)
+            else if (playerFacingLeft)
             {
                 // Set the bullet x velocity to -10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
@@ -358,7 +363,7 @@ public class PlayerController : MonoBehaviour {
                 playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
             }
             // Else if the player is facing right
-            else if (!playerFlipped || playerTouchingLeftWall)
+            else if (!playerFacingLeft)
             {
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
