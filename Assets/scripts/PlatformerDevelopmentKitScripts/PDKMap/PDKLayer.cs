@@ -34,7 +34,7 @@ public class PDKLayer
 
 
     //The Initialize function sets up the tile layer, objects, and images
-    public void InitializeLayer(Dictionary<string, UnityEngine.Object> objectsInMap)
+    public void InitializeLayer(SortedDictionary<string, UnityEngine.Object> objectsInMap)
     {
         // If this is an object layer
         if (type == layerTypes.Object)
@@ -123,6 +123,7 @@ public class PDKLayer
                 // For each object at this slot in the dehydrated objects map
                 foreach (int objectID in hashSetToUse)
                 {
+                    if (objectID == 50) { }
                     // Add the current object to the objects to return
                     objectsInIDsRect.Add(objectID);
                 }

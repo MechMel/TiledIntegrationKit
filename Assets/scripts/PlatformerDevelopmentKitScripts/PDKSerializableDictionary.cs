@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class PDKSerializableDictionay<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+public class PDKSerializableDictionay<TKey, TValue> : SortedDictionary<TKey, TValue>, ISerializationCallbackReceiver
 {
     [SerializeField, HideInInspector]
     private List<TKey> keys;

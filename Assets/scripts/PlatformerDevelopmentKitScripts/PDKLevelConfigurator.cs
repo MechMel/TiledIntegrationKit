@@ -11,6 +11,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
     public PDKMap pdkMap; // This is the PDKMap for this level
+    private PDKLevelRenderer temporaryLevelRenderer;
 
 
 
@@ -31,6 +32,36 @@ public class PDKLevelConfigurator : MonoBehaviour
             CopyMatchingProperties(ref newPDKMap, pdkMap);
             // Update the PDKMap for this level
             pdkMap = newPDKMap;
+            // Tell this level's map to initialize
+            pdkMap.InitializeMap();
+            
+
+            // TODO: Remove this later
+            if (temporaryLevelRenderer != null)
+            {
+                foreach(PDKLayerGroup layerGroupToDestroy in temporaryLevelRenderer.levelMap.layerGroups)
+                {
+                    if (layerGroupToDestroy.layerGroupObject != null)
+                    {
+                        Destroy(layerGroupToDestroy.layerGroupObject);
+                    }
+                    if (layerGroupToDestroy.layerGroupTexture != null)
+                    {
+                        Destroy(layerGroupToDestroy.layerGroupTexture);
+                    }
+                }
+                foreach (PDKLayer layerToClear in temporaryLevelRenderer.levelMap.layers)
+                {
+                    foreach (GameObject objectToDestroy in layerToClear.hydratedObjects)
+                    {
+                        Destroy(objectToDestroy);
+                    }
+                }
+            }
+            // Setup the level renderer
+            temporaryLevelRenderer = new PDKLevelRenderer(pdkMap);
+            // Render the level
+            temporaryLevelRenderer.LoadRectOfMap(new Rect(0, 0, pdkMap.width, pdkMap.height));
         }
     }
 
@@ -69,6 +100,8 @@ public class PDKLevelConfigurator : MonoBehaviour
                     }
                 }
             }
+            // Sort all the object types alphabetically
+            //newPDKMap.objectsInMap.S
             #endregion
             return newPDKMap;
         }

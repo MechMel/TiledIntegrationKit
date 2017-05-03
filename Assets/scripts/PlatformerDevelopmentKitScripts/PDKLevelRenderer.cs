@@ -19,7 +19,7 @@ public class PDKLevelRenderer : MonoBehaviour
         // Get the map to use
         levelMap = mapToUse;
         // Initizlse the rendered rect of the map
-        loadedRectOfMap = new Rect(0, 0, 1, 1);
+        loadedRectOfMap = new Rect(-1, -1, 0, 0);
         #region Setup Layer Group objects
         // Go through each layer group in this map
         for (int layerGroupIndex = 0; layerGroupIndex < mapToUse.layerGroups.Count; layerGroupIndex++)
@@ -348,10 +348,14 @@ public class PDKLevelRenderer : MonoBehaviour
             // Hydrate each of the pdk objects, in this layer, that are not hydrated but should be
             foreach (int objectIDToHydrate in objectIDsToHydrate)
             {
-                // Create a hydrated copy of the current dehydrated pdk object
-                GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(objectIDToHydrate);
-                // Add the newly hydrated game object to the list of hydrated game objects
-                objectLayerToUpdate.hydratedObjects.Add((currentHydratedObject));
+                // TODO: Find a better way to do this later
+                if (levelMap.layers[indexOfObjectLayerToUpdate].objects[objectIDToHydrate].prefab != null)
+                {
+                    // Create a hydrated copy of the current dehydrated pdk object
+                    GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(objectIDToHydrate);
+                    // Add the newly hydrated game object to the list of hydrated game objects
+                    objectLayerToUpdate.hydratedObjects.Add((currentHydratedObject));
+                }
             }
         }
     }

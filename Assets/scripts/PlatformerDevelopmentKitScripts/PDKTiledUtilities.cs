@@ -140,7 +140,7 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].name = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].name;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].type;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id - 1;
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = currentObjectIndex; // pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id - 1;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].gid = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].gid;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y = -((pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1);
@@ -166,10 +166,6 @@ public class PDKTiledUtilities
                         x: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
                         y: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y,
                         idToAdd: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id);
-                    // TODO: REMOVE THIS LATER
-                    Debug.Log(pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type +  
-                        ": x:" + pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x.ToString() + 
-                        " y:" + pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y);
                 }
             }
         }
