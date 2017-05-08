@@ -253,13 +253,13 @@ public class MobBehaviour : MonoBehaviour
     void Update()
     {
         // Update sprite
-        if (spriteFlipped)
-            transform.localScale = new Vector3(-1, 1, 1);
-        else
-            transform.localScale = new Vector3(1, 1, 1);
-        
+        //if (spriteFlipped)
+            GetComponent<SpriteRenderer>().flipX = spriteFlipped;
+        //else
+        //    GetComponent<SpriteRenderer>().flipX = true;
+
         // Go through the GameObjects with components   
-        if(mobType != MobType.CHASE)
+        if (mobType != MobType.CHASE)
         {
             for(int i = 0; i < gameObjectsWithComponents.Length; i++)
                 // Update the animator 
@@ -362,22 +362,19 @@ public class MobBehaviour : MonoBehaviour
                 {
                     // Get the goal vector
                     Vector2 towardsTargetVector = (currentTarget.transform.position - rotatableObject.transform.position).normalized;
-                    // Flip the sprite based on 
-                    // Setup a loop, instead of continually turning and moving forward(Decides the direction imediantly)
-                    //while (true)
-                    //{
-                        // If hit something 
-                        if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).transform != transform)
-                        {
-                            // Start turning right 
-                            towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).normal * 20;
-                            Debug.DrawLine(rotatableObject.transform.position, rotatableObject.transform.position + Vector3.forward);
-                        }
-                        //else
-                            // If not running into something, stop rotating
-                        //    break;                   
-                    //}
-
+                    // Flip the sprite based on the position of the player
+                    if (currentTarget.transform.position.x > transform.position.x)
+                        spriteFlipped = true;
+                    else
+                        spriteFlipped = false;
+                    
+                    // If hit something 
+                    if (Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).transform != transform)
+                    {
+                        // Start turning right 
+                        towardsTargetVector += Physics2D.Raycast(rotatableObject.transform.position, rotatableObject.transform.forward, 20).normal * 20;
+                    }
+                                       
                     // Translate the new vector into a rotation
                     Quaternion newRotation = Quaternion.LookRotation(towardsTargetVector);
                     // Rotate the rotatable object to the new rotation

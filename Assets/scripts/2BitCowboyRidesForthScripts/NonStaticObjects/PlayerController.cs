@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private float playerWaitToSlideTime = 0.7f;
     // The reload time of the player
     [HideInInspector]
-    public float playerReloadTime = 0.5f;
+    public float playerReloadTime = 0.7f;
     // The player animation speed
     // NOT YET IMPLEMENTED
     [HideInInspector]
@@ -58,6 +59,18 @@ public class PlayerController : MonoBehaviour
     // Whether the player is touching the water line
     [HideInInspector]
     public bool playerTouchingWaterLine = false;
+    // The upward velocity of the player
+    private float playerVelocityY
+    {
+        get
+        {
+            return playerRigidBody2D.velocity.y;
+        }
+        set
+        {
+            playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, value);
+        }
+    }
     #endregion
     #region Objects
     // The bullet prefab
@@ -194,6 +207,9 @@ public class PlayerController : MonoBehaviour
             // Reset the playerWasInWaterPrevious, so that we can catch next frame whether the player has gotten out of water
             playerWasInWaterPrevious = false;
         }
+
+        // Update debug text
+        //transform.Find("DebugText").GetComponent<TextMesh>().text = playerVelocityY.ToString();
         // If not riding
         if(!riding)
         {            
@@ -265,23 +281,20 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("AnimState", 0);
             }
 
-            // If the player is under water and up was just pressed
-            if (Up && playerIsInWater)
+            // If the player is under water
+            if (playerIsInWater)
             {
-                // Simply move upwards, instead of jumping
-                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
-                // Add force upwards to the rigidbody
-                playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed / 2), ForceMode2D.Force);
-                //transform.Translate(0, playerSpeed / 3, 0);
-            }
-            // If the player is under water and up is held down
-            else if (UpDown && playerIsInWater)
-            {           
-                // Simply move upwards, instead of jumping
-                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
-                // Add force upwards to the rigidbody
-                playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed / 4), ForceMode2D.Force);
-                //transform.Translate(0, playerSpeed / 3, 0);
+                // If up is being held down
+                if (UpDown)
+                {
+                    // Add force upwards to the rigidbody
+                    playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed / 4), ForceMode2D.Force);
+                }
+                else
+                {
+                    // Slowly fall
+                    playerVelocityY -= 0.3f;
+                }
             }
             // Jumping
             else if (Up)
@@ -367,7 +380,7 @@ public class PlayerController : MonoBehaviour
                     // Set the upwards velocity to zero, to counter the gravity
                     RigidBody2DOfAnimalPlayerIsRiding.velocity = new Vector2(RigidBody2DOfAnimalPlayerIsRiding.velocity.x, 0);
                     // Add force upwards to the rigidbody
-                    RigidBody2DOfAnimalPlayerIsRiding.AddForce(new Vector2(0, playerJumpSpeed*1.5f), ForceMode2D.Force);
+                    RigidBody2DOfAnimalPlayerIsRiding.AddForce(new Vector2(0, playerJumpSpeed * 1.5f), ForceMode2D.Force);
                 }
             }
             // Update the jump/falling animation
@@ -396,13 +409,13 @@ public class PlayerController : MonoBehaviour
             GameObject newBullet;
             if (!playerGrounded && !playerCanDoubleJump)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
-                    transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
+                    transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.1f, 0.1f)), Quaternion.identity);
             else if(playerTouchingWall && !playerGrounded)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPosOther").transform.position.x,
-                    transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
+                    transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.1f, 0.1f)), Quaternion.identity);
             else
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPos").transform.position.x,
-                    transform.Find("BulletPos").transform.position.y + Random.Range(-0.15f, 0.15f)), Quaternion.identity);
+                    transform.Find("BulletPos").transform.position.y + Random.Range(-0.1f, 0.1f)), Quaternion.identity);
 
             // Decide the direction and velocity of the new bullet, based on the direction of the player
 
@@ -440,9 +453,7 @@ public class PlayerController : MonoBehaviour
                 // Rotate the bullet left
                 newBullet.transform.Rotate(new Vector3(0, 0, 180));
                 // Move the player right as recoil
-                transform.Translate(0.3f * -transform.localScale.x * Time.deltaTime, 0, 0);
-                // Set the upwards velocity to zero, to counter the gravity
-                playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
+                transform.Translate(0.1f * -transform.localScale.x, 0, 0);
             }
             // Else if the player is facing right
             else if (!playerFacingLeft)
@@ -450,9 +461,7 @@ public class PlayerController : MonoBehaviour
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
                 // Move the player left as recoil
-                transform.Translate(0.3f * -transform.localScale.x * Time.deltaTime, 0 , 0);
-                // Add force upwards to the rigidbody
-                playerRigidBody2D.AddForce(new Vector2(0, 300f), ForceMode2D.Force);
+                transform.Translate(0.1f * -transform.localScale.x, 0 , 0);
             }
             // Invoke the reset for the playerCanShoot
             Invoke("ResetCanShoot", playerReloadTime);
@@ -508,16 +517,22 @@ public class PlayerController : MonoBehaviour
         playerIsInWater = newWaterState;
         playerWasInWaterPrevious = newWaterState;
     }
-    void AutoJump()
+    void HitWater()
     {
-        // Forces the player to jump, useful for the water invoking this function on the player
-
-        // Set the upwards velocity to zero, to counter the gravity
-        playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
-        // Add force upwards to the rigidbody
-        playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
-        // Set the bool playerCanDoubleJump to true, since we have only jumped once
-        playerCanDoubleJump = true;
+        // If the player's velocity is greater than or equal to 1
+        if (playerRigidBody2D.velocity.y >= 1f)
+        {
+            // Translate upwards
+            transform.Translate(0, 0.3f, 0);
+            // Set the upwards velocity to zero, to counter the gravity
+            playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1.2f);
+            // Add force upwards to the rigidbody
+            playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
+            // Set the bool playerCanDoubleJump to true, since we have only jumped once
+            playerCanDoubleJump = true;
+            // Update the in water state to false
+            UpdateInWaterState(false);
+        }        
     }
 
     void AddHealth(int amountOfHealthToAdd)
