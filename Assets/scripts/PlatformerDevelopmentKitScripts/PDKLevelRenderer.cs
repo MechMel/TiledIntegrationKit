@@ -168,7 +168,7 @@ public class PDKLevelRenderer : MonoBehaviour
         #region Find Tile Positions to Render
         #region SUMMARY:
         /*
-        To optimize rendering, find the tiles that are outside the currently loaded rect of the map and inside the rect to render
+        To optimize rendering, find the tiles that are inside the rect to render and outside the currently loaded rect of the map
         If the rect to render overlaps with the currently loaded rect
             add the position of each tile above, beside, and below the overlap to the list of tile positions to render.
         If the rect to render does not overlap with the currently loaded rect
@@ -185,7 +185,7 @@ public class PDKLevelRenderer : MonoBehaviour
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
                     // Add the position of this tile to the list of positions to render
-                    tilePositionsToRender.Add((y * levelMap.width) + x);
+                    tilePositionsToRender.Add(((Mathf.Abs(y) % levelMap.height) * levelMap.width) + (Mathf.Abs(x) % levelMap.width));
                 }
             }
             // For each row inside the rect to render and beside the overlap
@@ -195,13 +195,13 @@ public class PDKLevelRenderer : MonoBehaviour
                 for (int x = (int)rectToRender.xMin; x < overlapRect.xMin; x++)
                 {
                     // Add the position of this tile to the list of positions to render
-                    tilePositionsToRender.Add((y * levelMap.width) + x);
+                    tilePositionsToRender.Add(((Mathf.Abs(y) % levelMap.height) * levelMap.width) + (Mathf.Abs(x) % levelMap.width));
                 }
                 // For each tile on the right of the overlap
                 for (int x = (int)overlapRect.xMax; x < rectToRender.xMax; x++)
                 {
                     // Add the position of this tile to the list of positions to render
-                    tilePositionsToRender.Add((y * levelMap.width) + x);
+                    tilePositionsToRender.Add(((Mathf.Abs(y) % levelMap.height) * levelMap.width) + (Mathf.Abs(x) % levelMap.width));
                 }
             }
             // For each row inside the rect to render and below the overlap
@@ -211,7 +211,7 @@ public class PDKLevelRenderer : MonoBehaviour
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
                     // Add the position of this tile to the list of positions to render
-                    tilePositionsToRender.Add((y * levelMap.width) + x);
+                    tilePositionsToRender.Add(((Mathf.Abs(y) % levelMap.height) * levelMap.width) + (Mathf.Abs(x) % levelMap.width));
                 }
             }
         }
@@ -224,7 +224,7 @@ public class PDKLevelRenderer : MonoBehaviour
                 for (int x = (int)rectToRender.xMin; x < rectToRender.xMax; x++)
                 {
                     // Add the position of this tile to the list of positions to render
-                    tilePositionsToRender.Add((y * levelMap.width) + x);
+                    tilePositionsToRender.Add(((Mathf.Abs(y) % levelMap.height) * levelMap.width) + (Mathf.Abs(x) % levelMap.width));
                 }
             }
         }
@@ -244,7 +244,7 @@ public class PDKLevelRenderer : MonoBehaviour
         {
             #region Get all Tiles To Render
             // Get each tile ID and the positions of these IDs for all tiles outside of the overlap
-            tilePositions = levelMap.GetAllTilePositionsFromLayerInList(layerNumber, tilePositionsToRender);
+            tilePositions = levelMap.GetTilesByRasterList(layerNumber, tilePositionsToRender);
             #endregion
             #region Put Each Tile to Render on the Texture to Update
             // Go through each tile ID in the tile positions to render

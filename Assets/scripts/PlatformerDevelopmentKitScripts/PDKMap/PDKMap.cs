@@ -87,58 +87,71 @@ public class PDKMap
 
 
     /* When this is called this function finds all tile IDs in a given rectangle, and then 
-    returns a list of each ID and at what positions in the given rectangle that tile ID appears*/
-    public Dictionary<int, List<int>> GetAllTilePositionsFromLayerInList(int layerToGetTilesFrom, List<int> tilePositions)
+    returns a list of each ID and at what positions in the given rectangle that tile ID appears at */
+    public Dictionary<int, List<int>> GetTilesByRasterList(int layerToGetTilesFrom, List<int> rasterPositions)
     {
         // This dictionary will contain all positions of a tile ID in the given rectangle
         Dictionary<int, List<int>> disoveredTilePostitions = new Dictionary<int, List<int>>();
 
-        // Go through each tile in the given list
-        foreach (int thisTilePosition in tilePositions)
+        // Go through each position in the given list
+        foreach (int thisTilePosition in rasterPositions)
         {
-            // If this tile position is within the map
-            if (thisTilePosition >= 0)
+            // This will be used to determine if the position exists and then store the list this tile position should be placed in
+            List<int> matchingID;
+
+            // If the ID at the position being checked has been disovered add this position to that ID's list of positions
+            if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].tileMap[thisTilePosition], out matchingID))
             {
-                // This will be used to determine if it exits and then store the list this tile position should be placed in
-                List<int> matchingID;
-
-                // If the ID at the position being checked has been disovered
-                if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].tileMap[thisTilePosition], out matchingID))
-                {
-                    // Add this position to that ID's list of positions
-                    matchingID.Add(thisTilePosition);
-                }
-                else
-                {
-                    // Create a new list for the tile ID at the position being checked
-                    matchingID = new List<int>();
-                    // Add this position to this tile ID's new list
-                    matchingID.Add(thisTilePosition);
-                    // Add this tile ID's new list to the dictionary of discovered tile IDs
-                    disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[thisTilePosition]] = matchingID;
-
-                }
+                matchingID.Add(thisTilePosition);
             }
-            else // If this tile position is outside the map
+            else
             {
-                // This will be used to determine if it exits and then store the list this tile position should be placed in
-                List<int> matchingID;
+                // Create a new list for the tile ID at the position being checked
+                matchingID = new List<int>();
+                // Add this position to this tile ID's new list
+                matchingID.Add(thisTilePosition);
+                // Add this tile ID's new list to the dictionary of discovered tile IDs
+                disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[thisTilePosition]] = matchingID;
 
-                // If the ID at the position being checked has been disovered
-                if (disoveredTilePostitions.TryGetValue(0, out matchingID))
-                {
-                    // Add this position to that ID's list of positions
-                    matchingID.Add(thisTilePosition);
-                }
-                else
-                {
-                    // Create a new list for the tile ID at the position being checked
-                    matchingID = new List<int>();
-                    // Add this position to this tile ID's new list
-                    matchingID.Add(thisTilePosition);
-                    // Add this tile ID's new list to the dictionary of discovered tile IDs
-                    disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[thisTilePosition]] = matchingID;
-                }
+            }
+        }
+        // Return the lsit of all discovered tiles and their positions
+        return disoveredTilePostitions;
+    }
+
+
+    /* When this is called this function finds all tile IDs in a given rectangle, and then 
+    returns a list of each ID and at what positions in the given rectangle that tile ID appears at */
+    public Dictionary<int, List<Vector2>> GetTilesByCoordinateList(int layerToGetTilesFrom, List<Vector2> coordinatePositions)
+    {
+        // This dictionary will contain all positions of a tile ID in the given rectangle
+        Dictionary<int, List<Vector2>> disoveredTilePostitions = new Dictionary<int, List<Vector2>>();
+        // This stores the raster position of each element in the given list
+        int rasterPosition;
+
+        // Go through each tile in the given list and find all tiles 
+        foreach (Vector2 tileCoordinates in coordinatePositions)
+        {
+            // Calculate this tile's raster position
+            rasterPosition = (int)((tileCoordinates.y * width) + tileCoordinates.x);
+            // This will be used to determine if it exits and then store the list this tile position should be placed in
+            List<Vector2> matchingID;
+
+            // If the ID at the position being checked has been disovered
+            if (disoveredTilePostitions.TryGetValue(layers[layerToGetTilesFrom].tileMap[rasterPosition], out matchingID))
+            {
+                // Add this position to that ID's list of positions
+                matchingID.Add(tileCoordinates);
+            }
+            else
+            {
+                // Create a new list for the tile ID at the position being checked
+                matchingID = new List<Vector2>();
+                // Add this position to this tile ID's new list
+                matchingID.Add(tileCoordinates);
+                // Add this tile ID's new list to the dictionary of discovered tile IDs
+                disoveredTilePostitions[layers[layerToGetTilesFrom].tileMap[rasterPosition]] = matchingID;
+
             }
         }
         // Return the lsit of all discovered tiles and their positions
