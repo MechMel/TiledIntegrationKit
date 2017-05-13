@@ -11,7 +11,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
     public PDKMap pdkMap; // This is the PDKMap for this level
-    private PDKLevelRenderer temporaryLevelRenderer;
+    PDKLevelController levelController;
 
 
 
@@ -21,6 +21,8 @@ public class PDKLevelConfigurator : MonoBehaviour
     {
         if (mapTextAsset == null) // If the current map has been removed
         {
+            // Remove the old previsualized map
+            DestoryRenderedMap();
             // Clear all current settings
             pdkMap = CreateNewPDKMap(mapTextAsset);
         }
@@ -72,8 +74,6 @@ public class PDKLevelConfigurator : MonoBehaviour
                         {
                             // Assign the prefab
                             pdkMap.objectsInMap[objectTypeToLoad] = prefabToCheck;
-                            // To speed up future searches, unload this prefab
-                            Resources.UnloadAsset(prefabToCheck);
                             // Now that the mathcing prefab has been found there is no need to continue looking
                             break;
                         }
@@ -85,34 +85,23 @@ public class PDKLevelConfigurator : MonoBehaviour
             #endregion
             // Tell this level's map to initialize
             pdkMap.InitializeMap();
-            
-
-            // TODO: Remove this later
-            if (temporaryLevelRenderer != null)
+            // Remove the old previsualized map
+            DestoryRenderedMap();
+            // Destory the old level controller
+            if (levelController)
             {
-                foreach(PDKLayerGroup layerGroupToDestroy in temporaryLevelRenderer.levelMap.layerGroups)
-                {
-                    if (layerGroupToDestroy.layerGroupObject != null)
-                    {
-                        Destroy(layerGroupToDestroy.layerGroupObject);
-                    }
-                    if (layerGroupToDestroy.layerGroupTexture != null)
-                    {
-                        Destroy(layerGroupToDestroy.layerGroupTexture);
-                    }
-                }
-                foreach (PDKLayer layerToClear in temporaryLevelRenderer.levelMap.layers)
-                {
-                    foreach (GameObject objectToDestroy in layerToClear.hydratedObjects)
-                    {
-                        Destroy(objectToDestroy);
-                    }
-                }
+                DestroyImmediate(levelController);
             }
-            // Setup the level renderer
-            temporaryLevelRenderer = new PDKLevelRenderer(pdkMap);
+            // Add the level controller to this object
+            levelController = this.gameObject.AddComponent<PDKLevelController>();
+            // Give the TIKMap with the user's settings to the levelController
+            levelController.levelMap = pdkMap;
+            // Tell the level controller how close the camera can get to the edge of the loaded area before a new section of the level should be loaded
+            levelController.bufferDistance = bufferDistance;
+            //
+            levelController.levelRenderer = new PDKLevelRenderer(pdkMap);
             // Render the level
-            temporaryLevelRenderer.LoadRectOfMap(new Rect(0, 0, pdkMap.width, pdkMap.height));
+            levelController.levelRenderer.LoadRectOfMap(new Rect(0, 0, pdkMap.width, pdkMap.height));
         }
     }
 
@@ -163,6 +152,37 @@ public class PDKLevelConfigurator : MonoBehaviour
     }
 
 
+    // TODO: Comment this later
+    void DestoryRenderedMap()
+    {
+        if (levelController)
+        {
+            foreach (PDKLayerGroup layerGroupToDestroy in levelController.levelRenderer.levelMap.layerGroups)
+            {
+                if (layerGroupToDestroy.layerGroupObject != null)
+                {
+                    DestroyImmediate(layerGroupToDestroy.layerGroupObject);
+                }
+                if (layerGroupToDestroy.layerGroupTexture != null)
+                {
+                    DestroyImmediate(layerGroupToDestroy.layerGroupTexture);
+                }
+            }
+            foreach (PDKLayer layerToClear in levelController.levelRenderer.levelMap.layers)
+            {
+                if (layerToClear.hydratedObjects != null)
+                {
+                    foreach (GameObject objectToDestroy in layerToClear.hydratedObjects)
+                    {
+                        DestroyImmediate(objectToDestroy);
+                    }
+                }
+            }
+            DestroyImmediate(levelController.levelRenderer);
+        }
+    }
+
+
     // When this is called properties from another map are copied onto this map's settings
     public void CopyMatchingProperties(ref PDKMap mapToRecieve, PDKMap mapToCopy)
     {
@@ -202,27 +222,6 @@ public class PDKLevelConfigurator : MonoBehaviour
             }
         }
         #endregion
-    }
-
-
-    void Awake()
-    {
-        // If a TIKMap has been created
-        if (pdkMap != null && mapTextAsset != null)
-        {
-            // Tell this level's map to initialize
-            pdkMap.InitializeMap();
-            // Add the level controller to this object
-            PDKLevelController levelController = this.gameObject.AddComponent<PDKLevelController>();
-            // Give the TIKMap with the user's settings to the levelController
-            levelController.levelMap = pdkMap;
-            // Tell the level controller how close the camera can get to the edge of the loaded area before a new section of the level should be loaded
-            levelController.bufferDistance = bufferDistance;
-            //
-            levelController.levelRenderer = new PDKLevelRenderer(pdkMap);
-            // Disable this script
-            //this.gameObject.GetComponent<PDKLevelConfigurator>().enabled = false;
-        }
     }
 
 
