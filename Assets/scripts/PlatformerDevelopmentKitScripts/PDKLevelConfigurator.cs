@@ -11,7 +11,6 @@ public class PDKLevelConfigurator : MonoBehaviour
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
     public PDKMap pdkMap; // This is the PDKMap for this level
-    PDKLevelController levelController;
 
 
 
@@ -19,14 +18,24 @@ public class PDKLevelConfigurator : MonoBehaviour
     // This is called to update variables when the text asset has been changed
     public void TextAssetChanged()
     {
-        if (mapTextAsset == null) // If the current map has been removed
+        // Find the level controller
+        PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
+
+        // If the current map has been removed
+        if (mapTextAsset == null)
         {
             // Remove the old previsualized map
-            DestoryRenderedMap();
+            DestoryRenderedMap(levelController);
+            // Destory the old level controller
+            if (levelController)
+            {
+                DestroyImmediate(levelController);
+            }
             // Clear all current settings
             pdkMap = CreateNewPDKMap(mapTextAsset);
         }
-        else // If a new text asset has been put in
+        // If a new text asset has been put in
+        else
         {
             // Create a new map from the new TextAsset
             PDKMap newPDKMap = CreateNewPDKMap(mapTextAsset);
@@ -86,7 +95,7 @@ public class PDKLevelConfigurator : MonoBehaviour
             // Tell this level's map to initialize
             pdkMap.InitializeMap();
             // Remove the old previsualized map
-            DestoryRenderedMap();
+            DestoryRenderedMap(levelController);
             // Destory the old level controller
             if (levelController)
             {
@@ -152,32 +161,40 @@ public class PDKLevelConfigurator : MonoBehaviour
     }
 
 
-    // TODO: Comment this later
-    void DestoryRenderedMap()
+    // Removes all instatiated previs objects
+    void DestoryRenderedMap(PDKLevelController levelController)
     {
+        // Only attempt destorying items if the level controller exists
         if (levelController)
         {
+            // Destory each layergroup's texture and game object
             foreach (PDKLayerGroup layerGroupToDestroy in levelController.levelRenderer.levelMap.layerGroups)
             {
-                if (layerGroupToDestroy.layerGroupObject != null)
-                {
-                    DestroyImmediate(layerGroupToDestroy.layerGroupObject);
-                }
+                // If it exists destory this layer group's texture
                 if (layerGroupToDestroy.layerGroupTexture != null)
                 {
                     DestroyImmediate(layerGroupToDestroy.layerGroupTexture);
                 }
+                // If it exists destory this layer group's game object
+                if (layerGroupToDestroy.layerGroupObject != null)
+                {
+                    DestroyImmediate(layerGroupToDestroy.layerGroupObject);
+                }
             }
+            // Destory all instatieated objects
             foreach (PDKLayer layerToClear in levelController.levelRenderer.levelMap.layers)
             {
+                // If this layer has objects
                 if (layerToClear.hydratedObjects != null)
                 {
+                    // Destory each object
                     foreach (GameObject objectToDestroy in layerToClear.hydratedObjects)
                     {
                         DestroyImmediate(objectToDestroy);
                     }
                 }
             }
+            // Destory the level renderer
             DestroyImmediate(levelController.levelRenderer);
         }
     }
