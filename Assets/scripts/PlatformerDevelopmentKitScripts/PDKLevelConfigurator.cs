@@ -32,6 +32,57 @@ public class PDKLevelConfigurator : MonoBehaviour
             CopyMatchingProperties(ref newPDKMap, pdkMap);
             // Update the PDKMap for this level
             pdkMap = newPDKMap;
+            // Find and attatch all texture2Ds and prefabs with names corresponding to tilesets and object types in this map
+            #region Load Tilesets & Prefabs From Resources
+            // To find any tilesets or prefabs that should be in the map, first load all resources from the resources folder
+            Resources.LoadAll("");
+            // Find all texture2Ds that have the same name as an object type in this map, and attatch the prefabs to that object type
+            foreach (PDKTileset tilesetToLoad in pdkMap.tilesets)
+            {
+                // Only look for a texture for this tileset if the user has not already attatched one of their own.
+                if (!tilesetToLoad.imageTexture)
+                {
+                    // Look through all loaded textures and see if one of them has the same name as this tileset
+                    foreach (Texture2D textureToCheck in Resources.FindObjectsOfTypeAll(typeof(Texture2D)) as Texture2D[])
+                    {
+                        // If this tileset's name matches this textures's name, then attatch this texture to the map
+                        if (tilesetToLoad.name == textureToCheck.name)
+                        {
+                            // Assign the texture
+                            tilesetToLoad.imageTexture = textureToCheck;
+                            // To speed up future searches, unload this texture
+                            Resources.UnloadAsset(textureToCheck);
+                            // Now that the mathcing texture has been found there is no need to continue looking
+                            break;
+                        }
+                    }
+                }
+            }
+            // Find all prefabs that have the same name as an object type in this map, and attatch the prefabs to that object type
+            foreach (string objectTypeToLoad in pdkMap.objectsInMap.Keys)
+            {
+                // Only look for a prefab for this object type if the user has not already attatched one of their own.
+                if (!pdkMap.objectsInMap[objectTypeToLoad])
+                {
+                    // Look through all loaded prefabs and see if one of them has the same name as this object type
+                    foreach (GameObject prefabToCheck in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+                    {
+                        // If this object type matches this prefabs name, then attatch this prefab to the map
+                        if (objectTypeToLoad == prefabToCheck.name)
+                        {
+                            // Assign the prefab
+                            pdkMap.objectsInMap[objectTypeToLoad] = prefabToCheck;
+                            // To speed up future searches, unload this prefab
+                            Resources.UnloadAsset(prefabToCheck);
+                            // Now that the mathcing prefab has been found there is no need to continue looking
+                            break;
+                        }
+                    }
+                }
+            }
+            // Now that all matches have been found, deload the excess resources
+            Resources.UnloadUnusedAssets();
+            #endregion
             // Tell this level's map to initialize
             pdkMap.InitializeMap();
             
