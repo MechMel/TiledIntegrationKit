@@ -3484,6 +3484,23 @@
          "tilecount":1024,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "columns":32,
+         "firstgid":1025,
+         "image":"D:\/2-bit Cowboy\/levelFiles\/environment.png",
+         "imageheight":512,
+         "imagewidth":512,
+         "margin":0,
+         "name":"environment",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":1024,
+         "tileheight":16,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "version":1,

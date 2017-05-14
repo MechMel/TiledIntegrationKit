@@ -3,6 +3,9 @@
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="D:/2-bit Cowboy/levelFiles/environment.png" width="512" height="512"/>
  </tileset>
+ <tileset firstgid="1025" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="D:/2-bit Cowboy/levelFiles/environment.png" width="512" height="512"/>
+ </tileset>
  <layer name="Wall" width="192" height="64">
   <data>
    <tile gid="0"/>
