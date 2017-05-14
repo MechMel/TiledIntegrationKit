@@ -4,11 +4,31 @@ using UnityEditor;
 
 public class PDKEditorUtil : Editor
 {
-    // Creates an interger field tied to a variable instance
+    // Creates an label field with the given text
     public void Field(string fieldName)
     {
         // Display this field
         EditorGUILayout.LabelField(fieldName);
+    }
+
+    // Creates an string field tied to a variable instance
+    public bool Field(string fieldName, ref string stringInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        stringInstance = EditorGUILayout.TextField(fieldName, stringInstance);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
     }
 
     // Creates an interger field tied to a variable instance
@@ -98,6 +118,26 @@ public class PDKEditorUtil : Editor
         EditorGUI.BeginChangeCheck();
         // Display this field
         textureInstance = (Texture2D)EditorGUILayout.ObjectField(fieldName, textureInstance, typeof(Texture2D), false);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
+    // Creates a field for a Sprite
+    public bool Field(string fieldName, ref Sprite spriteInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        spriteInstance = (Sprite)EditorGUILayout.ObjectField(fieldName, spriteInstance, typeof(Sprite), false);
         // If this field has been changed
         if (EditorGUI.EndChangeCheck())
         {
