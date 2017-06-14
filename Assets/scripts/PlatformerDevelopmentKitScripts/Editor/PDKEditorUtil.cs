@@ -31,7 +31,7 @@ public class PDKEditorUtil : Editor
         }
     }
 
-    // Creates an interger field tied to a variable instance
+    // Creates an text field tied to a variable instance
     public bool Field(string fieldName, ref string stringInstance)
     {
         // Check to see if this field has been changed

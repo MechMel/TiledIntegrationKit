@@ -96,16 +96,16 @@ public class PDKFlipBookCreator : EditorWindow
         spriteBinding.type = typeof(SpriteRenderer);
         spriteBinding.path = "";
         spriteBinding.propertyName = "m_Sprite";
+        GameObject spriteRendererObject = new GameObject();
+        SpriteRenderer spriteRenderer = spriteRendererObject.AddComponent<SpriteRenderer>();
         ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[frames.Length];
         for (int i = 0; i < (frames.Length); i++)
         {
-            SpriteRenderer spriteRenderer = GameObject.Find("Main Camera").GetComponent<SpriteRenderer>();
             Sprite newSprite = Sprite.Create(frames[i], new Rect(0, 0, frames[i].width, frames[i].height), new Vector2(0.5f, 0.5f));
             spriteKeyFrames[i] = new ObjectReferenceKeyframe();
             spriteKeyFrames[i].time = i;
             spriteKeyFrames[i].value = newSprite;
             spriteRenderer.sprite = (Sprite)spriteKeyFrames[i].value;
-            Debug.Log(newSprite);
         }
         if (shouldLoop)
         {
@@ -117,9 +117,9 @@ public class PDKFlipBookCreator : EditorWindow
         }
         AnimationUtility.SetObjectReferenceCurve(newFlipbook, spriteBinding, spriteKeyFrames);
         Resources.UnloadUnusedAssets();
-        Debug.Log(outputPath + "\\" + animName + ".anim");
         AssetDatabase.CreateAsset(newFlipbook, outputPath + "\\" + animName + ".anim");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        DestroyImmediate(spriteRendererObject);
     }
 }

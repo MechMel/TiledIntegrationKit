@@ -24,6 +24,8 @@ public class PDKLevelConfiguratorEditor : Editor
 
         // Display a field for buffer distance
         editorUtilities.Field("Buffer Distance", ref levelConfigurator.bufferDistance);
+        // Display a field for layer grouping
+        editorUtilities.Field("Should Group Like Layers", ref levelConfigurator.shouldGroupLayers);
         // Display the map type selection drop down
         editorUtilities.Field("Map Type", ref levelConfigurator.mapType);
         #region Display Appropriate Fields for this MapType

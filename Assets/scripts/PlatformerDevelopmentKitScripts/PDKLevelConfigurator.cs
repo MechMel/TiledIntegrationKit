@@ -11,6 +11,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     public TextAsset mapTextAsset; // The text asset that will be used to create this map
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
     public PDKMap pdkMap; // This is the PDKMap for this level
+    public bool shouldGroupLayers = false; // TODO: FILL THIS IN LATER
 
 
 
@@ -93,7 +94,7 @@ public class PDKLevelConfigurator : MonoBehaviour
             Resources.UnloadUnusedAssets();
             #endregion
             // Tell this level's map to initialize
-            pdkMap.InitializeMap();
+            pdkMap.InitializeMap(shouldGroupLayers);
             // Remove the old previsualized map
             DestoryRenderedMap(levelController);
             // Destory the old level controller

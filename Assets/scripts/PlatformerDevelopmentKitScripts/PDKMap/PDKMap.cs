@@ -21,11 +21,12 @@ public class PDKMap
     public PDKObjectTypes objectsInMap;
     // This will store a blank tile
     Color[] blankTile;
+    // TODO: FILL THIS IN LATER
 
 
 
     //The InitializeMap function initializes all the layers and tilests
-    public void InitializeMap()
+    public void InitializeMap(bool shouldGroupLayers)
     {
         // This is used to determine which layer group is being looked at
         int currentLayerGroupNumber = -1;
@@ -54,7 +55,7 @@ public class PDKMap
             if (layers[thisLayerNumber].visible)
             {
                 // If this layer is the same type as the current layer group
-                if (layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].type)
+                if (shouldGroupLayers && layerGroups.Count > 0 && layerGroups[currentLayerGroupNumber].groupType == layers[thisLayerNumber].type)
                 {
                     // Add this layer to the current layer group
                     layerGroups[currentLayerGroupNumber].layerNumbers.Add(thisLayerNumber);
