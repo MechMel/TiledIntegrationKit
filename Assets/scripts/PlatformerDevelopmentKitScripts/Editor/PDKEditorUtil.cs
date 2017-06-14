@@ -31,6 +31,26 @@ public class PDKEditorUtil : Editor
         }
     }
 
+    // Creates an interger field tied to a variable instance
+    public bool Field(string fieldName, ref string stringInstance)
+    {
+        // Check to see if this field has been changed
+        EditorGUI.BeginChangeCheck();
+        // Display this field
+        stringInstance = EditorGUILayout.TextField(fieldName, stringInstance);
+        // If this field has been changed
+        if (EditorGUI.EndChangeCheck())
+        {
+            // Tell the caller this field has been changed
+            return true;
+        }
+        else
+        {
+            // Tell the caller this field has not been changed
+            return false;
+        }
+    }
+
     // Creates an boolean field tied to a variable instance
     public bool Field(string fieldName, ref bool boolInstance)
     {

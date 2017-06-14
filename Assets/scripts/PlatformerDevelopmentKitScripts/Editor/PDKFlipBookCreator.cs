@@ -30,7 +30,7 @@ public class PDKFlipBookCreator : EditorWindow
         // TODO: Comment this later
         GUILayout.Label("Create Flipbook Animation", EditorStyles.boldLabel);
         // TODO: Comment this later
-        //editorUtil.Field("Animation Name:", ref animName);
+        editorUtil.Field("Animation Name:", ref animName);
         // TODO: Comment this later
         editorUtil.Field("Frame Rate:", ref frameRate);
         framesScrollPosition = EditorGUILayout.BeginScrollView(framesScrollPosition, GUILayout.Height(140));
@@ -41,17 +41,10 @@ public class PDKFlipBookCreator : EditorWindow
             // TODO: Comment this later
             editorUtil.Field(null, ref frames[indexOfSpriteToDisplay]);
         }
-        for (int indexOfSpriteToDisplay = 0; indexOfSpriteToDisplay < frames.Length; indexOfSpriteToDisplay++)
-        {
-            // TODO: Comment this later
-            editorUtil.Field("Frame " + indexOfSpriteToDisplay + ":");
-            // TODO: Comment this later
-            //editorUtil.Field(null, ref framesSprites[indexOfSpriteToDisplay]);
-        }
         EditorGUILayout.EndScrollView();
 
         // TODO: Comment this later
-        //editorUtil.Field("Output Location:", ref outputPath);
+        editorUtil.Field("Output Location:", ref outputPath);
         // TODO: Comment this later
         editorUtil.Field("Loop Animation:", ref shouldLoop);
         // TODO: Comment this later
@@ -124,8 +117,8 @@ public class PDKFlipBookCreator : EditorWindow
         }
         AnimationUtility.SetObjectReferenceCurve(newFlipbook, spriteBinding, spriteKeyFrames);
         Resources.UnloadUnusedAssets();
-        Debug.Log(outputPath + "/" + animName + ".anim");
-        AssetDatabase.CreateAsset(newFlipbook, outputPath + "/" + animName + ".anim");
+        Debug.Log(outputPath + "\\" + animName + ".anim");
+        AssetDatabase.CreateAsset(newFlipbook, outputPath + "\\" + animName + ".anim");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
