@@ -179,8 +179,8 @@ public class PDKTiledObject
     public string type;
     public int id;
     public int gid;
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     public int width;
     public int height;
     public int rotation;

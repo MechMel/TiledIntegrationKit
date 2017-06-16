@@ -469,8 +469,9 @@ public class PlayerController : MonoBehaviour
         #endregion
         
         #region Rideable animals
-        // If close enough to a rideable animal
-        if (Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
+        // If a Ride able animal exists and it is close enough to a ride
+        if (GameObject.FindGameObjectsWithTag("RideableAnimal").Length > 0 &&
+            Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
         {
             // If pressing the Interact key
             if (Input.GetButtonDown("Interact"))

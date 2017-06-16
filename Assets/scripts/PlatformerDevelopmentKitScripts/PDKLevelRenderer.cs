@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PDKLevelRenderer : MonoBehaviour
+[System.Serializable]
+public class PDKLevelRenderer
 {
     // Stores the TIKMap that this instance of PDKLevelRenderer will Use
     public PDKMap levelMap;
@@ -261,7 +262,7 @@ public class PDKLevelRenderer : MonoBehaviour
                     {
                         #region Get the X and Y Positons For this Tile on the Textue to  Update
                         // Translate the global position of this tile to a local position
-                        int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width);
+                        int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width); 
                         // Calculate The x position of the pixel that this tile will start at
                         int initialPixelX = levelMap.tileWidth * (thisLocalTilePosition % (int)rectToRender.width);
                         // Calculate The y position of the pixel that this tile will start at

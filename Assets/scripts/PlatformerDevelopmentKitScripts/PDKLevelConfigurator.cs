@@ -195,8 +195,7 @@ public class PDKLevelConfigurator : MonoBehaviour
                     }
                 }
             }
-            // Destory the level renderer
-            DestroyImmediate(levelController.levelRenderer);
+            levelController.levelRenderer = null;
         }
     }
 

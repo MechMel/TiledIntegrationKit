@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PDKObjectProperties : MonoBehaviour
 {
-    [System.Serializable]
-    public class PDKSerializableObjectProperties : PDKSerializableDictionay<string, string> { }
+    // TODO: FILL THIS IN LATER
+    public int id;
+    public int gid;
 
     // Holds this object's properties
-    public PDKSerializableObjectProperties objectProperties;
+    public PDKMap.PDKCustomProperties objectProperties;
 }

@@ -163,8 +163,8 @@ public class PDKTiledUtilities
                     }
                     // Add this object at this position, to the object map
                     pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap.AddID(
-                        x: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
-                        y: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y,
+                        x: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
+                        y: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y,
                         idToAdd: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id);
                 }
             }

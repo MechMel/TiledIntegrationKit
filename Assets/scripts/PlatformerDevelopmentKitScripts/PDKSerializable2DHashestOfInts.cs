@@ -38,7 +38,7 @@ public class PDKSerializable2DHashestOfInts
     public PDKLayer.PDKObjectIDHashSet GetIDs(int x, int y)
     {
         // Convert the users-specified 2D coordinates into an one-demnsional index
-        int rasterIndex = (Mathf.Abs(y) * _width) + Mathf.Abs(x);
+        int rasterIndex = (Mathf.Abs(y % _height) * _width) + Mathf.Abs(x % _width);
         // Return the item from the user-specified coordinates
         return oneDimensionArray[rasterIndex];
     }

@@ -20,7 +20,7 @@ public class PDKMap
     // TODO: FILL THIS IN LATER
     public PDKObjectTypes objectsInMap;
     // This will store a blank tile
-    Color[] blankTile;
+    public Color[] blankTile;
     // TODO: FILL THIS IN LATER
 
 

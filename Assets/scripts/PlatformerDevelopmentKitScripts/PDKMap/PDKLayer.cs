@@ -84,7 +84,7 @@ public class PDKLayer
     public void PutObjectInDehydratedMap(PDKObject objectToInsert, int tileWidth, int tileHeight)
     {
         // Add this object at this position, to the object map
-        dehydratedObjectIDMap.AddID(objectToInsert.x, objectToInsert.y, objectToInsert.id);
+        dehydratedObjectIDMap.AddID((int)objectToInsert.x, (int)objectToInsert.y, objectToInsert.id);
     }
 
 
@@ -137,7 +137,7 @@ public class PDKLayer
     public void RemoveObjectFromDehydratedMap(PDKObject objectToRemove)
     {
         // Remove the current object from this slot in the dehydrated objects map
-        dehydratedObjectIDMap.RemoveID(objectToRemove.x, objectToRemove.y, objectToRemove.id);
+        dehydratedObjectIDMap.RemoveID((int)objectToRemove.x, (int)objectToRemove.y, objectToRemove.id);
     }
     #endregion
 
@@ -162,10 +162,10 @@ public class PDKLayer
         // Dehydrate each of the objects in the list of objects to dehydrate
         for (int indexOfObjectToDehydrate = 0; indexOfObjectToDehydrate < objectsToDehydrate.Count; indexOfObjectToDehydrate++)
         {
-                // Remove this object from the hydrated objects
-                hydratedObjects.Remove(objectsToDehydrate[indexOfObjectToDehydrate]);
-                // Dehydrate this object
-                DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
+            // Dehydrate this object
+            DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
+            // Remove this object from the hydrated objects
+            hydratedObjects.Remove(objectsToDehydrate[indexOfObjectToDehydrate]);
         }
     }
 
@@ -181,11 +181,11 @@ public class PDKLayer
         
         hydratedObject = (GameObject)GameObject.Instantiate(dehydratedObject.prefab, new Vector3(dehydratedObject.x, dehydratedObject.y, 0), new Quaternion(0, 0, 0, 0));
         hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
-        // Copy each property from the dehydrated objet to the hydrated object
-        foreach (string propertyName in dehydratedObject.properties.Keys)
-        {
-            hydratedObjectProperties.objectProperties.Add(propertyName, dehydratedObject.properties[propertyName]);
-        }
+        // Set this object's ID and GID'
+        hydratedObjectProperties.id = dehydratedObject.id;
+        hydratedObjectProperties.gid = dehydratedObject.gid;
+        // Copy the custom properties from the dehydrated objet to the hydrated object
+        hydratedObjectProperties.objectProperties = dehydratedObject.properties;
         // Return the newly hydrated object
         return hydratedObject;
     }
@@ -194,20 +194,19 @@ public class PDKLayer
     // Dehydrates a given object
     public PDKObject DehydrateObject(GameObject objectToDehydrate)
     {
-        // Will sstore the dehydrated object to return
-        PDKObject dehydratedObject = new PDKObject();
         // Store the hydrated object's properties
         PDKObjectProperties hydratedObjectProperties = objectToDehydrate.GetComponent<PDKObjectProperties>();
+        // Will sstore the dehydrated object to return
+        PDKObject dehydratedObject = objects[hydratedObjectProperties.id];
         
-        // If this object has custome properties, save them
+        // If this object has custom properties, save them
         if (hydratedObjectProperties.objectProperties != null)
         {
-            // Copy each property from the hydrated objet to the dehydrated object
-            foreach (string propertyName in hydratedObjectProperties.objectProperties.Keys)
-            {
-                dehydratedObject.properties.Add(propertyName, hydratedObjectProperties.objectProperties[propertyName]);
-            }
+            dehydratedObject.properties = hydratedObjectProperties.objectProperties;
         }
+        // TODO: FILL THIS IN LATER
+        dehydratedObject.x = objectToDehydrate.transform.position.x;
+        dehydratedObject.x = objectToDehydrate.transform.position.x;
         // Destory the hydrated obejct
         GameObject.Destroy(objectToDehydrate);
         // Return the dehydrated object

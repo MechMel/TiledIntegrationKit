@@ -10,8 +10,8 @@ public class PDKObject
     public string type;
     public int id;
     public int gid;
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     public Rect objectRect;
     public int rotation;
     public bool visible;
