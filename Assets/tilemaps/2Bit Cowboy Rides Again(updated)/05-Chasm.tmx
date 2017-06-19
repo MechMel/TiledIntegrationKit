@@ -1,8 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="141">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../environment.png" width="512" height="512"/>
+  <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
+ <objectgroup name="Objects">
+  <object id="1" type="Vulture" gid="304" x="448" y="224" width="16" height="16"/>
+  <object id="2" type="Vulture" gid="2147483952" x="512" y="64" width="16" height="16"/>
+  <object id="3" type="Vulture" gid="2147483952" x="528" y="288" width="16" height="16"/>
+  <object id="5" type="Vulture" gid="304" x="432" y="320" width="16" height="16"/>
+  <object id="6" type="Vulture" gid="2147483952" x="720" y="80" width="16" height="16"/>
+  <object id="7" type="Vulture" gid="2147483952" x="768" y="96" width="16" height="16"/>
+  <object id="8" type="Vulture" gid="304" x="432" y="688" width="16" height="16"/>
+  <object id="9" type="Vulture" gid="2147483952" x="496" y="1184" width="16" height="16"/>
+  <object id="10" type="Vulture" gid="2147483952" x="512" y="1488" width="16" height="16"/>
+  <object id="11" type="Vulture" gid="2147483952" x="528" y="2064" width="16" height="16"/>
+  <object id="12" type="Vulture" gid="2147483952" x="528" y="2448" width="16" height="16"/>
+  <object id="13" type="Vulture" gid="304" x="528" y="2720" width="16" height="16"/>
+  <object id="19" type="Bat" gid="300" x="176" y="432" width="16" height="16"/>
+  <object id="20" type="Bat" gid="2147483948" x="48" y="448" width="16" height="16"/>
+  <object id="21" type="Bat" gid="300" x="672" y="720" width="16" height="16"/>
+  <object id="22" type="Bat" gid="300" x="816" y="832" width="16" height="16"/>
+  <object id="23" type="Bat" gid="2147483948" x="272" y="1520" width="16" height="16"/>
+  <object id="24" type="Bat" gid="2147483948" x="128" y="1536" width="16" height="16"/>
+  <object id="25" type="Bat" gid="2147483948" x="848" y="1568" width="16" height="16"/>
+  <object id="26" type="Bat" gid="300" x="720" y="1600" width="16" height="16"/>
+  <object id="29" type="Bat" gid="2147483948" x="832" y="1984" width="16" height="16"/>
+  <object id="30" type="Bat" gid="300" x="720" y="2256" width="16" height="16"/>
+  <object id="32" type="Scorpion" gid="2147483880" x="640" y="144" width="16" height="16"/>
+  <object id="33" type="Scorpion" gid="232" x="640" y="800" width="16" height="16"/>
+  <object id="34" type="Scorpion" gid="2147483880" x="672" y="1072" width="16" height="16"/>
+  <object id="35" type="Scorpion" gid="232" x="464" y="1088" width="16" height="16"/>
+  <object id="36" type="Scorpion" gid="232" x="688" y="1520" width="16" height="16"/>
+  <object id="37" type="Scorpion" gid="2147483880" x="704" y="1696" width="16" height="16"/>
+  <object id="38" type="Scorpion" gid="232" x="800" y="1856" width="16" height="16"/>
+  <object id="39" type="Scorpion" gid="232" x="704" y="1856" width="16" height="16"/>
+  <object id="40" type="Scorpion" gid="2147483880" x="704" y="2080" width="16" height="16"/>
+  <object id="41" type="Scorpion" gid="232" x="640" y="2320" width="16" height="16"/>
+  <object id="42" type="Scorpion" gid="2147483880" x="640" y="2480" width="16" height="16"/>
+  <object id="43" type="Scorpion" gid="2147483880" x="896" y="2448" width="16" height="16"/>
+  <object id="44" type="Snake" gid="2147483820" x="256" y="512" width="16" height="16"/>
+  <object id="45" type="Snake" gid="2147483820" x="784" y="1424" width="16" height="16"/>
+  <object id="46" type="Snake" gid="2147483820" x="816" y="2432" width="16" height="16"/>
+  <object id="47" type="Snake" gid="2147483820" x="352" y="2752" width="16" height="16"/>
+  <object id="48" type="Bandit" gid="2147483816" x="640" y="368" width="16" height="16"/>
+  <object id="49" type="Bandit" gid="2147483816" x="112" y="512" width="16" height="16"/>
+  <object id="50" type="Bandit" gid="168" x="352" y="384" width="16" height="16"/>
+  <object id="51" type="Bandit" gid="168" x="128" y="1696" width="16" height="16"/>
+  <object id="52" type="Bandit" gid="2147483816" x="864" y="2080" width="16" height="16"/>
+  <object id="53" type="Player" gid="164" x="272" y="3104" width="16" height="16"/>
+  <object id="54" type="Barrel" gid="33" x="672" y="144" width="16" height="16"/>
+  <object id="55" type="Barrel" gid="33" x="176" y="512" width="16" height="16"/>
+  <object id="56" type="Barrel" gid="33" x="64" y="512" width="16" height="16"/>
+  <object id="57" type="Barrel" gid="33" x="64" y="496" width="16" height="16"/>
+  <object id="58" type="Barrel" gid="33" x="48" y="512" width="16" height="16"/>
+  <object id="59" type="Barrel" gid="33" x="736" y="1056" width="16" height="16"/>
+  <object id="60" type="Barrel" gid="33" x="176" y="1120" width="16" height="16"/>
+  <object id="61" type="Barrel" gid="33" x="160" y="1120" width="16" height="16"/>
+  <object id="62" type="Barrel" gid="33" x="352" y="1280" width="16" height="16"/>
+  <object id="63" type="Barrel" gid="33" x="48" y="1696" width="16" height="16"/>
+  <object id="64" type="Barrel" gid="33" x="832" y="2448" width="16" height="16"/>
+  <object id="65" type="Barrel" gid="33" x="832" y="2432" width="16" height="16"/>
+  <object id="66" type="Barrel" gid="33" x="752" y="2864" width="16" height="16"/>
+  <object id="67" type="Barrel" gid="33" x="240" y="2816" width="16" height="16"/>
+  <object id="68" type="Crate" gid="34" x="816" y="144" width="16" height="16"/>
+  <object id="69" type="Crate" gid="34" x="80" y="512" width="16" height="16"/>
+  <object id="70" type="Crate" gid="34" x="704" y="800" width="16" height="16"/>
+  <object id="71" type="Crate" gid="34" x="720" y="800" width="16" height="16"/>
+  <object id="72" type="Crate" gid="34" x="592" y="1232" width="16" height="16"/>
+  <object id="73" type="Crate" gid="34" x="736" y="1328" width="16" height="16"/>
+  <object id="74" type="Crate" gid="34" x="864" y="1616" width="16" height="16"/>
+  <object id="75" type="Crate" gid="34" x="64" y="1696" width="16" height="16"/>
+  <object id="77" type="Crate" gid="34" x="48" y="1680" width="16" height="16"/>
+  <object id="78" type="Crate" gid="34" x="848" y="2448" width="16" height="16"/>
+  <object id="79" type="Crate" gid="34" x="816" y="2448" width="16" height="16"/>
+  <object id="80" type="Crate" gid="34" x="352" y="2352" width="16" height="16"/>
+  <object id="81" type="Crate" gid="34" x="352" y="2368" width="16" height="16"/>
+  <object id="82" type="Crate" gid="34" x="368" y="2368" width="16" height="16"/>
+  <object id="83" type="Bottle" gid="35" x="672" y="128" width="16" height="16"/>
+  <object id="84" type="Bottle" gid="35" x="48" y="496" width="16" height="16"/>
+  <object id="85" type="Bottle" gid="35" x="176" y="496" width="16" height="16"/>
+  <object id="86" type="Bottle" gid="35" x="752" y="1328" width="16" height="16"/>
+  <object id="87" type="Bottle" gid="35" x="736" y="1312" width="16" height="16"/>
+  <object id="88" type="Bandit" gid="168" x="800" y="928" width="16" height="16"/>
+  <object id="89" type="Coin_Bag" gid="65" x="832" y="368" width="16" height="16"/>
+  <object id="90" type="Coin_Bag" gid="65" x="848" y="384" width="16" height="16"/>
+  <object id="91" type="Coin_Bag" gid="65" x="864" y="400" width="16" height="16"/>
+  <object id="92" type="Coin_Bag" gid="65" x="880" y="400" width="16" height="16"/>
+  <object id="93" type="Coin_Bag" gid="65" x="80" y="496" width="16" height="16"/>
+  <object id="94" type="Coin_Bag" gid="65" x="704" y="784" width="16" height="16"/>
+  <object id="95" type="Coin_Bag" gid="65" x="720" y="784" width="16" height="16"/>
+  <object id="96" type="Coin_Bag" gid="65" x="192" y="1120" width="16" height="16"/>
+  <object id="97" type="Coin_Bag" gid="65" x="160" y="1104" width="16" height="16"/>
+  <object id="98" type="Coin_Bag" gid="65" x="400" y="1088" width="16" height="16"/>
+  <object id="99" type="Coin_Bag" gid="65" x="80" y="1696" width="16" height="16"/>
+  <object id="100" type="Coin_Bag" gid="65" x="64" y="1680" width="16" height="16"/>
+  <object id="101" type="Coin_Bag" gid="65" x="48" y="1664" width="16" height="16"/>
+  <object id="102" type="Coin_Bag" gid="65" x="368" y="1904" width="16" height="16"/>
+  <object id="103" type="Coin" gid="67" x="704" y="1056" width="16" height="16"/>
+  <object id="104" type="Coin" gid="67" x="672" y="1040" width="16" height="16"/>
+  <object id="105" type="Coin" gid="67" x="640" y="1040" width="16" height="16"/>
+  <object id="106" type="Coin" gid="67" x="608" y="1056" width="16" height="16"/>
+  <object id="107" type="Coin" gid="67" x="80" y="1616" width="16" height="16"/>
+  <object id="108" type="Coin" gid="67" x="448" y="2496" width="16" height="16"/>
+  <object id="109" type="Coin" gid="67" x="576" y="2608" width="16" height="16"/>
+  <object id="110" type="Coin" gid="67" x="592" y="2672" width="16" height="16"/>
+  <object id="111" type="Coin" gid="67" x="448" y="2800" width="16" height="16"/>
+  <object id="112" type="Coin" gid="67" x="720" y="2848" width="16" height="16"/>
+  <object id="113" type="Coin" gid="67" x="576" y="2960" width="16" height="16"/>
+  <object id="114" type="Scorpion" gid="232" x="576" y="2800" width="16" height="16"/>
+  <object id="115" gid="65" x="384" y="176" width="16" height="16"/>
+  <object id="116" type="Coin_Bag" gid="65" x="320" y="480" width="16" height="16"/>
+  <object id="117" type="Rattlesnake" gid="2147483884" x="704" y="2912" width="16" height="16"/>
+  <object id="118" type="Rattlesnake" gid="236" x="336" y="2176" width="16" height="16"/>
+  <object id="119" type="Rattlesnake" gid="236" x="672" y="1328" width="16" height="16"/>
+  <object id="120" type="Rattlesnake" gid="2147483884" x="800" y="1072" width="16" height="16"/>
+  <object id="121" type="Crate_Coins" gid="39" x="848" y="400" width="16" height="16"/>
+  <object id="122" type="Crate_Coins" gid="39" x="832" y="400" width="16" height="16"/>
+  <object id="123" type="Crate_Coins" gid="39" x="832" y="384" width="16" height="16"/>
+  <object id="124" type="Crate_Coins" gid="39" x="736" y="1072" width="16" height="16"/>
+  <object id="125" type="Crate_Coins" gid="39" x="368" y="1280" width="16" height="16"/>
+  <object id="126" type="Crate_Coins" gid="39" x="352" y="1264" width="16" height="16"/>
+  <object id="127" type="Crate_Coins" gid="39" x="848" y="1616" width="16" height="16"/>
+  <object id="128" type="Crate_Coins" gid="39" x="864" y="1600" width="16" height="16"/>
+  <object id="129" type="Crate_Coins" gid="39" x="800" y="1696" width="16" height="16"/>
+  <object id="130" type="Crate_Health" gid="36" x="752" y="1072" width="16" height="16"/>
+  <object id="131" type="Flag_Pole" gid="801" x="880" y="144" width="16" height="16"/>
+  <object id="132" gid="1" x="128" y="496" width="16" height="16"/>
+  <object id="133" gid="1" x="192" y="1536" width="16" height="16"/>
+  <object id="134" gid="1" x="768" y="2064" width="16" height="16"/>
+  <object id="135" type="Bounty" gid="1" x="752" y="2432" width="16" height="16"/>
+  <object id="136" type="Bottle" gid="35" x="352" y="2336" width="16" height="16"/>
+  <object id="137" type="Crate_Scorpion" gid="38" x="784" y="1696" width="16" height="16"/>
+  <object id="138" type="Spider" gid="361" x="64" y="1536" width="16" height="16"/>
+  <object id="139" gid="361" x="176" y="1072" width="16" height="16"/>
+  <object id="140" type="Spider" gid="361" x="240" y="1056" width="16" height="16"/>
+ </objectgroup>
  <layer name="Wall" width="64" height="195">
   <data encoding="base64" compression="zlib">
    eJztnUFu3DAMRQdZZdF7dAL0JMlNkot0kUNnBNSAYdT2WJ8U+cX/AG3HehQtybKsud2EEEIIIYSI5/5yu739KxX5+/D+KOzfuMtf/kX9Xx/eX4X9q/f/jY9VDLalAndS/3U9/wB1Zfd/f5RvJ//MMbBo+0aUP3q9Ef4eHMX6mbL9nc9H+UVw/6PeRwXJga8B/p7umfuoBW//9+Qx8PZH+0Bv5F/bvyF/v/I5ob8QQoh8sI7BVszk3zMeV/SfYQ76Pyzc0TXYKM7WPmdv+/X7f/T5A1mDjKR6Dshf/lX7/4aFP2vbNyz8mfv/o/c/FXLAwt3bf3stz9/29re6nlUcRvlbelvGYIS/l3sW/7Pxf3b/qNzP4n82/s/uf5YDnv7ouMvu7zn3ZPC3yAGLWET5j3r2zOqPtP3Z2h+DP3L/W639RM5/kBwYtfbl6Y7c/1b+kfMfr72vlvXI6n9Gdv+RyD+PfwTV/RHkL3/5+xV9/xFTV3Z/dP5/Ffn7lN7vH0b7Z8Pq+fdKLDLFe7T/yDjP6m8ZA/nLX/7yl7/8s9RpJKztvy3R778i/TO8/4r09zr7Sv4c/hne/0f6Izkwi39vDszi3zsGzOJfPf97/a2+/2T1b1jlgPzlz+a/Pv+5or+e/+Uvf/nLHyvZ99/swX72A5p77Oe/WNx7zDlgce3K/pbzX0b/7e8g/X/E+S9Z/KP7f/T8X9b+H8Vy/sd4/ov85S9/+VsURuTP6W917zH6W/U9ls8+jP6WbR/t3zP/Zvzf06P4X82BZe2LCUt/Rvbcmc+fvULltm/IX/5V3T1gfP61vLb85/DPsP83+gzG6Gcg+dv7btm7NrL/m4novicaa/9Z8r+yf4a9H6z+lt8/MPo3mPf/WFDZn33/Ewpb/2eN/Gv7C26W3GPdf49S/d6Tv/zlj+9/zsbeHKMCR3OsClyddyIg818PRs+9q/sj618e9NQD3fvTmwMejGz7BrL+40FPPZCxn/3+R2H3X9o/4vw3L0b2ARn9G/J/viDjX7bxf4132y9kGv/XVPcfRWX/bPO/0WTq/3vrgfQB1f0zgfiznr+wBvHPngO/X/YL6i1/bn+rGDD7W8RA/tGW+zzjj8ZhFv/eGGSeA1z1741B1hz4Ab6b4kQ=
@@ -21,11 +153,6 @@
  <layer name="Foreground" width="64" height="195">
   <data encoding="base64" compression="zlib">
    eJzt3F1KAzEYBdCP9ElwB7qBgjtQXIBLcS2+uBAX4QIEX1t/1mIGCehAOw7ITJqcA4FS0pJ7k2mfZiIA4DQ8pXnzd3n+fuZnqNNL3sdXewkAAABU4jF9D/6udDbubvy+bpfr5C1/53vnXbMs1/lhNf4O1rYe2nDoP27tM3ZsXTWujWXpHgAAAAAAAPhvF5uIy83aq1jPdc5+03F+AAAAAAAAAAAAAAAAAABgOR8p4tMzpgEAAAAAoEueAxtx23F+AAAAAAAAAIBW3aeI847vn92meR1sG+tqyFM6OJvoocwtowXjTFcTuYY5z41kH4zzT10LP/d9l1/vT7yLcf6pM9DKuS/k/z3u8nhoLOMxX/AXM4E=
-  </data>
- </layer>
- <layer name="Objects" width="64" height="195">
-  <data encoding="base64" compression="zlib">
-   eJzt3VtuEzEUgOEJlZC4s4UU1Ihr+84T4gl2AusARFkHIC7rKPdN8FDui8AWiTKczKCJx55j+/yfNEonTVLbTeKZ42NP0wB6zs2a5vxMuxR6bri63zRc/xC02Rpt0e/LCe0SjHe0vL0U8NzZzr/7J3e6H5ez4+XtfMBjb4n9uajvXoH1L91t7QIAmdh3/fQBfTWAFo7h68d3P0I80i5AoCeRXuf5lo/P5XzjpdLfXTT5tIGGRbNuA8vtENs113ddr7z/uuLqd7XyOiKtkr9zfIzZx1lXdfDHHjPxe+nQbU8Tl2sq8+W2u9yXxx5dMehXbnudslAAAABAgYh/hzvj2u2s4bazEHsCsOm92LcW1/8u9nebdXwKa/SR9JEAbIqVb1IqrXwTAIA9d935xr3E5xx3xK0mWd/77ucHierfV9/V/UPmQ8YWo77vms2YzhDHYt/neF5u7f9w28/QQiXWjld9azZjOiWwFHPrssoNs94OAOJg3h+wifGt8i20C6DMHytabwPE8cltn8V9IetBleqX236L+3wfYakNAKBLTXMwQzAHE6Vi/WNiYEOEjpttK2RMd4p1M6YaN5NjnLJuvFXzd8r9k04b/kfVvI4Nef7D8vzHxB5zyLUZw9edMYRwh9oFUGI9t8N/ZmQb5JZX76+H8DbRa6/Wfmq3QW559T4P7qu4b69hrAkAANSpLwY6VWxUW18MtNQ5Baib9fNpAJhSzWM/QI3IARqeAyTj/31P89eueDyuWFnqiv938deueJG4LADQ1jVXyZKuuUoAEIP13FbWOYYVVsY1+6Qe13yT8LWtz023nn/NdRoQi/VjvtqFxv/9U9rvCz8PXq4LmzJfPpZYc4D99237+s3e0Hh5ro60C6BMrvtbutLn1gEAkAL9I2Ab3wF2XHDn/RcNx7b2Xd0PKqw/a1KyJiW2Y2G89399e2nzWDWuwQZwfPwXnz97Prjto3YhFOV8nUtgLPo2AADK8FC7AMqeaRcAwf4AQyBeUA==
   </data>
  </layer>
  <layer name="Viewport" width="64" height="195">
