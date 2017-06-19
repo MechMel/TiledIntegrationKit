@@ -269,11 +269,11 @@ public class PDKLevelRenderer
                             initialPixelX = levelMap.tileWidth * ((thisTilePosition % levelMap.width) - (int)rectToRender.x + levelMap.width);
                         }
                         // Calculate The y position of the pixel that this tile will start at
-                        int initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1));
+                        int initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1));
                         // TODO: FIND A BETTER WAY TO DO THIS
                         if (initialPixelY < 0)
                         {
-                            initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
+                            initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
                         }
 
                         /*int initialPixelX;
@@ -301,6 +301,14 @@ public class PDKLevelRenderer
                         // If there is no tile already at this position
                         if (!positionsWithTiles.Contains(thisTilePosition))
                         {
+                            if (initialPixelX + 16 > textureToUpdate.width)
+                            {
+                                int test = 16;
+                            }
+                            else if (initialPixelY + 16 > textureToUpdate.height)
+                            {
+                                int test = 16;
+                            }
                             // Place this tile in the texture to return
                             textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight, thisTilesPixels);
                             // Remember that there is tile at this position
