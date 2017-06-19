@@ -261,12 +261,41 @@ public class PDKLevelRenderer
                     if (!opaqueTilePositions.Contains(thisTilePosition))
                     {
                         #region Get the X and Y Positons For this Tile on the Textue to  Update
-                        // Translate the global position of this tile to a local position
-                        int thisLocalTilePosition = ((thisTilePosition % levelMap.width) - (int)rectToRender.x) + (((thisTilePosition / levelMap.width) - (int)rectToRender.y) * (int)rectToRender.width); 
                         // Calculate The x position of the pixel that this tile will start at
-                        int initialPixelX = levelMap.tileWidth * (thisLocalTilePosition % (int)rectToRender.width);
+                        int initialPixelX = levelMap.tileWidth * ((thisTilePosition % levelMap.width) - (int)rectToRender.x);
+                        // TODO: FIND A BETTER WAY TO DO THIS
+                        if (initialPixelX < 0)
+                        {
+                            initialPixelX = levelMap.tileWidth * ((thisTilePosition % levelMap.width) - (int)rectToRender.x + levelMap.width);
+                        }
                         // Calculate The y position of the pixel that this tile will start at
-                        int initialPixelY = levelMap.tileHeight * (((int)(rectToRender.height * rectToRender.width) - (thisLocalTilePosition + 1)) / (int)rectToRender.width);
+                        int initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1));
+                        // TODO: FIND A BETTER WAY TO DO THIS
+                        if (initialPixelY < 0)
+                        {
+                            initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
+                        }
+
+                        /*int initialPixelX;
+                        int initialPixelY;
+                        // Calculate The y position of the pixel that this tile will start at
+                        if ((thisTilePosition % levelMap.width) > (int)rectToRender.x) // TODO: FILL THIS IN LATER
+                        {
+                            initialPixelX = (thisTilePosition % levelMap.width) - (int)rectToRender.x;
+                        }
+                        else
+                        {
+                            initialPixelX = (thisTilePosition % levelMap.width) - (int)rectToRender.x + levelMap.width;
+                        }
+                        // Calculate The y position of the pixel that this tile will start at
+                        if ((thisTilePosition / levelMap.width) > (int)rectToRender.y) // TODO: FILL THIS IN LATER
+                        {
+                            initialPixelY = (thisTilePosition / levelMap.width) - (int)rectToRender.y;
+                        }
+                        else
+                        {
+                            initialPixelY = (thisTilePosition / levelMap.width) - (int)rectToRender.y + levelMap.height;
+                        }*/
                         #endregion
                         #region Place this Tile
                         // If there is no tile already at this position

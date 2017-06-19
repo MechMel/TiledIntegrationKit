@@ -14,7 +14,7 @@ public class PDKTileset
     public int margin;
     public int spacing;
     public Texture2D imageTexture;
-    public Color[][] tileColorArrays;
+    public PDKTileColorArray[] tileColorArrays;
     public int imageWidth;
     public int imageHeight;
     public PDKMap.PDKCustomProperties properties;
@@ -34,11 +34,13 @@ public class PDKTileset
     public void compileTileset()
     {
         // Create an array of color arrays to hold all the tiles
-        Color[][] thisTilesetColors = new Color[tileCount + 1][];
+        PDKTileColorArray[] thisTilesetColors = new PDKTileColorArray[tileCount + 1];
 
         // Go through each tile in this tileset
         for (int thisTileIndex = 0; thisTileIndex < thisTilesetColors.Length; thisTileIndex++)
         {
+            // Create a new tile color array for this tile
+            thisTilesetColors[thisTileIndex] = new PDKTileColorArray();
             // Get this tile's colors
             Color[] thisTileColors = imageTexture.GetPixels(
                 x: tileWidth * ((thisTileIndex + 1 - firstGID) % columns),
@@ -49,17 +51,17 @@ public class PDKTileset
             // Look through each previous tile in this set
             for (int previousTileIndex = 0; previousTileIndex < thisTileIndex; previousTileIndex++)
             {
-                // If a tile that is ecactly the same as this tile already exists
-                if (thisTilesetColors[previousTileIndex] == thisTileColors)
+                // If a tile that is exactly the same as this tile already exists
+                if (thisTilesetColors[previousTileIndex].colors == thisTileColors)
                 {
                     // Point to the previous tile in memory
-                    thisTileColors = thisTilesetColors[previousTileIndex];
+                    thisTileColors = thisTilesetColors[previousTileIndex].colors;
                     // There is no need to continue this search
                     break;
                 }
             }
             // Add this tile's colors to this tilest's aray of tile colors
-            thisTilesetColors[thisTileIndex] = thisTileColors;
+            thisTilesetColors[thisTileIndex].colors = thisTileColors;
         }
         // Add this compressed array of colors to the tikMap
         tileColorArrays = thisTilesetColors;
@@ -80,6 +82,6 @@ public class PDKTileset
     public Color[] GetTilePixels(int tileID)
     {
         // Return the appropriate tile color array
-        return tileColorArrays[tileID - 1];
+        return tileColorArrays[tileID - 1].colors;
     }
 }
