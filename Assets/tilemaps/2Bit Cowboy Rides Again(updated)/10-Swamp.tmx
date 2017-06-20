@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="384" height="32" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="384" height="32" tilewidth="16" tileheight="16" nextobjectid="187">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../environment.png" width="512" height="512"/>
+  <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
   <terraintypes>
    <terrain name="Canyon Dirt" tile="645"/>
   </terraintypes>
@@ -36,11 +36,191 @@
    eJzt219O2zAAB+CSvo3dhJMhLrJ3YCdA4gJs0/Y2EIgBF+DfLsAT7AJztFRUIWmbLCZO8n2S1chJGzutf3aVdjaDeE6z2ey8VH5labVnXemzvZvI+3RRURbtL2+n3h9gHOR/fFX5f76iLvX+AOMg/+OrW//Lf6BP8j++Vev/5X4s9qXeH2AcUsv/LGtXUlaX/0Odz4BxSC3/AXgf8h9gmuQ/wDTJf4Bpkv8A0yT/AabnLOT8h/nb/P8Y6i7NAdDYbRg3d8YOCctz/6km+4c6B+yWSmrKbUqxjdDWUciK4wHlBf0rZ7ZMhGo/ZWvn9sM1Pcj+PR6+w/V9DOf47X0EWvoe8uOHDAGYrO153y2A4boKa6jrUrlZs666D/sfrL1IwE7i+f+y9br9XGz/2XqtX9QtHzdmVw1yhjiq7je458DY1X3uq8aAcQFADPl91i8r1r+bzlPrbDLndXGuJs/rav3ZRd/atLPta3d53ev297FmiXXdm567izZ1Meb+tx1NXgsAgGF6Dt8FX9wPAQAAAACAwfNbDwCAOPaKUt4GYPz2agoA09DlPJD/f/fb0m+2Pxf/6T3J3h6X+1o8firqy8cBEF/dPOB7AcA0mAcA0vYXe98XCQ==
   </data>
  </layer>
- <layer name="Objects" width="384" height="32">
-  <data encoding="base64" compression="zlib">
-   eJzt3E1OwkAUwPEBE++BURK/vQJhrXdwyUITjd5AF5DoKXQB4sdV9AbexJlAkzoBOu20nTft/5dMEG2Z11bevLYDSgEAAAAAAAAA3nSbhw4CAAAAAAAAANB4wzU/AwCaiVxfr6H1CAASkaOqcd5R6qITOgo3hzrOo0hiBZqAazHNdqXz6XWHY4swfruhI0DiWOeBk2V9RT4o7lTvw7MAdeq+7vOA+hgR6WyFjgBZ0uOC4To2lJUH7f5jEGoMaKJRqvlgfJSH/A8Us6dzWb8F+WzquI0x3cvAQo/8LwaX4pDHo26S0m1yLyOPy2pCAVCSbWqEXKqugwfLx9fqukDkprrNQgexwkPoAFIk1U551B13X2D+lzwXsUgdbHB9vL3Guk08X+NJt+fUc4nnVi819vWu20eN/QGS9JaP5joR53DypPN1GfV6G/NdGfMS0Ayxl85JDhhkLZjBrG9y/+7yublOFOocLtQ1iJuuUrc5b6jd6eXvrXU+dfsqLar/7Hyd1OujDc1eFu7zE0LadExXHV+fuSV5+nFZTxrXOIvsQ9ft9n1tafvWZXuq/v+oej6Vb+zrcu6m/WKvQ95GCDGMkUXFuG0xxmwLvQ1zq/8QuZV8Dh91v4dc+gv9vpYgax98d5X68Zywy34G6iN1zgh5QBa7roQsZb1fxvp1Jhzr1pI6RxZyJTUE390cPzOOzCrI/2XXc9SHfsxciJ2MZbL+DgBZOHcEmiuWOVIAgPJR4wFxkHrPF3FKPpvFGIA6cO2/ON/PUcbWLwBgcT/XNNdcXOS7M6YrfjdQ3EsGAAAAAADt8AeyFF57
-  </data>
- </layer>
+ <objectgroup name="Objects">
+  <object id="1" type="Player" gid="164" x="96" y="288" width="16" height="16"/>
+  <object id="2" type="Snake" gid="2147483820" x="656" y="384" width="16" height="16"/>
+  <object id="3" type="Snake" gid="2147483820" x="912" y="480" width="16" height="16"/>
+  <object id="4" type="Snake" gid="2147483820" x="3280" y="304" width="16" height="16"/>
+  <object id="5" type="Snake" gid="172" x="3264" y="64" width="16" height="16"/>
+  <object id="6" type="Snake" gid="2147483820" x="5312" y="288" width="16" height="16"/>
+  <object id="8" type="Snake" gid="2147483820" x="5632" y="256" width="16" height="16"/>
+  <object id="9" type="Piranha" gid="2147484076" x="432" y="320" width="16" height="16"/>
+  <object id="10" type="Piranha" gid="2147484076" x="1200" y="368" width="16" height="16"/>
+  <object id="11" type="Piranha" gid="2147484076" x="1184" y="352" width="16" height="16"/>
+  <object id="12" type="Piranha" gid="2147484076" x="1632" y="352" width="16" height="16"/>
+  <object id="13" type="Piranha" gid="2147484076" x="1600" y="336" width="16" height="16"/>
+  <object id="14" type="Piranha" gid="2147484076" x="1776" y="352" width="16" height="16"/>
+  <object id="15" type="Piranha" gid="2147484076" x="2480" y="336" width="16" height="16"/>
+  <object id="16" type="Piranha" gid="428" x="2800" y="368" width="16" height="16"/>
+  <object id="17" type="Piranha" gid="2147484076" x="2816" y="352" width="16" height="16"/>
+  <object id="18" type="Piranha" gid="428" x="2944" y="448" width="16" height="16"/>
+  <object id="19" type="Piranha" gid="428" x="2928" y="432" width="16" height="16"/>
+  <object id="20" type="Piranha" gid="2147484076" x="3216" y="352" width="16" height="16"/>
+  <object id="21" type="Piranha" gid="2147484076" x="3200" y="336" width="16" height="16"/>
+  <object id="22" type="Piranha" gid="2147484076" x="3984" y="336" width="16" height="16"/>
+  <object id="23" type="Piranha" gid="2147484076" x="3888" y="224" width="16" height="16"/>
+  <object id="24" type="Piranha" gid="2147484076" x="4464" y="368" width="16" height="16"/>
+  <object id="25" type="Piranha" gid="428" x="4496" y="336" width="16" height="16"/>
+  <object id="26" type="Piranha" gid="2147484076" x="4752" y="384" width="16" height="16"/>
+  <object id="27" type="Piranha" gid="428" x="5088" y="400" width="16" height="16"/>
+  <object id="28" type="Piranha" gid="2147484076" x="5104" y="384" width="16" height="16"/>
+  <object id="29" type="Piranha" gid="2147484076" x="5408" y="448" width="16" height="16"/>
+  <object id="30" type="Piranha" gid="2147484076" x="5424" y="384" width="16" height="16"/>
+  <object id="31" type="Bat" gid="300" x="608" y="368" width="16" height="16"/>
+  <object id="32" type="Bat" gid="300" x="560" y="448" width="16" height="16"/>
+  <object id="33" type="Bat" gid="300" x="2448" y="272" width="16" height="16"/>
+  <object id="34" type="Bat" gid="2147483948" x="3024" y="192" width="16" height="16"/>
+  <object id="35" type="Bat" gid="300" x="2928" y="384" width="16" height="16"/>
+  <object id="36" type="Bat" gid="2147483948" x="3280" y="272" width="16" height="16"/>
+  <object id="37" type="Bat" gid="300" x="3936" y="160" width="16" height="16"/>
+  <object id="38" type="Bat" gid="2147483948" x="4176" y="208" width="16" height="16"/>
+  <object id="39" type="Rat" gid="2147483824" x="528" y="288" width="16" height="16"/>
+  <object id="40" type="Rat" gid="2147483824" x="704" y="480" width="16" height="16"/>
+  <object id="41" type="Rat" gid="176" x="4912" y="304" width="16" height="16"/>
+  <object id="42" type="Rat" gid="2147483824" x="5264" y="304" width="16" height="16"/>
+  <object id="43" type="Rat" gid="2147483824" x="5584" y="288" width="16" height="16"/>
+  <object id="44" type="Vulture" gid="2147483952" x="1232" y="192" width="16" height="16"/>
+  <object id="45" type="Vulture" gid="2147483952" x="1328" y="208" width="16" height="16"/>
+  <object id="46" type="Vulture" gid="304" x="1568" y="208" width="16" height="16"/>
+  <object id="47" type="Vulture" gid="2147483952" x="1840" y="208" width="16" height="16"/>
+  <object id="48" type="Vulture" gid="304" x="2576" y="208" width="16" height="16"/>
+  <object id="49" type="Vulture" gid="304" x="2560" y="192" width="16" height="16"/>
+  <object id="50" type="Craw_Dad" gid="2147483944" x="1280" y="320" width="16" height="16"/>
+  <object id="51" type="Craw_Dad" gid="2147483944" x="2576" y="320" width="16" height="16"/>
+  <object id="52" type="Craw_Dad" gid="2147483944" x="2944" y="320" width="16" height="16"/>
+  <object id="53" type="Craw_Dad" gid="2147483944" x="2960" y="224" width="16" height="16"/>
+  <object id="54" type="Craw_Dad" gid="2147483944" x="3776" y="320" width="16" height="16"/>
+  <object id="55" type="Craw_Dad" gid="2147483944" x="4304" y="320" width="16" height="16"/>
+  <object id="56" type="Spider_Large" gid="365" x="4048" y="240" width="16" height="16"/>
+  <object id="57" type="Spider_Large" gid="365" x="3056" y="272" width="16" height="16"/>
+  <object id="58" type="Spider_Large" gid="365" x="3232" y="176" width="16" height="16"/>
+  <object id="59" type="Bandit" gid="2147483816" x="3632" y="304" width="16" height="16"/>
+  <object id="60" type="Bandit" gid="2147483816" x="3472" y="256" width="16" height="16"/>
+  <object id="61" type="Crate" gid="34" x="512" y="480" width="16" height="16"/>
+  <object id="62" type="Crate" gid="34" x="528" y="480" width="16" height="16"/>
+  <object id="63" type="Crate" gid="34" x="576" y="400" width="16" height="16"/>
+  <object id="64" type="Crate" gid="34" x="704" y="400" width="16" height="16"/>
+  <object id="65" type="Crate" gid="34" x="1008" y="480" width="16" height="16"/>
+  <object id="67" type="Crate_Health" gid="36" x="3600" y="304" width="16" height="16"/>
+  <object id="68" type="Barrel" gid="33" x="560" y="400" width="16" height="16"/>
+  <object id="69" type="Barrel" gid="33" x="3584" y="304" width="16" height="16"/>
+  <object id="70" type="Barrel" gid="33" x="3600" y="288" width="16" height="16"/>
+  <object id="71" type="Coin_Bag" gid="65" x="528" y="464" width="16" height="16"/>
+  <object id="72" type="Coin_Bag" gid="65" x="544" y="480" width="16" height="16"/>
+  <object id="73" type="Coin_Bag" gid="65" x="992" y="480" width="16" height="16"/>
+  <object id="74" type="Coin_Bag" gid="65" x="1008" y="464" width="16" height="16"/>
+  <object id="75" type="Coin_Bag" gid="65" x="2912" y="448" width="16" height="16"/>
+  <object id="76" type="Coin_Bag" gid="65" x="3312" y="304" width="16" height="16"/>
+  <object id="77" type="Coin_Bag" gid="65" x="3440" y="256" width="16" height="16"/>
+  <object id="78" type="Coin_Bag" gid="65" x="3568" y="304" width="16" height="16"/>
+  <object id="79" type="Coin" gid="67" x="1280" y="192" width="16" height="16"/>
+  <object id="80" type="Coin" gid="67" x="1312" y="176" width="16" height="16"/>
+  <object id="81" type="Coin" gid="67" x="1360" y="176" width="16" height="16"/>
+  <object id="82" type="Coin" gid="67" x="1392" y="208" width="16" height="16"/>
+  <object id="83" type="Coin" gid="67" x="1744" y="144" width="16" height="16"/>
+  <object id="84" type="Coin" gid="67" x="1776" y="128" width="16" height="16"/>
+  <object id="85" type="Coin" gid="67" x="1824" y="128" width="16" height="16"/>
+  <object id="86" type="Coin" gid="67" x="1856" y="160" width="16" height="16"/>
+  <object id="87" type="Coin" gid="67" x="2944" y="384" width="16" height="16"/>
+  <object id="88" type="Coin" gid="67" x="2976" y="384" width="16" height="16"/>
+  <object id="89" type="Coin" gid="67" x="3216" y="144" width="16" height="16"/>
+  <object id="90" type="Coin" gid="67" x="3248" y="144" width="16" height="16"/>
+  <object id="91" type="Coin" gid="67" x="3264" y="176" width="16" height="16"/>
+  <object id="92" type="Bounty" gid="1" x="656" y="272" width="16" height="16"/>
+  <object id="93" type="Bounty" gid="1" x="1392" y="272" width="16" height="16"/>
+  <object id="94" type="Bounty" gid="2" x="1232" y="240" width="16" height="16"/>
+  <object id="95" type="Bounty" gid="1" x="2512" y="304" width="16" height="16"/>
+  <object id="96" type="Bounty" gid="1" x="3488" y="240" width="16" height="16"/>
+  <object id="97" type="Water" gid="105" x="416" y="304" width="16" height="16"/>
+  <object id="98" type="Water" gid="105" x="432" y="304" width="16" height="16"/>
+  <object id="99" type="Water" gid="105" x="1088" y="320" width="16" height="16"/>
+  <object id="100" type="Water" gid="105" x="1104" y="320" width="16" height="16"/>
+  <object id="101" type="Water" gid="105" x="1120" y="320" width="16" height="16"/>
+  <object id="102" type="Water" gid="105" x="1136" y="320" width="16" height="16"/>
+  <object id="103" type="Water" gid="105" x="1152" y="320" width="16" height="16"/>
+  <object id="104" type="Water" gid="105" x="1168" y="320" width="16" height="16"/>
+  <object id="105" type="Water" gid="105" x="1184" y="320" width="16" height="16"/>
+  <object id="106" type="Water" gid="105" x="1200" y="320" width="16" height="16"/>
+  <object id="107" type="Water" gid="105" x="1216" y="320" width="16" height="16"/>
+  <object id="108" type="Water" gid="105" x="1232" y="320" width="16" height="16"/>
+  <object id="109" type="Water" gid="105" x="1520" y="320" width="16" height="16"/>
+  <object id="110" type="Water" gid="105" x="1536" y="320" width="16" height="16"/>
+  <object id="111" type="Water" gid="105" x="1552" y="320" width="16" height="16"/>
+  <object id="112" type="Water" gid="105" x="1568" y="320" width="16" height="16"/>
+  <object id="113" type="Water" gid="105" x="1584" y="320" width="16" height="16"/>
+  <object id="114" type="Water" gid="105" x="1600" y="320" width="16" height="16"/>
+  <object id="115" type="Water" gid="105" x="1616" y="320" width="16" height="16"/>
+  <object id="116" type="Water" gid="105" x="1632" y="320" width="16" height="16"/>
+  <object id="117" type="Water" gid="105" x="1648" y="320" width="16" height="16"/>
+  <object id="118" type="Water" gid="105" x="1744" y="320" width="16" height="16"/>
+  <object id="119" type="Water" gid="105" x="1760" y="320" width="16" height="16"/>
+  <object id="120" type="Water" gid="105" x="1776" y="320" width="16" height="16"/>
+  <object id="121" type="Water" gid="105" x="1792" y="320" width="16" height="16"/>
+  <object id="122" type="Water" gid="105" x="1808" y="320" width="16" height="16"/>
+  <object id="123" type="Water" gid="105" x="1824" y="320" width="16" height="16"/>
+  <object id="124" type="Water" gid="105" x="2416" y="320" width="16" height="16"/>
+  <object id="125" type="Water" gid="105" x="2432" y="320" width="16" height="16"/>
+  <object id="126" type="Water" gid="105" x="2448" y="320" width="16" height="16"/>
+  <object id="127" type="Water" gid="105" x="2464" y="320" width="16" height="16"/>
+  <object id="128" type="Water" gid="105" x="2480" y="320" width="16" height="16"/>
+  <object id="129" type="Water" gid="105" x="2496" y="320" width="16" height="16"/>
+  <object id="130" type="Water" gid="105" x="2784" y="320" width="16" height="16"/>
+  <object id="131" type="Water" gid="105" x="2800" y="320" width="16" height="16"/>
+  <object id="132" type="Water" gid="105" x="2816" y="320" width="16" height="16"/>
+  <object id="133" type="Water" gid="105" x="2912" y="416" width="16" height="16"/>
+  <object id="134" type="Water" gid="105" x="2928" y="416" width="16" height="16"/>
+  <object id="135" type="Water" gid="105" x="2944" y="416" width="16" height="16"/>
+  <object id="136" type="Water" gid="105" x="2960" y="416" width="16" height="16"/>
+  <object id="137" type="Water" gid="105" x="2976" y="416" width="16" height="16"/>
+  <object id="138" type="Water" gid="105" x="2992" y="416" width="16" height="16"/>
+  <object id="139" type="Water" gid="105" x="3152" y="320" width="16" height="16"/>
+  <object id="140" type="Water" gid="105" x="3168" y="320" width="16" height="16"/>
+  <object id="141" type="Water" gid="105" x="3184" y="320" width="16" height="16"/>
+  <object id="142" type="Water" gid="105" x="3200" y="320" width="16" height="16"/>
+  <object id="143" type="Water" gid="105" x="3216" y="320" width="16" height="16"/>
+  <object id="144" type="Water" gid="105" x="3888" y="208" width="16" height="16"/>
+  <object id="145" type="Water" gid="105" x="3904" y="208" width="16" height="16"/>
+  <object id="146" type="Water" gid="105" x="3920" y="208" width="16" height="16"/>
+  <object id="147" type="Water" gid="105" x="3920" y="320" width="16" height="16"/>
+  <object id="148" type="Water" gid="105" x="3936" y="320" width="16" height="16"/>
+  <object id="149" type="Water" gid="105" x="3952" y="320" width="16" height="16"/>
+  <object id="150" type="Water" gid="105" x="3968" y="320" width="16" height="16"/>
+  <object id="151" type="Water" gid="105" x="3984" y="320" width="16" height="16"/>
+  <object id="152" type="Water" gid="105" x="4000" y="320" width="16" height="16"/>
+  <object id="153" type="Water" gid="105" x="4688" y="320" width="16" height="16"/>
+  <object id="154" type="Water" gid="105" x="4704" y="320" width="16" height="16"/>
+  <object id="155" type="Water" gid="105" x="4720" y="320" width="16" height="16"/>
+  <object id="156" type="Water" gid="105" x="4736" y="320" width="16" height="16"/>
+  <object id="157" type="Water" gid="105" x="4752" y="320" width="16" height="16"/>
+  <object id="158" type="Water" gid="105" x="5040" y="320" width="16" height="16"/>
+  <object id="159" type="Water" gid="105" x="5056" y="320" width="16" height="16"/>
+  <object id="160" type="Water" gid="105" x="5072" y="320" width="16" height="16"/>
+  <object id="161" type="Water" gid="105" x="5088" y="320" width="16" height="16"/>
+  <object id="162" type="Water" gid="105" x="5104" y="320" width="16" height="16"/>
+  <object id="163" type="Water" gid="105" x="5120" y="320" width="16" height="16"/>
+  <object id="164" type="Water" gid="105" x="5360" y="304" width="16" height="16"/>
+  <object id="165" type="Water" gid="105" x="5376" y="304" width="16" height="16"/>
+  <object id="166" type="Water" gid="105" x="5392" y="304" width="16" height="16"/>
+  <object id="167" type="Water" gid="105" x="5408" y="304" width="16" height="16"/>
+  <object id="168" type="Water" gid="105" x="5424" y="304" width="16" height="16"/>
+  <object id="169" type="Water" gid="105" x="5440" y="304" width="16" height="16"/>
+  <object id="171" type="Water" gid="105" x="5456" y="304" width="16" height="16"/>
+  <object id="172" type="Door_Doctor" gid="807" x="1840" y="272" width="16" height="16"/>
+  <object id="173" type="Door_Saloon" gid="807" x="3648" y="304" width="16" height="16"/>
+  <object id="174" type="Waterfall" gid="721" x="2944" y="352" width="16" height="16"/>
+  <object id="175" type="Waterfall" gid="722" x="2960" y="352" width="16" height="16"/>
+  <object id="176" type="Geyser" gid="97" x="4256" y="240" width="16" height="16"/>
+  <object id="177" type="Geyser" gid="97" x="4560" y="336" width="16" height="16"/>
+  <object id="178" type="Geyser" gid="97" x="4944" y="320" width="16" height="16"/>
+  <object id="179" type="Geyser" gid="97" x="5024" y="336" width="16" height="16"/>
+  <object id="180" type="Geyser" gid="97" x="5152" y="320" width="16" height="16"/>
+  <object id="181" type="Geyser" gid="97" x="5216" y="320" width="16" height="16"/>
+  <object id="182" type="Geyser" gid="97" x="5328" y="304" width="16" height="16"/>
+  <object id="183" type="Geyser" gid="97" x="5504" y="304" width="16" height="16"/>
+  <object id="184" type="Geyser" gid="97" x="5648" y="272" width="16" height="16"/>
+  <object id="185" type="Flag_Pole" gid="801" x="5792" y="224" width="16" height="16"/>
+  <object id="186" type="Door_Exit" gid="807" x="5856" y="224" width="16" height="16"/>
+ </objectgroup>
  <layer name="Tile Layer 7" width="384" height="32">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBvwAAAAQ==
