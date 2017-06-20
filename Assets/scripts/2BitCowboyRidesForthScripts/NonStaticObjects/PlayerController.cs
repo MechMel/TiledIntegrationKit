@@ -682,7 +682,7 @@ public class PlayerController : MonoBehaviour
             Invoke("pull", 0.05f);
         }
     }
-    void pause()
+    public void pause()
     {
         
         if (paused == true)
