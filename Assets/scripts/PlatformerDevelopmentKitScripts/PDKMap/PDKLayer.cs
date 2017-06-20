@@ -138,12 +138,12 @@ public class PDKLayer
                     // Add this object to the objects to hydrate
                     objectsToHydrate.Add(objectToAdd);
                 }
-                // Dehydrate each of the objects in the list of objects to dehydrate
-                for (int indexOfObjectToHydrate = 0; indexOfObjectToHydrate < objectsToHydrate.Count; indexOfObjectToHydrate++)
-                {
-                    HydrateObject(objectsToHydrate[indexOfObjectToHydrate]);
-                }
             }
+        }
+        // Hydrate each of the objects in the list of objects to dehydrate
+        for (int indexOfObjectToHydrate = 0; indexOfObjectToHydrate < objectsToHydrate.Count; indexOfObjectToHydrate++)
+        {
+            HydrateObject(objectsToHydrate[indexOfObjectToHydrate]);
         }
     }
 
