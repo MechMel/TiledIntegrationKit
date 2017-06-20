@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="141">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="147">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
@@ -134,6 +134,10 @@
   <object id="138" type="Spider" gid="361" x="64" y="1536" width="16" height="16"/>
   <object id="139" gid="361" x="176" y="1072" width="16" height="16"/>
   <object id="140" type="Spider" gid="361" x="240" y="1056" width="16" height="16"/>
+  <object id="141" type="Door_Exit" gid="807" x="944" y="144" width="16" height="16"/>
+  <object id="142" type="Door_Saloon" gid="805" x="160" y="496" width="16" height="16"/>
+  <object id="144" type="Door_Doctor" gid="807" x="784" y="2080" width="16" height="16"/>
+  <object id="146" type="Door_Exit" gid="807" x="944" y="144" width="16" height="16"/>
  </objectgroup>
  <layer name="Wall" width="64" height="195">
   <data encoding="base64" compression="zlib">
