@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     // The PlayerController class is the basic controller for the player, and the base class for add-ons
 
     #region Player
+
+    // Pause menus
+    public GameObject pauseMenus;
+    // Coin UI
+    private Text coinUI;
+    // Coin total
+    private int Coins=0;
+    // Original speed
+    private float originalSpeed = 0.15f;
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.15f;
+    private float playerSpeed;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -108,10 +118,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public GameObject midCheck;
     #endregion
-   
-    void Awake ()
+
+    void Awake()
     {
         // Hookup components
+        playerSpeed = originalSpeed;
+        coinUI = FindObjectOfType<coinz>().GetComponent<Text>();
         anim = GetComponent<Animator>();
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         sprRend = GetComponent<SpriteRenderer>();
@@ -121,9 +133,24 @@ public class PlayerController : MonoBehaviour
         midCheck = gameObject.transform.Find("MidCheck").gameObject;
     }
 
+    public bool paused;
+   
     void Update()
     {
-        // The built in update function in Unity runs every frame
+        // The built in update function in Unity runs every frame  
+        //make sure the player obeys the laws of time other than pausing
+        if (Input.GetKeyDown(KeyCode.Escape))
+            pause();
+        //Debug.Log(Time.timeScale);
+        //Debug.Log(playerSpeed);
+        //playerSpeed *= Time.timeScale;
+        //playerAnimationSpeed *= Time.timeScale;
+        //u know what lets just do this
+        if (Time.timeScale < 0.1f)
+        {
+            Debug.Log("time is late");
+            return;
+        }
 
         #region Input
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
@@ -189,10 +216,10 @@ public class PlayerController : MonoBehaviour
         // Update the flip of player
         if (playerFacingLeft)
             transform.localScale = new Vector3(-1, 1, 1);
-        else 
+        else
             transform.localScale = new Vector3(1, 1, 1);
         // Update the playerIsInWater state
-        if(playerIsInWater)
+        if (playerIsInWater)
         {
             // If the player wasn't in water since last frame
             if (!playerWasInWaterPrevious)
@@ -208,19 +235,21 @@ public class PlayerController : MonoBehaviour
             playerWasInWaterPrevious = false;
         }
 
+
+
         // Update debug text
         //transform.Find("DebugText").GetComponent<TextMesh>().text = playerVelocityY.ToString();
         // If not riding
-        if(!riding)
-        {            
+        if (!riding)
+        {
             // If pressing left
             if (Left)
             {
                 // If in water
-                if(playerIsInWater)
+                if (playerIsInWater)
                 {
                     // Move the player left at half speed
-                    transform.Translate( (playerSpeed / 2) * transform.localScale.x, 0, 0);
+                    transform.Translate((playerSpeed / 2) * transform.localScale.x , 0, 0);
                     // Flip the sprite
                     playerFacingLeft = true;
                 }
@@ -233,7 +262,7 @@ public class PlayerController : MonoBehaviour
                     playerFacingLeft = true;
                 }
                 // Otherwise, if not touching a wall
-                else if(!playerTouchingWall)
+                else if (!playerTouchingWall)
                 {
                     // Move the player left
                     transform.Translate(playerSpeed * transform.localScale.x, 0, 0);
@@ -248,7 +277,7 @@ public class PlayerController : MonoBehaviour
             else if (Right)
             {
                 // If in water
-                if(playerIsInWater)
+                if (playerIsInWater)
                 {
                     // Move the player left at half speed
                     transform.Translate((playerSpeed / 2) * transform.localScale.x, 0, 0);
@@ -275,7 +304,7 @@ public class PlayerController : MonoBehaviour
                 if (playerGrounded)
                     anim.SetInteger("AnimState", 1);
             }
-            else if(!Up && playerGrounded)
+            else if (!Up && playerGrounded)
             {
                 // If not pressing any keys and the player is grounded, run the idle animation
                 anim.SetInteger("AnimState", 0);
@@ -298,7 +327,7 @@ public class PlayerController : MonoBehaviour
             }
             // Jumping
             else if (Up)
-            {                
+            {
                 // Else if the player is grounded
                 if (playerGrounded && !playerTouchingLeftWall && !playerTouchingWall)
                 {
@@ -348,7 +377,7 @@ public class PlayerController : MonoBehaviour
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.7f);
                 }
                 // Else if the player can slide once, invoke the sliding to start
-                else if(!playerCanSlideOnce)
+                else if (!playerCanSlideOnce)
                 {
                     Invoke("WaitForSlide", playerWaitToSlideTime);
                     // Stop the falling
@@ -357,19 +386,19 @@ public class PlayerController : MonoBehaviour
             }
 
             // Update the enabled of the collider
-            GetComponent<Collider2D>().enabled = true;         
+            GetComponent<Collider2D>().enabled = true;
         }
         // If riding an animal
         else
         {
             // Get the rigidbody2d of the animal the player is riding
-            Rigidbody2D RigidBody2DOfAnimalPlayerIsRiding = animalPlayerIsRiding.GetComponent<Rigidbody2D>();   
+            Rigidbody2D RigidBody2DOfAnimalPlayerIsRiding = animalPlayerIsRiding.GetComponent<Rigidbody2D>();
             // Disable the player's collider
             GetComponent<Collider2D>().enabled = false;
             // Update the left and right input to the animal
             animalPlayerIsRiding.SendMessage("MoveLeft", Left, SendMessageOptions.DontRequireReceiver);
             animalPlayerIsRiding.SendMessage("MoveRight", Right, SendMessageOptions.DontRequireReceiver);
-            
+
 
             // Jumping
             if (Up)
@@ -395,22 +424,22 @@ public class PlayerController : MonoBehaviour
                     animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpDown");
                 }
             }
-            
+
         }
         #endregion
         #region Shooting
 
         // If space is pressed, and canShoot is true
-        if(Space && playerCanShoot)
+        if (Space && playerCanShoot)
         {
             // Set the playerCanShoot back to false, so as not to have rapid fire
             //playerCanShoot = false;
             // Create a new bullet at the BulletPos of the player
             GameObject newBullet;
             if (!playerGrounded && !playerCanDoubleJump)
-                newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x, 
+                newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletDownPos").transform.position.x,
                     transform.Find("BulletDownPos").transform.position.y + Random.Range(-0.1f, 0.1f)), Quaternion.identity);
-            else if(playerTouchingWall && !playerGrounded)
+            else if (playerTouchingWall && !playerGrounded)
                 newBullet = Instantiate(bullet, new Vector2(transform.Find("BulletPosOther").transform.position.x,
                     transform.Find("BulletPosOther").transform.position.y + Random.Range(-0.1f, 0.1f)), Quaternion.identity);
             else
@@ -426,7 +455,7 @@ public class PlayerController : MonoBehaviour
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
                 // Rotate the bullet down
                 newBullet.transform.Rotate(new Vector3(0, 0, 270));
-            }     
+            }
             // Else if the player is touching the left wall
             else if (playerTouchingWall && playerFacingLeft && !playerGrounded)
             {
@@ -461,13 +490,13 @@ public class PlayerController : MonoBehaviour
                 // Set the bullet x velocity to 10
                 newBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
                 // Move the player left as recoil
-                transform.Translate(0.1f * -transform.localScale.x, 0 , 0);
+                transform.Translate(0.1f * -transform.localScale.x, 0, 0);
             }
             // Invoke the reset for the playerCanShoot
             Invoke("ResetCanShoot", playerReloadTime);
         }
         #endregion
-        
+
         #region Rideable animals
         // If a Ride able animal exists and it is close enough to a ride
         if (GameObject.FindGameObjectsWithTag("RideableAnimal").Length > 0 &&
@@ -485,6 +514,7 @@ public class PlayerController : MonoBehaviour
 
         if (riding)
         {
+            Debug.Log("ride");
             // Update position if riding       
             transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
             // Update the grounded check for the animal the player is riding
@@ -533,7 +563,7 @@ public class PlayerController : MonoBehaviour
             playerCanDoubleJump = true;
             // Update the in water state to false
             UpdateInWaterState(false);
-        }        
+        }
     }
 
     void AddHealth(int amountOfHealthToAdd)
@@ -541,9 +571,13 @@ public class PlayerController : MonoBehaviour
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
     }
-    void AddCoin(int amountOfCoinToAdd)
+    public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
+        
+        Coins += amountOfCoinToAdd;
+        Debug.Log(Coins);
+        coinUI.text = Coins.ToString() + "$";
     }
     #endregion
 
@@ -591,5 +625,85 @@ public class PlayerController : MonoBehaviour
         }
         // After the loop is finished, return the closest object in array
         return closestObjectInArray;
+    }
+   
+    public Transform bountyUI;
+    public Transform Bui;
+    public Transform cantalope;
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+    //check for bounty
+        if (other.gameObject.GetComponent<bounty>())
+        {
+            playerPickUp.Bounty newBounty = new playerPickUp.Bounty(
+                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["numberRequirement"]), 
+                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["numberRequirement"]), 
+                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["objtypes"]));
+
+            gameObject.GetComponent<playerPickUp>().bounties.Add(newBounty);
+            //create notifications
+            bountyUI = Instantiate(Bui, new Vector3(247, 300, 0), Quaternion.Euler(Vector3.zero), cantalope);
+            Invoke("pull", 0);
+            Destroy(other.gameObject);
+            
+
+
+        }
+    }
+    bool itsTime = false;
+    void PullNote()
+    {
+        // Pulldown bounty notification
+        if (itsTime == false)
+        {
+            if (bountyUI.position.y > 225)
+            {
+                bountyUI.Translate(Vector3.down * 5f);
+
+                Invoke("pull", 0.05f);
+            }
+            else
+            {
+                itsTime = true;
+                Invoke("pull", 1);
+            }
+        }
+        else
+        {
+            if (bountyUI.position.y < 300)
+            {
+                bountyUI.Translate(-Vector3.down * 5f);
+            }
+            else
+            {
+                Destroy(bountyUI.gameObject);
+            }
+            Invoke("pull", 0.05f);
+        }
+    }
+    public void pause()
+    {
+        
+        if (paused == true)
+        {
+            playerSpeed = originalSpeed;
+            pauseMenus.SetActive(false);
+            Time.timeScale = 1;
+            paused = false;
+            
+        }
+        else
+        {
+            pauseMenus.SetActive(true);
+            Time.timeScale = 0f;
+            playerSpeed = 0;
+            paused = true;
+        }
+    }
+
+    void FixedUpdate()
+    {
+
     }
 }

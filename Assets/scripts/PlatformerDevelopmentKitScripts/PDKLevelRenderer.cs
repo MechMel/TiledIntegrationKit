@@ -167,7 +167,7 @@ public class PDKLevelRenderer
         }
         #endregion
         #region Find Tile Positions to Render
-        #region SUMMARY:
+        #region SUMMARY: Find Tile Positions to Render
         /*
         To optimize rendering, find the tiles that are inside the rect to render and outside the currently loaded rect of the map
         If the rect to render overlaps with the currently loaded rect
@@ -269,33 +269,12 @@ public class PDKLevelRenderer
                             initialPixelX = levelMap.tileWidth * ((thisTilePosition % levelMap.width) - (int)rectToRender.x + levelMap.width);
                         }
                         // Calculate The y position of the pixel that this tile will start at
-                        int initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1));
+                        int initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1));
                         // TODO: FIND A BETTER WAY TO DO THIS
                         if (initialPixelY < 0)
                         {
-                            initialPixelY = levelMap.tileHeight * (levelMap.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
+                            initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
                         }
-
-                        /*int initialPixelX;
-                        int initialPixelY;
-                        // Calculate The y position of the pixel that this tile will start at
-                        if ((thisTilePosition % levelMap.width) > (int)rectToRender.x) // TODO: FILL THIS IN LATER
-                        {
-                            initialPixelX = (thisTilePosition % levelMap.width) - (int)rectToRender.x;
-                        }
-                        else
-                        {
-                            initialPixelX = (thisTilePosition % levelMap.width) - (int)rectToRender.x + levelMap.width;
-                        }
-                        // Calculate The y position of the pixel that this tile will start at
-                        if ((thisTilePosition / levelMap.width) > (int)rectToRender.y) // TODO: FILL THIS IN LATER
-                        {
-                            initialPixelY = (thisTilePosition / levelMap.width) - (int)rectToRender.y;
-                        }
-                        else
-                        {
-                            initialPixelY = (thisTilePosition / levelMap.width) - (int)rectToRender.y + levelMap.height;
-                        }*/
                         #endregion
                         #region Place this Tile
                         // If there is no tile already at this position
@@ -368,25 +347,11 @@ public class PDKLevelRenderer
         {
             // Create a variable to more easily refrence the object layer that is currently being updated
             PDKLayer objectLayerToUpdate = levelMap.layers[indexOfObjectLayerToUpdate];
-            // This will be used to store all the objects that need to be hydrated
-            PDKLayer.PDKObjectIDHashSet objectIDsToHydrate;
 
             // Dehydrate any objects outside of the rect to load
             objectLayerToUpdate.DehydrateExternalObjects(rectToLoad);
-            // Take all dehydrated objects in the rect to render, from the dehydrated object map
-            objectIDsToHydrate = objectLayerToUpdate.TakeDehydratedObjectIDsInRect(rectToLoad);
             // Hydrate each of the pdk objects, in this layer, that are not hydrated but should be
-            foreach (int objectIDToHydrate in objectIDsToHydrate)
-            {
-                // TODO: Find a better way to do this later
-                if (levelMap.layers[indexOfObjectLayerToUpdate].objects[objectIDToHydrate].prefab != null)
-                {
-                    // Create a hydrated copy of the current dehydrated pdk object
-                    GameObject currentHydratedObject = objectLayerToUpdate.HydrateObject(objectIDToHydrate);
-                    // Add the newly hydrated game object to the list of hydrated game objects
-                    objectLayerToUpdate.hydratedObjects.Add((currentHydratedObject));
-                }
-            }
+            objectLayerToUpdate.HydrateInternalObjects(rectToLoad);
         }
     }
     #endregion

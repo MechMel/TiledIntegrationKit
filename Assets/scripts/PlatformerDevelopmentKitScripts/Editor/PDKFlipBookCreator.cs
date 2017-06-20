@@ -60,7 +60,7 @@ public class PDKFlipBookCreator : EditorWindow
     public static void OpenWindow()
     {
         //Texture2D[] textures = Selection.GetFiltered(typeof(object), SelectionMode.DeepAssets) as Texture2D[];
-        object[] ssprites = Selection.GetFiltered(typeof(SparseTexture), SelectionMode.DeepAssets);
+        //object[] ssprites = Selection.GetFiltered(typeof(SparseTexture), SelectionMode.DeepAssets);
         object[] objects = Selection.GetFiltered(typeof(Texture2D), SelectionMode.DeepAssets);
         frames = new Texture2D[objects.Length];
         framesSprites = new Sprite[objects.Length];

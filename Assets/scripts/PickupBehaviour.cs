@@ -145,8 +145,11 @@ public class PickupBehaviour : MonoBehaviour {
             // If the collided object is a player
             if (other.gameObject.tag == "Player")
             {
-                // Add health to the player
-                other.gameObject.SendMessage("AddCoin", amountOfCoinToAdd, SendMessageOptions.DontRequireReceiver);
+                // Add coinage to the player
+                amountOfCoinToAdd = Random.Range(0, 25);
+                other.gameObject.GetComponent<PlayerController>().AddCoin(amountOfCoinToAdd);
+                if (other.gameObject.GetComponent<PlayerController>())
+                    Debug.Log("kjasfksjfj");
                 // Destroy this gameObject
                 Destroy(gameObject);
             }
@@ -166,18 +169,6 @@ public class PickupBehaviour : MonoBehaviour {
             }
         }
         #endregion
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        // Otherwise, if collided with another pickup
-        if (pickupType == PickupType.COIN && other.gameObject.tag != "Tile")
-        {
-            // Ignore the collision, since we don't want coins stacking up on top of each other
-            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<BoxCollider2D>());
-            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), other.gameObject.GetComponent<CircleCollider2D>());
-        }
     }
 
     void Hit(int damage)
