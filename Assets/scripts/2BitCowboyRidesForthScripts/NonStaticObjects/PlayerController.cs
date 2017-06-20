@@ -626,62 +626,7 @@ public class PlayerController : MonoBehaviour
         // After the loop is finished, return the closest object in array
         return closestObjectInArray;
     }
-   
-    public Transform bountyUI;
-    public Transform Bui;
-    public Transform cantalope;
-    
-    void OnTriggerEnter2D(Collider2D other)
-    {
-    //check for bounty
-        if (other.gameObject.GetComponent<bounty>())
-        {
-            playerPickUp.Bounty newBounty = new playerPickUp.Bounty(
-                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["numberRequirement"]), 
-                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["numberRequirement"]), 
-                int.Parse(gameObject.GetComponent<PDKObjectProperties>().objectProperties["objtypes"]));
 
-            gameObject.GetComponent<playerPickUp>().bounties.Add(newBounty);
-            //create notifications
-            bountyUI = Instantiate(Bui, new Vector3(247, 300, 0), Quaternion.Euler(Vector3.zero), cantalope);
-            Invoke("pull", 0);
-            Destroy(other.gameObject);
-            
-
-
-        }
-    }
-    bool itsTime = false;
-    void PullNote()
-    {
-        // Pulldown bounty notification
-        if (itsTime == false)
-        {
-            if (bountyUI.position.y > 225)
-            {
-                bountyUI.Translate(Vector3.down * 5f);
-
-                Invoke("pull", 0.05f);
-            }
-            else
-            {
-                itsTime = true;
-                Invoke("pull", 1);
-            }
-        }
-        else
-        {
-            if (bountyUI.position.y < 300)
-            {
-                bountyUI.Translate(-Vector3.down * 5f);
-            }
-            else
-            {
-                Destroy(bountyUI.gameObject);
-            }
-            Invoke("pull", 0.05f);
-        }
-    }
     public void pause()
     {
         

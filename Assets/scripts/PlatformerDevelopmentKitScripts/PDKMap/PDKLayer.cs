@@ -188,7 +188,7 @@ public class PDKLayer
         dehydratedObjectMap.GetItem((int)objectToTake.x, -(int)objectToTake.y).Remove(objectToTake);
     }
     #endregion
-
+}
     /*// Returns a refrence to all objects in a rect of the object map
     public HashSet<PDKObject> GetObjectsInRect(Rect rectToGet)
     {
@@ -376,4 +376,3 @@ public class PDKLayer
         return dehydratedObject;
     }
     #endregion*/
-}
