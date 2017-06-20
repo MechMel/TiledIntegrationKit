@@ -122,15 +122,15 @@ public class PDKTiledUtilities
                 // Initialize the obects array
                 pdkMap.layers[currentLayerIndex].objects = new PDKObject[pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length];
                 // Initialize the object map
-                pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap = new PDKSerializable2DHashestOfInts(pdkMap.width, pdkMap.height);
-                // For each column
+                pdkMap.layers[currentLayerIndex].dehydratedObjectMap = new PDKSerializable2DHashsetOfPDKObjects(pdkMap.width, pdkMap.height);
+                // Go through each slot and Initialize it
                 for (int currentColumnIndex = 0; currentColumnIndex < pdkTiledMapToConvert.width; currentColumnIndex++)
                 {
                     // For each row
                     for (int currentRowIndex = 0; currentRowIndex < pdkTiledMapToConvert.height; currentRowIndex++)
                     {
                         // Initialize this slot
-                        pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap.SetIDs(currentColumnIndex, -currentRowIndex, new PDKLayer.PDKObjectIDHashSet());
+                        pdkMap.layers[currentLayerIndex].dehydratedObjectMap.SetItem(currentColumnIndex, currentRowIndex, new PDKLayer.PDKDehydratedObjectsHashSet());
                     }
                 }
                 // TODO: REMOVE THIS LATER
@@ -162,10 +162,10 @@ public class PDKTiledUtilities
                         }
                     }
                     // Add this object at this position, to the object map
-                    pdkMap.layers[currentLayerIndex].dehydratedObjectIDMap.AddID(
+                    pdkMap.layers[currentLayerIndex].dehydratedObjectMap.GetItem(
                         x: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
-                        y: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y,
-                        idToAdd: pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id);
+                        y: -(int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y).Add(
+                        pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
                 }
             }
         }

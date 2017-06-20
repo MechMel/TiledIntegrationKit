@@ -8,7 +8,7 @@ public class PDKMap
     [System.Serializable]
     public class PDKCustomProperties : PDKSerializableDictionay<string, string> { }
     [System.Serializable]
-    public class PDKObjectTypes : PDKSerializableDictionay<string, UnityEngine.Object> { }
+    public class PDKObjectTypes : PDKSerializableSortedDictionay<string, UnityEngine.Object> { }
     public int width;
     public int height;
     public int tileWidth;
