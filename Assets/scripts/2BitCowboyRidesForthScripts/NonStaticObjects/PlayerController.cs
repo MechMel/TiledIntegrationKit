@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     // The PlayerController class is the basic controller for the player, and the base class for add-ons
 
     #region Player
+
+    // Pause menus
+    public GameObject pauseMenus;
+    // Coin UI
+    private Text coinUI;
+    // Coin total
+    private int Coins=0;
+    // Original speed
+    private float originalSpeed = 0.15f;
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.15f;
+    private float playerSpeed;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -112,6 +122,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         // Hookup components
+        playerSpeed = originalSpeed;
+        coinUI = FindObjectOfType<coinz>().GetComponent<Text>();
         anim = GetComponent<Animator>();
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         sprRend = GetComponent<SpriteRenderer>();
@@ -125,7 +137,20 @@ public class PlayerController : MonoBehaviour
    
     void Update()
     {
-        // The built in update function in Unity runs every frame
+        // The built in update function in Unity runs every frame  
+        //make sure the player obeys the laws of time other than pausing
+        if (Input.GetKeyDown(KeyCode.Escape))
+            pause();
+        //Debug.Log(Time.timeScale);
+        //Debug.Log(playerSpeed);
+        //playerSpeed *= Time.timeScale;
+        //playerAnimationSpeed *= Time.timeScale;
+        //u know what lets just do this
+        if (Time.timeScale < 0.1f)
+        {
+            Debug.Log("time is late");
+            return;
+        }
 
         #region Input
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
@@ -210,8 +235,7 @@ public class PlayerController : MonoBehaviour
             playerWasInWaterPrevious = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            pause();
+
 
         // Update debug text
         //transform.Find("DebugText").GetComponent<TextMesh>().text = playerVelocityY.ToString();
@@ -225,7 +249,7 @@ public class PlayerController : MonoBehaviour
                 if (playerIsInWater)
                 {
                     // Move the player left at half speed
-                    transform.Translate((playerSpeed / 2) * transform.localScale.x, 0, 0);
+                    transform.Translate((playerSpeed / 2) * transform.localScale.x , 0, 0);
                     // Flip the sprite
                     playerFacingLeft = true;
                 }
@@ -547,9 +571,13 @@ public class PlayerController : MonoBehaviour
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
     }
-    void AddCoin(int amountOfCoinToAdd)
+    public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
+        
+        Coins += amountOfCoinToAdd;
+        Debug.Log(Coins);
+        coinUI.text = Coins.ToString() + "$";
     }
     #endregion
 
@@ -659,18 +687,23 @@ public class PlayerController : MonoBehaviour
         
         if (paused == true)
         {
+            playerSpeed = originalSpeed;
+            pauseMenus.SetActive(false);
             Time.timeScale = 1;
             paused = false;
+            
         }
         else
         {
-            Time.timeScale = 0;
+            pauseMenus.SetActive(true);
+            Time.timeScale = 0f;
+            playerSpeed = 0;
             paused = true;
         }
     }
 
     void FixedUpdate()
     {
-        Debug.Log("physics");
+
     }
 }
