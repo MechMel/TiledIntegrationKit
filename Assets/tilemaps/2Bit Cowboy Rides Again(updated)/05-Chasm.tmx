@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="147">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="64" height="195" tilewidth="16" tileheight="16" nextobjectid="160">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
@@ -126,9 +126,14 @@
   <object id="130" type="Crate_Health" gid="36" x="752" y="1072" width="16" height="16"/>
   <object id="131" type="Flag_Pole" gid="801" x="880" y="144" width="16" height="16"/>
   <object id="132" gid="1" x="128" y="496" width="16" height="16"/>
-  <object id="133" gid="1" x="192" y="1536" width="16" height="16"/>
+  <object id="133" gid="1" x="192" y="1536" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="14"/>
+    <property name="Reward" value="100"/>
+    <property name="Type" value="Scopion"/>
+   </properties>
+  </object>
   <object id="134" gid="1" x="768" y="2064" width="16" height="16"/>
-  <object id="135" type="Bounty" gid="1" x="752" y="2432" width="16" height="16"/>
   <object id="136" type="Bottle" gid="35" x="352" y="2336" width="16" height="16"/>
   <object id="137" type="Crate_Scorpion" gid="38" x="784" y="1696" width="16" height="16"/>
   <object id="138" type="Spider" gid="361" x="64" y="1536" width="16" height="16"/>
@@ -138,6 +143,20 @@
   <object id="142" type="Door_Saloon" gid="805" x="160" y="496" width="16" height="16"/>
   <object id="144" type="Door_Doctor" gid="807" x="784" y="2080" width="16" height="16"/>
   <object id="146" type="Door_Exit" gid="807" x="944" y="144" width="16" height="16"/>
+  <object id="156" gid="1" x="736" y="2432" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="10"/>
+    <property name="Reward" value="100"/>
+    <property name="Type" value="Bat"/>
+   </properties>
+  </object>
+  <object id="158" gid="2" x="768" y="2064" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="6"/>
+    <property name="Reward" value="300"/>
+    <property name="Type" value="Bandit"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Wall" width="64" height="195">
   <data encoding="base64" compression="zlib">
