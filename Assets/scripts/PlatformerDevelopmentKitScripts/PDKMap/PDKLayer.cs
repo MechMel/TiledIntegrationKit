@@ -62,7 +62,7 @@ public class PDKLayer
         foreach (GameObject objectToCheck in hydratedObjects)
         {
             // If this object is out of the rect use
-            if (!rectToUse.Overlaps(new Rect(objectToCheck.transform.position.x, -objectToCheck.transform.position.y, 1, 1)))
+            if (!rectToUse.Overlaps(new Rect(objectToCheck.transform.position.x, objectToCheck.transform.position.y, 1, -1)))
             {
                 // Add this object to the list of objects to dehydrate
                 objectsToDehydrate.Add(objectToCheck);
@@ -71,11 +71,11 @@ public class PDKLayer
         // Dehydrate each of the objects in the list of objects to dehydrate
         for (int indexOfObjectToDehydrate = 0; indexOfObjectToDehydrate < objectsToDehydrate.Count; indexOfObjectToDehydrate++)
         {
-            // Remove this object from the hydrated objects
-            hydratedObjects.Remove(objectsToDehydrate[indexOfObjectToDehydrate]);
             // Dehydrate this object
             DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
         }
+        int test;
+        test = 3;
     }
 
 
@@ -103,9 +103,11 @@ public class PDKLayer
                 }
             }
         }
-        // TODO: FILL THIS IN LATER
+        // Store the hydrated object's x and y position
         dehydratedObject.x = objectToDehydrate.transform.position.x;
         dehydratedObject.y = objectToDehydrate.transform.position.y;
+        // Remove this object from the hydrated objects map
+        hydratedObjects.Remove(objectToDehydrate);
         // Destory the hydrated obejct
         GameObject.Destroy(objectToDehydrate);
         // Put this object in the dehydrated object map
@@ -116,7 +118,10 @@ public class PDKLayer
     // Places an object in the dehydrated objects map
     public void PutObjectInDehydratedMap(PDKObject objectToPlace)
     {
-        dehydratedObjectMap.GetItem((int)objectToPlace.x, -(int)objectToPlace.y).Add(objectToPlace);
+        if (objectToPlace.x < dehydratedObjectMap.Width && -objectToPlace.y < dehydratedObjectMap.Height)
+        {
+            dehydratedObjectMap.GetItem((int)objectToPlace.x, -(int)objectToPlace.y).Add(objectToPlace);
+        }
     }
     #endregion
 
@@ -179,6 +184,8 @@ public class PDKLayer
         }
         // Remvoe this object from the dehydrated object map
         RemoveDehydratedObject(objectToHydrate);
+        // Add this object to the hydrated object map
+        hydratedObjects.Add(hydratedObject);
     }
 
     // Remvoes a object from the dehydrated object map

@@ -43,7 +43,7 @@ public class PDKLevelController : MonoBehaviour
         //
         mainCameraPosition = GameObject.FindGameObjectWithTag("MainCamera").transform.position;
         //
-        if (Vector2.Distance(mainCameraPosition, transform.position) > 1)
+        if (Mathf.Abs(mainCameraPosition.x - transform.position.x) > 1 || Mathf.Abs(mainCameraPosition.y - transform.position.y) > 1)
         {
             //
             transform.position = new Vector3((int)mainCameraPosition.x, (int)mainCameraPosition.y, transform.position.z);
@@ -58,9 +58,7 @@ public class PDKLevelController : MonoBehaviour
         // Calculate the width and the height of the area to render
         int renderAreaWidth = (int)(2 * screenRatioWidthToHeight * (mainCamera.orthographicSize + bufferDistance));
         int renderAreaHeight = (int)(2 * (mainCamera.orthographicSize + bufferDistance));
-
-        Rect test = new Rect(0, 0, 4, 4);
-        test.center = new Vector2(test.x, test.y);
+        
         // Load the appropriate area of the level
         levelRenderer.LoadRectOfMap(new Rect(
                 x: (int)mainCameraPosition.x - (renderAreaWidth / 2),

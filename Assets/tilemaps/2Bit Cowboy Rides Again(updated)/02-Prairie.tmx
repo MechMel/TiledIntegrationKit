@@ -61567,8 +61567,6 @@
   <object id="127" type="Snake" gid="169" x="5536" y="400" width="16" height="16"/>
   <object id="128" type="Crate" gid="34" x="5776" y="448" width="16" height="16"/>
   <object id="129" type="Bottle" gid="35" x="5760" y="448" width="16" height="16"/>
-  <object id="130" type="Water" gid="108" x="5824" y="480" width="16" height="16"/>
-  <object id="131" type="Water" gid="108" x="5840" y="480" width="16" height="16"/>
   <object id="132" type="Bottle" gid="35" x="5984" y="341" width="16" height="16"/>
  </objectgroup>
 </map>

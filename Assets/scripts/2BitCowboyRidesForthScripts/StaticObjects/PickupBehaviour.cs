@@ -10,8 +10,10 @@ public class PickupBehaviour : MonoBehaviour {
         ITEMBOX,
         DOOR,
         COIN,
-        HEALTH
+        HEALTH,
+        BUFF
     }
+
     public PickupType pickupType;
 
     #region Basic Stats
@@ -67,6 +69,7 @@ public class PickupBehaviour : MonoBehaviour {
     [Tooltip("Only set for COIN.")]
     public int amountOfCoinToAdd;
     #endregion
+
     #region Components
     // The sprite renderer of the pickup
     [HideInInspector]
@@ -82,6 +85,7 @@ public class PickupBehaviour : MonoBehaviour {
         sprRend = GetComponent<SpriteRenderer>();
         // Set the PDKObjectProperties variable for easy reference
         pdkObjectProperties = GetComponent<PDKObjectProperties>();
+
         #region SetupPDKObjectProperties
         // This region sets up the PDKObjectProperties, so the object can be hydrated and dehydrated
 
@@ -92,10 +96,7 @@ public class PickupBehaviour : MonoBehaviour {
         #endregion     
 
         // Check to turn off gravity
-        if (isAffectedByGravity)
-            GetComponent<Rigidbody2D>().isKinematic = false;
-        else
-            GetComponent<Rigidbody2D>().isKinematic = true;
+        GetComponent<Rigidbody2D>().isKinematic = !isAffectedByGravity;
 
         // If pickup is a buff
         if (pickupType == PickupType.COIN || pickupType == PickupType.HEALTH)
@@ -156,6 +157,7 @@ public class PickupBehaviour : MonoBehaviour {
         }
 
         #endregion
+
         #region HEALTH
         if (pickupType == PickupType.HEALTH)
         {
@@ -169,11 +171,25 @@ public class PickupBehaviour : MonoBehaviour {
             }
         }
         #endregion
+
+        #region BUFF
+        if(pickupType == PickupType.BUFF)
+        {
+            // If the pickup is hit by a player
+            if(other.tag == "Player")
+            {
+                // Add the amount of buffs to the player here!*************************
+
+                // Destroy this object
+                Destroy(this);
+            }
+        }
+        #endregion
     }
 
     void Hit(int damage)
     {
-        // If pickup is a BUFF
+        // If pickup is a ITEMBOX
         if (pickupType == PickupType.ITEMBOX)
             // Decrement health when hit
             Health -= damage;
