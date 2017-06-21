@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="74">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="76">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
@@ -90,9 +90,21 @@
   <object id="68" type="Crate_Health" gid="36" x="1408" y="880" width="16" height="16"/>
   <object id="69" type="Crate_Health" gid="36" x="1664" y="240" width="16" height="16"/>
   <object id="70" type="Health" gid="4" x="224" y="400" width="16" height="16"/>
-  <object id="71" type="Bounty" gid="1" x="2112" y="560" width="16" height="16"/>
-  <object id="72" type="Bounty" gid="1" x="2432" y="432" width="16" height="16"/>
   <object id="73" type="Flag_Pole" gid="801" x="2928" y="384" width="16" height="16"/>
+  <object id="74" gid="1" x="96" y="704" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="8"/>
+    <property name="Reward" value="80"/>
+    <property name="Type" value="Rattlesnakes"/>
+   </properties>
+  </object>
+  <object id="75" gid="1" x="1280" y="480" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="3"/>
+    <property name="Reward" value="120"/>
+    <property name="Type" value="Armadillos"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Viewport" width="192" height="64" visible="0" offsetx="-9.09091" offsety="-18.1818">
   <data encoding="base64" compression="zlib">
