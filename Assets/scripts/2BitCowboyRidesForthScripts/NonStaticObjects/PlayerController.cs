@@ -576,7 +576,6 @@ public class PlayerController : MonoBehaviour
         // Add coins here
         
         Coins += amountOfCoinToAdd;
-        Debug.Log(Coins);
         coinUI.text = Coins.ToString() + "$";
     }
     #endregion

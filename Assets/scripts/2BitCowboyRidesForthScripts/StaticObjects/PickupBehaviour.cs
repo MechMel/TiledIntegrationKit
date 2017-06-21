@@ -150,7 +150,6 @@ public class PickupBehaviour : MonoBehaviour {
                 amountOfCoinToAdd = Random.Range(0, 25);
                 other.gameObject.GetComponent<PlayerController>().AddCoin(amountOfCoinToAdd);
                 if (other.gameObject.GetComponent<PlayerController>())
-                    Debug.Log("kjasfksjfj");
                 // Destroy this gameObject
                 Destroy(gameObject);
             }
