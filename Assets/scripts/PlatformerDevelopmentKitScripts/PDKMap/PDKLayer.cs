@@ -74,8 +74,6 @@ public class PDKLayer
             // Dehydrate this object
             DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
         }
-        int test;
-        test = 3;
     }
 
 

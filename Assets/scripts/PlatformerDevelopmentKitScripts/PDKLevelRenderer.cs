@@ -105,10 +105,6 @@ public class PDKLevelRenderer
         Color[] overlapColors = new Color[0];
         #endregion
         #region Tile Position Variables
-        // This is used to store which positions already have tiles at them
-        List<int> positionsWithTiles = new List<int>();
-        // This is used to stroe which positions have no transparent pixels at them
-        List<int> opaqueTilePositions = new List<int>();
         // This stores the positions of tiles that will be rendered
         List<int> tilePositionsToRender = new List<int>();
         // This will store each tile ID and the positions of these IDs for all tiles outside of the overlap
@@ -117,10 +113,15 @@ public class PDKLevelRenderer
         #region Tile Placement Variables
         // This will store the pixels for each tile
         Color[] thisTilesPixels;
-        // This will store the old stack of tiles when one tile is placed ontop of another
-        Color[] combinedTile;
-        // This will be used to determine when there are no more transparent pixels in each tile
-        bool isCompletelyOpaque;
+        //
+        int mapWidth = levelMap.width;
+        //int mapHeight = levelMap.height;
+        // This is used to calculate The x position of the pixel that this tile will start at
+        //int initialPixelX;
+        // This is used to calculate The y position of the pixel that this tile will start at
+        //int initialPixelY;
+        int tileWidth = levelMap.tileWidth;
+        int tileHeight = levelMap.tileHeight;
         #endregion
 
 
@@ -135,10 +136,9 @@ public class PDKLevelRenderer
         Paste all the pixels that were in that overlap, onto this layer group's texture.
         */
         #endregion
-        // If there is an overlap
+        // If there is an overlap get the pixels from the old area
         if (overlapRect.width > 0 && overlapRect.height > 0)
         {
-            // Get the pixels from the old area
             overlapColors = textureToUpdate.GetPixels(
                     x: (int)(overlapRect.xMin - loadedRectOfMap.xMin) * levelMap.tileWidth,
                     y: (int)(loadedRectOfMap.height - (overlapRect.yMax - loadedRectOfMap.yMin)) * levelMap.tileHeight,
@@ -249,8 +249,6 @@ public class PDKLevelRenderer
             tilePositions = levelMap.GetTilesByRasterList(layerNumber, tilePositionsToRender);
             #endregion
             #region Put Each Tile to Render on the Texture to Update
-            LogTimeTakenForAction("Start of check");
-            LogTimeTakenForAction("Put Each Tile to Render on the Texture to Update");
             // Go through each tile ID in the tile positions to render
             foreach (int thisTileID in tilePositions.Keys)
             {
@@ -260,7 +258,33 @@ public class PDKLevelRenderer
                 // Go through each occurance of this tile in the requested rectangle of the map
                 foreach (int thisTilePosition in tilePositions[thisTileID])
                 {
-                    // If this tile is not already completely opaque
+                    #region Get the X and Y Positons For this Tile on the Textue to  Update
+                    /* // Calculate The x position of the pixel that this tile will start at
+                    initialPixelX = tileWidth * ((thisTilePosition % mapWidth) - (int)rectToRender.x);
+                    // TODO: FIND A BETTER WAY TO DO THIS
+                    if (initialPixelX < 0)
+                    {
+                        initialPixelX = tileWidth * ((thisTilePosition % mapWidth) - (int)rectToRender.x + mapWidth);
+                    }
+                    // Calculate The y position of the pixel that this tile will start at
+                    initialPixelY = tileHeight * ((int)rectToRender.height - ((thisTilePosition / mapWidth) - (int)rectToRender.y + 1));
+                    // TODO: FIND A BETTER WAY TO DO THIS
+                    if (initialPixelY < 0)
+                    {
+                        initialPixelY = tileHeight * ((int)rectToRender.height - ((thisTilePosition / mapWidth) - (int)rectToRender.y + 1) + mapHeight);
+                    } */
+                    #endregion
+                    #region Place this Tile
+                    // Place this tile in the texture to return
+                    textureToUpdate.SetPixels(
+                        x: tileWidth * ((thisTilePosition % mapWidth) - (int)rectToRender.x), 
+                        y: tileHeight * ((int)rectToRender.height - ((thisTilePosition / mapWidth) - (int)rectToRender.y + 1)),
+                        blockWidth: tileWidth, 
+                        blockHeight: tileHeight, 
+                        colors: thisTilesPixels);
+                    #endregion
+                    #region Depricated
+                    /* // If this tile is not already completely opaque
                     if (!opaqueTilePositions.Contains(thisTilePosition))
                     {
                         #region Get the X and Y Positons For this Tile on the Textue to  Update
@@ -276,10 +300,14 @@ public class PDKLevelRenderer
                         // TODO: FIND A BETTER WAY TO DO THIS
                         if (initialPixelY < 0)
                         {
-                            initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height); 
+                            initialPixelY = levelMap.tileHeight * ((int)rectToRender.height - ((thisTilePosition / levelMap.width) - (int)rectToRender.y + 1) + levelMap.height);
                         }
+                        LogTimeTakenForAction("Get the X and Y Positons For this Tile on the Textue to  Update");
                         #endregion
                         #region Place this Tile
+                        // Place this tile in the texture to return
+                        textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight, thisTilesPixels);
+                        #region Depricated
                         // If there is no tile already at this position
                         if (!positionsWithTiles.Contains(thisTilePosition))
                         {
@@ -324,9 +352,8 @@ public class PDKLevelRenderer
                             #endregion
                             // Place this tile in the texture to update
                             textureToUpdate.SetPixels(initialPixelX, initialPixelY, levelMap.tileWidth, levelMap.tileHeight, combinedTile);
-                        }
-                        #endregion
-                    }
+                        } */
+                    #endregion
                 }
                 #endregion
             }
@@ -335,8 +362,7 @@ public class PDKLevelRenderer
             textureToUpdate.Apply();
         }
         #endregion
-        // The texture has been updated
-        return;
+        LogTimeTakenForAction("Place tiles");
     }
     #endregion
 
