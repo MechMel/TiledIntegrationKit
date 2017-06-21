@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="831">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="835">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
@@ -692,7 +692,6 @@
   <object id="668" type="Coin_Bag" gid="65" x="560" y="352" width="16" height="16"/>
   <object id="669" type="Coin_Bag" gid="65" x="544" y="352" width="16" height="16"/>
   <object id="670" type="Coin_Bag" gid="65" x="544" y="336" width="16" height="16"/>
-  <object id="671" type="Wanted_Poster" gid="2" x="2112" y="144" width="16" height="16"/>
   <object id="672" type="Scorpian" gid="229" x="2720" y="320" width="16" height="16"/>
   <object id="673" type="Scorpian" gid="229" x="2784" y="160" width="16" height="16"/>
   <object id="674" type="Scorpian" gid="2147483877" x="2928" y="480" width="16" height="16"/>
@@ -848,5 +847,19 @@
   <object id="828" type="Track_Left" gid="123" x="1632" y="816" width="16" height="16"/>
   <object id="829" type="Track_Right" gid="124" x="1520" y="880" width="16" height="16"/>
   <object id="830" type="Track_Right" gid="124" x="640" y="752" width="16" height="16"/>
+  <object id="831" gid="1" x="2112" y="144" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="100"/>
+    <property name="Reward" value="250"/>
+    <property name="Type" value="Crate"/>
+   </properties>
+  </object>
+  <object id="833" gid="1" x="1168" y="480" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="14"/>
+    <property name="Reward" value="75"/>
+    <property name="Type" value="Bats"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
