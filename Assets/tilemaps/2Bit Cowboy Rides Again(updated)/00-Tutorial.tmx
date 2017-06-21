@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" nextobjectid="54">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16" nextobjectid="55">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="D:/2-bit Cowboy/levelFiles/environment.png" width="512" height="512"/>
+  <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
  <layer name="Wall" width="100" height="50">
   <data>
@@ -15030,8 +15030,13 @@
   <object id="12" type="Coin_Large" gid="67" x="1168" y="400" width="16" height="16"/>
   <object id="13" type="Coin_Large" gid="67" x="1232" y="416" width="16" height="16"/>
   <object id="14" type="Crate" gid="34" x="640" y="288" width="16" height="16"/>
-  <object id="15" type="Bank_Note" gid="1" x="336" y="464" width="16" height="16"/>
-  <object id="16" type="Bank_Note" gid="1" x="1280" y="400" width="16" height="16"/>
+  <object id="15" type="Bank_Note" gid="1" x="336" y="464" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="3"/>
+    <property name="Reward" value="25"/>
+    <property name="Type" value="Snake"/>
+   </properties>
+  </object>
   <object id="17" type="Piranha" gid="425" x="1392" y="400" width="16" height="16"/>
   <object id="18" type="Snake" gid="169" x="880" y="464" width="16" height="16"/>
   <object id="19" type="Snake" gid="169" x="624" y="480" width="16" height="16"/>
@@ -15066,6 +15071,13 @@
   <object id="51" type="Track_Right" gid="124" x="1248" y="464" width="16" height="16"/>
   <object id="52" type="Track_Left" gid="123" x="1232" y="464" width="16" height="16"/>
   <object id="53" type="Track_Left" gid="123" x="944" y="464" width="16" height="16"/>
+  <object id="54" gid="1" x="704" y="272" width="16" height="16">
+   <properties>
+    <property name="Requirement" value="3"/>
+    <property name="Reward" value="15"/>
+    <property name="Type" value="Bottle"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Foreground" width="100" height="50">
   <data>
