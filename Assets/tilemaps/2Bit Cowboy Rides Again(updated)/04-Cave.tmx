@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="88" tilewidth="16" tileheight="16" nextobjectid="112">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="128" height="88" tilewidth="16" tileheight="16" nextobjectid="112">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="tilesets/environment.png" width="512" height="512"/>
+  <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
  </tileset>
  <layer name="Background" width="128" height="88">
   <data encoding="base64" compression="zlib">
