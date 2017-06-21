@@ -1711,38 +1711,6 @@
                  "y":448
                 }, 
                 {
-                 "gid":108,
-                 "height":16,
-                 "id":130,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"Water",
-                 "visible":true,
-                 "width":16,
-                 "x":5824,
-                 "y":480
-                }, 
-                {
-                 "gid":108,
-                 "height":16,
-                 "id":131,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"Water",
-                 "visible":true,
-                 "width":16,
-                 "x":5840,
-                 "y":480
-                }, 
-                {
                  "gid":35,
                  "height":16,
                  "id":132,

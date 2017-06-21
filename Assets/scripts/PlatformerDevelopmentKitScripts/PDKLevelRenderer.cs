@@ -123,6 +123,7 @@ public class PDKLevelRenderer
         bool isCompletelyOpaque;
         #endregion
 
+
         #region Copy Overlap and Update Texture
         #region SUMMARY:
         /*
@@ -248,6 +249,8 @@ public class PDKLevelRenderer
             tilePositions = levelMap.GetTilesByRasterList(layerNumber, tilePositionsToRender);
             #endregion
             #region Put Each Tile to Render on the Texture to Update
+            LogTimeTakenForAction("Start of check");
+            LogTimeTakenForAction("Put Each Tile to Render on the Texture to Update");
             // Go through each tile ID in the tile positions to render
             foreach (int thisTileID in tilePositions.Keys)
             {
