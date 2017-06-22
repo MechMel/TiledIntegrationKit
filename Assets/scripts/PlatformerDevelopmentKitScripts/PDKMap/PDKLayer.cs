@@ -266,10 +266,14 @@ public class PDKLayer
     // Load the collider for a given tile
     private void LoadColliderForTile(int x, int y)
     {
-       /* if (tilesWithCollisions.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
+        Collider2D test2;
+
+        /*
+        if (tilesWithCollisions.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
         {
             pdkColliders.AddComponent(tileColliders((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])));
-        }*/
+        }
+        */
     }
     #endregion
 
