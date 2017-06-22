@@ -36,7 +36,7 @@ public class vehicleTransport : MonoBehaviour
         //    Debug.DrawLine(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), target.position, Color.blue, 1);
         //    Debug.Log(dir);
 
-        if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z), target.position, 1))
+        if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), target.position, 1))
         {
             if (riding)
                 if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -47,7 +47,7 @@ public class vehicleTransport : MonoBehaviour
 
             if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), target.position, 1).transform.gameObject.tag != "track")
             {
-                Debug.Log(Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z), target.position, 1).transform.name);
+                //Debug.Log(Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z), target.position, 1).transform.name);
 
                 if (speed > 0)
                 {
@@ -131,10 +131,15 @@ public class vehicleTransport : MonoBehaviour
         //    {
         //        onGround = true;
         //    }
-            else
-            {
+        else if (other.gameObject.GetComponent<MobBehaviour>())
+        {
+            if (speed>0)
+            other.SendMessage("Hit", 8, SendMessageOptions.DontRequireReceiver);
+        }
+        else
+        {
             dir = dire.STOP;
-            }
+        }
         //    //try detect player
         //    Debug.Log("pizza");
         //}

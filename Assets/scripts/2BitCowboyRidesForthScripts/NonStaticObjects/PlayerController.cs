@@ -114,9 +114,13 @@ public class PlayerController : MonoBehaviour
     public GameObject midCheck;
     #endregion
 
-    void Start()
+    private GameObject killScreen;
+
+    void Awake()
     {
         // Hookup components
+        killScreen = GameObject.FindGameObjectWithTag("death screen");
+        killScreen.SetActive(false);
         anim = GetComponent<Animator>();
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         sprRend = GetComponent<SpriteRenderer>();
@@ -129,6 +133,14 @@ public class PlayerController : MonoBehaviour
    
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            playerHealth = 0;
+        }
+
+        //DIE DIE DIE// If player drops below threshold he DIE DIE DIE
+        
+
         // The built in update function in Unity runs every frame
 
         #region Input
@@ -143,53 +155,10 @@ public class PlayerController : MonoBehaviour
 
         // Set the collisions by default off
         playerTouchingWall = false;
-        //playerGrounded = false;
-        //playerTouchingWaterLine = false;
 
         // Get the collision points
-        //Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
-        //Collider2D[] midColliders = Physics2D.OverlapCircleAll(midCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
-
-        #region Depricated
-        /*
-        // Update the player grounded state
-        if (Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right, 0.5f))
-        {
-            playerTouchingWall = (Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right, 0.5f).transform.gameObject.layer == LayerMask.NameToLayer("Solid"));
-            Debug.Log(playerTouchingWall);
-        }
-        */
-
-        /*
-        // Make sure a collision exists
-        if (groundColliders.Length > 0)
-        {
-            // Check for the player being grounded
-            for (int i = 0; i < groundColliders.Length; i++)
-            {
-                if (groundColliders[i].gameObject != gameObject)
-                {
-                    playerGrounded = true;
-                    break;
-                }
-            }
-        }
-        // Make sure a collision exists
-        if (midColliders.Length > 0)
-        {
-            // Check for the player touching the water line
-            for (int i = 0; i < midColliders.Length; i++)
-            {
-                if (midColliders[i].gameObject != gameObject && midColliders[i].gameObject.tag == "Water")
-                {
-                    playerTouchingWaterLine = true;
-                    break;
-                }
-            }
-        }
-        */
-        #endregion
+        
         // Make sure a collision exists
         if (rightWallColliders.Length > 0)
         {
@@ -198,8 +167,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (rightWallColliders[i].gameObject != gameObject)
                 {
-                    playerTouchingWall = true;
-                    playerCanDoubleJump = true;
+                    // If the player is grounded, pushing against the wall, and facing against it
+                    if (!playerGrounded && Left && playerFacingLeft || !playerGrounded && Right && !playerFacingLeft)
+                    {
+                        // Set the touching wall to true
+                        playerTouchingWall = true;
+                        // Reset the player's jump
+                        playerCanDoubleJump = true;
+                    }
                     break;
                 }
             }
@@ -214,9 +189,6 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         else
             transform.localScale = new Vector3(1, 1, 1);
-        // If the player is sliding
-        //if (playerCanSlideOnce)
-        //    transform.position = new Vector2(transform.position.x, 0f);
         // Update the playerIsInWater state
         if (playerIsInWater)
         {
@@ -346,21 +318,12 @@ public class PlayerController : MonoBehaviour
                     playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
                 }
                 // Else if the player is on a wall while trying to jump
-                else if(!playerGrounded && playerTouchingWall)
+                else if (playerTouchingWall && !playerGrounded && Left && playerFacingLeft || playerTouchingWall && !playerGrounded && Right && !playerFacingLeft)
                 {
-                    if(playerFacingLeft)
-                        playerRigidBody2D.velocity = transform.localToWorldMatrix.MultiplyVector(new Vector2(playerSpeed * 50, playerSpeed * 50));
-                    
-
+                    // Jump away from the wall
+                    //aplayerRigidBody2D.velocity = transform.localToWorldMatrix.MultiplyVector(new Vector2(-playerSpeed * 50, playerSpeed * 200));
                     // Set the playerCanDoubleJump to false
                     playerCanDoubleJump = false;
-                    // Reset the touching wall, as we're supposed to jump away
-                    playerTouchingWall = false;
-                    // Set the upwards velocity to zero, to counter gravity
-                    //playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
-                    // Add the force for jumping upwards
-                    //playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
-                    // Add the force for jumping outwards slightly
                 }
             }
 
@@ -371,34 +334,40 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("AnimState", 2);
 
             // If touching the ground, reset the wall sliding
-            if (playerGrounded || !playerTouchingWall)
+            if (playerGrounded || !playerTouchingWall && !Left && !playerFacingLeft || !playerTouchingWall && !Right && playerFacingLeft)
             {
                 playerCanSlideOnce = false;
                 playerCanSlide = false;
             }
 
             // Wall sliding
-            if (playerTouchingWall && !playerGrounded && Left || playerTouchingWall && !playerGrounded && Right)
+            if (playerTouchingWall && !playerGrounded && Left && playerFacingLeft || playerTouchingWall && !playerGrounded && Right && !playerFacingLeft)
             {
                 // Set the animator state to wall sliding
                 anim.SetInteger("AnimState", 4);
                 // If the player can slide
-                if (playerCanSlide)
+                if (playerCanSlide && Left || playerCanSlide && Right)
                 {
                     // Set the slide once to on, so the sliding doesn't continue to reset
-                    playerCanSlideOnce = true;              
+                    playerCanSlideOnce = true;
                     // Set the sliding on the rigidBody2D
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.5f);
                 }
                 // Else if the player can slide once, invoke the sliding to start
-                else if (!playerCanSlideOnce)
+                else if (!playerCanSlideOnce && Left || !playerCanSlideOnce && Right)
                 {
                     // Invoke the wait for slide
                     Invoke("WaitForSlide", playerWaitToSlideTime);
+                    // Lock the y axis
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.9f);
                 }
             }
         }
-		/*
+
+        #endregion
+
+        #region Riding
+        /*
         // If riding an animal
         else
         {
@@ -434,6 +403,32 @@ public class PlayerController : MonoBehaviour
             }
         }
 		*/
+        /*
+        #region Rideable animals
+        // If a Ride able animal exists and it is close enough to a ride
+        if (GameObject.FindGameObjectsWithTag("RideableAnimal").Length > 0 &&
+            Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
+        {
+            // If pressing the Interact key
+            if (Input.GetButtonDown("Interact"))
+            {
+                // Either get on, or get off, depending on the state of Riding
+                riding = !riding;
+                // Set the animal the player is riding
+                animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
+            }
+        }
+
+        if (riding)
+        {
+            Debug.Log("ride");
+            // Update position if riding       
+            transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
+            // Update the grounded check for the animal the player is riding
+            animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
+        }
+        #endregion
+        */
         #endregion
 
         #region Shooting
@@ -504,34 +499,7 @@ public class PlayerController : MonoBehaviour
             // Invoke the reset for the playerCanShoot
             Invoke("ResetCanShoot", playerReloadTime);
         }
-        #endregion
-
-		/*
-        #region Rideable animals
-        // If a Ride able animal exists and it is close enough to a ride
-        if (GameObject.FindGameObjectsWithTag("RideableAnimal").Length > 0 &&
-            Vector2.Distance(GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal")).transform.position, transform.position) < 3)
-        {
-            // If pressing the Interact key
-            if (Input.GetButtonDown("Interact"))
-            {
-                // Either get on, or get off, depending on the state of Riding
-                riding = !riding;
-                // Set the animal the player is riding
-                animalPlayerIsRiding = GetNearestObjectInArray(GameObject.FindGameObjectsWithTag("RideableAnimal"));
-            }
-        }
-
-        if (riding)
-        {
-            Debug.Log("ride");
-            // Update position if riding       
-            transform.position = animalPlayerIsRiding.transform.Find("RidePos").position;
-            // Update the grounded check for the animal the player is riding
-            animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
-        }
-        #endregion
-        */
+        #endregion       
     }
 
     #region Wait Functions
@@ -547,11 +515,47 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Outside Invoke Functions
+    bool invunerable;
     public void Hit(int damage)
     {
-        // Inform health bar systems
-        FindObjectOfType<healthBar>().Invoke("deh", 0.5f);
-        playerHealth -= damage;
+        if (!invunerable)
+        {
+            // Inform health bar systems
+
+            FindObjectOfType<healthBar>().Invoke("deh", 0.5f);
+            playerHealth -= damage;
+            invunerable = true;
+            Invoke("vun", 1.5f);
+            flash();
+        }
+    }
+    void flash()
+    {
+        if (invunerable)
+        {
+            if (GetComponent<SpriteRenderer>().enabled)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+            Invoke("flash", .15f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            if (playerHealth < 1)
+            {
+                killScreen.SetActive(true);
+            }
+        }
+    }
+
+    void vun()
+    {
+        invunerable = false;
     }
 
     public void UpdateInWaterState(bool newWaterState)

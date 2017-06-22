@@ -13,7 +13,7 @@ public class healthBar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(FindObjectOfType<PlayerController>().playerHealth);
+        //Debug.Log(FindObjectOfType<PlayerController>().playerHealth);
     }
     void deh()
     {

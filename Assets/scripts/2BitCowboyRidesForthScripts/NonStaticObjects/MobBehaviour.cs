@@ -17,6 +17,7 @@ public class MobBehaviour : MonoBehaviour
         BLOCK,
         RIDE
     }
+
     public MobType mobType;
 
     #region Mob Stats
@@ -98,6 +99,7 @@ public class MobBehaviour : MonoBehaviour
     [Tooltip("The rotatable child of the mob. NOTE: Only necessary to set if the mob is a CHASE type.")]
     public GameObject rotatableObject;
     #endregion
+
     #region Components
     // The array sprite renderers of the mob
     [Tooltip("The array of GameObjects that have a SpriteRenderer and Animator that is part of this object.")]
@@ -446,23 +448,18 @@ public class MobBehaviour : MonoBehaviour
     }
     void Hit(int damage)
     {
+        Debug.Log(damage);
         // When hit, subtract the health
         if(canGetHurt)
             Health -= damage;
     }
     #endregion
 
-    private void OnCollisionStay2D(Collision2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        // If collided with anything other than a tile, ignore the collision
-        if (other.gameObject.tag != "Tile")
-        {
-            // Send the hit
-            if (other.gameObject.tag == "Player")
-                other.gameObject.SendMessage("Hit", 1, SendMessageOptions.DontRequireReceiver);
-            // Ignore the collision
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), other.gameObject.GetComponent<BoxCollider2D>());
-        }
+        // Send the hit
+        if (other.gameObject.tag == "Player")
+            other.gameObject.SendMessage("Hit", 1, SendMessageOptions.DontRequireReceiver);
     }
 
     GameObject GetNearestObjectInArray(GameObject[] objects)
