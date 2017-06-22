@@ -1757,6 +1757,41 @@
          "spacing":0,
          "tilecount":1024,
          "tileheight":16,
+         "tileproperties":
+            {
+             "512":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "513":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "516":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "544":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "548":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "640":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "641":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                },
+             "644":
+                {
+                 "PDKCustomCollider":"Box_Collider"
+                }
+            },
          "tilewidth":16
         }],
  "tilewidth":16,

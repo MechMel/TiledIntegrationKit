@@ -78,7 +78,12 @@ public class PDKLayer
             for (int x = 0; x < width; x++)
             {
                 // Instatiate each row
-                loadedColliders[x] = new PDKColliderRow();
+                loadedColliders.Add(x, new PDKColliderRow());
+                for (int y = 0; y < height; y++)
+                {
+                    // Instatiate each row
+                    loadedColliders[x].Add(y, null);
+                }
             }
         }
     }
@@ -86,21 +91,21 @@ public class PDKLayer
 
     #region Collision Deloading
     // Removes all colliders outside the rect to load and inside the currently loaded rect
-    public void RemoveExternalObjects(Rect currentlyLoadedRect, Rect rectToLoad)
+    public void RemoveExternalColliders(Rect currentlyLoadedRect, Rect rectToLoad)
     {
         // This stores the overlap between the rendered rect and the rect to render
         Rect overlapRect;
 
         /* Collisions are loaded further out than tiles and objects, so scale the given
          * rectangles up the right amount */
-        currentlyLoadedRect.x -= collisionBufferDistance;
+        /*currentlyLoadedRect.x -= collisionBufferDistance;
         currentlyLoadedRect.y -= collisionBufferDistance;
         currentlyLoadedRect.width += 2 * collisionBufferDistance;
         currentlyLoadedRect.height += 2 * collisionBufferDistance;
         rectToLoad.x -= collisionBufferDistance;
         rectToLoad.y -= collisionBufferDistance;
         rectToLoad.width += 2 * collisionBufferDistance;
-        rectToLoad.height += 2 * collisionBufferDistance;
+        rectToLoad.height += 2 * collisionBufferDistance;*/
         // Calculate the overlap between the currently loaded rect and the rect to load
         overlapRect = PDKLevelRenderer.GetOverlap(rectToLoad, currentlyLoadedRect);
 
@@ -116,12 +121,14 @@ public class PDKLayer
                 {
                     // Remove the collider for this tile
                     GameObject.Destroy(loadedColliders[x][y]);
+                    loadedColliders[x][y] = null;
                 }
                 // For each collider on the right of the overlap
                 for (int x = (int)overlapRect.xMax; x < currentlyLoadedRect.xMax; x++)
                 {
                     // Remove the collider for this tile
                     GameObject.Destroy(loadedColliders[x][y]);
+                    loadedColliders[x][y] = null;
                 }
             }
             // For each row inside the rect to load and above or below the overlap
@@ -132,12 +139,14 @@ public class PDKLayer
                 {
                     // Remove the collider for this tile
                     GameObject.Destroy(loadedColliders[x][y]);
+                    loadedColliders[x][y] = null;
                 }
                 // For each collider below the overlap
                 for (int y = (int)overlapRect.yMax; y < currentlyLoadedRect.yMax; y++)
                 {
                     // Remove the collider for this tile
                     GameObject.Destroy(loadedColliders[x][y]);
+                    loadedColliders[x][y] = null;
                 }
             }
             #region Depricated
@@ -168,14 +177,15 @@ public class PDKLayer
         // If there is no overlap remove all colliders inside the rect to deload
         else
         {
-            // For each row inside the rect to render
-            for (int y = (int)currentlyLoadedRect.yMin; y < currentlyLoadedRect.yMax; y++)
+            // For each column inside the rect to render
+            for (int x = (int)currentlyLoadedRect.xMin; x < currentlyLoadedRect.xMax; x++)
             {
-                // For each collider in this row
-                for (int x = (int)currentlyLoadedRect.xMin; x < currentlyLoadedRect.xMax; x++)
+                // For each collider in this column
+                for (int y = (int)currentlyLoadedRect.yMin; y < currentlyLoadedRect.yMax; y++)
                 {
                     // Remove the collider for this tile
                     GameObject.Destroy(loadedColliders[x][y]);
+                    loadedColliders[x][y] = null;
                 }
             }
         }
@@ -191,14 +201,14 @@ public class PDKLayer
 
         /* Collisions are loaded further out than tiles and objects, so scale the given
          * rectangles up the right amount */
-        currentlyLoadedRect.x -= collisionBufferDistance;
+        /*currentlyLoadedRect.x -= collisionBufferDistance;
         currentlyLoadedRect.y -= collisionBufferDistance;
         currentlyLoadedRect.width += 2 * collisionBufferDistance;
         currentlyLoadedRect.height += 2 * collisionBufferDistance;
         rectToLoad.x -= collisionBufferDistance;
         rectToLoad.y -= collisionBufferDistance;
         rectToLoad.width += 2 * collisionBufferDistance;
-        rectToLoad.height += 2 * collisionBufferDistance;
+        rectToLoad.height += 2 * collisionBufferDistance;*/
         // Calculate the overlap between the currently loaded rect and the rect to load
         overlapRect = PDKLevelRenderer.GetOverlap(currentlyLoadedRect, rectToLoad);
         
@@ -287,7 +297,7 @@ public class PDKLayer
         {
             loadedColliders[x][y] = (GameObject)GameObject.Instantiate(
                 original: mapToLoad.tileColliderObjects[tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)]], 
-                position: new Vector3(x, y, 0), 
+                position: new Vector3(x, -y, 0), 
                 rotation: new Quaternion(0, 0, 0, 0));
         }
     }

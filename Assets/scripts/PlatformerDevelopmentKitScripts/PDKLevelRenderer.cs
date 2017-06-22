@@ -59,7 +59,7 @@ public class PDKLevelRenderer
                 foreach (int layerIndex in layerGroupToUpdate.layerNumbers)
                 {
                     //
-                    levelMap.layers[layerIndex].RemoveExternalObjects(loadedRectOfMap, rectToLoad);
+                    levelMap.layers[layerIndex].RemoveExternalColliders(loadedRectOfMap, rectToLoad);
                     //
                     levelMap.layers[layerIndex].LoadInternalObjects(levelMap, loadedRectOfMap, rectToLoad);
                 }

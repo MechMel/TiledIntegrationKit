@@ -11,5 +11,10 @@ public class PDKColliderType
     
     public string name;
     public PDKSerializableHashSetOfIDs tilesWithThisCollider;
-    public GameObject gameObjectForThisCollider;
+    public UnityEngine.Object gameObjectForThisCollider;
+
+    public PDKColliderType()
+    {
+        tilesWithThisCollider = new PDKSerializableHashSetOfIDs();
+    }
 }

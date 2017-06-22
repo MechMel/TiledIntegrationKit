@@ -13,7 +13,7 @@ public class PDKMap
     [System.Serializable]
     public class PDKColliderTypes : PDKSerializableHashSet<PDKColliderType> { }
     [System.Serializable]
-    public class PDKColliderObjectsForTileIDs : PDKSerializableDictionay<int, GameObject> { }
+    public class PDKColliderObjectsForTileIDs : PDKSerializableDictionay<int, UnityEngine.Object> { }
     [System.Serializable]
     public class PDKObjectTypes : PDKSerializableSortedDictionay<string, UnityEngine.Object> { }
     #endregion

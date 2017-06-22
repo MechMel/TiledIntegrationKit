@@ -74,6 +74,7 @@ public class PDKTiledUtilities
         }
         #endregion
         #region Copy Tileset Properties
+        bool thisColliderTypeWasFound = false;
         pdkMap.tilesets = new PDKTileset[pdkTiledMapToConvert.tilesets.Length];
         // Inisilize the map's collider properties
         pdkMap.tilesWithColliders = new PDKMap.PDKIDHashet();
@@ -135,10 +136,32 @@ public class PDKTiledUtilities
                                             if (colliderTypeToCheck.name == currentCustomProperty.value)
                                             {
                                                 // Add this tile ID to this collider type
-                                                colliderTypeToCheck.tilesWithThisCollider.Add(currentTileIndex);
+                                                colliderTypeToCheck.tilesWithThisCollider.Add(currentTileIndex + 1);
                                                 // Add this tile ID to the list of tiles with colliders
-                                                pdkMap.tilesWithColliders.Add(currentTileIndex);
+                                                pdkMap.tilesWithColliders.Add(currentTileIndex + 1);
+                                                // A collider type for this tile was found so remember that
+                                                thisColliderTypeWasFound = true;
+                                                // There is no need to keep looking for a collider type so break
+                                                break;
                                             }
+                                        }
+                                        // If no matching collider type was found create a new one
+                                        if (!thisColliderTypeWasFound)
+                                        {
+                                            // Create a new collider type
+                                            PDKColliderType newColliderType = new PDKColliderType();
+                                            newColliderType.name = currentCustomProperty.value;
+                                            // Add this tile ID to that collider type
+                                            newColliderType.tilesWithThisCollider.Add(currentTileIndex + 1);
+                                            // Add this collider type to the map's list of collider types
+                                            pdkMap.colliderTypes.Add(newColliderType);
+                                            // Add this tile ID to the list of tiles with colliders
+                                            pdkMap.tilesWithColliders.Add(currentTileIndex + 1);
+                                        }
+                                        // If a matching collider type was found reset the collider type fond variable
+                                        else
+                                        {
+                                            thisColliderTypeWasFound = false;
                                         }
                                     }
                                 }

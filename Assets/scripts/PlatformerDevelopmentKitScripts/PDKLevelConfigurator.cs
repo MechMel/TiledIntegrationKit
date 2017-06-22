@@ -12,6 +12,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     public mapTypes mapType = mapTypes.None; // This will be used to track the map type that the user has chosen
     public PDKMap pdkMap; // This is the PDKMap for this level
     public bool shouldGroupLayers = false; // TODO: FILL THIS IN LATER
+    public bool levelIsPreVisualized = false; // TODO: FILL THIS IN LATER
 
 
 
@@ -135,9 +136,34 @@ public class PDKLevelConfigurator : MonoBehaviour
             levelController.bufferDistance = bufferDistance;
             //
             levelController.levelRenderer = new PDKLevelRenderer(pdkMap);
-            // Render the level
-            levelController.levelRenderer.LoadRectOfMap(new Rect(0, 0, pdkMap.width, pdkMap.height));
         }
+        // If the level was previsualized it no longer is
+        levelIsPreVisualized = false;
+    }
+
+
+    // When this is called the entire level is rendered
+    public void PrevisualizeLevel()
+    {
+        // Find the level controller
+        PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
+        // Render the level
+        levelController.levelRenderer.LoadRectOfMap(new Rect(0, 0, pdkMap.width, pdkMap.height));
+        // This level has been previsualized
+        levelIsPreVisualized = true;
+    }
+
+
+    // Remove level Previsualization
+    public void RemoveLevelPrevisualization()
+    {
+        // Find the level controller
+        PDKLevelController levelController = this.gameObject.GetComponent<PDKLevelController>();
+
+        // Remove the level Previsualization
+        DestoryRenderedMap(levelController);
+        // The previsualization has been removed
+        levelIsPreVisualized = false;
     }
 
 
@@ -191,7 +217,7 @@ public class PDKLevelConfigurator : MonoBehaviour
     void DestoryRenderedMap(PDKLevelController levelController)
     {
         // Only attempt destorying items if the level controller exists
-        if (levelController)
+        if (levelController != null && levelController.levelRenderer.levelMap.layerGroups != null)
         {
             // Destory each layergroup's texture and game object
             foreach (PDKLayerGroup layerGroupToDestroy in levelController.levelRenderer.levelMap.layerGroups)
@@ -217,6 +243,31 @@ public class PDKLevelConfigurator : MonoBehaviour
                     foreach (GameObject objectToDestroy in layerToClear.hydratedObjects)
                     {
                         DestroyImmediate(objectToDestroy);
+                    }
+                }
+            }
+            // Destory all instatieated collider objects
+            foreach (PDKLayer layerToClear in levelController.levelRenderer.levelMap.layers)
+            {
+                // If this layer has tiles
+                if (layerToClear.loadedColliders != null)
+                {
+                    // For each collider in this row
+                    for (int x = 0; x < pdkMap.width; x++)
+                    {
+                        // For each row inside the rect to render
+                        for (int y = 0; y < pdkMap.height; y++)
+                        {
+                            // If this collider exists
+                            if (layerToClear.loadedColliders.Keys.Contains(x) 
+                                && layerToClear.loadedColliders.Keys.Contains(y) 
+                                && layerToClear.loadedColliders[x][y])
+                            {
+                                // Remove the collider for this tile
+                                GameObject.DestroyImmediate(layerToClear.loadedColliders[x][y]);
+                                layerToClear.loadedColliders[x][y] = null;
+                            }
+                        }
                     }
                 }
             }
@@ -265,143 +316,146 @@ public class PDKLevelConfigurator : MonoBehaviour
         }
         #endregion
     }
+}
 
 
-    /* collision calculations
-    private List<Vector2>[] CalculateCollisions(int[] data)
+#region Depricated
+/* Depricated
+// collision calculations
+private List<Vector2>[] CalculateCollisions(int[] data)
+{
+    // This will store the solid tiles
+    HashSet<int> solidTilesHashSet = new HashSet<int>();
+    // This will store the collision data
+    List<Vector2>[] collisionData = new List<Vector2>[data.Length];
+
+    // For each solid tile
+    foreach (int thisTileID in solidTiles)
     {
-        // This will store the solid tiles
-        HashSet<int> solidTilesHashSet = new HashSet<int>();
-        // This will store the collision data
-        List<Vector2>[] collisionData = new List<Vector2>[data.Length];
+        // Add this tile to the solid tiles hashset
+        solidTilesHashSet.Add(thisTileID);
+    }
+    // For each tile
+    for (int thisTileIndex = 0; thisTileIndex < data.Length; thisTileIndex++)
+    {
+        bool[] collisionSides = new bool[4];
+        //
+        Vector2[] thisSideCollider;
 
-        // For each solid tile
-        foreach (int thisTileID in solidTiles)
+        if (pdkMap.width % thisTileIndex == 0) // If this tile is on the left edge of the map
         {
-            // Add this tile to the solid tiles hashset
-            solidTilesHashSet.Add(thisTileID);
-        }
-        // For each tile
-        for (int thisTileIndex = 0; thisTileIndex < data.Length; thisTileIndex++)
-        {
-            bool[] collisionSides = new bool[4];
-            //
-            Vector2[] thisSideCollider;
-
-            if (pdkMap.width % thisTileIndex == 0) // If this tile is on the left edge of the map
-            {
-                // The left side of this tile should have a collider
-                collisionSides[1] = true;
-                // If this tile is sold, but the next tile is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + 1]))
-                {
-                    // The right side of this tile should have a collider
-                    collisionSides[3] = true;
-                }
-            }
-            else if  (pdkMap.width % (thisTileIndex + 1) == 0) // If this tile is on the right edge of the map
+            // The left side of this tile should have a collider
+            collisionSides[1] = true;
+            // If this tile is sold, but the next tile is not
+            if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + 1]))
             {
                 // The right side of this tile should have a collider
                 collisionSides[3] = true;
-                // If this tile is sold, but the last tile is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - 1]))
-                {
-                    // The left side of this tile should have a collider
-                    collisionSides[1] = true;
-                }
             }
-            else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+        }
+        else if  (pdkMap.width % (thisTileIndex + 1) == 0) // If this tile is on the right edge of the map
+        {
+            // The right side of this tile should have a collider
+            collisionSides[3] = true;
+            // If this tile is sold, but the last tile is not
+            if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - 1]))
             {
-                // If the last tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex - 1]))
-                {
-                    // The left side of this tile should have a collider
-                    collisionSides[1] = true;
-                }
-                // If the next tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex + 1]))
-                {
-                    // The right side of this tile should have a collider
-                    collisionSides[3] = true;
-                }
+                // The left side of this tile should have a collider
+                collisionSides[1] = true;
             }
+        }
+        else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+        {
+            // If the last tile is not solid
+            if (!solidTilesHashSet.Contains(data[thisTileIndex - 1]))
+            {
+                // The left side of this tile should have a collider
+                collisionSides[1] = true;
+            }
+            // If the next tile is not solid
+            if (!solidTilesHashSet.Contains(data[thisTileIndex + 1]))
+            {
+                // The right side of this tile should have a collider
+                collisionSides[3] = true;
+            }
+        }
 
-            if (thisTileIndex < pdkMap.width) // If this tile is on the top edge of the map
-            {
-                // The top side of this tile should have a collider
-                collisionSides[0] = true;
-                // If this tile is sold, but tile below is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + pdkMap.width]))
-                {
-                    // The bottom side of this tile should have a collider
-                    collisionSides[2] = true;
-                }
-            }
-            else if (thisTileIndex >= data.Length - pdkMap.width) // If this tile is on the bottom edge of the map
+        if (thisTileIndex < pdkMap.width) // If this tile is on the top edge of the map
+        {
+            // The top side of this tile should have a collider
+            collisionSides[0] = true;
+            // If this tile is sold, but tile below is not
+            if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex + pdkMap.width]))
             {
                 // The bottom side of this tile should have a collider
                 collisionSides[2] = true;
-                // If this tile is sold, but the above tile is not
-                if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - pdkMap.width]))
-                {
-                    // The top side of this tile should have a collider
-                    collisionSides[0] = true;
-                }
             }
-            else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+        }
+        else if (thisTileIndex >= data.Length - pdkMap.width) // If this tile is on the bottom edge of the map
+        {
+            // The bottom side of this tile should have a collider
+            collisionSides[2] = true;
+            // If this tile is sold, but the above tile is not
+            if (solidTilesHashSet.Contains(data[thisTileIndex]) && !solidTilesHashSet.Contains(data[thisTileIndex - pdkMap.width]))
             {
-                // If the below tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex - pdkMap.width]))
-                {
-                    // The bottom side of this tile should have a collider
-                    collisionSides[2] = true;
-                }
-                // If the above tile is not solid
-                if (!solidTilesHashSet.Contains(data[thisTileIndex + pdkMap.width]))
-                {
-                    // The top side of this tile should have a collider
-                    collisionSides[0] = true;
-                }
+                // The top side of this tile should have a collider
+                collisionSides[0] = true;
             }
-            // Go through each side
-            for (int thisSide = 0; thisSide < collisionSides.Length; thisSide++)
+        }
+        else if (solidTilesHashSet.Contains(data[thisTileIndex])) // If this tile is solid
+        {
+            // If the below tile is not solid
+            if (!solidTilesHashSet.Contains(data[thisTileIndex - pdkMap.width]))
             {
-                // If this side should have a collider but the previous side should not
-                if (collisionSides[thisSide] && !collisionSides[(thisSide + 3) % 4])
+                // The bottom side of this tile should have a collider
+                collisionSides[2] = true;
+            }
+            // If the above tile is not solid
+            if (!solidTilesHashSet.Contains(data[thisTileIndex + pdkMap.width]))
+            {
+                // The top side of this tile should have a collider
+                collisionSides[0] = true;
+            }
+        }
+        // Go through each side
+        for (int thisSide = 0; thisSide < collisionSides.Length; thisSide++)
+        {
+            // If this side should have a collider but the previous side should not
+            if (collisionSides[thisSide] && !collisionSides[(thisSide + 3) % 4])
+            {
+                collisionData[thisTileIndex] = new List<Vector2>();
+                switch (thisSide)
                 {
-                    collisionData[thisTileIndex] = new List<Vector2>();
-                    switch (thisSide)
+                    case 0:
+                        collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
+                        collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
+                        break;
+                    case 01:
+                        collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
+                        collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
+                        break;
+                    case 2:
+                        collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
+                        collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
+                        break;
+                    case 3:
+                        collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
+                        collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
+                        break;
+                }
+                // Go through each other side
+                for (int thisOtherSide = thisSide; thisOtherSide % collisionSides.Length != thisSide; thisOtherSide++)
+                {
+                    // If this other side should have a collider
+                    if (collisionSides[thisOtherSide % collisionSides.Length])
                     {
-                        case 0:
-                            collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
-                            collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
-                            break;
-                        case 01:
-                            collisionData[thisTileIndex].Add(new Vector2(-.5f, .5f));
-                            collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
-                            break;
-                        case 2:
-                            collisionData[thisTileIndex].Add(new Vector2(-.5f, -.5f));
-                            collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
-                            break;
-                        case 3:
-                            collisionData[thisTileIndex].Add(new Vector2(.5f, -.5f));
-                            collisionData[thisTileIndex].Add(new Vector2(.5f, .5f));
-                            break;
-                    }
-                    // Go through each other side
-                    for (int thisOtherSide = thisSide; thisOtherSide % collisionSides.Length != thisSide; thisOtherSide++)
-                    {
-                        // If this other side should have a collider
-                        if (collisionSides[thisOtherSide % collisionSides.Length])
-                        {
-                            // 
+                        // 
 
-                        }
                     }
                 }
             }
         }
-        return collisionData;
-    }*/
-}
+    }
+    return collisionData;
+}*/
+#endregion
