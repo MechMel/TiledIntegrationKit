@@ -12,7 +12,7 @@ public class vehicleTransport : MonoBehaviour
     public float speed = 0.25f;
     private ParticleSystem.EmissionModule pe1;
     private ParticleSystem.EmissionModule pe2;
-    private bool onGround=true;
+    private bool onGround = true;
     public Transform target;
     void Start()
     {
@@ -25,32 +25,38 @@ public class vehicleTransport : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.DrawLine(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), Vector3., Color.blue, 1);
-        Debug.Log(dir);
+        if (dir != dire.STOP)
+        {
+            if (dir == dire.BACKWARDS)
+                transform.Translate(Vector3.right * speed * Time.timeScale);
+            if (dir == dire.ONWARDS)
+                transform.Translate(Vector3.left * speed * Time.timeScale);
+        }
 
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), target.position, 0.1f))
+        //    Debug.DrawLine(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), target.position, Color.blue, 1);
+        //    Debug.Log(dir);
+
+        if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z), target.position, 1))
         {
             if (riding)
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    GetComponent<Rigidbody2D>().velocity = (Vector2.up * 7);
+                    GetComponent<Rigidbody2D>().velocity = (new Vector2(GetComponent<Rigidbody2D>().velocity.x, GetComponent<Rigidbody2D>().velocity.y + 7));
                 }
 
-            if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), target.position, 1).transform.gameObject.tag != "track")
 
+            if (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.5f, transform.position.z), target.position, 1).transform.gameObject.tag != "track")
             {
-
-
-                //Debug.Log(Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.01f, transform.position.z), -transform.up, 1).transform.name);
+                Debug.Log(Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z), target.position, 1).transform.name);
 
                 if (speed > 0)
                 {
-                    if (dir == dire.BACKWARDS)
+                    if (dir == dire.ONWARDS)
                     {
                         pe2.enabled = false;
                         pe1.enabled = true;
                     }
-                    if (dir == dire.ONWARDS)
+                    if (dir == dire.BACKWARDS)
                     {
                         pe2.enabled = true;
                         pe1.enabled = false;
@@ -65,13 +71,7 @@ public class vehicleTransport : MonoBehaviour
             }
         }
 
-        if (dir != dire.STOP)
-        {
-            if (dir == dire.ONWARDS)
-                transform.Translate(Vector3.right * speed * Time.timeScale);
-            if (dir == dire.BACKWARDS)
-                transform.Translate(Vector3.left * speed * Time.timeScale);
-        }
+
 
 
         if (riding)
@@ -86,11 +86,13 @@ public class vehicleTransport : MonoBehaviour
             //  transform.
 
             if (Input.GetKey(KeyCode.E))
+            {
                 player.transform.localPosition = new Vector3(2, 0.35f, 1);
-            player.GetComponent<PlayerController>().enabled = true;
-            player.GetComponent<Rigidbody2D>().simulated = true;
-            player.transform.parent = null;
-            riding = false;
+                player.GetComponent<PlayerController>().enabled = true;
+                player.GetComponent<Rigidbody2D>().simulated = true;
+                player.transform.parent = null;
+                riding = false;
+            }
 
 
 
@@ -115,7 +117,9 @@ public class vehicleTransport : MonoBehaviour
                 }
             }
         }
+
     }
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.name == "Player")
@@ -123,23 +127,23 @@ public class vehicleTransport : MonoBehaviour
             player = other.gameObject;
             riding = true;
         }
-        else if (other.tag == "track")
-        {
-            onGround = true;
-        }
-        else
-        {
-
-        dir = dire.STOP;
-        }
-        //try detect player
-        Debug.Log("pizza");
+        //    else if (other.tag == "track")
+        //    {
+        //        onGround = true;
+        //    }
+            else
+            {
+            dir = dire.STOP;
+            }
+        //    //try detect player
+        //    Debug.Log("pizza");
+        //}
+        ////void OnTriggerExit2D(Collider2D other)
+        ////{
+        ////    if (other.tag == "track")
+        ////    {
+        ////        onGround = false;
+        ////    }
+        ////}
     }
-    //void OnTriggerExit2D(Collider2D other)
-    //{
-    //    if (other.tag == "track")
-    //    {
-    //        onGround = false;
-    //    }
-    //}
 }
