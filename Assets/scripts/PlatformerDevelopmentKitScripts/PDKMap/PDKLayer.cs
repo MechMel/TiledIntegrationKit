@@ -6,6 +6,8 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKLayer
 {
+    #region Data Storage Types
+    // Data Storage Types
     [System.Serializable]
     public class PDKObjectIDHashSet : PDKSerializableHashSet<int> { }
     [System.Serializable]
@@ -13,6 +15,10 @@ public class PDKLayer
     [System.Serializable]
     public class PDKGameObjectsHashSet : PDKSerializableHashSet<GameObject> { }
     public enum layerTypes { Tile, Object, Image };
+    #endregion
+
+    #region Layer Properties
+    // Layer Properties
     public string name;
     public layerTypes type;
     public int height;
@@ -22,16 +28,27 @@ public class PDKLayer
     public int horizontalOffset;
     public int verticalOffset;
     public PDKMap.PDKCustomProperties properties;
-    // Tile Layer Attributes
+    #endregion
+
+    #region Tile Layer Properties
+    // Tile Layer Properties
     public int[] tileMap;
-    // Object Layer Attributes
+    public Dictionary<int, Dictionary<int, Collider>> loadedColliders;
+    public int collisionBufferDistance = 2;
+    #endregion
+
+    #region Object Layer Properties
+    // Object Layer Properties
     public PDKObject[] objects;
     public PDKSerializable2DHashsetOfPDKObjects dehydratedObjectMap;
     public PDKGameObjectsHashSet hydratedObjects;
-    // Image Layer Attributes
+    #endregion
+
+    #region Image Layer Properties
+    // Image Layer Properties
     public Texture2D image;
-
-
+    #endregion
+    
 
     //The Initialize function sets up the tile layer, objects, and images
     public void InitializeLayer(SortedDictionary<string, UnityEngine.Object> objectsInMap)
@@ -49,6 +66,212 @@ public class PDKLayer
             }
         }
     }
+
+
+    #region Collision Deloading
+    // Removes all colliders outside the rect to load and inside the currently loaded rect
+    public void RemoveExternalObjects(Rect currentlyLoadedRect, Rect rectToLoad)
+    {
+        // This stores the overlap between the rendered rect and the rect to render
+        Rect overlapRect;
+
+        /* Collisions are loaded further out than tiles and objects, so scale the given
+         * rectangles up the right amount */
+        currentlyLoadedRect.x -= collisionBufferDistance;
+        currentlyLoadedRect.y -= collisionBufferDistance;
+        currentlyLoadedRect.width += 2 * collisionBufferDistance;
+        currentlyLoadedRect.height += 2 * collisionBufferDistance;
+        rectToLoad.x -= collisionBufferDistance;
+        rectToLoad.y -= collisionBufferDistance;
+        rectToLoad.width += 2 * collisionBufferDistance;
+        rectToLoad.height += 2 * collisionBufferDistance;
+        // Calculate the overlap between the currently loaded rect and the rect to load
+        overlapRect = PDKLevelRenderer.GetOverlap(rectToLoad, currentlyLoadedRect);
+
+        /* If there is an overlap remove the colliders outside the rect to load and
+         * inside the currently loaded rect */
+        if (overlapRect.width > 0 && overlapRect.height > 0)
+        {
+            // For each row inside the rect to load and beside the overlap
+            for (int y = (int)overlapRect.yMin; y < overlapRect.yMax; y++)
+            {
+                // For each collider on the left of the overlap
+                for (int x = (int)currentlyLoadedRect.xMin; x < overlapRect.xMin; x++)
+                {
+                    // Remove the collider for this tile
+                    GameObject.Destroy(loadedColliders[x][y]);
+                }
+                // For each collider on the right of the overlap
+                for (int x = (int)overlapRect.xMax; x < currentlyLoadedRect.xMax; x++)
+                {
+                    // Remove the collider for this tile
+                    GameObject.Destroy(loadedColliders[x][y]);
+                }
+            }
+            // For each row inside the rect to load and above or below the overlap
+            for (int x = (int)overlapRect.xMin; x < overlapRect.xMax; x++)
+            {
+                // For each collider above the overlap
+                for (int y = (int)currentlyLoadedRect.yMin; y < overlapRect.yMin; y++)
+                {
+                    // Remove the collider for this tile
+                    GameObject.Destroy(loadedColliders[x][y]);
+                }
+                // For each collider below the overlap
+                for (int y = (int)overlapRect.yMax; y < currentlyLoadedRect.yMax; y++)
+                {
+                    // Remove the collider for this tile
+                    GameObject.Destroy(loadedColliders[x][y]);
+                }
+            }
+            #region Depricated
+            /* Depricated
+            // For each row inside the rect to load and above the overlap
+            for (int y = (int)rectToLoad.yMin; y < overlapRect.yMin; y++)
+            {
+                // For each tile in this row
+                for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            // For each row inside the rect to load and below the overlap
+            for (int y = (int)overlapRect.yMax; y < rectToLoad.yMax; y++)
+            {
+                // For each tile in this row
+                for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            */
+            #endregion
+        }
+        // If there is no overlap remove all colliders inside the rect to deload
+        else
+        {
+            // For each row inside the rect to render
+            for (int y = (int)currentlyLoadedRect.yMin; y < currentlyLoadedRect.yMax; y++)
+            {
+                // For each collider in this row
+                for (int x = (int)currentlyLoadedRect.xMin; x < currentlyLoadedRect.xMax; x++)
+                {
+                    // Remove the collider for this tile
+                    GameObject.Destroy(loadedColliders[x][y]);
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region Collision Loading
+    // load all colliders inside the rect to load and outside the currently loaded rect
+    public void LoadInternalObjects(Rect currentlyLoadedRect, Rect rectToLoad)
+    {
+        // This stores the overlap between the rendered rect and the rect to render
+        Rect overlapRect;
+
+        /* Collisions are loaded further out than tiles and objects, so scale the given
+         * rectangles up the right amount */
+        currentlyLoadedRect.x -= collisionBufferDistance;
+        currentlyLoadedRect.y -= collisionBufferDistance;
+        currentlyLoadedRect.width += 2 * collisionBufferDistance;
+        currentlyLoadedRect.height += 2 * collisionBufferDistance;
+        rectToLoad.x -= collisionBufferDistance;
+        rectToLoad.y -= collisionBufferDistance;
+        rectToLoad.width += 2 * collisionBufferDistance;
+        rectToLoad.height += 2 * collisionBufferDistance;
+        // Calculate the overlap between the currently loaded rect and the rect to load
+        overlapRect = PDKLevelRenderer.GetOverlap(currentlyLoadedRect, rectToLoad);
+        
+        /* If there is an overlap load the colliders inside the rect to load and
+         * outside the currently loaded rect */  
+        if (overlapRect.width > 0 && overlapRect.height > 0)
+        {
+            // For each row inside the rect to load and beside the overlap
+            for (int y = (int)overlapRect.yMin; y < overlapRect.yMax; y++)
+            {
+                // For each tile on the left of the overlap
+                for (int x = (int)rectToLoad.xMin; x < overlapRect.xMin; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+                // For each tile on the right of the overlap
+                for (int x = (int)overlapRect.xMax; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            // For each row inside the rect to load and above or below the overlap
+            for (int x = (int)overlapRect.xMin; x < overlapRect.xMax; x++)
+            {
+                // For each tile above the overlap
+                for (int y = (int)rectToLoad.yMin; y < overlapRect.yMin; y++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+                // For each tile below the overlap
+                for (int y = (int)overlapRect.yMax; y < rectToLoad.yMax; y++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            #region Depricated
+            /* Depricated
+            // For each row inside the rect to load and above the overlap
+            for (int y = (int)rectToLoad.yMin; y < overlapRect.yMin; y++)
+            {
+                // For each tile in this row
+                for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            // For each row inside the rect to load and below the overlap
+            for (int y = (int)overlapRect.yMax; y < rectToLoad.yMax; y++)
+            {
+                // For each tile in this row
+                for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+            */
+            #endregion
+        }
+        // If there is no overlap load all colliders inside the rect to load
+        else
+        {
+            // For each row inside the rect to load
+            for (int y = (int)rectToLoad.yMin; y < rectToLoad.yMax; y++)
+            {
+                // For each tile in this row
+                for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
+                {
+                    // Load the collider for this tile
+                    LoadColliderForTile(x, y);
+                }
+            }
+        }
+    }
+
+    // Load the collider for a given tile
+    private void LoadColliderForTile(int x, int y)
+    {
+        if (tilesWithCollisions.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
+        {
+
+        }
+    }
+    #endregion
 
 
     #region Object Dehydration
@@ -206,190 +429,195 @@ public class PDKLayer
     }
     #endregion
 }
-    /*// Returns a refrence to all objects in a rect of the object map
-    public HashSet<PDKObject> GetObjectsInRect(Rect rectToGet)
-    {
-        // Create a new hash set to put all objects in the given rect into
-        HashSet<PDKObject> objectsInRect = new HashSet<PDKObject>();
-        // TODO: COMMENT LATER
-        PDKObjectIDHashSet hashSetToUse;
 
-        // Go through each collumn in the given rect
-        for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
+
+
+#region Depricated
+/*// Returns a refrence to all objects in a rect of the object map
+public HashSet<PDKObject> GetObjectsInRect(Rect rectToGet)
+{
+    // Create a new hash set to put all objects in the given rect into
+    HashSet<PDKObject> objectsInRect = new HashSet<PDKObject>();
+    // TODO: COMMENT LATER
+    PDKObjectIDHashSet hashSetToUse;
+
+    // Go through each collumn in the given rect
+    for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
+    {
+        // Go through each row in this collumn
+        for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
         {
-            // Go through each row in this collumn
-            for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
+            // TODO: COMMENT LATER
+            hashSetToUse = dehydratedObjectIDMap.GetIDs(currentColumnIndex, currentRowIndex);
+            // For each object in this slot
+            foreach (int objectID in hashSetToUse)
             {
-                // TODO: COMMENT LATER
-                hashSetToUse = dehydratedObjectIDMap.GetIDs(currentColumnIndex, currentRowIndex);
-                // For each object in this slot
-                foreach (int objectID in hashSetToUse)
-                {
-                    // Add this object to the objects to return
-                    objectsInRect.Add(objects[objectID]);
-                }
+                // Add this object to the objects to return
+                objectsInRect.Add(objects[objectID]);
             }
         }
-        return objectsInRect;
     }
+    return objectsInRect;
+}
 
 
-    #region DehydratedObjectMap Manipulation
-    // Places an object in the dehydrated objects map
-    public void PutObjectInDehydratedMap(PDKObject objectToInsert, int tileWidth, int tileHeight)
+#region DehydratedObjectMap Manipulation
+// Places an object in the dehydrated objects map
+public void PutObjectInDehydratedMap(PDKObject objectToInsert, int tileWidth, int tileHeight)
+{
+    // Add this object at this position, to the object map
+    dehydratedObjectIDMap.AddID((int)objectToInsert.x, (int)objectToInsert.y, objectToInsert.id);
+}
+
+
+// Removes all objects in a given rect of the dehydrated objects map, and returns them in a hashset
+public PDKObjectIDHashSet TakeDehydratedObjectIDsInRect(Rect rectToTake)
+{
+    // Create a new hash set to put all objects in the given rect into
+    PDKObjectIDHashSet objectIDsInRect = GetDehydratedObjectIDsInRect(rectToTake);
+
+    // For each object at this slot in the dehydrated objects map
+    foreach (int objectID in objectIDsInRect)
     {
-        // Add this object at this position, to the object map
-        dehydratedObjectIDMap.AddID((int)objectToInsert.x, (int)objectToInsert.y, objectToInsert.id);
+        // Remove the current object from the dehydrated objects map
+        RemoveObjectFromDehydratedMap(objects[objectID]);
     }
+    return objectIDsInRect;
+}
 
 
-    // Removes all objects in a given rect of the dehydrated objects map, and returns them in a hashset
-    public PDKObjectIDHashSet TakeDehydratedObjectIDsInRect(Rect rectToTake)
+// Returns a hahset with all dehydrated objects in a given rect
+public  PDKObjectIDHashSet GetDehydratedObjectIDsInRect(Rect rectToGet)
+{
+    // Create a new hash set to put all objects in the given rect into
+    PDKObjectIDHashSet objectsInIDsRect = new PDKObjectIDHashSet();
+    // TODO: COMMENT LATER
+    PDKObjectIDHashSet hashSetToUse;
+
+    // Go through each collumn in the given rect
+    for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
     {
-        // Create a new hash set to put all objects in the given rect into
-        PDKObjectIDHashSet objectIDsInRect = GetDehydratedObjectIDsInRect(rectToTake);
-
-        // For each object at this slot in the dehydrated objects map
-        foreach (int objectID in objectIDsInRect)
+        // Go through each row in this collumn
+        for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
         {
-            // Remove the current object from the dehydrated objects map
-            RemoveObjectFromDehydratedMap(objects[objectID]);
-        }
-        return objectIDsInRect;
-    }
-
-
-    // Returns a hahset with all dehydrated objects in a given rect
-    public  PDKObjectIDHashSet GetDehydratedObjectIDsInRect(Rect rectToGet)
-    {
-        // Create a new hash set to put all objects in the given rect into
-        PDKObjectIDHashSet objectsInIDsRect = new PDKObjectIDHashSet();
-        // TODO: COMMENT LATER
-        PDKObjectIDHashSet hashSetToUse;
-
-        // Go through each collumn in the given rect
-        for (int currentColumnIndex = (int)rectToGet.xMin; currentColumnIndex < (int)rectToGet.xMax; currentColumnIndex++)
-        {
-            // Go through each row in this collumn
-            for (int currentRowIndex = (int)rectToGet.yMin; currentRowIndex < (int)rectToGet.yMax; currentRowIndex++)
+            // TODO: COMMENT LATER
+            hashSetToUse = dehydratedObjectIDMap.GetIDs(currentColumnIndex, currentRowIndex);
+            // For each object at this slot in the dehydrated objects map
+            foreach (int objectID in hashSetToUse)
             {
-                // TODO: COMMENT LATER
-                hashSetToUse = dehydratedObjectIDMap.GetIDs(currentColumnIndex, currentRowIndex);
-                // For each object at this slot in the dehydrated objects map
-                foreach (int objectID in hashSetToUse)
-                {
-                    if (objectID == 50) { }
-                    // Add the current object to the objects to return
-                    objectsInIDsRect.Add(objectID);
-                }
+                if (objectID == 50) { }
+                // Add the current object to the objects to return
+                objectsInIDsRect.Add(objectID);
             }
         }
-        return objectsInIDsRect;
     }
+    return objectsInIDsRect;
+}
 
 
-    // Removes all instances of an object from the dehydrated objects map
-    public void RemoveObjectFromDehydratedMap(PDKObject objectToRemove)
+// Removes all instances of an object from the dehydrated objects map
+public void RemoveObjectFromDehydratedMap(PDKObject objectToRemove)
+{
+    // Remove the current object from this slot in the dehydrated objects map
+    dehydratedObjectIDMap.RemoveID((int)objectToRemove.x, (int)objectToRemove.y, objectToRemove.id);
+}
+#endregion
+
+
+#region HydratedObject Manipulation
+// This goes through each hydrated object, and destroys the ones that are outside of the given rect
+public void DehydrateExternalObjects(Rect rectToUse)
+{
+    // This stores the objects to dehydrate
+    List<GameObject> objectsToDehydrate = new List<GameObject>();
+
+    // Find all the objects that are outside of the given rect
+    foreach (GameObject objectToCheck in hydratedObjects)
     {
-        // Remove the current object from this slot in the dehydrated objects map
-        dehydratedObjectIDMap.RemoveID((int)objectToRemove.x, (int)objectToRemove.y, objectToRemove.id);
-    }
-    #endregion
-
-
-    #region HydratedObject Manipulation
-    // This goes through each hydrated object, and destroys the ones that are outside of the given rect
-    public void DehydrateExternalObjects(Rect rectToUse)
-    {
-        // This stores the objects to dehydrate
-        List<GameObject> objectsToDehydrate = new List<GameObject>();
-
-        // Find all the objects that are outside of the given rect
-        foreach (GameObject objectToCheck in hydratedObjects)
+        // If this object is out of the rect use
+        if (!rectToUse.Overlaps(new Rect(objectToCheck.transform.position.x, -objectToCheck.transform.position.y, 1, 1)))
         {
-            // If this object is out of the rect use
-            if (!rectToUse.Overlaps(new Rect(objectToCheck.transform.position.x, -objectToCheck.transform.position.y, 1, 1)))
+            // Add this object to the list of objects to dehydrate
+            objectsToDehydrate.Add(objectToCheck);
+        }
+    }
+    // Dehydrate each of the objects in the list of objects to dehydrate
+    for (int indexOfObjectToDehydrate = 0; indexOfObjectToDehydrate < objectsToDehydrate.Count; indexOfObjectToDehydrate++)
+    {
+        // Remove this object from the hydrated objects
+        hydratedObjects.Remove(objectsToDehydrate[indexOfObjectToDehydrate]);
+        // Dehydrate this object
+        PDKObject dehydratedObject = DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
+        // Put this object in the dehydrated object map
+        PutObjectInDehydratedMap(dehydratedObject, 16, 16);
+    }
+}
+
+// Creates a hydrated version of a dehydrated object
+public GameObject HydrateObject(int idOfObjectToHydrate)
+{
+    // Stores the dehydrated object for the given ID
+    PDKObject dehydratedObject = objects[idOfObjectToHydrate];
+    // Will store the hydrated object to return
+    GameObject hydratedObject;
+    // Will store the hydrated object's properties
+    PDKObjectProperties hydratedObjectProperties;
+
+    hydratedObject = (GameObject)GameObject.Instantiate(dehydratedObject.prefab, new Vector3(dehydratedObject.x, dehydratedObject.y, 0), new Quaternion(0, 0, 0, 0));
+    hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
+    // Set this object's ID and GID'
+    hydratedObjectProperties.id = dehydratedObject.id;
+    hydratedObjectProperties.gid = dehydratedObject.gid;
+    // Copy the custom properties from the dehydrated objet to the hydrated object
+    if (dehydratedObject.properties != null)
+    {
+        foreach (string key in dehydratedObject.properties.Keys)
+        {
+            if (hydratedObjectProperties.objectProperties.Keys.Contains(key))
             {
-                // Add this object to the list of objects to dehydrate
-                objectsToDehydrate.Add(objectToCheck);
+                hydratedObjectProperties.objectProperties[key] = dehydratedObject.properties[key];
+            }
+            else
+            {
+                hydratedObjectProperties.objectProperties.Add(key, dehydratedObject.properties[key]);
             }
         }
-        // Dehydrate each of the objects in the list of objects to dehydrate
-        for (int indexOfObjectToDehydrate = 0; indexOfObjectToDehydrate < objectsToDehydrate.Count; indexOfObjectToDehydrate++)
-        {
-            // Remove this object from the hydrated objects
-            hydratedObjects.Remove(objectsToDehydrate[indexOfObjectToDehydrate]);
-            // Dehydrate this object
-            PDKObject dehydratedObject = DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
-            // Put this object in the dehydrated object map
-            PutObjectInDehydratedMap(dehydratedObject, 16, 16);
-        }
     }
+    // Return the newly hydrated object
+    return hydratedObject;
+}
 
-    // Creates a hydrated version of a dehydrated object
-    public GameObject HydrateObject(int idOfObjectToHydrate)
+
+// Dehydrates a given object
+public PDKObject DehydrateObject(GameObject objectToDehydrate)
+{
+    // Store the hydrated object's properties
+    PDKObjectProperties hydratedObjectProperties = objectToDehydrate.GetComponent<PDKObjectProperties>();
+    // Will sstore the dehydrated object to return
+    PDKObject dehydratedObject = objects[hydratedObjectProperties.id];
+
+    // If this object has custom properties, save them
+    if (hydratedObjectProperties.objectProperties != null)
     {
-        // Stores the dehydrated object for the given ID
-        PDKObject dehydratedObject = objects[idOfObjectToHydrate];
-        // Will store the hydrated object to return
-        GameObject hydratedObject;
-        // Will store the hydrated object's properties
-        PDKObjectProperties hydratedObjectProperties;
-        
-        hydratedObject = (GameObject)GameObject.Instantiate(dehydratedObject.prefab, new Vector3(dehydratedObject.x, dehydratedObject.y, 0), new Quaternion(0, 0, 0, 0));
-        hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
-        // Set this object's ID and GID'
-        hydratedObjectProperties.id = dehydratedObject.id;
-        hydratedObjectProperties.gid = dehydratedObject.gid;
-        // Copy the custom properties from the dehydrated objet to the hydrated object
-        if (dehydratedObject.properties != null)
+        foreach (string key in hydratedObjectProperties.objectProperties.Keys)
         {
-            foreach (string key in dehydratedObject.properties.Keys)
+            if (dehydratedObject.properties.Keys.Contains(key))
             {
-                if (hydratedObjectProperties.objectProperties.Keys.Contains(key))
-                {
-                    hydratedObjectProperties.objectProperties[key] = dehydratedObject.properties[key];
-                }
-                else
-                {
-                    hydratedObjectProperties.objectProperties.Add(key, dehydratedObject.properties[key]);
-                }
+                dehydratedObject.properties[key] = hydratedObjectProperties.objectProperties[key];
+            }
+            else
+            {
+                dehydratedObject.properties.Add(key, hydratedObjectProperties.objectProperties[key]);
             }
         }
-        // Return the newly hydrated object
-        return hydratedObject;
     }
-
-
-    // Dehydrates a given object
-    public PDKObject DehydrateObject(GameObject objectToDehydrate)
-    {
-        // Store the hydrated object's properties
-        PDKObjectProperties hydratedObjectProperties = objectToDehydrate.GetComponent<PDKObjectProperties>();
-        // Will sstore the dehydrated object to return
-        PDKObject dehydratedObject = objects[hydratedObjectProperties.id];
-        
-        // If this object has custom properties, save them
-        if (hydratedObjectProperties.objectProperties != null)
-        {
-            foreach (string key in hydratedObjectProperties.objectProperties.Keys)
-            {
-                if (dehydratedObject.properties.Keys.Contains(key))
-                {
-                    dehydratedObject.properties[key] = hydratedObjectProperties.objectProperties[key];
-                }
-                else
-                {
-                    dehydratedObject.properties.Add(key, hydratedObjectProperties.objectProperties[key]);
-                }
-            }
-        }
-        // TODO: FILL THIS IN LATER
-        dehydratedObject.x = objectToDehydrate.transform.position.x;
-        dehydratedObject.x = objectToDehydrate.transform.position.x;
-        // Destory the hydrated obejct
-        GameObject.Destroy(objectToDehydrate);
-        // Return the dehydrated object
-        return dehydratedObject;
-    }
-    #endregion*/
+    // TODO: FILL THIS IN LATER
+    dehydratedObject.x = objectToDehydrate.transform.position.x;
+    dehydratedObject.x = objectToDehydrate.transform.position.x;
+    // Destory the hydrated obejct
+    GameObject.Destroy(objectToDehydrate);
+    // Return the dehydrated object
+    return dehydratedObject;
+}
+#endregion*/
+#endregion
