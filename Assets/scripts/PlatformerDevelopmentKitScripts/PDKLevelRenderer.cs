@@ -61,7 +61,7 @@ public class PDKLevelRenderer
                     //
                     levelMap.layers[layerIndex].RemoveExternalObjects(loadedRectOfMap, rectToLoad);
                     //
-                    levelMap.layers[layerIndex].LoadInternalObjects(rectToLoad);
+                    levelMap.layers[layerIndex].LoadInternalObjects(loadedRectOfMap, rectToLoad);
                 }
             }
             // If the layer group to update is an objectLayerGroup
