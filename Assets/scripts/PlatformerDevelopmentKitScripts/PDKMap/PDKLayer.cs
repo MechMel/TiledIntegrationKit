@@ -268,7 +268,7 @@ public class PDKLayer
     {
        /* if (tilesWithCollisions.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
         {
-            PDKColliders.AddComponent(tileColliders((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])));
+            pdkColliders.AddComponent(tileColliders((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])));
         }*/
     }
     #endregion
