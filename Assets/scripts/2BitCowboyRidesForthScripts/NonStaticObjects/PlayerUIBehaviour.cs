@@ -17,7 +17,7 @@ public class PlayerUIBehaviour : MonoBehaviour {
 	[HideInInspector]
 	bool itsTime = false;
 
-    public GameObject pauseMenus;
+    private GameObject pauseMenus;
 
     private float originalSpeed = 0.15f;
 
@@ -38,7 +38,7 @@ public class PlayerUIBehaviour : MonoBehaviour {
 
     void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
 			Pause();
 	}
 

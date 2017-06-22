@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
+
     #region Objects
     // The bullet prefab
     public GameObject bullet;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool animalPlayerIsRidingGrounded = false;
     #endregion
+
     #region Components
     // The animator component
     [HideInInspector]
@@ -543,11 +545,15 @@ public class PlayerController : MonoBehaviour
         playerCanSlide = true;
     }
     #endregion
+
     #region Outside Invoke Functions
     public void Hit(int damage)
     {
+        // Inform health bar systems
+        FindObjectOfType<healthBar>().Invoke("deh", 0.5f);
         playerHealth -= damage;
     }
+
     public void UpdateInWaterState(bool newWaterState)
     {
         // Updates the player's in water state
@@ -556,6 +562,7 @@ public class PlayerController : MonoBehaviour
         playerIsInWater = newWaterState;
         playerWasInWaterPrevious = newWaterState;
     }
+
     public void HitWater()
     {
         // If the player's velocity is greater than or equal to 1
@@ -576,9 +583,12 @@ public class PlayerController : MonoBehaviour
 
     public void AddHealth(int amountOfHealthToAdd)
     {
+
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
     }
+
+    
     public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
@@ -635,6 +645,8 @@ public class PlayerController : MonoBehaviour
     {
         // Update the player grounded
         playerGrounded = (collision.gameObject.layer == LayerMask.NameToLayer("Solid"));
+        // Update the player touching water line
+        playerTouchingWaterLine = (collision.gameObject.layer == LayerMask.NameToLayer("Water"));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -646,7 +658,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        // Update the player grounded}
-        playerGrounded = false;    
+        // Update the player grounded
+        playerGrounded = false;
+        // Update the player touching water line
+        playerTouchingWaterLine = (collision.gameObject.layer == LayerMask.NameToLayer("Water"));
     }
 }
