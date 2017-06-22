@@ -73,6 +73,82 @@ public class PDKTiledUtilities
             }
         }
         #endregion
+        #region Copy Tileset Properties
+        pdkMap.tilesets = new PDKTileset[pdkTiledMapToConvert.tilesets.Length];
+        // Inisilize the map's collider properties
+        pdkMap.tilesWithColliders = new PDKMap.PDKIDHashet();
+        pdkMap.tileColliderObjects = new PDKMap.PDKColliderObjectsForTileIDs();
+        pdkMap.colliderTypes = new PDKMap.PDKColliderTypes();
+        // I there are tilesets in this map
+        if (pdkTiledMapToConvert.tilesets != null)
+        {
+            // Convert and copy each tileset
+            for (int currentTilesetIndex = 0; currentTilesetIndex < pdkTiledMapToConvert.tilesets.Length; currentTilesetIndex++)
+            {
+                pdkMap.tilesets[currentTilesetIndex] = new PDKTileset();
+                pdkMap.tilesets[currentTilesetIndex].name = pdkTiledMapToConvert.tilesets[currentTilesetIndex].name;
+                pdkMap.tilesets[currentTilesetIndex].tileWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilewidth;
+                pdkMap.tilesets[currentTilesetIndex].tileHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileheight;
+                pdkMap.tilesets[currentTilesetIndex].tileCount = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount;
+                pdkMap.tilesets[currentTilesetIndex].columns = pdkTiledMapToConvert.tilesets[currentTilesetIndex].columns;
+                pdkMap.tilesets[currentTilesetIndex].firstGID = pdkTiledMapToConvert.tilesets[currentTilesetIndex].firstgid;
+                pdkMap.tilesets[currentTilesetIndex].margin = pdkTiledMapToConvert.tilesets[currentTilesetIndex].margin;
+                pdkMap.tilesets[currentTilesetIndex].spacing = pdkTiledMapToConvert.tilesets[currentTilesetIndex].spacing;
+                pdkMap.tilesets[currentTilesetIndex].imageWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imagewidth;
+                pdkMap.tilesets[currentTilesetIndex].imageHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imageheight;
+                pdkMap.tilesets[currentTilesetIndex].properties = new PDKMap.PDKCustomProperties();
+                // If this tileset has costom properties
+                if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].properties != null)
+                {
+                    // Convert and copy each property
+                    foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.tilesets[currentTilesetIndex].properties)
+                    {
+                        pdkMap.tilesets[currentTilesetIndex].properties.Add(currentProperty.name, currentProperty.value);
+                    }
+                }
+                pdkMap.tilesets[currentTilesetIndex].tileProperties = new PDKMap.PDKCustomProperties[pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount];
+                // Go through each tile in this map. If this tile has tile properties convert and copy each property
+                for (int currentTileIndex = 0; currentTileIndex < pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount; currentTileIndex++)
+                {
+                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex] = new PDKMap.PDKCustomProperties();
+                    // If this tile has tile properties
+                    if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties != null)
+                    {
+                        // Go through each possible tile properties
+                        foreach (PDKTiledTileProperties currentTileProperties in pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties)
+                        {
+                            // If this tile has custom properites
+                            if (currentTileIndex == currentTileProperties.tileid)
+                            {
+                                // Convert and copy each property
+                                foreach (PDKTiledCustomProperty currentCustomProperty in currentTileProperties.customproperties)
+                                {
+                                    // Copy this property
+                                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex].Add(currentCustomProperty.name, currentCustomProperty.value);
+                                    // If this tile has a custom collider add it to the list of tiles with custom colliders
+                                    if (currentCustomProperty.name == "PDKCustomCollider")
+                                    {
+                                        // Look through each of the existing collider types to see if this one already exists
+                                        foreach (PDKColliderType colliderTypeToCheck in pdkMap.colliderTypes)
+                                        {
+                                            // If this collider type already exists add this tile ID to that collider type
+                                            if (colliderTypeToCheck.name == currentCustomProperty.value)
+                                            {
+                                                // Add this tile ID to this collider type
+                                                colliderTypeToCheck.tilesWithThisCollider.Add(currentTileIndex);
+                                                // Add this tile ID to the list of tiles with colliders
+                                                pdkMap.tilesWithColliders.Add(currentTileIndex);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
         #region Copy Layer Properties
         pdkMap.layers = new PDKLayer[pdkTiledMapToConvert.layers.Length];
         // Go thorugh each layer
@@ -166,61 +242,6 @@ public class PDKTiledUtilities
                         x: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
                         y: -(int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y).Add(
                         pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
-                }
-            }
-        }
-        #endregion
-        #region Copy Tileset Properties
-        pdkMap.tilesets = new PDKTileset[pdkTiledMapToConvert.tilesets.Length];
-        // I there are tilesets in this map
-        if (pdkTiledMapToConvert.tilesets != null)
-        {
-            // Convert and copy each tileset
-            for (int currentTilesetIndex = 0; currentTilesetIndex < pdkTiledMapToConvert.tilesets.Length; currentTilesetIndex++)
-            {
-                pdkMap.tilesets[currentTilesetIndex] = new PDKTileset();
-                pdkMap.tilesets[currentTilesetIndex].name = pdkTiledMapToConvert.tilesets[currentTilesetIndex].name;
-                pdkMap.tilesets[currentTilesetIndex].tileWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilewidth;
-                pdkMap.tilesets[currentTilesetIndex].tileHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileheight;
-                pdkMap.tilesets[currentTilesetIndex].tileCount = pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount;
-                pdkMap.tilesets[currentTilesetIndex].columns = pdkTiledMapToConvert.tilesets[currentTilesetIndex].columns;
-                pdkMap.tilesets[currentTilesetIndex].firstGID = pdkTiledMapToConvert.tilesets[currentTilesetIndex].firstgid;
-                pdkMap.tilesets[currentTilesetIndex].margin = pdkTiledMapToConvert.tilesets[currentTilesetIndex].margin;
-                pdkMap.tilesets[currentTilesetIndex].spacing = pdkTiledMapToConvert.tilesets[currentTilesetIndex].spacing;
-                pdkMap.tilesets[currentTilesetIndex].imageWidth = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imagewidth;
-                pdkMap.tilesets[currentTilesetIndex].imageHeight = pdkTiledMapToConvert.tilesets[currentTilesetIndex].imageheight;
-                pdkMap.tilesets[currentTilesetIndex].properties = new PDKMap.PDKCustomProperties();
-                // If this tileset has costom properties
-                if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].properties != null)
-                {
-                    // Convert and copy each property
-                    foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.tilesets[currentTilesetIndex].properties)
-                    {
-                        pdkMap.tilesets[currentTilesetIndex].properties.Add(currentProperty.name, currentProperty.value);
-                    }
-                }
-                pdkMap.tilesets[currentTilesetIndex].tileProperties = new PDKMap.PDKCustomProperties[pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount];
-                // Go through each tile in this map
-                for (int currentTileIndex = 0; currentTileIndex < pdkTiledMapToConvert.tilesets[currentTilesetIndex].tilecount; currentTileIndex++)
-                {
-                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex] = new PDKMap.PDKCustomProperties();
-                    // If this tile has tile properties
-                    if (pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties != null)
-                    {
-                        // Go through each possible tile properties
-                        foreach (PDKTiledTileProperties currentTileProperties in pdkTiledMapToConvert.tilesets[currentTilesetIndex].tileproperties)
-                        {
-                            // If this tile has custom properites
-                            if (currentTileIndex == currentTileProperties.tileid)
-                            {
-                                // Convert and copy each property
-                                foreach (PDKTiledCustomProperty currentCustomProperty in currentTileProperties.customproperties)
-                                {
-                                    pdkMap.tilesets[currentTilesetIndex].tileProperties[currentTileIndex].Add(currentCustomProperty.name, currentCustomProperty.value);
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

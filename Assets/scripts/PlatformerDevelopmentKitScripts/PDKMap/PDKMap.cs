@@ -5,16 +5,32 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKMap
 {
+    #region Whatever these are called
     [System.Serializable]
     public class PDKCustomProperties : PDKSerializableDictionay<string, string> { }
     [System.Serializable]
+    public class PDKIDHashet : PDKSerializableHashSet<int> { }
+    [System.Serializable]
+    public class PDKColliderTypes : PDKSerializableHashSet<PDKColliderType> { }
+    [System.Serializable]
+    public class PDKColliderObjectsForTileIDs : PDKSerializableDictionay<int, GameObject> { }
+    [System.Serializable]
     public class PDKObjectTypes : PDKSerializableSortedDictionay<string, UnityEngine.Object> { }
+    #endregion
+
     public int width;
     public int height;
     public int tileWidth;
     public int tileHeight;
     public PDKLayer[] layers;
     public PDKTileset[] tilesets;
+    #region Collider Type Variables
+    // Used durring run time
+    public PDKIDHashet tilesWithColliders;
+    public PDKColliderObjectsForTileIDs tileColliderObjects;
+    // Used in editor
+    public PDKColliderTypes colliderTypes;
+    #endregion
     public List<PDKLayerGroup> layerGroups;
     public PDKCustomProperties properties;
     // TODO: FILL THIS IN LATER

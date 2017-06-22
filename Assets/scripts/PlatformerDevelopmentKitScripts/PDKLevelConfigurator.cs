@@ -90,6 +90,31 @@ public class PDKLevelConfigurator : MonoBehaviour
                     }
                 }
             }
+            // Find all prefabs that have the same name as an collider type in this map, and attatch the prefabs to that collider type
+            foreach (PDKColliderType colliderTypeToFind in pdkMap.colliderTypes)
+            {
+                // Only look for a prefab for this collider type if the user has not already attatched one of their own.
+                if (!colliderTypeToFind.gameObjectForThisCollider)
+                {
+                    // Look through all loaded prefabs and see if one of them has the same name as this collider type
+                    foreach (GameObject prefabToCheck in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+                    {
+                        // If this collider type matches this prefabs name, then attatch this prefab to the map
+                        if (colliderTypeToFind.name == prefabToCheck.name)
+                        {
+                            // Assign the prefab
+                            colliderTypeToFind.gameObjectForThisCollider = prefabToCheck;
+                            // Attatch this collider to each tile ID
+                            foreach (int idToAdd in colliderTypeToFind.tilesWithThisCollider)
+                            {
+                                pdkMap.tileColliderObjects.Add(idToAdd, prefabToCheck);
+                            }
+                            // Now that the mathcing prefab has been found there is no need to continue looking
+                            break;
+                        }
+                    }
+                }
+            }
             // Now that all matches have been found, deload the excess resources
             Resources.UnloadUnusedAssets();
             #endregion

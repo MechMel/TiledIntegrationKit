@@ -6,10 +6,14 @@ using System.Collections.Generic;
 [Serializable]
 public class PDKLayer
 {
-    #region Data Storage Types
+    #region Whatever these are called
     // Data Storage Types
     [System.Serializable]
     public class PDKObjectIDHashSet : PDKSerializableHashSet<int> { }
+    [System.Serializable]
+    public class PDKColliderRow : PDKSerializableDictionay<int, GameObject> { }
+    [System.Serializable]
+    public class PDKColliderMap : PDKSerializableDictionay<int, PDKColliderRow> { }
     [System.Serializable]
     public class PDKDehydratedObjectsHashSet : PDKSerializableHashSet<PDKObject> { }
     [System.Serializable]
@@ -33,7 +37,7 @@ public class PDKLayer
     #region Tile Layer Properties
     // Tile Layer Properties
     public int[] tileMap;
-    public Dictionary<int, Dictionary<int, Collider>> loadedColliders;
+    public PDKColliderMap loadedColliders;
     public int collisionBufferDistance = 2;
     #endregion
 
@@ -63,6 +67,18 @@ public class PDKLayer
                 thisObject.prefab = objectsInMap[thisObject.type];
                 // Put this object in the object map
                 dehydratedObjectMap.GetItem((int)thisObject.x, -(int)thisObject.y).Add(thisObject);
+            }
+        }
+        // If this is an tile layer instatiate the nessecary variables
+        else if (type == layerTypes.Tile)
+        {
+            // Instatiate each column
+            loadedColliders = new PDKColliderMap();
+            // Go through each row and instatitate it
+            for (int x = 0; x < width; x++)
+            {
+                // Instatiate each row
+                loadedColliders[x] = new PDKColliderRow();
             }
         }
     }
@@ -168,7 +184,7 @@ public class PDKLayer
 
     #region Collision Loading
     // load all colliders inside the rect to load and outside the currently loaded rect
-    public void LoadInternalObjects(Rect currentlyLoadedRect, Rect rectToLoad)
+    public void LoadInternalObjects(PDKMap mapToLoad, Rect currentlyLoadedRect, Rect rectToLoad)
     {
         // This stores the overlap between the rendered rect and the rect to render
         Rect overlapRect;
@@ -197,13 +213,13 @@ public class PDKLayer
                 for (int x = (int)rectToLoad.xMin; x < overlapRect.xMin; x++)
                 {
                     // Load the collider for this tile
-                    LoadColliderForTile(x, y);
+                    LoadColliderForTile(mapToLoad, x, y);
                 }
                 // For each tile on the right of the overlap
                 for (int x = (int)overlapRect.xMax; x < rectToLoad.xMax; x++)
                 {
                     // Load the collider for this tile
-                    LoadColliderForTile(x, y);
+                    LoadColliderForTile(mapToLoad, x, y);
                 }
             }
             // For each row inside the rect to load and above or below the overlap
@@ -213,13 +229,13 @@ public class PDKLayer
                 for (int y = (int)rectToLoad.yMin; y < overlapRect.yMin; y++)
                 {
                     // Load the collider for this tile
-                    LoadColliderForTile(x, y);
+                    LoadColliderForTile(mapToLoad, x, y);
                 }
                 // For each tile below the overlap
                 for (int y = (int)overlapRect.yMax; y < rectToLoad.yMax; y++)
                 {
                     // Load the collider for this tile
-                    LoadColliderForTile(x, y);
+                    LoadColliderForTile(mapToLoad, x, y);
                 }
             }
             #region Depricated
@@ -257,23 +273,23 @@ public class PDKLayer
                 for (int x = (int)rectToLoad.xMin; x < rectToLoad.xMax; x++)
                 {
                     // Load the collider for this tile
-                    LoadColliderForTile(x, y);
+                    LoadColliderForTile(mapToLoad, x, y);
                 }
             }
         }
     }
 
     // Load the collider for a given tile
-    private void LoadColliderForTile(int x, int y)
+    private void LoadColliderForTile(PDKMap mapToLoad, int x, int y)
     {
-        Collider2D test2;
-
-        /*
-        if (tilesWithCollisions.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
+        // Only create a collider if this otile should have
+        if (mapToLoad.tilesWithColliders.Contains((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])))
         {
-            pdkColliders.AddComponent(tileColliders((tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)])));
+            loadedColliders[x][y] = (GameObject)GameObject.Instantiate(
+                original: mapToLoad.tileColliderObjects[tileMap[((Mathf.Abs(y) % height) * width) + (Mathf.Abs(x) % width)]], 
+                position: new Vector3(x, y, 0), 
+                rotation: new Quaternion(0, 0, 0, 0));
         }
-        */
     }
     #endregion
 
