@@ -596,9 +596,13 @@ public class PlayerController : MonoBehaviour
     public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
+        GetComponent<PlayerUIBehaviour>().Coins += amountOfCoinToAdd;
     }
     #endregion
-
+    public void EndOfLevel()
+    {
+        Saver.Save(gameObject);
+    }
 
     bool CheckIfTouchingObject(Vector2 origin, Vector2 direction, float distance, string tagOfObject)
     {

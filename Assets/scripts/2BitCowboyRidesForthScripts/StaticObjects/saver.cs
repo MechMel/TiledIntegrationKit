@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-static class saver {
-    static void blah(object player)
+static class Saver {
+    public static void Save(GameObject player)
     {
 
 
-        PlayerPrefs.SetInt("gold",);
+        PlayerPrefs.SetInt("gold",player.GetComponent<PlayerUIBehaviour>().Coins);
 
     }
 }
