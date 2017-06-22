@@ -55,6 +55,14 @@ public class PDKLevelRenderer
             {
                 // Update this layer group
                 UpdateTileLayerGroup(layerGroupToUpdate, rectToLoad);
+                //
+                foreach (int layerIndex in layerGroupToUpdate.layerNumbers)
+                {
+                    //
+                    levelMap.layers[layerIndex].RemoveExternalObjects(loadedRectOfMap, rectToLoad);
+                    //
+                    levelMap.layers[layerIndex].LoadInternalObjects(rectToLoad);
+                }
             }
             // If the layer group to update is an objectLayerGroup
             else if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Object)
@@ -386,7 +394,7 @@ public class PDKLevelRenderer
     #endregion
 
     // This examines two rectangles and finds the rectangular area of overlap between them
-    private Rect GetOverlap(Rect firstRect, Rect secondRect)
+    public static Rect GetOverlap(Rect firstRect, Rect secondRect)
     {
         // Create a rectangle to store the overlap
         Rect overlapRect = new Rect();

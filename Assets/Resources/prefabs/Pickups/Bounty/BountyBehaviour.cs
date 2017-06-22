@@ -92,7 +92,7 @@ public class BountyBehaviour : MonoBehaviour
             // Tell the canvas to display the notification
             FindObjectOfType<Canvas>().GetComponent<Notifications>().DisplayBounty(bounty);
             // Give the player this bounty
-            other.gameObject.GetComponent<playerPickUp>().bounties.Add(bounty);
+            other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty);
             // Destry this object
             Destroy(this);
         }
