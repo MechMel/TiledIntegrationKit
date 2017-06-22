@@ -1,25 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     // The PlayerController class is the basic controller for the player, and the base class for add-ons
 
     #region Player
-
-    // Pause menus
-    public GameObject pauseMenus;
-    // Coin UI
-    private Text coinUI;
-    // Coin total
-    private int Coins=0;
-    // Original speed
-    private float originalSpeed = 0.15f;
     // The player speed
     [HideInInspector]
-    private float playerSpeed;
+    private float playerSpeed = 0.15f;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -102,6 +92,9 @@ public class PlayerController : MonoBehaviour
     // The animator component
     [HideInInspector]
     public Rigidbody2D playerRigidBody2D;
+	// The collider of the player
+	[HideInInspector]
+	public BoxCollider2D boxCollider2D;
     // The SpriteRenderer component
     [HideInInspector]
     public SpriteRenderer sprRend;
@@ -119,38 +112,22 @@ public class PlayerController : MonoBehaviour
     public GameObject midCheck;
     #endregion
 
-    void Awake()
+    void Start()
     {
         // Hookup components
-        playerSpeed = originalSpeed;
-        coinUI = FindObjectOfType<coinz>().GetComponent<Text>();
         anim = GetComponent<Animator>();
         playerRigidBody2D = GetComponent<Rigidbody2D>();
         sprRend = GetComponent<SpriteRenderer>();
-        groundCheck = gameObject.transform.Find("GroundCheck").gameObject;
-        rightWallCheck = gameObject.transform.Find("RightWallCheck").gameObject;
-        leftWallCheck = gameObject.transform.Find("LeftWallCheck").gameObject;
-        midCheck = gameObject.transform.Find("MidCheck").gameObject;
+        groundCheck = transform.Find("GroundCheck").gameObject;
+        rightWallCheck = transform.Find("RightWallCheck").gameObject;
+        leftWallCheck = transform.Find("LeftWallCheck").gameObject;
+        midCheck = transform.Find("MidCheck").gameObject;
+		boxCollider2D = transform.GetComponent<BoxCollider2D>();
     }
-
-    public bool paused;
    
     void Update()
     {
-        // The built in update function in Unity runs every frame  
-        //make sure the player obeys the laws of time other than pausing
-        if (Input.GetKeyDown(KeyCode.Escape))
-            pause();
-        //Debug.Log(Time.timeScale);
-        //Debug.Log(playerSpeed);
-        //playerSpeed *= Time.timeScale;
-        //playerAnimationSpeed *= Time.timeScale;
-        //u know what lets just do this
-        if (Time.timeScale < 0.1f)
-        {
-            Debug.Log("time is late");
-            return;
-        }
+        // The built in update function in Unity runs every frame
 
         #region Input
         bool Left = Input.GetButton("Left") || Input.GetButton("dPadLeft");
@@ -159,18 +136,30 @@ public class PlayerController : MonoBehaviour
         bool UpDown = Input.GetButton("Up") || Input.GetButton("Jump");
         bool Space = Input.GetButtonDown("Space");
         #endregion
+
         #region Collision Detection
 
         // Set the collisions by default off
         playerTouchingWall = false;
-        playerGrounded = false;
-        playerTouchingWaterLine = false;
+        //playerGrounded = false;
+        //playerTouchingWaterLine = false;
 
         // Get the collision points
-        Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
-        Collider2D[] midColliders = Physics2D.OverlapCircleAll(midCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        //Collider2D[] groundColliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
+        //Collider2D[] midColliders = Physics2D.OverlapCircleAll(midCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
 
+        #region Depricated
+        /*
+        // Update the player grounded state
+        if (Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right, 0.5f))
+        {
+            playerTouchingWall = (Physics2D.Raycast(rightWallCheck.transform.position, Vector2.right, 0.5f).transform.gameObject.layer == LayerMask.NameToLayer("Solid"));
+            Debug.Log(playerTouchingWall);
+        }
+        */
+
+        /*
         // Make sure a collision exists
         if (groundColliders.Length > 0)
         {
@@ -197,6 +186,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        */
+        #endregion
         // Make sure a collision exists
         if (rightWallColliders.Length > 0)
         {
@@ -211,13 +202,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        
         #endregion
+
         #region Movement
         // Update the flip of player
+
         if (playerFacingLeft)
             transform.localScale = new Vector3(-1, 1, 1);
         else
             transform.localScale = new Vector3(1, 1, 1);
+        // If the player is sliding
+        //if (playerCanSlideOnce)
+        //    transform.position = new Vector2(transform.position.x, 0f);
         // Update the playerIsInWater state
         if (playerIsInWater)
         {
@@ -235,8 +232,6 @@ public class PlayerController : MonoBehaviour
             playerWasInWaterPrevious = false;
         }
 
-
-
         // Update debug text
         //transform.Find("DebugText").GetComponent<TextMesh>().text = playerVelocityY.ToString();
         // If not riding
@@ -249,7 +244,7 @@ public class PlayerController : MonoBehaviour
                 if (playerIsInWater)
                 {
                     // Move the player left at half speed
-                    transform.Translate((playerSpeed / 2) * transform.localScale.x , 0, 0);
+                    transform.Translate((playerSpeed / 2) * transform.localScale.x, 0, 0);
                     // Flip the sprite
                     playerFacingLeft = true;
                 }
@@ -329,7 +324,7 @@ public class PlayerController : MonoBehaviour
             else if (Up)
             {
                 // Else if the player is grounded
-                if (playerGrounded && !playerTouchingLeftWall && !playerTouchingWall)
+                if (playerGrounded && !playerTouchingWall)
                 {
                     // Set the upwards velocity to zero, to counter the gravity
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
@@ -339,7 +334,7 @@ public class PlayerController : MonoBehaviour
                     playerCanDoubleJump = true;
                 }
                 // Else if the playerCanDoubleJump is true
-                else if (playerCanDoubleJump && !playerTouchingLeftWall && !playerTouchingWall)
+                else if (playerCanDoubleJump && !playerTouchingWall)
                 {
                     // Set the playerCanDoubleJump to false
                     playerCanDoubleJump = false;
@@ -347,6 +342,23 @@ public class PlayerController : MonoBehaviour
                     playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
                     // Add the force for jumping upwards
                     playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
+                }
+                // Else if the player is on a wall while trying to jump
+                else if(!playerGrounded && playerTouchingWall)
+                {
+                    if(playerFacingLeft)
+                        playerRigidBody2D.velocity = transform.localToWorldMatrix.MultiplyVector(new Vector2(playerSpeed * 50, playerSpeed * 50));
+                    
+
+                    // Set the playerCanDoubleJump to false
+                    playerCanDoubleJump = false;
+                    // Reset the touching wall, as we're supposed to jump away
+                    playerTouchingWall = false;
+                    // Set the upwards velocity to zero, to counter gravity
+                    //playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0);
+                    // Add the force for jumping upwards
+                    //playerRigidBody2D.AddForce(new Vector2(0, playerJumpSpeed), ForceMode2D.Force);
+                    // Add the force for jumping outwards slightly
                 }
             }
 
@@ -364,7 +376,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // Wall sliding
-            if (playerTouchingWall && !playerGrounded)
+            if (playerTouchingWall && !playerGrounded && Left || playerTouchingWall && !playerGrounded && Right)
             {
                 // Set the animator state to wall sliding
                 anim.SetInteger("AnimState", 4);
@@ -372,22 +384,19 @@ public class PlayerController : MonoBehaviour
                 if (playerCanSlide)
                 {
                     // Set the slide once to on, so the sliding doesn't continue to reset
-                    playerCanSlideOnce = true;
+                    playerCanSlideOnce = true;              
                     // Set the sliding on the rigidBody2D
-                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.7f);
+                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 0.5f);
                 }
                 // Else if the player can slide once, invoke the sliding to start
                 else if (!playerCanSlideOnce)
                 {
+                    // Invoke the wait for slide
                     Invoke("WaitForSlide", playerWaitToSlideTime);
-                    // Stop the falling
-                    playerRigidBody2D.velocity = new Vector2(playerRigidBody2D.velocity.x, 1f);
                 }
             }
-
-            // Update the enabled of the collider
-            GetComponent<Collider2D>().enabled = true;
         }
+		/*
         // If riding an animal
         else
         {
@@ -413,27 +422,25 @@ public class PlayerController : MonoBehaviour
                 }
             }
             // Update the jump/falling animation
-            if (!animalPlayerIsRidingGrounded)
+            if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y > 0)
             {
-                if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y > 0)
-                {
-                    animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpUp");
-                }
-                else if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y < 0)
-                {
-                    animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpDown");
-                }
+                animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpUp");
             }
-
+            else if (RigidBody2DOfAnimalPlayerIsRiding.velocity.y < 0)
+            {
+                animalPlayerIsRiding.GetComponent<Animator>().SetTrigger("JumpDown");
+            }
         }
+		*/
         #endregion
+
         #region Shooting
 
         // If space is pressed, and canShoot is true
         if (Space && playerCanShoot)
         {
             // Set the playerCanShoot back to false, so as not to have rapid fire
-            //playerCanShoot = false;
+            playerCanShoot = false;
             // Create a new bullet at the BulletPos of the player
             GameObject newBullet;
             if (!playerGrounded && !playerCanDoubleJump)
@@ -497,6 +504,7 @@ public class PlayerController : MonoBehaviour
         }
         #endregion
 
+		/*
         #region Rideable animals
         // If a Ride able animal exists and it is close enough to a ride
         if (GameObject.FindGameObjectsWithTag("RideableAnimal").Length > 0 &&
@@ -521,6 +529,7 @@ public class PlayerController : MonoBehaviour
             animalPlayerIsRidingGrounded = CheckIfTouchingObject(animalPlayerIsRiding.transform.Find("GroundCheck").transform.position, -Vector2.up, 0f, "Tile");
         }
         #endregion
+        */
     }
 
     #region Wait Functions
@@ -535,12 +544,11 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     #region Outside Invoke Functions
-    void Hit(int damage)
+    public void Hit(int damage)
     {
-        Debug.Log("Player was just hit!");
         playerHealth -= damage;
     }
-    void UpdateInWaterState(bool newWaterState)
+    public void UpdateInWaterState(bool newWaterState)
     {
         // Updates the player's in water state
 
@@ -548,7 +556,7 @@ public class PlayerController : MonoBehaviour
         playerIsInWater = newWaterState;
         playerWasInWaterPrevious = newWaterState;
     }
-    void HitWater()
+    public void HitWater()
     {
         // If the player's velocity is greater than or equal to 1
         if (playerRigidBody2D.velocity.y >= 1f)
@@ -566,7 +574,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void AddHealth(int amountOfHealthToAdd)
+    public void AddHealth(int amountOfHealthToAdd)
     {
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
@@ -574,10 +582,6 @@ public class PlayerController : MonoBehaviour
     public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
-        
-        Coins += amountOfCoinToAdd;
-        Debug.Log(Coins);
-        coinUI.text = Coins.ToString() + "$";
     }
     #endregion
 
@@ -627,28 +631,22 @@ public class PlayerController : MonoBehaviour
         return closestObjectInArray;
     }
 
-    public void pause()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (paused == true)
-        {
-            playerSpeed = originalSpeed;
-            pauseMenus.SetActive(false);
-            Time.timeScale = 1;
-            paused = false;
-            
-        }
-        else
-        {
-            pauseMenus.SetActive(true);
-            Time.timeScale = 0f;
-            playerSpeed = 0;
-            paused = true;
-        }
+        // Update the player grounded
+        playerGrounded = (collision.gameObject.layer == LayerMask.NameToLayer("Solid"));
     }
 
-    void FixedUpdate()
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        // Update the player grounded
+        playerGrounded = (collision.gameObject.layer == LayerMask.NameToLayer("Solid"));
 
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Update the player grounded}
+        playerGrounded = false;    
     }
 }

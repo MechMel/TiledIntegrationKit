@@ -269,30 +269,16 @@
                  "name":"",
                  "properties":
                     {
-
+                     "Requirement":"3",
+                     "Reward":"25",
+                     "Type":"Snake"
                     },
                  "rotation":0,
-                 "type":"Bank_Note",
+                 "type":"Bounty",
                  "visible":true,
                  "width":16,
                  "x":336,
                  "y":464
-                }, 
-                {
-                 "gid":1,
-                 "height":16,
-                 "id":16,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"Bank_Note",
-                 "visible":true,
-                 "width":16,
-                 "x":1280,
-                 "y":400
                 }, 
                 {
                  "gid":425,
@@ -837,6 +823,24 @@
                  "width":16,
                  "x":944,
                  "y":464
+                }, 
+                {
+                 "gid":1,
+                 "height":16,
+                 "id":54,
+                 "name":"",
+                 "properties":
+                    {
+                     "Requirement":"3",
+                     "Reward":"15",
+                     "Type":"Bottle"
+                    },
+                 "rotation":0,
+                 "type":"Bounty",
+                 "visible":true,
+                 "width":16,
+                 "x":704,
+                 "y":272
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -869,7 +873,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":54,
+ "nextobjectid":55,
  "orientation":"orthogonal",
  "properties":
     {
@@ -881,7 +885,7 @@
         {
          "columns":32,
          "firstgid":1,
-         "image":"D:\/2-bit Cowboy\/levelFiles\/environment.png",
+         "image":"..\/Resources\/Tilesets\/environment.png",
          "imageheight":512,
          "imagewidth":512,
          "margin":0,

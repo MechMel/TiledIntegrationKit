@@ -104,7 +104,7 @@ public class PDKLayer
         // Store the hydrated object's x and y position
         dehydratedObject.x = objectToDehydrate.transform.position.x;
         dehydratedObject.y = objectToDehydrate.transform.position.y;
-        // Remove this object from the hydrated objects map
+        // Remove this object from the hydrated object map
         hydratedObjects.Remove(objectToDehydrate);
         // Destory the hydrated obejct
         GameObject.Destroy(objectToDehydrate);
@@ -164,6 +164,8 @@ public class PDKLayer
         // Set this object's ID and GID'
         hydratedObjectProperties.id = objectToHydrate.id;
         hydratedObjectProperties.gid = objectToHydrate.gid;
+        // Tell this object which layer it is in
+        hydratedObjectProperties.layerThisObjectIsIn = this;
         // Copy the custom properties from the dehydrated objet to the hydrated object
         if (objectToHydrate.properties != null)
         {
@@ -191,6 +193,16 @@ public class PDKLayer
     {
         // Remove this object from the dehydrated object map
         dehydratedObjectMap.GetItem((int)objectToTake.x, -(int)objectToTake.y).Remove(objectToTake);
+    }
+    #endregion
+
+    #region Object Map Manipulation
+    /* When a hydrated object is destroyed it calls this function to tell this layer to
+     * remove this object from the hydrated object map */
+    public void HydratedObectDestoryed(GameObject destoyedObject)
+    {
+        // Remove this object from the hydrated object map
+        hydratedObjects.Remove(destoyedObject);
     }
     #endregion
 }
