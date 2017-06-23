@@ -133,10 +133,19 @@ public class PlayerController : MonoBehaviour
    
     void Update()
     {
+        Debug.Log(PlayerPrefs.GetInt("level max"));
+        Debug.Log(PlayerPrefs.GetInt("gold"));
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Saver.Save(gameObject);
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             playerHealth = 0;
         }
+
+       // playerSpeed *= Time.timeScale;
 
         //DIE DIE DIE// If player drops below threshold he DIE DIE DIE
         

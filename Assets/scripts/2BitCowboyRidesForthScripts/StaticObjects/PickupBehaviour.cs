@@ -13,6 +13,7 @@ public class PickupBehaviour : MonoBehaviour {
         HEALTH,
         BUFF
     }
+    public bool flashing;
 
     public PickupType pickupType;
 
@@ -81,6 +82,15 @@ public class PickupBehaviour : MonoBehaviour {
 
     void Awake ()
     {
+        #region destruct coin
+        //
+        if (pickupType == PickupType.COIN)
+        {
+            Invoke("DestroySelfWithDelay", 6);
+            Invoke("flash", 4.5f);
+            flashing = true;
+        }
+        #endregion
         // Setup the sprite renderer
         sprRend = GetComponent<SpriteRenderer>();
         // Set the PDKObjectProperties variable for easy reference
@@ -99,9 +109,9 @@ public class PickupBehaviour : MonoBehaviour {
         GetComponent<Rigidbody2D>().isKinematic = !isAffectedByGravity;
 
         // If pickup is a buff
-        if (pickupType == PickupType.COIN || pickupType == PickupType.HEALTH)
-            // Set the BoxCollider2D to a trigger
-            GetComponent<BoxCollider2D>().isTrigger = true;
+        //if (pickupType == PickupType.COIN || pickupType == PickupType.HEALTH)
+        //    // Set the BoxCollider2D to a trigger
+        //    GetComponent<Collider2D>().isTrigger = true;
     }
 		
 	void Update ()
@@ -149,9 +159,24 @@ public class PickupBehaviour : MonoBehaviour {
                 // Add coinage to the player
                 amountOfCoinToAdd = Random.Range(0, 25);
                 other.gameObject.GetComponent<PlayerController>().AddCoin(amountOfCoinToAdd);
-                if (other.gameObject.GetComponent<PlayerController>())
                 // Destroy this gameObject
                 Destroy(gameObject);
+
+            }
+            else
+            {
+                //artificial colliding
+                if (other.gameObject.tag != "Pickup")
+                {
+                    if (GetComponent<Rigidbody2D>().velocity.y < -1)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -GetComponent<Rigidbody2D>().velocity.y * 0.75f);
+                    }
+                    if (GetComponent<Rigidbody2D>().velocity.y < 0&& GetComponent<Rigidbody2D>().velocity.y > -1)
+                    {
+                        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                    }
+                }
             }
         }
 
@@ -192,6 +217,25 @@ public class PickupBehaviour : MonoBehaviour {
         if (pickupType == PickupType.ITEMBOX)
             // Decrement health when hit
             Health -= damage;
+    }
+    void flash()
+    {
+        if (flashing)
+        {
+            if (GetComponent<SpriteRenderer>().enabled)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+            Invoke("flash", .15f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     void DestroySelfWithDelay()
