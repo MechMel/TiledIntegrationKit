@@ -252,10 +252,10 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].visible = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].visible;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new PDKMap.PDKCustomProperties();
                     // If this object had custom properties
-                    if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
+                    if (pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].properties != null)
                     {
                         // Convert and copy each property
-                        foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
+                        foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].properties)
                         {
                             pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties.Add(currentProperty.name, currentProperty.value);
                         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="384" height="32" tilewidth="16" tileheight="16" nextobjectid="133">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="384" height="32" tilewidth="16" tileheight="16" nextobjectid="133">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
   <tile id="512">
@@ -28,6 +28,11 @@
    </properties>
   </tile>
   <tile id="640">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="641">
    <properties>
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
@@ -49446,7 +49451,8 @@
   <object id="96" type="Door_Exit" gid="806" x="5936" y="400" width="16" height="16"/>
   <object id="97" type="Bounty" gid="1" x="2960" y="384" width="16" height="16">
    <properties>
-    <property name="Amount" value="4"/>
+    <property name="Requirement" value="4"/>
+    <property name="Reward" value="40"/>
     <property name="Type" value="Sheep"/>
    </properties>
   </object>
@@ -49454,7 +49460,8 @@
   <object id="100" type="Flagpost" gid="801" x="5872" y="400" width="16" height="16"/>
   <object id="104" type="Bounty" gid="1" x="96" y="341" width="16" height="16">
    <properties>
-    <property name="Amount" value="63"/>
+    <property name="Requirement" value="63"/>
+    <property name="Reward" value="50"/>
     <property name="Type" value="Coin_Big"/>
    </properties>
   </object>

@@ -359,7 +359,7 @@ public class PDKLayer
         dehydratedObject.y = objectToDehydrate.transform.position.y;
         // Remove this object from the hydrated object map
         hydratedObjects.Remove(objectToDehydrate);
-        // Destory the hydrated obejct
+        // Destory the hydrated version of this obejct
         GameObject.Destroy(objectToDehydrate);
         // Put this object in the dehydrated object map
         PutObjectInDehydratedMap(dehydratedObject);
@@ -452,7 +452,7 @@ public class PDKLayer
     #region Object Map Manipulation
     /* When a hydrated object is destroyed it calls this function to tell this layer to
      * remove this object from the hydrated object map */
-    public void HydratedObectDestoryed(GameObject destoyedObject)
+    public void HydratedObectHasBeenDestoryed(GameObject destoyedObject)
     {
         // Remove this object from the hydrated object map
         hydratedObjects.Remove(destoyedObject);

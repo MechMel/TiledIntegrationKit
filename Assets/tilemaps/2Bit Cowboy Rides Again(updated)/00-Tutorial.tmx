@@ -32,6 +32,11 @@
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
   </tile>
+  <tile id="641">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
   <tile id="644">
    <properties>
     <property name="PDKCustomCollider" value="Box_Collider"/>

@@ -11,7 +11,7 @@ public class BountyBehaviour : MonoBehaviour
 
 
     // On awake get this bounties data from this object's properites
-    private void Awake()
+    private void Start()
     {
         // Refrence to this object's properties
         PDKMap.PDKCustomProperties objectProperties = GetComponent<PDKObjectProperties>().objectProperties;
@@ -45,7 +45,7 @@ public class BountyBehaviour : MonoBehaviour
                 bounty.objectType = ObjectTypes.SNAKE;
                 break;
             case "Rattle_Snake":
-                bounty.objectType = ObjectTypes.RATTLE_SNAKE;
+                bounty.objectType = ObjectTypes.RATTLESNAKE;
                 break;
             case "Spider":
                 bounty.objectType = ObjectTypes.SPIDER;
@@ -60,7 +60,7 @@ public class BountyBehaviour : MonoBehaviour
                 bounty.objectType = ObjectTypes.SCORPION;
                 break;
             case "Crawdad":
-                bounty.objectType = ObjectTypes.CRAWDAD;
+                bounty.objectType = ObjectTypes.CRAWFISH;
                 break;
             case "Lizard":
                 bounty.objectType = ObjectTypes.LIZARD;
@@ -89,12 +89,12 @@ public class BountyBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // Tell the canvas to display the notification
-            FindObjectOfType<Canvas>().GetComponent<Notifications>().DisplayBounty(bounty);
             // Give the player this bounty
             other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty.objectType, bounty);
+            // Tell the canvas to display the notification
+            FindObjectOfType<Canvas>().GetComponent<Notifications>().DisplayBounty(bounty);
             // Destry this object
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
