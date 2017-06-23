@@ -27,7 +27,9 @@ public class PlayerUIBehaviour : MonoBehaviour {
 
     private Text coinGUI;
     // Coin total
-    private int Coins = 0;
+    public int Coins = 0;
+
+    public bool end;
 
     private void Awake()
     {
@@ -42,11 +44,9 @@ public class PlayerUIBehaviour : MonoBehaviour {
 
     void Update()
 	{
-<<<<<<< HEAD
         coinUI.text = Coins.ToString();
         coinGUI.text = Coins.ToString();
-=======
->>>>>>> 5f16be3a0a4a329d02d3b71fa6c58700e09595db
+
         if (Input.GetKeyDown(KeyCode.Escape))
 			Pause();
 	}
@@ -105,15 +105,19 @@ public class PlayerUIBehaviour : MonoBehaviour {
         {
             playerSpeed = originalSpeed;
             pauseMenus.SetActive(false);
+            GetComponent<PlayerController>().playerSpeed = 0.15f;
             Time.timeScale = 1;
-            paused = false;
+            paused  = false;
             
         }
         else
         {
             pauseMenus.SetActive(true);
+
+            if (end)
+                pauseMenus.GetComponentInChildren<play>().gameObject.SetActive(false);
             Time.timeScale = 0f;
-            playerSpeed = 0;
+            GetComponent<PlayerController>().playerSpeed = 0;
             paused = true;
         }
     }
