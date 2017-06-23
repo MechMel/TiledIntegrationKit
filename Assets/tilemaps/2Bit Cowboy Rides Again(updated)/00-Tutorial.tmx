@@ -32,6 +32,11 @@
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
   </tile>
+  <tile id="641">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
   <tile id="644">
    <properties>
     <property name="PDKCustomCollider" value="Box_Collider"/>
@@ -11967,7 +11972,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="161"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -20240,7 +20245,6 @@
   <object id="25" type="Door_Exit" gid="806" x="1232" y="288" width="16" height="16"/>
   <object id="26" type="Door_Doctor" gid="806" x="1328" y="288" width="16" height="16"/>
   <object id="29" type="Minecart" gid="355" x="928" y="448" width="16" height="16"/>
-  <object id="30" type="Player" gid="161" x="1056" y="288" width="16" height="16"/>
   <object id="32" type="Flag_Post" gid="801" x="1168" y="288" width="16" height="16"/>
   <object id="33" type="Track_Middle" gid="122" x="960" y="464" width="16" height="16"/>
   <object id="34" type="Track_Middle" gid="122" x="976" y="464" width="16" height="16"/>

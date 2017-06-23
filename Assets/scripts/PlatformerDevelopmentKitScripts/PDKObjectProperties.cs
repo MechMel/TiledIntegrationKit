@@ -15,6 +15,7 @@ public class PDKObjectProperties : MonoBehaviour
 
     private void OnDestroy()
     {
-        layerThisObjectIsIn.HydratedObectDestoryed(gameObject);
+        // Tell this object's layer this object has been destroyed
+        layerThisObjectIsIn.HydratedObectHasBeenDestoryed(gameObject);
     }
 }
