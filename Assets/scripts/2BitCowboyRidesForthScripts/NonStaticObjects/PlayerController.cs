@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     #region Player
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.15f;
+    public float playerSpeed = 0.15f;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -133,8 +133,7 @@ public class PlayerController : MonoBehaviour
    
     void Update()
     {
-        Debug.Log(PlayerPrefs.GetInt("level max"));
-        Debug.Log(PlayerPrefs.GetInt("gold"));
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             Saver.Save(gameObject);
