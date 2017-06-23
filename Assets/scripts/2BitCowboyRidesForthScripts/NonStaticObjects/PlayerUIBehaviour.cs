@@ -27,7 +27,7 @@ public class PlayerUIBehaviour : MonoBehaviour {
 
     private Text coinGUI;
     // Coin total
-    public int Coins = 0;
+    private int Coins = 0;
 
     private void Awake()
     {
@@ -42,8 +42,11 @@ public class PlayerUIBehaviour : MonoBehaviour {
 
     void Update()
 	{
+<<<<<<< HEAD
         coinUI.text = Coins.ToString();
         coinGUI.text = Coins.ToString();
+=======
+>>>>>>> 5f16be3a0a4a329d02d3b71fa6c58700e09595db
         if (Input.GetKeyDown(KeyCode.Escape))
 			Pause();
 	}

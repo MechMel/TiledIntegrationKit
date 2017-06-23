@@ -15,1147 +15,35 @@ Platform assembly: C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6
 Loading C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6_22_17_02_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6_22_17_02_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6_22_17_02_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.072 seconds
+- Completed reload, in  0.016 seconds
 Platform assembly: C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6_22_17_02_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Melchiah\Documents\GitHub\TiledIntegrationKit\test 6_22_17_02_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 4480x1080 at -1280,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.898816 ms
-Place tiles: 2990.867 milliseconds
+UnloadTime: 0.900096 ms
+Place tiles: 2684.206 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 54.73471 milliseconds
+Place tiles: 7.08127 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 20.11991 milliseconds
+Place tiles: 6.609917 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 4.650593 milliseconds
+Place tiles: 4.974127 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 1173.288 milliseconds
+Place tiles: 75.25301 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 7.238865 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 9.086132 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.357742 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 78.35722 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.009579 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.230354 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.665302 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 96.59052 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.75161 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.231785 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.03199 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.40202 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.777836 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.323338 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.642891 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 15665.07 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.498886 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.439209 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.628036 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.10011 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.975723 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.637573 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.395889 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 97.57614 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.475998 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.01387 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.594254 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 82.78465 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.61142 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.126404 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.630493 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 105.0529 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.519867 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.708145 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.176544 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 93.83583 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.540848 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.015778 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.409241 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 88.83667 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.344391 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.351471 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.058289 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 92.85355 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.289078 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.79834 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.702972 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 106.7715 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.645752 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.036758 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.292892 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 76.32256 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.313873 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.903244 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.449295 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.55406 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.361557 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.067276 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.4245 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.62654 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.523682 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.939484 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.771637 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 89.06174 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.464554 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.307602 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.187988 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 92.64183 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.584717 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.710602 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.531311 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 100.0252 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.220413 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.531311 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.60379 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 83.69827 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.544662 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.838394 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.413055 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 72.32094 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.044937 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.643845 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.086899 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 11.13129 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.289078 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.708694 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.853653 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.1745 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.132675 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.426407 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.331039 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 84.56993 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.231857 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.252289 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.225586 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.6824 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 11.66344 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.701065 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 4.924774 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 93.78433 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 4.983902 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.542755 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.51033 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 50.82893 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.161285 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.311966 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.661011 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 17.34352 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.132675 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.64003 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.582809 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 16.69121 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.44545 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.250381 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.065918 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 59.28612 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.247116 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.765915 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.420685 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 49.74937 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.405426 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.628586 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.535126 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 33.26416 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.308151 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.664825 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.527496 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 33.36143 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.397797 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.83836 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.216599 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 26.5522 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.407333 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.592346 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.495071 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.93362 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.308151 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.771637 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.458832 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.67995 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.441666 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.701065 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.447388 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 83.5228 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.189896 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 13.29231 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.289078 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 93.10341 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.262375 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.630493 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.529404 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.70474 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.594254 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.842209 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.746841 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 80.88493 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.203247 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.725861 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.432129 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 100.3628 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.302429 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.33482 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.26619 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 93.83583 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.437851 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.737305 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.739212 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 82.53098 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.743027 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.636215 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.599976 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.56169 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.340576 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.741119 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.405426 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 66.97083 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.376816 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.65717 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.231857 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 10.59532 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.243301 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.775452 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.411148 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 49.48044 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.678177 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.072998 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.743027 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 15.69939 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.210876 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.811691 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.64003 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.721497 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.315781 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 13.40294 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.578995 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 68.67981 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.470276 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.870819 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.674362 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.90883 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.222321 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.817413 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.38826 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 82.96585 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.342484 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.720139 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.643845 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.50066 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.403519 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.89368 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.222321 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 93.32275 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.784988 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.010056 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.998611 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 82.33261 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.741119 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.551743 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.141663 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.91891 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.800247 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.227493 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.752563 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 97.47124 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.495071 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 13.05199 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.718231 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 75.80185 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.540848 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.372452 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.865097 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.30038 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.533218 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.727768 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.391525 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.37151 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.458832 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.73349 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.910873 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 82.53479 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.41687 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.788803 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.5103 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 92.61322 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.657196 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.884171 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.971909 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.99139 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.626678 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.729675 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.922318 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 66.16211 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.636215 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.067276 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.320953 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 7.86972 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.267548 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.931854 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.11357 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 49.6521 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.500793 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.004333 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.844116 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 15.40756 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.468369 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.916595 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.118774 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 7.522583 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.565643 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.20079 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.449295 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 41.11099 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.630493 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.914688 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.68768 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 8.892059 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.699158 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.39534 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.657196 milliseconds
+Place tiles: 5.985737 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1163,71 +51,51 @@ Place tiles: 7.066727 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.046295 milliseconds
+Place tiles: 5.610943 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.998611 milliseconds
+Place tiles: 644.752 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.317688 milliseconds
+Place tiles: 5.828857 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 24.41025 milliseconds
+Place tiles: 6.114244 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.361557 milliseconds
+Place tiles: 6.396532 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.794525 milliseconds
+Place tiles: 98.0668 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.413055 milliseconds
+Place tiles: 5.86319 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 16.52336 milliseconds
+Place tiles: 6.440878 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.455017 milliseconds
+Place tiles: 5.760431 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.109238 milliseconds
+Place tiles: 82.30328 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.1994 milliseconds
+Place tiles: 5.627155 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 92.62848 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.628586 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.901337 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.98526 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 98.33717 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.441666 milliseconds
+Place tiles: 6.366253 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1235,47 +103,299 @@ Place tiles: 5.987167 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.710602 milliseconds
+Place tiles: 104.2285 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 83.00591 milliseconds
+Place tiles: 5.620718 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.458832 milliseconds
+Place tiles: 6.862879 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.92804 milliseconds
+Place tiles: 5.492926 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.710602 milliseconds
+Place tiles: 92.72456 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.47205 milliseconds
+Place tiles: 5.689621 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.66864 milliseconds
+Place tiles: 7.520199 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.221771 milliseconds
+Place tiles: 6.076574 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.64572 milliseconds
+Place tiles: 80.62125 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 91.78734 milliseconds
+Place tiles: 5.914211 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.475998 milliseconds
+Place tiles: 6.300926 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.51796 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.21272 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.597591 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.877495 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.377293 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 106.2913 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.724907 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.6185 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 7.501602 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 73.19069 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.727768 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.457806 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.398273 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.28445 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.410194 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.964279 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.715847 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 7.033348 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.656719 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.293774 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.365372 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 64.89468 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.907536 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.605148 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.598545 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 8.784294 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.930901 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.717682 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.029129 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.85641 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.422115 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.975723 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.450726 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 49.59965 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.884171 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.969524 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.506039 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 106.5378 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.672455 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.148815 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.336285 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 91.96568 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.453587 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.757809 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.736828 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.93486 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.374908 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.822182 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.397797 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 100.2207 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.292416 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.62191 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.418777 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 107.1687 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.68819 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.921364 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.131245 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 76.2558 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.605698 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.993366 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.204678 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 83.03928 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.514622 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1283,159 +403,335 @@ Place tiles: 5.941391 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.687714 milliseconds
+Place tiles: 5.534649 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 82.60918 milliseconds
+Place tiles: 49.20149 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.281448 milliseconds
+Place tiles: 5.376339 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.657196 milliseconds
+Place tiles: 5.699635 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.601883 milliseconds
+Place tiles: 5.346298 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 100.296 milliseconds
+Place tiles: 290.3805 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.373001 milliseconds
+Place tiles: 5.83744 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.055832 milliseconds
+Place tiles: 6.560326 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.586624 milliseconds
+Place tiles: 5.241871 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.4873 milliseconds
+Place tiles: 91.63332 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.51033 milliseconds
+Place tiles: 5.609989 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.05011 milliseconds
+Place tiles: 6.233692 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 13.02719 milliseconds
+Place tiles: 5.205154 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 75.29449 milliseconds
+Place tiles: 113.6422 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.548477 milliseconds
+Place tiles: 5.604267 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.149292 milliseconds
+Place tiles: 15.49911 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.601883 milliseconds
+Place tiles: 5.525112 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.09821 milliseconds
+Place tiles: 76.16806 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.796432 milliseconds
+Place tiles: 5.595684 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.750656 milliseconds
+Place tiles: 10.15425 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.571365 milliseconds
+Place tiles: 5.42593 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.45488 milliseconds
+Place tiles: 102.3426 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.548477 milliseconds
+Place tiles: 5.468845 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.084442 milliseconds
+Place tiles: 16.18958 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.832672 milliseconds
+Place tiles: 5.272388 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 82.74651 milliseconds
+Place tiles: 93.74953 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.319595 milliseconds
+Place tiles: 5.536079 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.85556 milliseconds
+Place tiles: 9.325981 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.45117 milliseconds
+Place tiles: 5.376816 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 92.3481 milliseconds
+Place tiles: 68.04037 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.599976 milliseconds
+Place tiles: 5.435467 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.872726 milliseconds
+Place tiles: 19.61374 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.51033 milliseconds
+Place tiles: 5.851746 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.45869 milliseconds
+Place tiles: 85.66761 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.44548 milliseconds
+Place tiles: 5.414486 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.737305 milliseconds
+Place tiles: 18.82505 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.79071 milliseconds
+Place tiles: 5.452156 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 83.6277 milliseconds
+Place tiles: 70.96386 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.460739 milliseconds
+Place tiles: 12.82406 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 11.21569 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.335331 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 8.164406 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 8.309364 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 19.11306 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.435467 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 11.65295 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.419254 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 10.61964 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.306721 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 75.77467 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.156921 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.244183 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.903244 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 84.14793 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.11255 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.100655 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.229473 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 91.79115 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.556583 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.915165 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.384922 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.64494 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.470753 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.725384 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.923271 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 100.0118 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.274773 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.88131 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.352974 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.44106 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.01677 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.115913 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.299091 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 76.3092 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.403519 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.698681 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.486012 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 266.6984 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.321026 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.781651 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.729198 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.76959 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.558014 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1443,43 +739,43 @@ Place tiles: 5.897522 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.563736 milliseconds
+Place tiles: 5.525589 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 98.92845 milliseconds
+Place tiles: 266.4166 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.527496 milliseconds
+Place tiles: 13.26847 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.010056 milliseconds
+Place tiles: 6.117821 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.77351 milliseconds
+Place tiles: 5.103111 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 91.98761 milliseconds
+Place tiles: 191.5817 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.008148 milliseconds
+Place tiles: 5.595207 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.834579 milliseconds
+Place tiles: 6.051064 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.571365 milliseconds
+Place tiles: 5.620003 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 82.53098 milliseconds
+Place tiles: 216.9094 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1487,191 +783,143 @@ Place tiles: 5.355835 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.535126 milliseconds
+Place tiles: 6.66523 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.508423 milliseconds
+Place tiles: 5.724907 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 100.2159 milliseconds
+Place tiles: 198.4806 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.466461 milliseconds
+Place tiles: 5.752563 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.48172 milliseconds
+Place tiles: 6.093979 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.821228 milliseconds
+Place tiles: 5.682945 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.22409 milliseconds
+Place tiles: 198.74 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.384445 milliseconds
+Place tiles: 5.454063 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.67627 milliseconds
+Place tiles: 6.435394 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 11.94572 milliseconds
+Place tiles: 5.43499 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 77.15797 milliseconds
+Place tiles: 341.5546 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.54657 milliseconds
+Place tiles: 5.251884 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.718231 milliseconds
+Place tiles: 5.860329 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.750656 milliseconds
+Place tiles: 5.784988 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.479263 milliseconds
+Place tiles: 82.94106 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.54657 milliseconds
+Place tiles: 5.34153 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.23703 milliseconds
+Place tiles: 5.766869 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.401611 milliseconds
+Place tiles: 5.322456 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 58.80165 milliseconds
+Place tiles: 100.1072 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.460739 milliseconds
+Place tiles: 5.405426 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.662918 milliseconds
+Place tiles: 5.850792 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.94902 milliseconds
+Place tiles: 5.5933 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.546021 milliseconds
+Place tiles: 100.6947 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.788803 milliseconds
+Place tiles: 5.439758 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.076813 milliseconds
+Place tiles: 12.92992 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 13.04436 milliseconds
+Place tiles: 5.327225 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 84.6405 milliseconds
+Place tiles: 75.38414 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.634308 milliseconds
+Place tiles: 5.452156 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.527496 milliseconds
+Place tiles: 5.587578 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.907059 milliseconds
+Place tiles: 5.484581 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 82.95631 milliseconds
+Place tiles: 100.0071 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.638123 milliseconds
+Place tiles: 5.435944 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.788803 milliseconds
+Place tiles: 6.12545 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.905151 milliseconds
+Place tiles: 5.488396 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 99.08676 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.51033 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.882263 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.0215 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 99.3576 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.659103 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 5.834579 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 12.70294 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 42.42325 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.025314 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.011963 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 6.206512 milliseconds
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Place tiles: 14.85252 milliseconds
+Place tiles: 98.98567 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1679,87 +927,403 @@ Place tiles: 5.607605 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.025314 milliseconds
+Place tiles: 5.717278 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.796432 milliseconds
+Place tiles: 5.417824 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 32.38678 milliseconds
+Place tiles: 83.54378 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.683899 milliseconds
+Place tiles: 5.442619 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.715775 milliseconds
+Place tiles: 13.44109 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.994797 milliseconds
+Place tiles: 5.756378 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 48.05946 milliseconds
+Place tiles: 91.76922 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.735397 milliseconds
+Place tiles: 5.423546 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.741119 milliseconds
+Place tiles: 6.095886 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.70866 milliseconds
+Place tiles: 5.372047 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 7.003784 milliseconds
+Place tiles: 99.65324 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.979538 milliseconds
+Place tiles: 5.291939 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.261826 milliseconds
+Place tiles: 5.949974 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.760193 milliseconds
+Place tiles: 5.495071 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 16.86859 milliseconds
+Place tiles: 83.65536 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.535126 milliseconds
+Place tiles: 5.290031 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.971909 milliseconds
+Place tiles: 5.976677 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.844116 milliseconds
+Place tiles: 5.428314 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 33.24127 milliseconds
+Place tiles: 99.26128 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.735397 milliseconds
+Place tiles: 5.705833 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.996704 milliseconds
+Place tiles: 12.82787 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.566597 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 92.32903 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.536079 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.886078 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.569458 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.89909 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.2948 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.693436 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.630493 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.86019 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.391121 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.88131 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.473137 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 100.0881 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.767822 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.69762 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.49984 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 74.85199 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.638123 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.437302 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.899429 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.56892 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.814552 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.254196 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.901337 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.1741 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.69725 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.267548 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.8918 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 81.85673 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.623817 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.99 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.47123 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 93.42957 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.68676 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.361008 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.937576 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 97.53227 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.755424 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.929947 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.039619 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 282.3191 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.501747 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.896568 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.443977 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.7179 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.643845 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.96714 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.78877 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 74.1806 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.58567 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.882263 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.754471 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 66.35952 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.68676 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.197929 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.865097 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 31.90136 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.825996 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.38485 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.706787 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.38697 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.801201 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.356239 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.911827 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 105.195 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.663872 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.514549 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.622864 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 325.1514 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.532265 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.727768 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.116867 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 165.7772 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.815506 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.809784 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.275177 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 115.6483 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.765915 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -1767,21 +1331,1853 @@ Place tiles: 6.076813 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.84166 milliseconds
+Place tiles: 6.435394 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 5.939484 milliseconds
+Place tiles: 81.19678 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 6.061554 milliseconds
+Place tiles: 12.18605 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Place tiles: 12.1479 milliseconds
+Place tiles: 6.456375 milliseconds
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.433083 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 92.49306 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.87368 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.39534 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.014824 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 81.357 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.562782 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.260872 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.036758 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 48.81668 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.667686 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.045341 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.106377 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 48.83099 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.6791 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.641388 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.408287 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 42.78564 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.596161 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.272316 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.534172 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 180.9015 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.807877 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.086349 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.304741 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.69862 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.048203 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.105423 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.774498 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.44017 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 11.84559 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.590843 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.452156 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 75.92964 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.558014 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.131172 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.919456 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 282.383 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.473137 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.007195 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.533623 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.12662 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.619049 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.202698 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.68676 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.21912 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.402565 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.09967 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.347252 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 92.26036 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.521774 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.986214 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.566597 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.85332 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.454063 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.765915 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.543709 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.69234 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.335808 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.58567 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.456924 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 100.1339 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.21183 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.1073 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.133629 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 76.57814 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.284309 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.657196 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.558014 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.67041 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.244255 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.486488 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.609512 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 100.1482 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.351067 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.337715 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.654335 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 83.251 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.278587 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.405426 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.56752 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 59.97753 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.28717 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.515099 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.635262 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 17.2205 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.25856 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.57518 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.554199 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 16.76846 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.179405 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.468369 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.451202 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 66.81252 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.395889 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.796432 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 12.31861 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 43.32638 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.434036 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.632401 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.661011 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 16.15715 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.756378 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.94902 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.69725 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 48.88725 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.296707 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.645752 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.498886 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 50.40359 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.405426 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.893707 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.607605 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 105.7072 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.512238 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.219864 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.338669 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 76.39503 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.674362 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.235123 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.750656 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.05052 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.523682 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.912781 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.626678 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 1249.466 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.796432 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.263733 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.970001 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 89.16664 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.032944 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.635666 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.479813 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 91.00342 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.33812 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 7.104874 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.160736 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 96.99059 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.349564 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.637573 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 7.972717 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 78.73917 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.918503 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.113052 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.922318 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 106.2431 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.149292 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.320953 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.376816 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 91.61568 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.067276 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.790161 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.599976 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 80.98793 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.933762 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.271362 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.767822 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 515.0566 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.94902 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.305695 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.229401 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 104.5799 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.065369 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.271362 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.552292 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 75.15144 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.685806 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.093979 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.731583 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 98.80066 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.92804 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.834579 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.048203 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.09248 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.853653 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.177902 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.277084 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 87.57401 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.813599 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.256104 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.332947 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 92.47589 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.739212 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.796432 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.828857 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.60747 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.653381 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.859375 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.901337 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 82.15714 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.781174 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.720139 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.019592 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 105.5756 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.638123 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.101608 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.393982 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 92.77916 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.699158 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.748749 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.288528 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 81.95496 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.796432 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.714417 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.834579 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 99.96033 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.859375 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.893707 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.779266 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 105.7568 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.645752 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.410599 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.54657 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 74.73946 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.475998 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.85556 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.853653 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 66.2117 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.090164 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.212234 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.960464 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 15.19585 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.45311 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.838394 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.609512 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.910324 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 13.2618 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 6.694794 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.922318 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 7.471085 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.691528 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.735397 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Place tiles: 5.35965 milliseconds
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
+  at PDKLayer.HydrateInternalObjects (Rect rectToHydrate) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.UpdateObjectGroup (.PDKLayerGroup groupToUpdate, Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelRenderer.LoadRectOfMap (Rect rectToLoad) [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Reload () [0x00000] in <filename unknown>:0 
+  at PDKLevelController.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
 IndexOutOfRangeException: Array index is out of range.
   at PDKSerializable2DHashsetOfPDKObjects.GetItem (Int32 x, Int32 y) [0x00000] in <filename unknown>:0 
@@ -1954,7 +3350,7 @@ IndexOutOfRangeException: Array index is out of range.
 (Filename:  Line: -1)
 
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 52bc -> priority: 1 
-  Thread -> id: 52c0 -> priority: 1 
-  Thread -> id: 52c4 -> priority: 1 
-  Thread -> id: 52c8 -> priority: 1 
+  Thread -> id: 68b8 -> priority: 1 
+  Thread -> id: 56d4 -> priority: 1 
+  Thread -> id: 5490 -> priority: 1 
+  Thread -> id: 5e64 -> priority: 1 

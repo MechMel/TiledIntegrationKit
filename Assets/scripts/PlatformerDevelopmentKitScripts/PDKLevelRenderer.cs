@@ -45,30 +45,37 @@ public class PDKLevelRenderer
     // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
     public void LoadRectOfMap(Rect rectToLoad)
     {
-        // Update each layer group
-        for (int indexOfLayerGroupToUpdate = 0; indexOfLayerGroupToUpdate < levelMap.layerGroups.Count; indexOfLayerGroupToUpdate++)
+        // TODO: COMMENT THIS LATER
+        Rect rectToLoadInsideMap = GetOverlap(rectToLoad, new Rect(0, 0, levelMap.width, levelMap.height));
+        Rect loadedRectInsideMap = GetOverlap(loadedRectOfMap, new Rect(0, 0, levelMap.width, levelMap.height));
+        // TODO: COMMENT THIS LATER
+        if (rectToLoadInsideMap.width > 0 && rectToLoadInsideMap.height > 0)
         {
-            //Create a variable to more easily refrence the layer group to update
-            PDKLayerGroup layerGroupToUpdate = levelMap.layerGroups[indexOfLayerGroupToUpdate];
-            // If the layer group to update is a tileLayerGroup
-            if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Tile)
+            // Update each layer group
+            for (int indexOfLayerGroupToUpdate = 0; indexOfLayerGroupToUpdate < levelMap.layerGroups.Count; indexOfLayerGroupToUpdate++)
             {
-                // Update this layer group
-                UpdateTileLayerGroup(layerGroupToUpdate, rectToLoad);
-                //
-                foreach (int layerIndex in layerGroupToUpdate.layerNumbers)
+                //Create a variable to more easily refrence the layer group to update
+                PDKLayerGroup layerGroupToUpdate = levelMap.layerGroups[indexOfLayerGroupToUpdate];
+                // If the layer group to update is a tileLayerGroup
+                if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Tile)
                 {
-                    //
-                    levelMap.layers[layerIndex].RemoveExternalColliders(loadedRectOfMap, rectToLoad);
-                    //
-                    levelMap.layers[layerIndex].LoadInternalObjects(levelMap, loadedRectOfMap, rectToLoad);
+                    // Update this layer group
+                    UpdateTileLayerGroup(layerGroupToUpdate, loadedRectInsideMap, rectToLoadInsideMap);
+                    // TODO: COMMENT THIS LATER
+                    foreach (int layerIndex in layerGroupToUpdate.layerNumbers)
+                    {
+                        // TODO: COMMENT THIS LATER
+                        levelMap.layers[layerIndex].RemoveExternalColliders(loadedRectInsideMap, rectToLoadInsideMap);
+                        // TODO: COMMENT THIS LATER
+                        levelMap.layers[layerIndex].LoadInternalObjects(levelMap, loadedRectInsideMap, rectToLoadInsideMap);
+                    }
                 }
-            }
-            // If the layer group to update is an objectLayerGroup
-            else if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Object)
-            {
-                // Update this object group
-                UpdateObjectGroup(layerGroupToUpdate, rectToLoad);
+                // If the layer group to update is an objectLayerGroup
+                else if (layerGroupToUpdate.groupType == PDKLayer.layerTypes.Object)
+                {
+                    // Update this object group
+                    UpdateObjectGroup(layerGroupToUpdate, rectToLoadInsideMap);
+                }
             }
         }
         // Store the curretly loaded rectangle of the map
@@ -77,10 +84,10 @@ public class PDKLevelRenderer
 
     #region TileLayerGroup Rendering
     // This updates a given tile Layer Group's texture, and then moves the layer group the apropriate position
-    public void UpdateTileLayerGroup(PDKLayerGroup layerGroupToUpdate, Rect rectToRender)
+    public void UpdateTileLayerGroup(PDKLayerGroup layerGroupToUpdate, Rect loadedRectInMap, Rect rectToRender)
     {
         // Update the texture for this layer group
-        UpdateTextureForRectOfLayerGroup(ref layerGroupToUpdate.layerGroupTexture, layerGroupToUpdate, rectToRender);
+        UpdateTextureForRectOfLayerGroup(ref layerGroupToUpdate.layerGroupTexture, layerGroupToUpdate, loadedRectInMap, rectToRender);
         // Create a sprite from this layer group's newly created texture
         Sprite spriteToDisplay = Sprite.Create(
             texture: layerGroupToUpdate.layerGroupTexture,
@@ -104,7 +111,7 @@ public class PDKLevelRenderer
 
 
     // Alters a given layer group's texture based on the rectangle that is being rendered
-    private void UpdateTextureForRectOfLayerGroup(ref Texture2D textureToUpdate, PDKLayerGroup givenLayerGroup, Rect rectToRender)
+    private void UpdateTextureForRectOfLayerGroup(ref Texture2D textureToUpdate, PDKLayerGroup givenLayerGroup, Rect loadedRectInMap, Rect rectToRender)
     {
         #region Overlap Variables
         // This stores the overlap between the rendered rect and the rect to render
@@ -148,8 +155,8 @@ public class PDKLevelRenderer
         if (overlapRect.width > 0 && overlapRect.height > 0)
         {
             overlapColors = textureToUpdate.GetPixels(
-                    x: (int)(overlapRect.xMin - loadedRectOfMap.xMin) * levelMap.tileWidth,
-                    y: (int)(loadedRectOfMap.height - (overlapRect.yMax - loadedRectOfMap.yMin)) * levelMap.tileHeight,
+                    x: (int)(overlapRect.xMin - loadedRectInMap.xMin) * levelMap.tileWidth,
+                    y: (int)(loadedRectInMap.height - (overlapRect.yMax - loadedRectInMap.yMin)) * levelMap.tileHeight,
                     blockWidth: (int)overlapRect.width * levelMap.tileWidth,
                     blockHeight: (int)overlapRect.height * levelMap.tileHeight);
         }

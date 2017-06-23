@@ -32,12 +32,157 @@
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
   </tile>
-  <tile id="641">
+  <tile id="644">
    <properties>
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
   </tile>
-  <tile id="644">
+  <tile id="656">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="675">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTriangle1_Collider"/>
+   </properties>
+  </tile>
+  <tile id="676">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTriangle2_Collider"/>
+   </properties>
+  </tile>
+  <tile id="677">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTriangle3_Collider"/>
+   </properties>
+  </tile>
+  <tile id="678">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTriangle4_Collider"/>
+   </properties>
+  </tile>
+  <tile id="713">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="714">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="715">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="745">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTopHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="746">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTopHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="747">
+   <properties>
+    <property name="PDKCustomCollider" value="OneWayTopHalfBox_Collider"/>
+   </properties>
+  </tile>
+  <tile id="837">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="838">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="840">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="864">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="865">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="868">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="872">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="896">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="900">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="901">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="928">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="932">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="933">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="935">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="936">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="960">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="964">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="992">
+   <properties>
+    <property name="PDKCustomCollider" value="Box_Collider"/>
+   </properties>
+  </tile>
+  <tile id="996">
    <properties>
     <property name="PDKCustomCollider" value="Box_Collider"/>
    </properties>
