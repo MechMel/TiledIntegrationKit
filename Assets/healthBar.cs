@@ -13,10 +13,7 @@ public class healthBar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(FindObjectOfType<PlayerController>().playerHealth);
-    }
-    void deh()
-    {
         GetComponent<Image>().fillAmount = FindObjectOfType<PlayerController>().playerHealth / 4f;
+        //Debug.Log(FindObjectOfType<PlayerController>().playerHealth);
     }
 }

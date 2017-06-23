@@ -24,20 +24,29 @@ public class PlayerUIBehaviour : MonoBehaviour {
     private float playerSpeed;
 
     private Text coinUI;
+
+    private Text coinGUI;
     // Coin total
-    private int Coins = 0;
+    public int Coins = 0;
+
+    public bool end;
 
     private void Awake()
     {
+        Coins = PlayerPrefs.GetInt("gold");
+        coinUI = GameObject.FindGameObjectWithTag("pause coins").GetComponent<Text>();
         pauseMenus = FindObjectOfType<pauseMenu>().gameObject;
         // Turn the pause menu off
         pauseMenus.SetActive(false);
         playerSpeed = originalSpeed;
-        coinUI = FindObjectOfType<coinz>().GetComponent<Text>();
+        coinGUI = FindObjectOfType<coinz>().GetComponent<Text>();
     }
 
     void Update()
 	{
+        coinUI.text = Coins.ToString();
+        coinGUI.text = Coins.ToString();
+
         if (Input.GetKeyDown(KeyCode.Escape))
 			Pause();
 	}
@@ -96,15 +105,19 @@ public class PlayerUIBehaviour : MonoBehaviour {
         {
             playerSpeed = originalSpeed;
             pauseMenus.SetActive(false);
+            GetComponent<PlayerController>().playerSpeed = 0.15f;
             Time.timeScale = 1;
-            paused = false;
+            paused  = false;
             
         }
         else
         {
             pauseMenus.SetActive(true);
+
+            if (end)
+                pauseMenus.GetComponentInChildren<play>().gameObject.SetActive(false);
             Time.timeScale = 0f;
-            playerSpeed = 0;
+            GetComponent<PlayerController>().playerSpeed = 0;
             paused = true;
         }
     }

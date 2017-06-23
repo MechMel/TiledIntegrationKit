@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class genr8 : MonoBehaviour {
-
-    public GameObject[] genies;
-    public int setCount;
+public class play : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +13,4 @@ public class genr8 : MonoBehaviour {
 	void Update () {
 		
 	}
-    
-    void genes()
-    {
-        Instantiate(genies[Random.Range(0, genies.Length)]);
-    }
 }

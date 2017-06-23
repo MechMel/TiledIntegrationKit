@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     #region Player
     // The player speed
     [HideInInspector]
-    private float playerSpeed = 0.15f;
+    public float playerSpeed = 0.15f;
     // The player jump speed
     [HideInInspector]
     private float playerJumpSpeed = 1100f;
@@ -133,10 +133,18 @@ public class PlayerController : MonoBehaviour
    
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Saver.Save(gameObject);
+        }
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             playerHealth = 0;
         }
+
+       // playerSpeed *= Time.timeScale;
 
         //DIE DIE DIE// If player drops below threshold he DIE DIE DIE
         
