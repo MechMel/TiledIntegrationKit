@@ -7,7 +7,7 @@ static class saver {
     {
 
 
-        PlayerPrefs.SetInt("gold",);
+       // PlayerPrefs.SetInt("gold",);
 
     }
 }
