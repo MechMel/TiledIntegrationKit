@@ -6,4 +6,9 @@ public class PlayerPickUp : MonoBehaviour
 {
     public Dictionary<ObjectTypes, int> objectsDestroyed;
     public List<Bounty> bounties;
+
+    AddDestoryedObject(ObjectTypes destrroyedObject)
+    {
+
+    }
 }
