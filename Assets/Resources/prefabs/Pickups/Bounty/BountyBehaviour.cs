@@ -85,14 +85,14 @@ public class BountyBehaviour : MonoBehaviour
 
 
     // If the player collides with this object, give the player this bounty and destroy this object
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             // Tell the canvas to display the notification
             FindObjectOfType<Canvas>().GetComponent<Notifications>().DisplayBounty(bounty);
             // Give the player this bounty
-            other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty);
+            other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty.objectType, bounty);
             // Destry this object
             Destroy(this);
         }

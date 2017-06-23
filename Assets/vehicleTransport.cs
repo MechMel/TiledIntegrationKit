@@ -14,6 +14,13 @@ public class vehicleTransport : MonoBehaviour
     private ParticleSystem.EmissionModule pe2;
     private bool onGround = true;
     public Transform target;
+
+    private void Awake()
+    {
+        // Setup the player
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Start()
     {
         pe1 = GetComponentInChildren<ParticleSystem>().emission;
