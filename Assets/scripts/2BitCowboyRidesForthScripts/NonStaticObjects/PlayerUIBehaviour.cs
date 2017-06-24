@@ -113,6 +113,7 @@ public class PlayerUIBehaviour : MonoBehaviour {
         else
         {
             pauseMenus.SetActive(true);
+            pauseMenus.GetComponent<pauseMenu>().DisplayPauseMenu();
 
             if (end)
                 pauseMenus.GetComponentInChildren<play>().gameObject.SetActive(false);

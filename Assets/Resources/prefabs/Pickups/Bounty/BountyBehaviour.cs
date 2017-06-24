@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -89,8 +90,12 @@ public class BountyBehaviour : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            // Give the player this bounty
-            other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty.objectType, bounty);
+            // If the player does not already have a bounty for this object type
+            if (!other.gameObject.GetComponent<PlayerPickUp>().bounties.Keys.Contains(bounty.objectType))
+            {
+                // Give the player this bounty
+                other.gameObject.GetComponent<PlayerPickUp>().bounties.Add(bounty.objectType, bounty);
+            }
             // Tell the canvas to display the notification
             FindObjectOfType<Canvas>().GetComponent<Notifications>().DisplayBounty(bounty);
             // Destry this object

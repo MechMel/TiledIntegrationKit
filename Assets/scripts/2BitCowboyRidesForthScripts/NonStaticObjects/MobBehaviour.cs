@@ -17,7 +17,8 @@ public class MobBehaviour : MonoBehaviour
         BLOCK,
         RIDE
     }
-
+    
+    public ObjectTypes mobObjectType;
     public MobType mobType;
 
     #region Mob Stats
@@ -288,7 +289,10 @@ public class MobBehaviour : MonoBehaviour
         */
         // Check for death
         if (Health <= 0 && canGetHurt)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPickUp>().AddDestoryedObject(mobObjectType);
             Destroy(gameObject);
+        }
 
         #region PATROL
         // Updated only if the mob is a PATROL type
