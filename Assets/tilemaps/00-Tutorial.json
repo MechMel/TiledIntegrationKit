@@ -878,6 +878,60 @@
                  "width":16,
                  "x":720,
                  "y":272
+                }, 
+                {
+                 "gid":1,
+                 "height":16,
+                 "id":57,
+                 "name":"",
+                 "properties":
+                    {
+                     "Requirement":"3",
+                     "Reward":"15",
+                     "Type":"Bat"
+                    },
+                 "rotation":0,
+                 "type":"Bounty",
+                 "visible":true,
+                 "width":16,
+                 "x":752,
+                 "y":272
+                }, 
+                {
+                 "gid":1,
+                 "height":16,
+                 "id":58,
+                 "name":"",
+                 "properties":
+                    {
+                     "Requirement":"3",
+                     "Reward":"15",
+                     "Type":"Sheep"
+                    },
+                 "rotation":0,
+                 "type":"Bounty",
+                 "visible":true,
+                 "width":16,
+                 "x":768,
+                 "y":272
+                }, 
+                {
+                 "gid":1,
+                 "height":16,
+                 "id":59,
+                 "name":"",
+                 "properties":
+                    {
+                     "Requirement":"3",
+                     "Reward":"15",
+                     "Type":"Coin_Large"
+                    },
+                 "rotation":0,
+                 "type":"Bounty",
+                 "visible":true,
+                 "width":16,
+                 "x":784,
+                 "y":272
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -886,7 +940,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":57,
+ "nextobjectid":60,
  "orientation":"orthogonal",
  "properties":
     {

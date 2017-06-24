@@ -9,7 +9,10 @@ public class pauseMenu : MonoBehaviour
     //
     public GameObject blankBounty;
     public GameObject viewPort;
+    public RectTransform contentRectTransform;
     public Transform veiwPortContent;
+    //
+    public GameObject uiObject;
     //
     private PlayerPickUp playerPickUp;
     //
@@ -24,10 +27,10 @@ public class pauseMenu : MonoBehaviour
         bounties = new Dictionary<ObjectTypes, GameObject>();
 	}
 
-    //
+    // When the pause menu is displayed this is called. This function updates and displays the bounties that have been collected
     public void DisplayPauseMenu()
     {
-        //
+        // Used to get the Reward and Status texts
         Text[] bountyTexts;
 
         // Displays the bounties the player has collected
@@ -38,8 +41,9 @@ public class pauseMenu : MonoBehaviour
             {
                 // Create a new bounty object
                 GameObject newBountyObject = Instantiate(blankBounty, veiwPortContent).gameObject;
-                // NAme this bounty object correctly
+                // Name this bounty object correctly
                 newBountyObject.name = "Reward_" + bountyToDisplay.ToString();
+                newBountyObject.GetComponent<Image>().sprite = uiObject.GetComponent<Notifications>().GetBountySpriteForObjectType(bountyToDisplay);
                 // Place this bounty object at the correct position
                 newBountyObject.GetComponent<RectTransform>().localPosition = new Vector3(-192, 300 - (bounties.Count * 60), 0);
                 // Add this bounty object to the list of bounty objects
@@ -60,6 +64,33 @@ public class pauseMenu : MonoBehaviour
             else
             {
                 bountyTexts[1].text = "%";
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (bounties.Count >= 5)
+        {
+            //
+            contentRectTransform.position += new Vector3(0, -100 * Input.GetAxis("Mouse ScrollWheel"), 0);
+            //
+            if (contentRectTransform.position.y < Screen.height / 4.6587f)
+            {
+                //
+                contentRectTransform.position = new Vector3(
+                    x: contentRectTransform.position.x,
+                    y: Screen.height / 4.6587f,
+                    z: contentRectTransform.position.z);
+            }
+            //
+            else if (contentRectTransform.position.y > (bounties.Count * 60) - Screen.height / 3.625f)
+            {
+                //
+                contentRectTransform.position = new Vector3(
+                    x: contentRectTransform.position.x,
+                    y: (bounties.Count * 60) - Screen.height / 3.625f,
+                    z: contentRectTransform.position.z);
             }
         }
     }

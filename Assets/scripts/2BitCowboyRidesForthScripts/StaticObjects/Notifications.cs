@@ -174,8 +174,8 @@ public class Notifications : MonoBehaviour
         }
     }
 
-    // This returns the texture for the bounty notification for a object type
-    private Sprite GetTextureForObjectType(ObjectTypes objectTypeToGetTextureFor)
+    // This returns the sprite for the bounty notification for a object type
+    public Sprite GetBountySpriteForObjectType(ObjectTypes objectTypeToGetTextureFor)
     {
         // Return the appropriate texture for this object type
         switch (objectTypeToGetTextureFor)
@@ -228,7 +228,7 @@ public class Notifications : MonoBehaviour
     private void SetUpNextNotification()
     {
         // Give this bounty notification the appropriate texture
-        bountyUI.GetComponent<Image>().sprite = GetTextureForObjectType(bountyNotificationsToDisplay.First.Value.objectType);
+        bountyUI.GetComponent<Image>().sprite = GetBountySpriteForObjectType(bountyNotificationsToDisplay.First.Value.objectType);
         // Give this bounty notification the appropriate reward
         bountyRewardText.text = bountyNotificationsToDisplay.First.Value.reward.ToString();
         // Give this bounty notification the appropriate coimpletion status
