@@ -73,24 +73,24 @@ public class pauseMenu : MonoBehaviour
         if (bounties.Count >= 5)
         {
             //
-            contentRectTransform.position += new Vector3(0, -100 * Input.GetAxis("Mouse ScrollWheel"), 0);
+            contentRectTransform.localPosition += new Vector3(0, -100 * Input.GetAxis("Mouse ScrollWheel"), 0);
             //
-            if (contentRectTransform.position.y < Screen.height / 4.6587f)
+            if (contentRectTransform.localPosition.y < -300)
             {
                 //
-                contentRectTransform.position = new Vector3(
-                    x: contentRectTransform.position.x,
-                    y: Screen.height / 4.6587f,
-                    z: contentRectTransform.position.z);
+                contentRectTransform.localPosition = new Vector3(
+                    x: contentRectTransform.localPosition.x,
+                    y: -300,
+                    z: contentRectTransform.localPosition.z);
             }
             //
-            else if (contentRectTransform.position.y > (bounties.Count * 60) - Screen.height / 3.625f)
+            else if (contentRectTransform.localPosition.y > (bounties.Count * 60) - 520)
             {
                 //
-                contentRectTransform.position = new Vector3(
-                    x: contentRectTransform.position.x,
-                    y: (bounties.Count * 60) - Screen.height / 3.625f,
-                    z: contentRectTransform.position.z);
+                contentRectTransform.localPosition = new Vector3(
+                    x: contentRectTransform.localPosition.x,
+                    y: (bounties.Count * 60) - 520,
+                    z: contentRectTransform.localPosition.z);
             }
         }
     }
