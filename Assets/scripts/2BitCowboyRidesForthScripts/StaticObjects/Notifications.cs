@@ -26,6 +26,7 @@ public class Notifications : MonoBehaviour
     #endregion
     private enum NotificationState { HIDDEN, LOWERING, DOWN, COMPLETED, RAISING };
     private NotificationState notificationState = NotificationState.HIDDEN;
+    private List<ObjectTypes> completedBountiesThatHaveBeenDisplayed;
     private Text bountyRewardText;
     private Text bountyStatusText;
     private Text bountyCoinCountText;
@@ -47,6 +48,8 @@ public class Notifications : MonoBehaviour
         playerPickUp = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPickUp>();
         // Put the game object for bounty notifications in the right spot
         bountyUI.GetComponent<RectTransform>().position = new Vector3(Screen.width / 2, Screen.height * 1.1f, 0);
+        // Instatitiate the list of bounties that have been displayed
+        completedBountiesThatHaveBeenDisplayed = new List<ObjectTypes>();
         // Instatitiate the list of bounty notifications to display
         bountyNotificationsToDisplay = new LinkedList<Bounty>();
     }
@@ -140,6 +143,8 @@ public class Notifications : MonoBehaviour
                     timer = 0;
                     // Raise this notification
                     notificationState = NotificationState.RAISING;
+                    // This bounty has been completed so don't display any more notifiatinos for it
+                    completedBountiesThatHaveBeenDisplayed.Add(bountyNotificationsToDisplay.First.Value.objectType);
                 }
                 // Inriment the timer
                 timer++;
@@ -158,8 +163,6 @@ public class Notifications : MonoBehaviour
                     {
                         // Setup the next notification
                         SetUpNextNotification();
-                        // Lower the bounty notification
-                        notificationState = NotificationState.LOWERING;
                     }
                     // If there is not another notification to display, then do nothing
                     else
@@ -227,13 +230,31 @@ public class Notifications : MonoBehaviour
     // This sets up the notifications for a given bounty
     private void SetUpNextNotification()
     {
-        // Give this bounty notification the appropriate texture
-        bountyUI.GetComponent<Image>().sprite = GetBountySpriteForObjectType(bountyNotificationsToDisplay.First.Value.objectType);
-        // Give this bounty notification the appropriate reward
-        bountyRewardText.text = bountyNotificationsToDisplay.First.Value.reward.ToString();
-        // Give this bounty notification the appropriate coimpletion status
-        bountyStatusText.text = playerPickUp.objectsDestroyed[bountyNotificationsToDisplay.First.Value.objectType].ToString()
-            + " / "
-            + bountyNotificationsToDisplay.First.Value.numberRequirement.ToString();
+        // If this bounty has already been completed and displayed remove it from the list
+        if (completedBountiesThatHaveBeenDisplayed.Contains(bountyNotificationsToDisplay.First.Value.objectType))
+        {
+            // Remove this bounty from the list
+            bountyNotificationsToDisplay.Remove(bountyNotificationsToDisplay.First);
+            // If there is another notification to display set up the next bounty and lower it
+            if (bountyNotificationsToDisplay.First != null)
+            {
+                // Setup the next notification
+                SetUpNextNotification();
+            }
+        }
+        // If this bounty has not already been completed and displayed prepare to display it
+        else
+        {
+            // Give this bounty notification the appropriate texture
+            bountyUI.GetComponent<Image>().sprite = GetBountySpriteForObjectType(bountyNotificationsToDisplay.First.Value.objectType);
+            // Give this bounty notification the appropriate reward
+            bountyRewardText.text = bountyNotificationsToDisplay.First.Value.reward.ToString();
+            // Give this bounty notification the appropriate coimpletion status
+            bountyStatusText.text = playerPickUp.objectsDestroyed[bountyNotificationsToDisplay.First.Value.objectType].ToString()
+                + " / "
+                + bountyNotificationsToDisplay.First.Value.numberRequirement.ToString();
+            // Lower the bounty notification
+            notificationState = NotificationState.LOWERING;
+        }
     }
 }

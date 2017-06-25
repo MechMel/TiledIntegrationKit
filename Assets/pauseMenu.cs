@@ -49,18 +49,18 @@ public class pauseMenu : MonoBehaviour
                 // Add this bounty object to the list of bounty objects
                 bounties.Add(bountyToDisplay, newBountyObject);
             }
-            //
+            // Get the reward and bounty completion status text components
             bountyTexts = bounties[bountyToDisplay].GetComponentsInChildren<Text>();
-            //
+            // Set the reward text
             bountyTexts[0].text = playerPickUp.bounties[bountyToDisplay].reward.ToString() + "$";
-            //
+            // If the player has not completed this bounty then display it normally
             if (playerPickUp.objectsDestroyed[bountyToDisplay] < playerPickUp.bounties[bountyToDisplay].numberRequirement)
             {
                 bountyTexts[1].text = playerPickUp.objectsDestroyed[bountyToDisplay].ToString()
                     + " / "
                     + playerPickUp.bounties[bountyToDisplay].numberRequirement.ToString();
             }
-            //
+            // If the player has not completed this bounty then display a check mark
             else
             {
                 bountyTexts[1].text = "%";
@@ -70,23 +70,22 @@ public class pauseMenu : MonoBehaviour
 
     private void Update()
     {
+        // If more than 5 bounties have been collected then enable scrolling
         if (bounties.Count >= 5)
         {
-            //
+            //  Enable scrolling with the mouse wheel
             contentRectTransform.localPosition += new Vector3(0, -100 * Input.GetAxis("Mouse ScrollWheel"), 0);
-            //
+            // Stop the user from scrolling to far up
             if (contentRectTransform.localPosition.y < -300)
             {
-                //
                 contentRectTransform.localPosition = new Vector3(
                     x: contentRectTransform.localPosition.x,
                     y: -300,
                     z: contentRectTransform.localPosition.z);
             }
-            //
+            // Stop the user from scrolling to far up
             else if (contentRectTransform.localPosition.y > (bounties.Count * 60) - 520)
             {
-                //
                 contentRectTransform.localPosition = new Vector3(
                     x: contentRectTransform.localPosition.x,
                     y: (bounties.Count * 60) - 520,
@@ -95,6 +94,7 @@ public class pauseMenu : MonoBehaviour
         }
     }
 
+    // When the quit button is pressed load the Main Menu
     public void quit()
     {
         SceneManager.LoadScene(0);
