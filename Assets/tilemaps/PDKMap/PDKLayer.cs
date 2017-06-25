@@ -326,11 +326,12 @@ public class PDKLayer
         for (int indexOfObjectToDehydrate = 0; indexOfObjectToDehydrate < objectsToDehydrate.Count; indexOfObjectToDehydrate++)
         {
             // Dehydrate this object
-            DehydrateObject(objectsToDehydrate[indexOfObjectToDehydrate]);
+            objectsToDehydrate[indexOfObjectToDehydrate].GetComponent<PDKObject>().Dehydrate();
         }
     }
 
-
+    #region Depricated
+    /*
     // Dehydrates a given object
     public void DehydrateObject(GameObject objectToDehydrate)
     {
@@ -365,7 +366,8 @@ public class PDKLayer
         // Put this object in the dehydrated object map
         PutObjectInDehydratedMap(dehydratedObject);
     }
-
+    */
+    #endregion
 
     // Places an object in the dehydrated objects map
     public void PutObjectInDehydratedMap(PDKObject objectToPlace)

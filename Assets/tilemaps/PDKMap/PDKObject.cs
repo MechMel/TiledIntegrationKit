@@ -6,7 +6,8 @@ using System;
 [Serializable]
 public class PDKObject : MonoBehaviour
 {
-    public Vector2 offset;
+    public Vector2 offsetFromTopLeft;
+    [HideInInspector]
     public PDKMap.PDKCustomProperties properties;
     [HideInInspector]
     public string objectName;
@@ -17,20 +18,24 @@ public class PDKObject : MonoBehaviour
     [HideInInspector]
     public Vector3 position;
     [HideInInspector]
-    public Rect objectRect;
-    [HideInInspector]
     public int rotation;
     [HideInInspector]
     public UnityEngine.Object prefab;
     [HideInInspector]
     public PDKLayer layerThisObjectIsIn;
 
-    /*
+    
     private void OnDestroy()
     {
         // Tell this object's layer this object has been destroyed
         layerThisObjectIsIn.HydratedObectHasBeenDestoryed(gameObject);
-    }*/
+    }
+
+    // TODO: COMMENT THIS LATER
+    public PDKObject()
+    {
+        properties = new PDKMap.PDKCustomProperties();
+    }
 
     // TODO: COMMENT THIS LATER
     public PDKObject(PDKObject objectToCopy)
@@ -42,7 +47,7 @@ public class PDKObject : MonoBehaviour
     public void Copy(PDKObject objectToCopy)
     {
         // Copy each property
-        this.offset = objectToCopy.offset;
+        this.offsetFromTopLeft = objectToCopy.offsetFromTopLeft;
         this.objectName = objectToCopy.objectName;
         this.id = objectToCopy.id;
         this.type = objectToCopy.type;
@@ -54,14 +59,13 @@ public class PDKObject : MonoBehaviour
     }
 
 
-    // Creates a hydrated version of a dehydrated object
+    // Creates a hydrated version of this object and puts it in the hydrated object map
     public void Hydrate(PDKLayer layerThisObjectIsIn)
     {
-        // Will store the hydrated object to return
-        GameObject hydratedObject;
+        // Instatieate the hydrated version of this object
+        GameObject hydratedObject = (GameObject)GameObject.Instantiate(prefab, position, new Quaternion(0, 0, rotation, 0));
 
-        // Create a new 
-        hydratedObject = (GameObject)GameObject.Instantiate(prefab, position, new Quaternion(0, 0, rotation, 0));
+        // Copy this pdkObject to the hydrated version of this object
         hydratedObject.GetComponent<PDKObject>().Copy(this);
         // Remove this object from the dehydrated object map
         layerThisObjectIsIn.RemoveDehydratedObject(this);
@@ -71,14 +75,14 @@ public class PDKObject : MonoBehaviour
         Destroy(this);
     }
 
-    // Dehydrates this object
+    // Creates a dehydrates version of this object and puts it in the dehydrated object map
     public void Dehydrate()
     {
         // Create a copy of this pdkObject
         PDKObject dehydratedObject = new PDKObject(this);
-        // Give
-        dehydratedObject.position = transform.position;
 
+        // Update the dehydrated version of this object's position
+        dehydratedObject.position = transform.position;
         // Remove the hydrated version of this object from the hydrated object map
         layerThisObjectIsIn.hydratedObjects.Remove(gameObject);
         // Put the dehydrated version of this object in the dehydrated object map

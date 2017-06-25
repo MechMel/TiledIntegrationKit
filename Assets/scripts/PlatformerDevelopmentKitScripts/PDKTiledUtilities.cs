@@ -252,14 +252,8 @@ public class PDKTiledUtilities
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].position = new Vector3(
                         x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth,
                         y: -((pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1),
-                    z: currentLayerIndex);
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect = new Rect(
-                        x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth,
-                        y: (pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1,
-                        width: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].width / pdkMap.tileWidth,
-                        height: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].height / pdkMap.tileHeight);
+                        z: currentLayerIndex);
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].rotation = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].rotation;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new PDKMap.PDKCustomProperties();
                     // If this object had custom properties
                     if (pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].properties != null)
                     {

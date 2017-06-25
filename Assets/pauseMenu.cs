@@ -93,6 +93,10 @@ public class pauseMenu : MonoBehaviour
             }
         }
     }
+    public void LoadNext()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
     // When the quit button is pressed load the Main Menu
     public void quit()

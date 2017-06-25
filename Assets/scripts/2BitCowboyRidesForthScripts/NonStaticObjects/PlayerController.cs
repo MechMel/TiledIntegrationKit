@@ -94,9 +94,9 @@ public class PlayerController : MonoBehaviour
     // The animator component
     [HideInInspector]
     public Rigidbody2D playerRigidBody2D;
-	// The collider of the player
-	[HideInInspector]
-	public BoxCollider2D boxCollider2D;
+    // The collider of the player
+    [HideInInspector]
+    public BoxCollider2D boxCollider2D;
     // The SpriteRenderer component
     [HideInInspector]
     public SpriteRenderer sprRend;
@@ -128,9 +128,9 @@ public class PlayerController : MonoBehaviour
         rightWallCheck = transform.Find("RightWallCheck").gameObject;
         leftWallCheck = transform.Find("LeftWallCheck").gameObject;
         midCheck = transform.Find("MidCheck").gameObject;
-		boxCollider2D = transform.GetComponent<BoxCollider2D>();
+        boxCollider2D = transform.GetComponent<BoxCollider2D>();
     }
-   
+
     void Update()
     {
 
@@ -144,10 +144,10 @@ public class PlayerController : MonoBehaviour
             playerHealth = 0;
         }
 
-       // playerSpeed *= Time.timeScale;
+        // playerSpeed *= Time.timeScale;
 
         //DIE DIE DIE// If player drops below threshold he DIE DIE DIE
-        
+
 
         // The built in update function in Unity runs every frame
 
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
         // Get the collision points
         Collider2D[] rightWallColliders = Physics2D.OverlapCircleAll(rightWallCheck.transform.position, 0.01f, 1 << LayerMask.NameToLayer("Solid"));
-        
+
         // Make sure a collision exists
         if (rightWallColliders.Length > 0)
         {
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
+
         #endregion
 
         #region Movement
@@ -537,6 +537,29 @@ public class PlayerController : MonoBehaviour
             flash();
         }
     }
+    public void BecomeInvunerable()
+    {
+        {
+            invunerable = false;
+            playerSpeed = 0.15f;
+            playerJumpSpeed = 1100;
+        }
+    }
+    public void BecomeInvunerable(int seconds)
+    {
+        if (!invunerable)
+        {
+            invunerable = true;
+            playerSpeed = 0.25f;
+            playerJumpSpeed *= 1.25f;
+        }
+        if (seconds != 0)
+            Invoke("BecomeInvunerable", seconds);
+        seconds = 0;
+        if (FindObjectOfType<Drinks>())
+            FindObjectOfType<Drinks>().gameObject.SetActive(false);
+    }
+
     void flash()
     {
         if (invunerable)
@@ -598,12 +621,15 @@ public class PlayerController : MonoBehaviour
 
         // Add the health, up to the max
         playerHealth = (int)Mathf.Clamp((playerHealth + amountOfHealthToAdd), 0f, 4f);
+        if (FindObjectOfType<DocsShop>())
+            FindObjectOfType<DocsShop>().gameObject.SetActive(false);
     }
 
-    
+
     public void AddCoin(int amountOfCoinToAdd)
     {
         // Add coins here
+        GetComponent<PlayerUIBehaviour>().Coins += amountOfCoinToAdd;
     }
     #endregion
 
