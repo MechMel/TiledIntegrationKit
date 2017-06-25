@@ -31,6 +31,7 @@ public class PDKLayer
     public int opacity;
     public int horizontalOffset;
     public int verticalOffset;
+    public bool IsCollidable;
     public PDKMap.PDKCustomProperties properties;
     #endregion
 
@@ -66,7 +67,7 @@ public class PDKLayer
                 // Apply the appropriate prefab
                 thisObject.prefab = objectsInMap[thisObject.type];
                 // Put this object in the object map
-                dehydratedObjectMap.GetItem((int)thisObject.x, -(int)thisObject.y).Add(thisObject);
+                dehydratedObjectMap.GetItem((int)thisObject.position.x, -(int)thisObject.position.x).Add(thisObject);
             }
         }
         // If this is an tile layer instatiate the nessecary variables
@@ -355,8 +356,8 @@ public class PDKLayer
             }
         }
         // Store the hydrated object's x and y position
-        dehydratedObject.x = objectToDehydrate.transform.position.x;
-        dehydratedObject.y = objectToDehydrate.transform.position.y;
+        dehydratedObject.position.x = objectToDehydrate.transform.position.x;
+        dehydratedObject.position.y = objectToDehydrate.transform.position.y;
         // Remove this object from the hydrated object map
         hydratedObjects.Remove(objectToDehydrate);
         // Destory the hydrated version of this obejct
@@ -369,9 +370,9 @@ public class PDKLayer
     // Places an object in the dehydrated objects map
     public void PutObjectInDehydratedMap(PDKObject objectToPlace)
     {
-        if (objectToPlace.x < dehydratedObjectMap.Width && -objectToPlace.y < dehydratedObjectMap.Height)
+        if (objectToPlace.position.x < dehydratedObjectMap.Width && -objectToPlace.position.y < dehydratedObjectMap.Height)
         {
-            dehydratedObjectMap.GetItem((int)objectToPlace.x, -(int)objectToPlace.y).Add(objectToPlace);
+            dehydratedObjectMap.GetItem((int)objectToPlace.position.x, -(int)objectToPlace.position.y).Add(objectToPlace);
         }
     }
     #endregion
@@ -399,10 +400,12 @@ public class PDKLayer
         // Hydrate each of the objects in the list of objects to dehydrate
         for (int indexOfObjectToHydrate = 0; indexOfObjectToHydrate < objectsToHydrate.Count; indexOfObjectToHydrate++)
         {
-            HydrateObject(objectsToHydrate[indexOfObjectToHydrate]);
+            objectsToHydrate[indexOfObjectToHydrate].Hydrate(this);
         }
     }
 
+    #region Depricated
+    /* Depricated
     // Creates a hydrated version of a dehydrated object
     public void HydrateObject(PDKObject objectToHydrate)
     {
@@ -416,7 +419,6 @@ public class PDKLayer
         hydratedObjectProperties = hydratedObject.GetComponent<PDKObjectProperties>();
         // Set this object's ID and GID'
         hydratedObjectProperties.id = objectToHydrate.id;
-        hydratedObjectProperties.gid = objectToHydrate.gid;
         // Tell this object which layer it is in
         hydratedObjectProperties.layerThisObjectIsIn = this;
         // Copy the custom properties from the dehydrated objet to the hydrated object
@@ -440,12 +442,14 @@ public class PDKLayer
         // Add this object to the hydrated object map
         hydratedObjects.Add(hydratedObject);
     }
+    */
+    #endregion
 
     // Remvoes a object from the dehydrated object map
     public void RemoveDehydratedObject(PDKObject objectToTake)
     {
         // Remove this object from the dehydrated object map
-        dehydratedObjectMap.GetItem((int)objectToTake.x, -(int)objectToTake.y).Remove(objectToTake);
+        dehydratedObjectMap.GetItem((int)objectToTake.position.x, -(int)objectToTake.position.y).Remove(objectToTake);
     }
     #endregion
 

@@ -6,7 +6,6 @@ public class PDKObjectProperties : MonoBehaviour
 {
     // TODO: FILL THIS IN LATER
     public int id;
-    public int gid;
     [HideInInspector]
     public PDKLayer layerThisObjectIsIn;
 

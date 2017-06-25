@@ -200,13 +200,22 @@ public class PDKTiledUtilities
             pdkMap.layers[currentLayerIndex].horizontalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].x;
             pdkMap.layers[currentLayerIndex].verticalOffset = pdkTiledMapToConvert.layers[currentLayerIndex].y;
             pdkMap.layers[currentLayerIndex].properties = new PDKMap.PDKCustomProperties();
-            // If this layer had custom properties
+            // If this layer had custom properties convert and copy each property
             if (pdkTiledMapToConvert.layers[currentLayerIndex].properties != null)
             {
                 // Convert and copy each property
                 foreach (PDKTiledCustomProperty currentProperty in pdkTiledMapToConvert.layers[currentLayerIndex].properties)
                 {
-                    pdkMap.layers[currentLayerIndex].properties.Add(currentProperty.name, currentProperty.value);
+                    // If this layer should have collisions enabled then enable them
+                    if (currentProperty.name == "PDKIsCollidable")
+                    {
+                        pdkMap.layers[currentLayerIndex].IsCollidable = true;
+                    }
+                    // If this is not a property PDK recognizes then store it in this layer's properties
+                    else
+                    {
+                        pdkMap.layers[currentLayerIndex].properties.Add(currentProperty.name, currentProperty.value);
+                    }
                 }
             }
             // If this layer had tiles(only tile layers have tiles)
@@ -237,19 +246,19 @@ public class PDKTiledUtilities
                 for (int currentObjectIndex = 0; currentObjectIndex < pdkTiledMapToConvert.layers[currentLayerIndex].objects.Length; currentObjectIndex++)
                 {
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex] = new PDKObject();
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].name = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].name;
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectName = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].name;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].type = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].type;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].id = currentObjectIndex; // pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].id - 1;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].gid = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].gid;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y = -((pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1);
+                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].position = new Vector3(
+                        x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth,
+                        y: -((pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1),
+                    z: currentLayerIndex);
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].objectRect = new Rect(
                         x: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].x / pdkMap.tileWidth,
                         y: (pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].y / pdkMap.tileHeight) - 1,
                         width: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].width / pdkMap.tileWidth,
                         height: pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].height / pdkMap.tileHeight);
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].rotation = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].rotation;
-                    pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].visible = pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].visible;
                     pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].properties = new PDKMap.PDKCustomProperties();
                     // If this object had custom properties
                     if (pdkTiledMapToConvert.layers[currentLayerIndex].objects[currentObjectIndex].properties != null)
@@ -262,8 +271,8 @@ public class PDKTiledUtilities
                     }
                     // Add this object at this position, to the object map
                     pdkMap.layers[currentLayerIndex].dehydratedObjectMap.GetItem(
-                        x: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].x, 
-                        y: -(int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].y).Add(
+                        x: (int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].position.x, 
+                        y: -(int)pdkMap.layers[currentLayerIndex].objects[currentObjectIndex].position.y).Add(
                         pdkMap.layers[currentLayerIndex].objects[currentObjectIndex]);
                 }
             }

@@ -45,10 +45,10 @@ public class PDKLevelRenderer
     // This adjust each layer group's object so that is is at a new given positon rendering the correct portion of the map
     public void LoadRectOfMap(Rect rectToLoad)
     {
-        // TODO: COMMENT THIS LATER
+        // Only load data inside of the map
         Rect rectToLoadInsideMap = GetOverlap(rectToLoad, new Rect(0, 0, levelMap.width, levelMap.height));
         Rect loadedRectInsideMap = GetOverlap(loadedRectOfMap, new Rect(0, 0, levelMap.width, levelMap.height));
-        // TODO: COMMENT THIS LATER
+        // Only load the map if the rect to load is inside the map
         if (rectToLoadInsideMap.width > 0 && rectToLoadInsideMap.height > 0)
         {
             // Update each layer group
@@ -61,13 +61,17 @@ public class PDKLevelRenderer
                 {
                     // Update this layer group
                     UpdateTileLayerGroup(layerGroupToUpdate, loadedRectInsideMap, rectToLoadInsideMap);
-                    // TODO: COMMENT THIS LATER
+                    // Load collisions for this layer group
                     foreach (int layerIndex in layerGroupToUpdate.layerNumbers)
                     {
-                        // TODO: COMMENT THIS LATER
-                        levelMap.layers[layerIndex].RemoveExternalColliders(loadedRectInsideMap, rectToLoadInsideMap);
-                        // TODO: COMMENT THIS LATER
-                        levelMap.layers[layerIndex].LoadInternalObjects(levelMap, loadedRectInsideMap, rectToLoadInsideMap);
+                        // If collisions are enabled on this layer then load collisions
+                        if (levelMap.layers[layerIndex].IsCollidable)
+                        {
+                            // First unnessecary collisions are remvoed
+                            levelMap.layers[layerIndex].RemoveExternalColliders(loadedRectInsideMap, rectToLoadInsideMap);
+                            // Then new collissions are loaded
+                            levelMap.layers[layerIndex].LoadInternalObjects(levelMap, loadedRectInsideMap, rectToLoadInsideMap);
+                        }
                     }
                 }
                 // If the layer group to update is an objectLayerGroup

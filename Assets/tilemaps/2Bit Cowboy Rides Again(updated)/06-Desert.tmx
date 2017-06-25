@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="76">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="192" height="64" tilewidth="16" tileheight="16" nextobjectid="76">
  <tileset firstgid="1" name="environment" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="../../Resources/Tilesets/environment.png" width="512" height="512"/>
   <tile id="512">
@@ -49368,7 +49368,7 @@
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="1" type="Player" gid="164" x="80" y="384" width="16" height="16"/>
+  <object id="1" type="Player_Start" gid="164" x="80" y="384" width="16" height="16"/>
   <object id="2" type="Snake" gid="2147483820" x="288" y="480" width="16" height="16"/>
   <object id="3" type="Snake" gid="2147483820" x="496" y="448" width="16" height="16"/>
   <object id="4" type="Snake" gid="172" x="1760" y="368" width="16" height="16"/>

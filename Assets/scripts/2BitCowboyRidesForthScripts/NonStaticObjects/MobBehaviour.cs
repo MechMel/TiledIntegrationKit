@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(PDKObjectProperties))]
-
 public class MobBehaviour : MonoBehaviour
 {
     // The MobBehaviour class is the base class for all mobs
@@ -271,7 +269,7 @@ public class MobBehaviour : MonoBehaviour
 
         // Update the debug text
         if (transform.Find("DebugText") != null)
-            transform.Find("DebugText").GetComponent<TextMesh>().text = GetComponent<PDKObjectProperties>().objectProperties["health"];
+            transform.Find("DebugText").GetComponent<TextMesh>().text = GetComponentInParent<PDKObjectProperties>().objectProperties["health"];
         // Update the grounded state
         /*
         // Get the collision points
